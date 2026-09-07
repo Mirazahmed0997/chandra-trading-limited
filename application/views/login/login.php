@@ -74,17 +74,17 @@
                     </form>
 
                     <div class="text-center mt-3">
-                        <a href="#">Forgot Password?</a>
+                        <a href="<?= base_url('forget_password'); ?>">Forgot Password?</a>
                     </div>
 
-                    <div class="text-center mt-2">
+                    <!-- <div class="text-center mt-2">
                         <p>
                             Click here
                             <a href="<?php echo base_url('admin_registration_form'); ?>">
                                 to registration
                             </a>
                         </p>
-                    </div>
+                    </div> -->
 
                     <div class="text-center mt-2">
                         <a href="<?php echo base_url(); ?>">
@@ -92,12 +92,12 @@
                         </a>
                     </div>
 
-                    <div class="text-center mt-3">
+                    <!-- <div class="text-center mt-3">
                         <a href="<?php base_url('Auth/google_login_process'); ?>" class="btn btn-outline-danger w-100 py-2 fw-semibold">
                             <i class="bi bi-google me-2"></i>
                             Continue with Google
                         </a>
-                    </div>
+                    </div> -->
 
                 </div>
 

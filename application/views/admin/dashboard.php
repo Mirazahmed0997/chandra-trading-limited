@@ -1,5 +1,5 @@
 <!-- Google Font & Chart.js Library Injection -->
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Custom Inline Styles for Modern Dark Theme UI -->
@@ -7,7 +7,7 @@
     .dashboard-wrapper-dark {
         background-color: #0b0f19;
         color: #f1f5f9;
-        font-family: 'Hind Siliguri', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         min-height: 100vh;
     }
     
@@ -194,12 +194,12 @@
         <div class="container-fluid">
             <div class="row mb-2 align-items-center">
                 <div class="col-sm-6">
-                    <h1 class="m-0 dashboard-title-dark">হাউজিং ম্যানেজমেন্ট ড্যাশবোর্ড</h1>
+                    <h1 class="m-0 dashboard-title-dark">Housing Management Dashboard</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right bg-transparent p-0 m-0">
-                        <li class="breadcrumb-item"><a href="#" class="text-secondary">হোম</a></li>
-                        <li class="breadcrumb-item active text-light font-weight-bold">হাউজিং ড্যাশবোর্ড</li>
+                        <li class="breadcrumb-item"><a href="#" class="text-secondary">Home</a></li>
+                        <li class="breadcrumb-item active text-light font-weight-bold">Housing Dashboard</li>
                     </ol>
                 </div>
             </div>
@@ -213,7 +213,7 @@
             <!-- Stat Box Row -->
             <div class="row">
 
-                <!-- Card 1: মোট প্লট সংখ্যা -->
+                <!-- Card 1: Total Plots Count -->
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="stat-card-dark card-theme-blue">
                         <div class="card-body-custom">
@@ -223,16 +223,16 @@
                             <div class="stat-value">
                                 <?= !empty($total_plots) ? $total_plots : 0; ?>
                             </div>
-                            <p class="stat-label">মোট প্লট/ফ্ল্যাট সংখ্যা</p>
+                            <p class="stat-label">Total Plots/Flats Count</p>
                         </div>
                         <a href="<?php echo base_url(); ?>Housing/plots_list" class="stat-card-footer-dark">
-                            <span>বিস্তারিত দেখুন</span>
+                            <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Card 2: বরাদ্দকৃত প্লট -->
+                <!-- Card 2: Allocated Plots -->
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="stat-card-dark card-theme-emerald">
                         <div class="card-body-custom">
@@ -242,16 +242,16 @@
                             <div class="stat-value">
                                 <?= !empty($allocated_plots) ? $allocated_plots : 0; ?>
                             </div>
-                            <p class="stat-label">বরাদ্দকৃত প্লট</p>
+                            <p class="stat-label">Allocated Plots</p>
                         </div>
                         <a href="<?php echo base_url(); ?>Housing/allocated_list" class="stat-card-footer-dark">
-                            <span>বিস্তারিত দেখুন</span>
+                            <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Card 3: অবরাদ্দকৃত/খালি প্লট -->
+                <!-- Card 3: Unallocated/Vacant Plots -->
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="stat-card-dark card-theme-purple">
                         <div class="card-body-custom">
@@ -261,16 +261,16 @@
                             <div class="stat-value">
                                 <?= !empty($available_plots) ? $available_plots : 0; ?>
                             </div>
-                            <p class="stat-label">খালি/অবরাদ্দকৃত প্লট</p>
+                            <p class="stat-label">Vacant/Unallocated Plots</p>
                         </div>
                         <a href="<?php echo base_url(); ?>Housing/available_list" class="stat-card-footer-dark">
-                            <span>বিস্তারিত দেখুন</span>
+                            <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Card 4: প্লট রেজিস্টার্ড সদস্য -->
+                <!-- Card 4: Registered Plot Members -->
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="stat-card-dark card-theme-indigo">
                         <div class="card-body-custom">
@@ -280,16 +280,16 @@
                             <div class="stat-value">
                                 <?= !empty($member_count) ? $member_count : 0; ?>
                             </div>
-                            <p class="stat-label">নিবন্ধিত প্লট মালিক/সদস্য</p>
+                            <p class="stat-label">Registered Owners/Members</p>
                         </div>
                         <a href="<?php echo base_url(); ?>Applicant/members_list" class="stat-card-footer-dark">
-                            <span>বিস্তারিত দেখুন</span>
+                            <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Card 5: বকেয়া কিস্তি সংখ্যা -->
+                <!-- Card 5: Overdue Installment Count -->
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="stat-card-dark card-theme-amber">
                         <div class="card-body-custom">
@@ -299,16 +299,16 @@
                             <div class="stat-value">
                                 <?= !empty($pending_installments) ? $pending_installments : 0; ?>
                             </div>
-                            <p class="stat-label">বকেয়া কিস্তি সংখ্যা</p>
+                            <p class="stat-label">Pending Installments</p>
                         </div>
                         <a href="<?php echo base_url(); ?>Housing/due_installments" class="stat-card-footer-dark">
-                            <span>বিস্তারিত দেখুন</span>
+                            <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Card 6: খেলাপি/বাতিলকৃত বরাদ্দ -->
+                <!-- Card 6: Defaulters/Cancelled Allocations -->
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="stat-card-dark card-theme-red">
                         <div class="card-body-custom">
@@ -318,10 +318,10 @@
                             <div class="stat-value">
                                 <?= !empty($defaulter_count) ? $defaulter_count : 0; ?>
                             </div>
-                            <p class="stat-label">খেলাপি বরাদ্দ সংখ্যা</p>
+                            <p class="stat-label">Defaulted Allocations</p>
                         </div>
                         <a href="<?php echo base_url(); ?>Housing/defaulters_list" class="stat-card-footer-dark">
-                            <span>বিস্তারিত দেখুন</span>
+                            <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -335,8 +335,8 @@
                 <div class="col-lg-8 col-12">
                     <div class="dashboard-panel-dark">
                         <div class="panel-header-dark">
-                            <h3 class="panel-title-dark"><i class="fas fa-chart-line mr-2 text-primary"></i>প্লট বুকিং ও কিস্তি আদায় পরিসংখ্যান</h3>
-                            <span class="text-muted text-sm">মাসিক চিত্র</span>
+                            <h3 class="panel-title-dark"><i class="fas fa-chart-line mr-2 text-primary"></i>Plot Booking & Collection Statistics</h3>
+                            <span class="text-muted text-sm">Monthly Trend</span>
                         </div>
                         <div class="panel-body-dark">
                             <div class="chart-container">
@@ -350,8 +350,8 @@
                 <div class="col-lg-4 col-12">
                     <div class="dashboard-panel-dark">
                         <div class="panel-header-dark">
-                            <h3 class="panel-title-dark"><i class="fas fa-chart-pie mr-2 text-success"></i>প্লট অবস্থার অনুপাত</h3>
-                            <span class="text-muted text-sm">সামগ্রিক চিত্র</span>
+                            <h3 class="panel-title-dark"><i class="fas fa-chart-pie mr-2 text-success"></i>Plot Status Breakdown</h3>
+                            <span class="text-muted text-sm">Overall Status</span>
                         </div>
                         <div class="panel-body-dark">
                             <div class="chart-container">
@@ -363,42 +363,42 @@
             </div>
 
             <!-- Recent Summary Data Table -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-12">
                     <div class="dashboard-panel-dark">
                         <div class="panel-header-dark">
-                            <h3 class="panel-title-dark"><i class="fas fa-list-alt mr-2 text-info"></i>সাম্প্রতিক হাউজিং কার্যক্রমের সামারি</h3>
-                            <a href="<?php echo base_url(); ?>Housing/summary_report" class="btn btn-sm btn-outline-light">সবগুলো দেখুন</a>
+                            <h3 class="panel-title-dark"><i class="fas fa-list-alt mr-2 text-info"></i>Recent Housing Activity Summary</h3>
+                            <a href="<?php echo base_url(); ?>Housing/summary_report" class="btn btn-sm btn-outline-light">View All</a>
                         </div>
                         <div class="panel-body-dark p-0">
                             <div class="table-responsive">
                                 <table class="table-dark-custom">
                                     <thead>
                                         <tr>
-                                            <th>ক্যাটাগরি</th>
-                                            <th>বর্তমান সংখ্যা</th>
-                                            <th>অবস্থা</th>
-                                            <th>সর্বশেষ আপডেট</th>
+                                            <th>Category</th>
+                                            <th>Current Count</th>
+                                            <th>Status</th>
+                                            <th>Last Updated</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>বরাদ্দকৃত প্লট মালিক</td>
+                                            <td>Allocated Plot Owners</td>
                                             <td><?= !empty($allocated_plots) ? $allocated_plots : 0; ?></td>
-                                            <td><span class="badge-status-dark badge-active">সক্রিয়</span></td>
-                                            <td>আজ, ১২:৩০ PM</td>
+                                            <td><span class="badge-status-dark badge-active">Active</span></td>
+                                            <td>Today, 12:30 PM</td>
                                         </tr>
                                         <tr>
-                                            <td>বকেয়া কিস্তি প্রদানকারী</td>
+                                            <td>Pending Installment Payers</td>
                                             <td><?= !empty($pending_installments) ? $pending_installments : 0; ?></td>
-                                            <td><span class="badge-status-dark badge-pending">প্রক্রিয়াধীন</span></td>
-                                            <td>গতকাল</td>
+                                            <td><span class="badge-status-dark badge-pending">Pending</span></td>
+                                            <td>Yesterday</td>
                                         </tr>
                                         <tr>
-                                            <td>খেলাপি আবেদনকারী</td>
+                                            <td>Defaulted Applicants</td>
                                             <td><?= !empty($defaulter_count) ? $defaulter_count : 0; ?></td>
-                                            <td><span class="badge-status-dark badge-alert">সতর্কতা</span></td>
-                                            <td>৩ দিন আগে</td>
+                                            <td><span class="badge-status-dark badge-alert">Warning</span></td>
+                                            <td>3 days ago</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -406,7 +406,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </section>
@@ -420,10 +420,10 @@
         new Chart(ctxTrend, {
             type: 'line',
             data: {
-                labels: ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন'],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
                 datasets: [
                     {
-                        label: 'নতুন প্লট বুকিং',
+                        label: 'New Plot Bookings',
                         data: [12, 19, 15, 25, 22, 30],
                         borderColor: '#38bdf8',
                         backgroundColor: 'rgba(56, 189, 248, 0.1)',
@@ -432,7 +432,7 @@
                         borderWidth: 2
                     },
                     {
-                        label: 'কিস্তি আদায়কৃত (প্লট)',
+                        label: 'Installments Collected (Plots)',
                         data: [8, 11, 13, 18, 16, 24],
                         borderColor: '#818cf8',
                         backgroundColor: 'rgba(129, 140, 248, 0.1)',
@@ -447,17 +447,17 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        labels: { color: '#94a3b8', font: { family: 'Hind Siliguri' } }
+                        labels: { color: '#94a3b8', font: { family: 'Inter' } }
                     }
                 },
                 scales: {
                     x: {
                         grid: { color: '#1e293b' },
-                        ticks: { color: '#94a3b8', font: { family: 'Hind Siliguri' } }
+                        ticks: { color: '#94a3b8', font: { family: 'Inter' } }
                     },
                     y: {
                         grid: { color: '#1e293b' },
-                        ticks: { color: '#94a3b8', font: { family: 'Hind Siliguri' } }
+                        ticks: { color: '#94a3b8', font: { family: 'Inter' } }
                     }
                 }
             }
@@ -468,7 +468,7 @@
         new Chart(ctxRatio, {
             type: 'doughnut',
             data: {
-                labels: ['বরাদ্দকৃত প্লট', 'খালি প্লট', 'বকেয়া কিস্তি', 'খেলাপি/বাতিল'],
+                labels: ['Allocated Plots', 'Vacant Plots', 'Pending Installments', 'Defaulted/Cancelled'],
                 datasets: [{
                     data: [50, 25, 15, 10],
                     backgroundColor: [
@@ -487,7 +487,7 @@
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { color: '#94a3b8', font: { family: 'Hind Siliguri' }, padding: 15 }
+                        labels: { color: '#94a3b8', font: { family: 'Inter' }, padding: 15 }
                     }
                 },
                 cutout: '70%'

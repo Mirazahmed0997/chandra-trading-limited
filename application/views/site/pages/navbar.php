@@ -31,13 +31,13 @@
             <a class="nav-link " href="<?php echo base_url(); ?>"><?= lang('nav_home'); ?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url(); ?>"><?= lang('properties'); ?></a>
+            <a class="nav-link" href="properties"><?= lang('properties'); ?></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="showcase"><?= lang('nav_projects'); ?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="showcase"><?= lang('investment'); ?></a>
+            <a class="nav-link" href=""><?= lang('investment'); ?></a>
           </li>
 
           <li class="nav-item dropdown">
@@ -51,10 +51,10 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="showcase"><?= lang('services'); ?></a>
+            <a class="nav-link" href=""><?= lang('services'); ?></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="showcase"><?= lang('news&insights'); ?></a>
+            <a class="nav-link" href=""><?= lang('news&insights'); ?></a>
           </li>
 
 

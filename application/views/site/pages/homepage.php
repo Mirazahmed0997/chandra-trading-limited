@@ -231,13 +231,16 @@
     </div>
 
     <?php $this->load->view('site/pages/property_search_section.php'); ?>
+    <?php $this->load->view('site/pages/property_catagories.php'); ?>
     <?php $this->load->view('site/pages/featured_products'); ?>
-    <?php $this->load->view('site/pages/hero_banner1'); ?>
-    <?php $this->load->view('site/pages/available_plots'); ?>
+    <?php $this->load->view('site/pages/our_projects'); ?>
+    <?php $this->load->view('site/pages/why_chandra'); ?>
+    <?php $this->load->view('site/pages/about_chandra'); ?>
+    <?php $this->load->view('site/pages/investment_card'); ?>
+    <?php $this->load->view('site/pages/joint_venture'); ?>
     <?php $this->load->view('site/pages/gallary/gallary'); ?>
     <?php $this->load->view('site/pages/how_it_works'); ?>
     <?php $this->load->view('site/pages/gallary/videos'); ?>
-    <?php $this->load->view('site/pages/about_us/managing_committee'); ?>
     <?php $this->load->view('site/pages/newz_testimonial'); ?>
 
 </body>

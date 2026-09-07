@@ -1,3 +1,7 @@
+<?php
+$user = $this->session->userdata('login_user_info_all');
+?>
+
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
@@ -341,7 +345,10 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Admin <small>Super Admin</small></a>
+                <a href="#" class="d-block">
+                    <span class="brand-text font-weight-light">
+                        <?= htmlspecialchars($user->first_name . ' ' . $user->last_name); ?>
+                    </span> <small>Super Admin</small></a>
             </div>
 
 
@@ -359,288 +366,149 @@
                     </a>
                 </li>
 
-                <?php if (has_menu_access('হোমপেজ ব্যবস্থাপনা')): ?>
-                    <li class="nav-item has-treeview <?= active_open('হোমপেজ ব্যবস্থাপনা', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('হোমপেজ ব্যবস্থাপনা', $main_nav); ?>">
-                            <i class="nav-icon fas fa-home"></i>
-                            <p>
-                                হোমপেজ ব্যবস্থাপনা
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('news_list') ?>"
-                                    class="nav-link <?= active_nav('news_list', $sub_nav); ?>">
-                                    <i class="fas fa-newspaper nav-icon"></i>
-                                    <p>সংবাদ</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('slider_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="fas fa-newspaper nav-icon"></i>
-                                    <p>সংবাদ ছবি</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('notice_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="fas fa-newspaper nav-icon"></i>
-                                    <p>নোটিশ</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('projects_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="fas fa-industry nav-icon"></i>
-                                    <p>প্রজেক্টস</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('banner_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="fas fa-image banner-icon" style="margin-right: 12px; margin-left: 4px;"></i>
-                                    <p>ব্যানার</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('managment_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="fas fa-users nav-icon"></i>
-                                    <p>ব্যবস্থাপক</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('achievements_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="fas fa-medal achievement-icon"
-                                        style="margin-right: 14px; margin-left: 4px;"></i>
-                                    <p>অর্জন</p>
-                                </a>
-                            </li>
 
-                            <!-- sub menu for gallery -->
-                            <li class="nav-item has-treeview <?= ($sub_nav == 'gallery') ? 'menu-open' : ''; ?>">
-                                <a href="#" class="nav-link <?= ($sub_nav == 'gallery') ? 'active' : ''; ?>">
-                                    <i class="fas fa-newspaper nav-icon"></i>
-                                    <p>
-                                        গ্যালারি
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url('image_gallery_list') ?>"
-                                            class="nav-link <?= active_nav('image_gallery_list', $sub_nav); ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>ইমেজ তালিকা</p>
-                                        </a>
-                                    </li>
-                                    <!-- <li class="nav-item">
-                                        <a href="<?= base_url('image_gallery_create') ?>"
-                                            class="nav-link <?= active_nav('image_gallery_create', $sub_nav); ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>নতুন গ্যালারি যোগ</p>
-                                        </a>
-                                    </li> -->
-                                </ul>
-                            </li>
+                <li class="nav-item has-treeview <?= active_open('Properties', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Properties', $main_nav); ?>">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Properties
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview <?= active_open('Projects', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Projects', $main_nav); ?>">
+                        <i class="nav-icon fas fa-landmark"></i>
+                        <p>
+                            Projects
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview <?= active_open('Leads', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Leads', $main_nav); ?>">
+                        <i class="nav-icon fas fa-user-plus"></i>
+                        <p>
+                            Leads
+                        </p>
+                    </a>
+                </li>
 
-                            <li class="nav-item has-treeview <?= ($sub_nav == 'gallery') ? 'menu-open' : ''; ?>">
-                                <a href="#" class="nav-link <?= ($sub_nav == 'gallery') ? 'active' : ''; ?>">
-                                    <i class="fas fa-newspaper nav-icon"></i>
-                                    <p>
-                                        প্রোডাক্ট ব্যবস্থাপনা
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="<?= base_url('category_list') ?>"
-                                            class="nav-link <?= active_nav('image_gallery_list', $sub_nav); ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>ক্যাটাগরি</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="<?= base_url('product_list') ?>"
-                                            class="nav-link <?= active_nav('image_gallery_list', $sub_nav); ?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>প্রোডাক্ট</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
+                <li class="nav-item has-treeview <?= active_open('Site Visits', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Site Visits', $main_nav); ?>">
+                        <i class="nav-icon fas fa-map-marker-alt"></i>
+                        <p>
+                            Site Visits
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview <?= active_open('Customers', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Customers', $main_nav); ?>">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Customers
+                        </p>
+                    </a>
+                </li>
 
-                <?php if (has_menu_access('অর্ডার ব্যবস্থাপনা')): ?>
-                    <li class="nav-item has-treeview <?= ($sub_nav == 'gallery') ? 'menu-open' : ''; ?>">
-                        <a href="#" class="nav-link <?= ($sub_nav == 'gallery') ? 'active' : ''; ?>">
-                            <i class="fas fa-newspaper nav-icon"></i>
-                            <p>
-                                অর্ডার ব্যবস্থাপনা
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= base_url('admin_orders_table') ?>"
-                                    class="nav-link <?= active_nav('image_gallery_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>অর্ডার তালিকা</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
+                <li class="nav-item has-treeview <?= active_open('Landowner Enquiries', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Landowner Enquiries', $main_nav); ?>">
+                        <i class="nav-icon fas fa-user-tie"></i>
+                        <p>
+                            Landowner Enquiries
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item has-treeview <?= active_open('Investment Enquiries', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Investment Enquiries', $main_nav); ?>">
+                        <i class="nav-icon fas fa-hand-holding-usd"></i>
+                        <p>
+                            Investment Enquiries
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item has-treeview <?= active_open('News', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('News', $main_nav); ?>">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>
+                            News
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item has-treeview <?= active_open('Gallery', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Gallery', $main_nav); ?>">
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>
+                            Gallery
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item has-treeview <?= active_open('Team', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Team', $main_nav); ?>">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>
+                            Team
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item has-treeview <?= active_open('Testimonials', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Testimonials', $main_nav); ?>">
+                        <i class="nav-icon fas fa-comments"></i>
+                        <p>
+                            Testimonials
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item has-treeview <?= active_open('Documents', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Documents', $main_nav); ?>">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>
+                            Documents
+                        </p>
+                    </a>
+                </li>
+
+
+
 
                 <br>
 
                 <a href="<?php echo base_url('Admin/registered_user_list') ?>"
                     class="nav-link <?= active_nav('user_list', $main_nav); ?>">
                     <i class="nav-icon fas fa-list"></i>
-                    <p>রেজিস্টার্ড ইউজার তালিকা</p>
+                    <p>Registered User List</p>
                 </a>
 
-                <?php if (has_menu_access('সদস্য ব্যবস্থাপনা')): ?>
-                    <li class="nav-item has-treeview <?= active_open('applicant', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('applicant', $main_nav); ?>">
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>
-                                সদস্য ব্যবস্থাপনা
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('admin/members_list/members_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>সদস্য তালিকা</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('permisssions') ?>"
-                                    class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Permission</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('table') ?>"
-                                    class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Table</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('table2') ?>"
-                                    class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Table2</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('investment_report') ?>"
-                                    class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Investment report</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('due_list_details') ?>"
-                                    class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Due list report</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('due_list_details1') ?>"
-                                    class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Due list report-2</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('daily_installment') ?>"
-                                    class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Daily Installment</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('c_47') ?>"
-                                    class="nav-link <?= active_nav('Applicant/members_list/members_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>c_47</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('calculator') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Calculator</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('id_card1') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>id_card1</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('id_card2') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>id_card2</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('id_card3') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>id_card3</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('id_card4') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>id_card4</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('id_card2_both') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>id_card2_both</p>
-                                </a>
-                            </li>
 
-                            
-                        </ul>
-                    </li>
-
-                <?php endif; ?>
-
-                <?php if (has_menu_access('ইউজার ব্যবস্থাপনা')): ?>
-                    <li class="nav-item has-treeview <?= active_open('applicant', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('applicant', $main_nav); ?>">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                ইউজার ব্যবস্থাপনা
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('admin/users_list/users_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>ইউজার</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                <?php endif; ?>
+                <li class="nav-item has-treeview <?= active_open('User Management', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('User Management', $main_nav); ?>">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            User Management
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin/users_list/users_list') ?>"
+                                class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin_registration_form') ?>"
+                                class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add new User</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </nav>

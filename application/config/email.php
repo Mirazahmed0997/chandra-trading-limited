@@ -1,11 +1,21 @@
 <?php
-$config['protocol']  = 'smtp';
-$config['smtp_host'] = 'ssl://smtp.gmail.com';
-$config['smtp_port'] = 465;
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+$config['protocol'] = 'smtp';
+
+$config['smtp_host'] = 'smtp.gmail.com';
+$config['smtp_port'] = 587;
+
 $config['smtp_user'] = 'ahmedmiraz87@gmail.com';
-$config['smtp_pass'] = 'xttd jigb jjls doyn'; 
-$config['mailtype']  = 'html';
-$config['charset']   = 'utf-8';
-$config['newline']   = "\r\n";
-$config['crlf']      = "\r\n";
+$config['smtp_pass'] = 'lxgv fylo rukg lxyh';
+
+$config['smtp_crypto'] = 'tls';
+
+$config['smtp_timeout'] = 30;
+
+$config['mailtype'] = 'html';
+$config['charset'] = 'utf-8';
+
+$config['newline'] = "\r\n";
+$config['crlf'] = "\r\n";
 ?>

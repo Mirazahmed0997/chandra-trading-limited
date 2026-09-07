@@ -1,7 +1,3 @@
-<!-- ============================================
-     SMART PROPERTY SEARCH
-============================================= -->
-
 <section class="smart-property-section">
 
     <!-- Background decoration -->
@@ -14,16 +10,16 @@
         <div class="text-center property-heading">
 
             <span class="property-subtitle">
-                SMART PROPERTY SEARCH
+                <?= lang('smart_property_search'); ?>
             </span>
 
             <h2>
-                Find Your <span>Perfect Property</span>
+                <?= lang('find_your'); ?>
+                <span><?= lang('perfect_property'); ?></span>
             </h2>
 
             <p>
-                Discover properties that match your lifestyle,
-                investment goals and budget.
+                <?= lang('property_search_description'); ?>
             </p>
 
         </div>
@@ -40,7 +36,7 @@
                     <div class="col-lg-3 col-md-6">
 
                         <label class="property-label">
-                            Property Type
+                            <?= lang('property_type'); ?>
                         </label>
 
                         <div class="property-input">
@@ -48,11 +44,27 @@
                             <i class="fa-solid fa-building"></i>
 
                             <select name="property_type" class="form-select">
-                                <option value="">Select Property Type</option>
-                                <option value="apartment">Apartment</option>
-                                <option value="plot">Plot</option>
-                                <option value="land">Land</option>
-                                <option value="commercial">Commercial</option>
+
+                                <option value="">
+                                    <?= lang('select_property_type'); ?>
+                                </option>
+
+                                <option value="apartment">
+                                    <?= lang('apartment'); ?>
+                                </option>
+
+                                <option value="plot">
+                                    <?= lang('plot'); ?>
+                                </option>
+
+                                <option value="land">
+                                    <?= lang('land'); ?>
+                                </option>
+
+                                <option value="commercial">
+                                    <?= lang('commercial'); ?>
+                                </option>
+
                             </select>
 
                         </div>
@@ -64,7 +76,7 @@
                     <div class="col-lg-3 col-md-6">
 
                         <label class="property-label">
-                            Location
+                            <?= lang('location'); ?>
                         </label>
 
                         <div class="property-input">
@@ -72,12 +84,31 @@
                             <i class="fa-solid fa-location-dot"></i>
 
                             <select name="location" class="form-select">
-                                <option value="">Select Location</option>
-                                <option value="dhaka">Dhaka</option>
-                                <option value="uttara">Uttara</option>
-                                <option value="purbachal">Purbachal</option>
-                                <option value="bashundhara">Bashundhara</option>
-                                <option value="keraniganj">Keraniganj</option>
+
+                                <option value="">
+                                    <?= lang('select_location'); ?>
+                                </option>
+
+                                <option value="dhaka">
+                                    <?= lang('dhaka'); ?>
+                                </option>
+
+                                <option value="uttara">
+                                    <?= lang('uttara'); ?>
+                                </option>
+
+                                <option value="purbachal">
+                                    <?= lang('purbachal'); ?>
+                                </option>
+
+                                <option value="bashundhara">
+                                    <?= lang('bashundhara'); ?>
+                                </option>
+
+                                <option value="keraniganj">
+                                    <?= lang('keraniganj'); ?>
+                                </option>
+
                             </select>
 
                         </div>
@@ -89,7 +120,7 @@
                     <div class="col-lg-3 col-md-6">
 
                         <label class="property-label">
-                            Budget
+                            <?= lang('budget'); ?>
                         </label>
 
                         <div class="property-input">
@@ -97,11 +128,27 @@
                             <i class="fa-solid fa-money-bill-wave"></i>
 
                             <select name="budget" class="form-select">
-                                <option value="">Select Budget</option>
-                                <option value="10-30">৳ 10 - 30 Lac</option>
-                                <option value="30-50">৳ 30 - 50 Lac</option>
-                                <option value="50-100">৳ 50 Lac - 1 Crore</option>
-                                <option value="100+">৳ 1 Crore+</option>
+
+                                <option value="">
+                                    <?= lang('select_budget'); ?>
+                                </option>
+
+                                <option value="10-30">
+                                    <?= lang('budget_10_30'); ?>
+                                </option>
+
+                                <option value="30-50">
+                                    <?= lang('budget_30_50'); ?>
+                                </option>
+
+                                <option value="50-100">
+                                    <?= lang('budget_50_100'); ?>
+                                </option>
+
+                                <option value="100+">
+                                    <?= lang('budget_100_plus'); ?>
+                                </option>
+
                             </select>
 
                         </div>
@@ -116,7 +163,7 @@
 
                             <i class="fa-solid fa-magnifying-glass"></i>
 
-                            SEARCH PROPERTY
+                            <?= lang('search_property'); ?>
 
                         </button>
 
@@ -126,94 +173,98 @@
 
             </form>
 
-
-            <!-- Advanced Search -->
-            <div class="advanced-search">
-
-                <a href="<?= base_url('properties/advanced-search'); ?>">
-
-                    <i class="fa-solid fa-sliders"></i>
-
-                    Advanced Search
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- Property Categories -->
-        <div class="property-categories">
-
-            <a href="<?= base_url('properties?purpose=buy'); ?>"
-               class="property-category active">
-
-                <i class="fa-solid fa-house"></i>
-
-                <span>Buy</span>
-
-            </a>
-
-
-            <a href="<?= base_url('properties?purpose=invest'); ?>"
-               class="property-category">
-
-                <i class="fa-solid fa-chart-line"></i>
-
-                <span>Invest</span>
-
-            </a>
-
-
-            <a href="<?= base_url('properties?purpose=commercial'); ?>"
-               class="property-category">
-
-                <i class="fa-solid fa-city"></i>
-
-                <span>Commercial</span>
-
-            </a>
-
-
-            <a href="<?= base_url('properties?purpose=land'); ?>"
-               class="property-category">
-
-                <i class="fa-solid fa-map"></i>
-
-                <span>Land</span>
-
-            </a>
-
-        </div>
-
-
-        <!-- Bottom Message -->
-        <div class="property-search-message text-center">
-
-            <i class="fa-solid fa-circle-check"></i>
-
-            Find the right property for your dream,
-            lifestyle and investment.
-
         </div>
 
     </div>
-    
-  
-    
 
 </section>
 
 
+  <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Search Box Card -->
+                <div class="col-lg-3">
+                    <div class="card border-0 text-white p-3 h-100" style="background-color: #0d5c3a;">
+                        <span class="text-uppercase small fw-semibold text-warning">Available Plots</span>
+                        <h3 class="fw-bold mb-4">Find Your Perfect Plot</h3>
+                        
+                        <div class="text-center my-auto py-3">
+                            <i class="bi bi-geo-alt-fill display-3 text-warning"></i>
+                            <h5 class="mt-3 fw-bold">Looking for a plot?</h5>
+                            <p class="small text-light">We have wide range of plots in prime locations.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Plot Table -->
+                <div class="col-lg-9">
+                    <div class="table-responsive bg-white rounded shadow-sm p-3">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Location</th>
+                                    <th>Plot Size</th>
+                                    <th>Price (BDT)</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-semibold">Green Valley</td>
+                                    <td>Gazipur, Dhaka</td>
+                                    <td>3 Katha</td>
+                                    <td>1,350,000</td>
+                                    <td><span class="badge badge-available px-3 py-2">Available</span></td>
+                                    <td><a href="#" class="btn btn-green btn-sm px-3">Book Now</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">City View</td>
+                                    <td>Savar, Dhaka</td>
+                                    <td>5 Katha</td>
+                                    <td>2,250,000</td>
+                                    <td><span class="badge badge-available px-3 py-2">Available</span></td>
+                                    <td><a href="#" class="btn btn-green btn-sm px-3">Book Now</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">Lake City</td>
+                                    <td>Narsingdi</td>
+                                    <td>4 Katha</td>
+                                    <td>1,800,000</td>
+                                    <td><span class="badge badge-available px-3 py-2">Available</span></td>
+                                    <td><a href="#" class="btn btn-green btn-sm px-3">Book Now</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">Sunshine Avenue</td>
+                                    <td>Keraniganj, Dhaka</td>
+                                    <td>3 Katha</td>
+                                    <td>1,250,000</td>
+                                    <td><span class="badge badge-booked px-3 py-2">Booked</span></td>
+                                    <td><a href="#" class="btn btn-outline-secondary btn-sm px-3">View</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">Meadow Land</td>
+                                    <td>Munshiganj</td>
+                                    <td>6 Katha</td>
+                                    <td>2,650,000</td>
+                                    <td><span class="badge badge-available px-3 py-2">Available</span></td>
+                                    <td><a href="#" class="btn btn-green btn-sm px-3">Book Now</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
 <style>
-      
-    /* ============================================
-   SMART PROPERTY SEARCH
-============================================= */
+ 
 
 .smart-property-section {
     position: relative;
@@ -492,10 +543,6 @@
 }
 
 
-/* ============================================
-   CATEGORIES
-============================================= */
-
 .property-categories {
     display: flex;
 
@@ -562,10 +609,6 @@
 }
 
 
-/* ============================================
-   BOTTOM MESSAGE
-============================================= */
-
 .property-search-message {
     margin-top: 25px;
 
@@ -580,10 +623,6 @@
     margin-right: 5px;
 }
 
-
-/* ============================================
-   TABLET
-============================================= */
 
 @media (max-width: 991px) {
 
@@ -601,10 +640,6 @@
 
 }
 
-
-/* ============================================
-   MOBILE
-============================================= */
 
 @media (max-width: 767px) {
 

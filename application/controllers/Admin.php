@@ -32,7 +32,7 @@ class Admin extends CI_Controller
 
 	public function index()
 	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
 
 		// Get member count
 		$data['member_count'] = $this->db->count_all('members_n');
@@ -58,7 +58,7 @@ class Admin extends CI_Controller
 	// 	}
 	// }
 
-	function require_super_admin()
+	public function require_super_admin()
 	{
 		$user = $this->session->userdata('login_user_info_all');
 		echo $user;
@@ -71,9 +71,9 @@ class Admin extends CI_Controller
 		}
 	}
 
-	function menu_access($user_id)
+	public function menu_access($user_id)
 	{
-		
+
 		$menus = $this->input->post('menus');
 
 		$this->db->where('user_id', $user_id);
@@ -88,6 +88,69 @@ class Admin extends CI_Controller
 
 		redirect($_SERVER['HTTP_REFERER']);
 	}
+
+
+
+	public function admin_registration()
+	{
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+
+		$path = 'admin/registration/registration';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+
+	public function admin_registration_saved()
+	{
+		// echo '<pre>';
+		// print_r($this->input->post());
+		// echo '</pre>';
+		// exit;
+		$username = $this->input->post('username');
+		$mobile_number = $this->input->post('mobile_number');
+		$email = $this->input->post('email');
+
+
+
+		$this->db->where("username", $username);
+		$this->db->where("mobile_number", $mobile_number);
+		$this->db->where("email", $email);
+
+
+
+
+
+		$isExist = $this->db->get("users")->row();
+		if ($isExist) {
+			$this->session->set_flashdata('reg_error', 'Already registered with this number');
+			redirect('admin_registration_form');
+			return;
+		}
+
+
+
+
+		$data = array(
+
+			'first_name' => $this->input->post('first_name'),
+			'last_name' => $this->input->post('last_name'),
+			'email' => $this->input->post('email'),
+
+			'username' => $this->input->post('username'),
+			'mobile_number' => $this->input->post('mobile_number'),
+			'designation' => $this->input->post('designation'),
+			'role' => $this->input->post('role'),
+			'password' => $this->input->post('password')
+			// 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+		);
+
+		$this->db->insert('users', $data);
+		redirect("admin");
+
+
+	}
+
+
 
 
 
@@ -266,58 +329,6 @@ class Admin extends CI_Controller
 		$path = 'admin/members_list/IdentityForm';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
-
-	// ---------------------get all members-----------------
-
-
-	// public function members_list()
-	// {
-	// 	$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য তালিকা');
-
-	// 	$where_data = array();
-
-	// 	$id = $this->input->get('id');
-	// 	$branch_registration_no = $this->input->get('branch_registration_no');
-	// 	$mobile_number = $this->input->get('mobile_number');
-	// 	$branch_name = $this->input->get('branch_name');
-	// 	$from_date = $this->input->get('from_date');
-	// 	$to_date = $this->input->get('to_date');
-
-
-
-	// 	if (!empty($id)) {
-	// 		$where_data['id'] = $id;
-	// 	}
-
-	// 	if (!empty($branch_registration_no)) {
-	// 		$where_data['branch_registration_no'] = $branch_registration_no;
-	// 	}
-
-	// 	if (!empty($mobile_number)) {
-	// 		$where_data['mobile_number'] = $mobile_number;
-	// 	}
-
-	// 	if (!empty($branch_name)) {
-	// 		$where_data['branch_name'] = $branch_name;
-	// 	}
-
-	// 	if (!empty($where_data)) {
-	// 		$this->db->where($where_data);
-	// 	}
-
-	// 	if (!empty($from_date)) {
-	// 		$this->db->where('created_at >=', $from_date);
-	// 	}
-
-	// 	if (!empty($to_date)) {
-	// 		$this->db->where('created_at <=', $to_date);
-	// 	}
-
-	// 	$data['members'] = $this->db->get('members_n')->result();
-
-	// 	$path = 'admin/members_list/members_list';
-	// 	$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	// }
 
 
 
@@ -516,7 +527,7 @@ class Admin extends CI_Controller
 
 	public function view_user($id = null)
 	{
-		
+
 		if (empty($id)) {
 			redirect(base_url('Admin/users_list'));
 		}

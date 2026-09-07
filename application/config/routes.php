@@ -13,11 +13,19 @@ $route['translate_uri_dashes'] = FALSE;
 // --------------------Admin Registration----------------------
 
 $route['admin'] = 'Admin_login/index';
-$route['admin_registration_form'] = 'Admin_login/admin_registration';
-$route['admin_registration'] = 'Admin_login/admin_registration_saved';
+$route['admin_registration_form'] = 'Admin/admin_registration';
+$route['admin_registration'] = 'Admin/admin_registration_saved';
 $route['update_user_role/(:num)'] = 'Admin/update_users_role/$1';
 $route['menu_access/(:num)'] = 'Admin/menu_access/$1';
 $route['logout'] = 'Admin_login/logout';
+
+$route['forget_password'] = 'Admin_login/reset_email_form';
+
+$route['send_reset_link'] = 'Admin_login/send_reset_link';
+
+$route['reset_password/(:any)'] = 'Admin_login/reset_password/$1';
+
+$route['update_new_password'] = 'Admin_login/update_new_password';
 
 
 
@@ -57,13 +65,14 @@ $route['news_details/(:num)'] = 'View_content_controller/news_details/$1';
 $route['notice_details/(:num)'] = 'View_content_controller/notice_details/$1';
 $route['management_details/(:num)'] = 'View_content_controller/management_details/$1';
 $route['all_managment'] = 'View_content_controller/all_managment';
-$route['all_products'] = 'Site/all_products';
+$route['all_products'] = 'Site/admin_registration_form';
 $route['our_mission'] = 'Site/our_mission';
 $route['our_managment'] = 'Site/our_managment';
 $route['contact_us'] = 'Site/contact_us';
 $route['our_vission'] = 'Site/our_vission';
 $route['our_concern'] = 'Site/our_concern';
 $route['showcase'] = 'Site/showcase';
+$route['properties'] = 'Site/properties';
 
 
 
@@ -225,29 +234,5 @@ $route['delete_permission/(:num)'] = 'Permisions_controller/delete_permission/$1
 
 $route['due_list'] = 'Permisions_controller/due_list';
 // $route['due_list_details'] = 'Permisions_controller/due_list_details';
-
-
-
-
-
-
-
-
-$route['org_history'] = 'Site/history';
-$route['org_mission'] = 'Site/mission_vission';
-$route['exi_committee'] = 'Site/executive_committee';
-$route['committee_mem_details'] = 'Site/committee_member_details';
-$route['org_structure'] = 'Site/organization_structure';
-$route['ex_presidents'] = 'Site/previous_presidents';
-$route['ex_presidents_details'] = 'Site/previous_presidents_details';
-$route['ex_secretaries'] = 'Site/previous_secretaries';
-$route['ex_secretaries_details'] = 'Site/previous_secretaries_details';
-$route['crnt_projects'] = 'Site/current_projects';
-$route['crnt_projects_details'] = 'Site/current_projects_details';
-$route['all_dev_works'] = 'Site/all_devlopment_works';
-$route['dev_works'] = 'Site/devlopment_works';
-$route['dev_works_details'] = 'Site/devlopment_works_details';
-$route['omen_dev_works'] = 'Site/women_devlopment_works';
-$route['omen_dev_works_details'] = 'Site/women_devlopment_works_details';
 
 

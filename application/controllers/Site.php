@@ -191,6 +191,13 @@ class Site extends  MY_Controller
 		$path = "site/pages/showcase/showcase";
 		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
 	}
+	public function properties()
+	{
+		$data = $this->engine->store_nav('site', 'Nothing', 'Our Mission');
+
+		$path = "site/pages/properties/properties";
+		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+	}
 
 
 	public function member_application_save()

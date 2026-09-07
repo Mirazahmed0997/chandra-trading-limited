@@ -6,7 +6,7 @@
                 <div class="col-lg-7">
                     <div class="d-flex justify-content-between align-items-end mb-4">
                         <div>
-                            <span class="text-muted text-uppercase fw-semibold small">Latest News & Updates</span>
+                            <span class="text-muted text-uppercase fw-semibold small">Latest News & Insights</span>
                             <h3 class="fw-bold mb-0">News & Updates</h3>
                         </div>
                         <a href="#" class="btn btn-outline-green btn-sm">View All News</a>
@@ -43,6 +43,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="News">
+                                <div class="card-body p-3">
+                                    <small class="text-muted">10 May, 2024</small>
+                                    <h6 class="fw-bold mt-1">Chandra News</h6>
+                                    <a href="#" class="text-green text-decoration-none small fw-semibold">Read More &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -53,7 +63,7 @@
                             <span class="text-uppercase small fw-semibold text-warning">Testimonial</span>
                             <h3 class="fw-bold text-white mb-4">What Our Clients Say</h3>
                             <i class="bi bi-quote display-4 text-warning opacity-50 d-block mb-2"></i>
-                            <p class="fs-6 text-light">Green Valley Real Estate helped me to find the perfect plot for my dream home. The process was smooth and transparent.</p>
+                            <p class="fs-6 text-light">Chandra Trading Limited helped me to find the perfect plot for my dream home. The process was smooth and transparent.</p>
                             <div class="text-warning mb-3">
                                 <i class="bi bi-star-fill"></i>
                                 <i class="bi bi-star-fill"></i>

@@ -24,6 +24,58 @@ $lang['hero_subtitle'] = 'Discover Quality Properties, trusted investment opport
 $lang['explore_projects'] = 'Explore Projects';
 $lang['book_plot'] = 'Book a Plot';
 
+
+// Property Search
+
+$lang['smart_property_search'] = 'SMART PROPERTY SEARCH';
+$lang['find_your'] = 'Find Your';
+$lang['perfect_property'] = 'Perfect Property';
+$lang['property_search_description'] = 'Discover properties that match your lifestyle, investment goals and budget.';
+
+$lang['property_type'] = 'Property Type';
+$lang['select_property_type'] = 'Select Property Type';
+$lang['apartment'] = 'Apartment';
+$lang['plot'] = 'Plot';
+$lang['land'] = 'Land';
+$lang['commercial'] = 'Commercial';
+
+$lang['location'] = 'Location';
+$lang['select_location'] = 'Select Location';
+$lang['dhaka'] = 'Dhaka';
+$lang['uttara'] = 'Uttara';
+$lang['purbachal'] = 'Purbachal';
+$lang['bashundhara'] = 'Bashundhara';
+$lang['keraniganj'] = 'Keraniganj';
+
+$lang['budget'] = 'Budget';
+$lang['select_budget'] = 'Select Budget';
+$lang['budget_10_30'] = '৳ 10 - 30 Lac';
+$lang['budget_30_50'] = '৳ 30 - 50 Lac';
+$lang['budget_50_100'] = '৳ 50 Lac - 1 Crore';
+$lang['budget_100_plus'] = '৳ 1 Crore+';
+
+$lang['search_property'] = 'SEARCH PROPERTY';
+
+
+// Property Catagories
+$lang['property_categories'] = 'PROPERTY CATEGORIES';
+$lang['explore_our'] = 'Explore Our';
+$lang['property_categories_title'] = 'Property Categories';
+$lang['property_categories_description'] = 'Find the right property for living, investment, business and future growth.';
+
+$lang['residential'] = 'RESIDENTIAL';
+$lang['residential_description'] = 'Homes designed for better living.';
+
+$lang['land_plots'] = 'LAND & PLOTS';
+$lang['land_plots_description'] = 'Opportunities with long-term value.';
+
+$lang['commercial'] = 'COMMERCIAL';
+$lang['commercial_description'] = 'Spaces built for business.';
+
+$lang['investment'] = 'INVESTMENT';
+$lang['investment_description'] = 'Property opportunities for your future.';
+
+
 // Features
 $lang['prime_location'] = 'Prime Location';
 $lang['prime_location_desc'] = 'Well connected with city and facilities';
@@ -40,13 +92,13 @@ $lang['trust_reliability_desc'] = 'Committed to Honesty & Excellence';
 
 
 // Featured Products
-$lang['Our_Projects']='Our Projects';
+$lang['Our_Projects']='Explore selected properties from Chandra Trading Limited';
 $lang['Featured_Projects']='Featured Projects';
 
 
 
 // heroo_banner1
-$lang['chandra_trading_limited'] = 'Chandra Trading Limited';
+$lang['chandra_trading_limited'] = 'Why Chandra Trading Limited?';
 
 $lang['building_today'] = 'Building Today, Inspiring Tomorrow';
 
@@ -55,6 +107,33 @@ $lang['about_company_text_1'] = 'We are a trusted real estate company committed 
 $lang['about_company_text_2'] = 'With a strong focus on transparency, quality, and customer satisfaction, we strive to make every property investment a secure and rewarding experience.';
 
 $lang['about_us'] = 'About Us';
+
+
+// Why Chandra
+
+
+$lang['why_choose_chandra'] = 'WHY CHANDRA TRADING LIMITED?';
+
+$lang['built_on'] = 'Built on';
+$lang['trust'] = 'Trust';
+$lang['driven_by_value'] = 'Driven by Value.';
+
+$lang['why_chandra_description'] = 'We believe real estate is more than property. It is about trust, transparency, quality and long-term relationships.';
+
+$lang['quality'] = 'Quality';
+$lang['transparency'] = 'Transparency';
+$lang['value'] = 'Value';
+$lang['commitment'] = 'Commitment';
+
+$lang['trust_description'] = 'We are committed to conducting our business with honesty and responsibility while earning the trust of our customers.';
+
+$lang['quality_description'] = 'We have a strong commitment to providing quality properties and development.';
+
+$lang['transparency_description'] = 'We ensure transparency at every stage of property information and transactions.';
+
+$lang['value_description'] = 'We give the highest priority to our customers’ long-term value and satisfaction.';
+
+$lang['commitment_description'] = 'We believe in long-term cooperation by maintaining customer relationships even after the sale.';
 
 
 
