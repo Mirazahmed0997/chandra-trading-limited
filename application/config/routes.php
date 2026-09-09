@@ -15,8 +15,11 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'Admin_login/index';
 $route['admin_registration_form'] = 'Admin/admin_registration';
 $route['admin_registration'] = 'Admin/admin_registration_saved';
-$route['update_user_role/(:num)'] = 'Admin/update_users_role/$1';
+$route['update_users_role/(:num)'] = 'Admin/update_users_role/$1';
+$route['change_password'] = 'Admin/change_password';
 $route['menu_access/(:num)'] = 'Admin/menu_access/$1';
+
+
 $route['logout'] = 'Admin_login/logout';
 
 $route['forget_password'] = 'Admin_login/reset_email_form';
@@ -28,28 +31,24 @@ $route['reset_password/(:any)'] = 'Admin_login/reset_password/$1';
 $route['update_new_password'] = 'Admin_login/update_new_password';
 
 
+// Properties managment
+$route['add_properties'] = 'Admin_properties/add_properties';
+$route['create_properties'] = 'Admin_properties/create_properties';
+$route['properties_list'] = 'Admin_properties/properties_list';
+$route['properties_details/(:num)'] = 'Admin_properties/properties_details/$1';
+
+
 
 
 // --------------------Admin dashboard-------------------------
 
 $route['admin_dashboard'] = 'Admin/index';
 $route['members_list'] = 'Admin/members_list';
+$route['view_profile'] = 'Admin/view_profile';
 $route['view_member/(:num)'] = 'Admin/view_member/$1';
 $route['delete_member/(:num)'] = 'Admin/delete_member/$1';
 $route['members_account_details_admin'] = 'Admin/members_account';
 
-$route['table'] = 'Admin/table';
-$route['table2'] = 'Admin/table2';
-$route['investment_report'] = 'Admin/investment_report';
-$route['due_list_details'] = 'Admin/due_list_details';
-$route['due_list_details1'] = 'Admin/due_list_details1';
-$route['daily_installment'] = 'Admin/daily_installment';
-$route['c_47'] = 'Admin/c_47';
-$route['id_card1'] = 'Admin/id_card1';
-$route['id_card2'] = 'Admin/id_card2';
-$route['id_card3'] = 'Admin/id_card3';
-$route['id_card4'] = 'Admin/id_card4';
-$route['id_card2_both'] = 'Admin/id_card2_both';
 
 // $route['calculator'] = 'Admin/calculator';
 
@@ -180,7 +179,7 @@ $route['member_register'] = 'Site/member_application_save';
 $route['member_login'] = 'Member_login/index';
 $route['members_login'] = 'Member_login/login_process';
 $route['member_logout'] = 'Member_login/logout';
-$route['change_password/(:num)'] = 'Member_login/change_password/$1';
+
 $route['member_logout'] = 'Member_login/logout';
 
 

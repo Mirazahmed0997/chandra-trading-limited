@@ -61,8 +61,8 @@ class Admin extends CI_Controller
 	public function require_super_admin()
 	{
 		$user = $this->session->userdata('login_user_info_all');
-		echo $user;
-		exit;
+		// echo $user;
+		// exit;
 
 		if ($user->role !== 'super_admin') {
 			$this->session->set_flashdata('error', 'Only Super Admin have access to Update & Delete user.');
@@ -151,309 +151,118 @@ class Admin extends CI_Controller
 	}
 
 
-
-
-
-
-
-	public function table()
+	public function change_password()
 	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/sbcl/c_38';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function id_card1()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/id_card/id_card1';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function id_card2()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/id_card/id_card2';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function id_card3()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/id_card/id_card3';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function id_card4()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/id_card/id_card4';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function id_card2_both()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/id_card/id_card2_both';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function table2()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/sbcl/table2';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function investment_report()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/sbcl/investment_report1';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function due_list_details()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/sbcl/due_list_details';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function due_list_details1()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/sbcl/due_list_details1';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function daily_installment()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/sbcl/daily_installment';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function c_47()
-	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
-
-		$path = 'admin/sbcl/c_47';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-
-	// ---------------------middle ware--------------------
+		$loggedUser = $this->session->userdata('login_user_info_all');
 
 
-
-	// --------------single member details------------
-
-	public function view_member($id = null)
-	{
-		if (empty($id)) {
-			redirect(base_url('Admin/members_list'));
+		if (!$loggedUser) {
+			redirect('login');
+			return;
 		}
 
-		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
+		$current_password = $this->input->post('current_password');
+		$new_password = $this->input->post('new_password');
+		$confirm_password = $this->input->post('confirm_password');
 
-		$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
 
-		//  Check if member exists
-		if (!$data['member']) {
-			show_404(); // member not found
+
+		if (empty($current_password) || empty($new_password) || empty($confirm_password)) {
+
+			$this->session->set_flashdata(
+				'pass_error',
+				'All password fields are required.'
+			);
+
+			redirect($_SERVER['HTTP_REFERER']);
+			return;
 		}
 
-		$path = 'admin/members_list/member_Details';
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
+		if ($new_password !== $confirm_password) {
 
+			$this->session->set_flashdata(
+				'pass_error',
+				'New password and confirm password do not match.'
+			);
 
-
-	// -------------------Form View---------------------
-
-	public function form_view($id = null)
-	{
-		//  Redirect if no ID
-		if (empty($id)) {
-			redirect(base_url('Admin/members_list'));
+			redirect($_SERVER['HTTP_REFERER']);
+			return;
 		}
 
-		//  Set dashboard navigation & page title
-		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
+		if (strlen($new_password) < 6) {
 
-		// Fetch the specific member
-		$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+			$this->session->set_flashdata(
+				'pass_error',
+				'New password must be at least 6 characters long.'
+			);
 
-		//  Check if member exists
-		if (!$data['member']) {
-			show_404(); // member not found
+			redirect($_SERVER['HTTP_REFERER']);
+			return;
 		}
 
-		//  Render the member details inside dashboard layout
-		// $path = 'admin/members_list/IdentityForm';
-		$path = 'admin/members_list/form_view';
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
+		$user = $this->db
+			->where('id', $loggedUser->id)
+			->get('users')
+			->row();
 
 
-	public function IdentityForm_view($id = null)
-	{
-		//  Redirect if no ID
-		if (empty($id)) {
-			redirect(base_url('Admin/members_list'));
+
+		// echo '<pre>';
+		// print_r($loggedUser);
+		// print_r($user);
+		// exit;
+		if (!$user) {
+
+			$this->session->set_flashdata(
+				'pass_error',
+				'User account not found.'
+			);
+
+			redirect($_SERVER['HTTP_REFERER']);
+			return;
 		}
 
-		//  Set dashboard navigation & page title
-		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
+		if ($current_password !== $user->password) {
 
-		// Fetch the specific member
-		$data['member'] = $this->Common->get_data_single_conditional('members_n', 'id', $id)->row();
+			$this->session->set_flashdata(
+				'pass_error',
+				'Current password is incorrect.'
+			);
 
-		//  Check if member exists
-		if (!$data['member']) {
-			show_404(); // member not found
+			redirect($_SERVER['HTTP_REFERER']);
+			return;
 		}
 
-		//  Render the member details inside dashboard layout
-		$path = 'admin/members_list/IdentityForm';
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+		// $hashed_password = password_hash(
+		// 	$new_password,
+		// 	PASSWORD_DEFAULT
+		// );
+
+
+
+		$this->db
+			->where('id', $loggedUser->id)
+			->update('users', [
+				'password' => $new_password
+			]);
+
+		if ($this->db->affected_rows() > 0) {
+
+			$this->session->set_flashdata(
+				'success',
+				'Password changed successfully.'
+			);
+
+		} else {
+
+			$this->session->set_flashdata(
+				'pass_error',
+				'Unable to change password. Please try again.'
+			);
+		}
+
+		redirect($_SERVER['HTTP_REFERER']);
 	}
-
-
-
-	// ---------------------delete member-----------------
-
-	public function members_list()
-	{
-		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
-		$ch = curl_init('http://localhost:8080/bjsu/Pubilc_api/members_table_api');
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-		$response = curl_exec($ch);
-		curl_close($ch);
-
-		$data['members'] = json_decode($response);
-
-		$path = 'admin/members_list/members_list';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-	public function members_details($id)
-	{
-		echo $id;
-		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
-		$ch = curl_init('http://localhost:8080/bjsu/Pubilc_api/members_table_single_api/' . $id);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-		$response = curl_exec($ch);
-		curl_close($ch);
-
-		$data['member'] = json_decode($response);
-
-		$path = 'admin/members_list/form_view';
-
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-
-
-	public function delete_member($id)
-	{
-		$this->Common->delete_data('members_n', 'id', $id);
-		redirect('members');
-	}
-
-
-
-
-	public function edit_member($id)
-	{
-		$data['member'] = $this->db->get_where('members_n', ['id' => $id])->row();
-		$this->load->view('site/members_list/updateForm', $data);
-	}
-
-
-
-
-
-
-	public function save_charge()
-	{
-		$id = $this->input->post('member_id');
-
-		$data = [
-			'subscription_fee' => $this->input->post('subscription_fee'),
-		];
-
-		$this->db->where('id', $id);
-		$this->db->update('members_n', $data);
-
-		echo "success";
-	}
-
-
-	public function approval_update()
-	{
-		$id = $this->input->post('member_id');
-
-		$user = $this->session->userdata('login_user_info_all');
-
-
-		$approved_by = $user->username;
-
-		$data = [
-			'active_status' => 1,
-			'approved_by' => $approved_by,
-			'approved_date' => date('Y-m-d H:i:s')
-		];
-
-		$this->db->where('id', $id);
-		$this->db->update('members_n', $data);
-
-		echo "success";
-	}
-
-
-
-	// -------------------member account details---------------------
-
-	public function members_account($id = null)
-	{
-		$data = $this->engine->store_nav('members_list', 'members_list', 'সদস্য বিস্তারিত');
-
-		// OPTIONAL: comment this for now
-		// if (empty($id)) {
-		//     redirect(base_url('Applicant/members_list'));
-		// }
-
-		// OPTIONAL: disable DB check for now
-		// $data['member'] = ...
-		// if (!$data['member']) {
-		//     show_404();
-		// }
-
-		$path = 'admin/members_list/members_accounts_details';
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
-
-
-
-
-
-
-
-
-
 
 	// ----------------------------users list--------------------
 
@@ -461,7 +270,7 @@ class Admin extends CI_Controller
 
 	public function users_list()
 	{
-		$data = $this->engine->store_nav('users_list', 'users_list', 'সদস্য তালিকা');
+		$data = $this->engine->store_nav('users_list', 'users_list', 'User List');
 
 		$where_data = array();
 
@@ -469,9 +278,6 @@ class Admin extends CI_Controller
 		$username = $this->input->get('username');
 		$mobile_number = $this->input->get('mobile_number');
 		$role = $this->input->get('role');
-
-
-
 
 		if (!empty($id)) {
 			$where_data['id'] = $id;
@@ -532,7 +338,7 @@ class Admin extends CI_Controller
 			redirect(base_url('Admin/users_list'));
 		}
 
-		$data = $this->engine->store_nav('users_list', 'users_list', 'সদস্য বিস্তারিত');
+		$data = $this->engine->store_nav('users_list', 'users_list', 'User List');
 
 		$data['user'] = $this->Common->get_data_single_conditional('users', 'id', $id)->row();
 
@@ -542,6 +348,40 @@ class Admin extends CI_Controller
 
 		$path = 'admin/users_list/users_details';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+	public function view_profile()
+	{
+		$data = $this->engine->store_nav(
+			'users_list',
+			'users_list',
+			'user info'
+		);
+
+		$login_user = $this->session->userdata('login_user_info_all');
+
+		if (!$login_user || empty($login_user->id)) {
+			redirect(base_url('Admin/login'));
+		}
+
+		$user_id = $login_user->id;
+
+		$data['user'] = $this->Common
+			->get_data_single_conditional('users', 'id', $user_id)
+			->row();
+
+		if (!$data['user']) {
+			show_404();
+		}
+
+		$path = 'admin/users_list/users_profile';
+
+		$this->engine->render_view(
+			$data,
+			$path,
+			$this->side_menu,
+			$this->main_layout
+		);
 	}
 
 
@@ -581,12 +421,7 @@ class Admin extends CI_Controller
 	}
 
 
-	// public function calculator()
-	// {
-	// 	$data = $this->engine->store_nav('members_list', 'members_list', 'Calculator');
-	// 	$path = 'admin/calculator/calculator';
-	// 	$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	// }
+
 
 	public function admin_orders_table()
 	{

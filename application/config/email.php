@@ -6,8 +6,8 @@ $config['protocol'] = 'smtp';
 $config['smtp_host'] = 'smtp.gmail.com';
 $config['smtp_port'] = 587;
 
-$config['smtp_user'] = 'ahmedmiraz87@gmail.com';
-$config['smtp_pass'] = 'lxgv fylo rukg lxyh';
+$config['smtp_user'] = 'ctl05.2026@gmail.com';
+$config['smtp_pass'] = 'zani mefh wlpq ydlz';
 
 $config['smtp_crypto'] = 'tls';
 

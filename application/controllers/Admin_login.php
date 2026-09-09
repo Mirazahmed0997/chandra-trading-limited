@@ -142,7 +142,7 @@ class Admin_login extends CI_Controller
 
 
         $this->email->from(
-            'ahmedmiraz87@gmail.com',
+            'ctl05.2026@gmail.com',
             'Chandra Trading Limited'
         );
 

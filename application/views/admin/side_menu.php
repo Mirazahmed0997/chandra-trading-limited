@@ -345,11 +345,12 @@ $user = $this->session->userdata('login_user_info_all');
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">
+                <a href="<?php echo base_url('view_profile'); ?>" class="d-block">
                     <span class="brand-text font-weight-light">
                         <?= htmlspecialchars($user->first_name . ' ' . $user->last_name); ?>
-                    </span> <small>Super Admin</small></a>
+                    </span> <small><?= $user->role; ?></small></a>
             </div>
+
 
 
 
@@ -366,116 +367,162 @@ $user = $this->session->userdata('login_user_info_all');
                     </a>
                 </li>
 
+                <?php if (has_menu_access('Properties')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Properties', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Properties', $main_nav); ?>">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>
+                                Properties
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
 
-                <li class="nav-item has-treeview <?= active_open('Properties', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Properties', $main_nav); ?>">
-                        <i class="nav-icon fas fa-building"></i>
-                        <p>
-                            Properties
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item has-treeview <?= active_open('Projects', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Projects', $main_nav); ?>">
-                        <i class="nav-icon fas fa-landmark"></i>
-                        <p>
-                            Projects
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item has-treeview <?= active_open('Leads', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Leads', $main_nav); ?>">
-                        <i class="nav-icon fas fa-user-plus"></i>
-                        <p>
-                            Leads
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview <?= active_open('Site Visits', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Site Visits', $main_nav); ?>">
-                        <i class="nav-icon fas fa-map-marker-alt"></i>
-                        <p>
-                            Site Visits
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item has-treeview <?= active_open('Customers', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Customers', $main_nav); ?>">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Customers
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview <?= active_open('Landowner Enquiries', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Landowner Enquiries', $main_nav); ?>">
-                        <i class="nav-icon fas fa-user-tie"></i>
-                        <p>
-                            Landowner Enquiries
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview <?= active_open('Investment Enquiries', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Investment Enquiries', $main_nav); ?>">
-                        <i class="nav-icon fas fa-hand-holding-usd"></i>
-                        <p>
-                            Investment Enquiries
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview <?= active_open('News', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('News', $main_nav); ?>">
-                        <i class="nav-icon fas fa-newspaper"></i>
-                        <p>
-                            News
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview <?= active_open('Gallery', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Gallery', $main_nav); ?>">
-                        <i class="nav-icon fas fa-images"></i>
-                        <p>
-                            Gallery
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview <?= active_open('Team', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Team', $main_nav); ?>">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>
-                            Team
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview <?= active_open('Testimonials', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Testimonials', $main_nav); ?>">
-                        <i class="nav-icon fas fa-comments"></i>
-                        <p>
-                            Testimonials
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview <?= active_open('Documents', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Documents', $main_nav); ?>">
-                        <i class="nav-icon fas fa-newspaper"></i>
-                        <p>
-                            Documents
-                        </p>
-                    </a>
-                </li>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('properties_list') ?>"
+                                    class="nav-link <?= active_nav('properties', $sub_nav); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Our Properties</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('add_properties') ?>"
+                                    class="nav-link <?= active_nav('add_properties', $sub_nav); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add new Properties</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
 
+                <?php endif; ?>
 
+                <?php if (has_menu_access('Projects')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Projects', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Projects', $main_nav); ?>">
+                            <i class="nav-icon fas fa-landmark"></i>
+                            <p>
+                                Projects
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Leads')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Leads', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Leads', $main_nav); ?>">
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                                Leads
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Site Visits')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Site Visits', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Site Visits', $main_nav); ?>">
+                            <i class="nav-icon fas fa-map-marker-alt"></i>
+                            <p>
+                                Site Visits
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Customers')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Customers', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Customers', $main_nav); ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Customers
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+
+                <?php if (has_menu_access('Landowner Enquiries')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Landowner Enquiries', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Landowner Enquiries', $main_nav); ?>">
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <p>
+                                Landowner Enquiries
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Investment Enquiries')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Investment Enquiries', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Investment Enquiries', $main_nav); ?>">
+                            <i class="nav-icon fas fa-hand-holding-usd"></i>
+                            <p>
+                                Investment Enquiries
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('News')): ?>
+                    <li class="nav-item has-treeview <?= active_open('News', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('News', $main_nav); ?>">
+                            <i class="nav-icon fas fa-newspaper"></i>
+                            <p>
+                                News
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Gallery')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Gallery', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Gallery', $main_nav); ?>">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Gallery
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Team')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Team', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Team', $main_nav); ?>">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>
+                                Team
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Testimonials')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Testimonials', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Testimonials', $main_nav); ?>">
+                            <i class="nav-icon fas fa-comments"></i>
+                            <p>
+                                Testimonials
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Documents')): ?>
+                    <li class="nav-item has-treeview <?= active_open('Documents', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Documents', $main_nav); ?>">
+                            <i class="nav-icon fas fa-newspaper"></i>
+                            <p>
+                                Documents
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
 
                 <br>
+
+
 
                 <a href="<?php echo base_url('Admin/registered_user_list') ?>"
                     class="nav-link <?= active_nav('user_list', $main_nav); ?>">
@@ -484,31 +531,33 @@ $user = $this->session->userdata('login_user_info_all');
                 </a>
 
 
-                <li class="nav-item has-treeview <?= active_open('User Management', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('User Management', $main_nav); ?>">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            User Management
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('admin/users_list/users_list') ?>"
-                                class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>User</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('admin_registration_form') ?>"
-                                class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Add new User</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <?php if (has_menu_access('User Management')): ?>
+                    <li class="nav-item has-treeview <?= active_open('User Management', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('User Management', $main_nav); ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                User Management
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('admin/users_list/users_list') ?>"
+                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>User</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('admin_registration_form') ?>"
+                                    class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add new User</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
 
             </ul>
         </nav>

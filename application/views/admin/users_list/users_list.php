@@ -1,8 +1,6 @@
-```php
 <!-- Content Wrapper -->
 <div class="content-wrapper bg-light">
 
-    <!-- Page Header -->
     <section class="content-header py-4">
         <div class="container-fluid">
 
@@ -125,36 +123,7 @@
 
             <!-- Flash Messages -->
 
-            <?php if ($this->session->flashdata('error')): ?>
-
-                <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
-
-                    <i class="fas fa-exclamation-circle me-2"></i>
-
-                    <?= $this->session->flashdata('error'); ?>
-
-                    <button type="button" class="btn-close" data-bs-dismiss="alert">
-                    </button>
-
-                </div>
-
-            <?php endif; ?>
-
-
-            <?php if ($this->session->flashdata('success')): ?>
-
-                <div class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
-
-                    <i class="fas fa-check-circle me-2"></i>
-
-                    <?= $this->session->flashdata('success'); ?>
-
-                    <button type="button" class="btn-close" data-bs-dismiss="alert">
-                    </button>
-
-                </div>
-
-            <?php endif; ?>
+           
 
 
             <!-- Users Card -->
@@ -294,7 +263,7 @@
                                         <!-- ROLE -->
                                         <td>
 
-                                            <form action="<?= base_url('update_user_role/' . $row->id); ?>" method="post"
+                                            <form action="<?= base_url('update_users_role/' . $row->id); ?>" method="post"
                                                 class="role-form">
 
                                                 <select name="role" onchange="this.form.submit()" class="role-select
@@ -456,11 +425,6 @@
     </section>
 
 </div>
-
-
-<!-- =========================
-     CUSTOM CSS
-========================= -->
 
 <style>
     .content-wrapper {
@@ -842,9 +806,6 @@
 </style>
 
 
-<!-- =========================
-     DATATABLES
-========================= -->
 
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>

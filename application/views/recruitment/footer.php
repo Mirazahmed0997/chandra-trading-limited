@@ -36,13 +36,13 @@
                         <li class="mb-2"><i class="bi bi-envelope text-green me-2"></i> ctl05_2026@gmail.com</li>
                         <li class="mb-2"><i class="bi bi-geo-alt text-green me-2"></i> Lily Pond Center, Floor- 21, R.K Mission Road, Motijheel, Dhaka-1203</li>
                     </ul>
-                    <h6 class="text-white fw-bold mt-4 mb-2">Follow Us</h6>
-                    <div class="d-flex gap-2">
+                    <!-- <h6 class="text-white fw-bold mt-4 mb-2">Follow Us</h6>
+                    <div class="d-flex gap-2 links">
                         <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="bi bi-facebook"></i></a>
                         <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="bi bi-instagram"></i></a>
                         <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="bi bi-youtube"></i></a>
                         <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="bi bi-linkedin"></i></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
