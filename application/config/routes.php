@@ -36,6 +36,9 @@ $route['add_properties'] = 'Admin_properties/add_properties';
 $route['create_properties'] = 'Admin_properties/create_properties';
 $route['properties_list'] = 'Admin_properties/properties_list';
 $route['properties_details/(:num)'] = 'Admin_properties/properties_details/$1';
+$route['update_properties_form/(:num)'] = 'Admin_properties/update_properties_form/$1';
+$route['update_properties/(:num)'] = 'Admin_properties/update_properties/$1';
+$route['delete_property/(:num)'] = 'Admin_properties/delete_property/$1';
 
 
 

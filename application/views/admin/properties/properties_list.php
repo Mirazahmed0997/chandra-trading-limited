@@ -202,11 +202,11 @@
                                                         class="btn btn-sm btn-outline-info" title="View">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?= base_url('admin/properties/edit/' . $property->id); ?>"
+                                                    <a href="<?= base_url('update_properties_form/' . $property->id); ?>"
                                                         class="btn btn-sm btn-outline-primary" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="<?= base_url('admin/properties/delete/' . $property->id); ?>"
+                                                    <a href="<?= base_url('delete_property/' . $property->id); ?>"
                                                         class="btn btn-sm btn-outline-danger" title="Delete"
                                                         onclick="return confirm('Are you sure you want to delete this property?');">
                                                         <i class="fas fa-trash"></i>
