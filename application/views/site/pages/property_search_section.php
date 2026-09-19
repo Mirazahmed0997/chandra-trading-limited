@@ -1,12 +1,22 @@
+
+<?php
+$projects = $this->db->order_by('created_at', 'DESC')
+    ->where('status', 'Published')
+    ->limit(5)
+    ->get('properties')
+    ->result_array();
+?>
+
+
+
+
 <section class="smart-property-section">
 
-    <!-- Background decoration -->
     <div class="property-bg-shape property-bg-shape-1"></div>
     <div class="property-bg-shape property-bg-shape-2"></div>
 
     <div class="container position-relative">
 
-        <!-- Section Heading -->
         <div class="text-center property-heading">
 
             <span class="property-subtitle">
@@ -25,183 +35,71 @@
         </div>
 
 
-        <!-- Search Box -->
-        <div class="property-search-card">
-
-            <form action="<?= base_url('properties/search'); ?>" method="GET">
-
-                <div class="row g-3 align-items-end">
-
-                    <!-- Property Type -->
-                    <div class="col-lg-3 col-md-6">
-
-                        <label class="property-label">
-                            <?= lang('property_type'); ?>
-                        </label>
-
-                        <div class="property-input">
-
-                            <i class="fa-solid fa-building"></i>
-
-                            <select name="property_type" class="form-select">
-
-                                <option value="">
-                                    <?= lang('select_property_type'); ?>
-                                </option>
-
-                                <option value="apartment">
-                                    <?= lang('apartment'); ?>
-                                </option>
-
-                                <option value="plot">
-                                    <?= lang('plot'); ?>
-                                </option>
-
-                                <option value="land">
-                                    <?= lang('land'); ?>
-                                </option>
-
-                                <option value="commercial">
-                                    <?= lang('commercial'); ?>
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Location -->
-                    <div class="col-lg-3 col-md-6">
-
-                        <label class="property-label">
-                            <?= lang('location'); ?>
-                        </label>
-
-                        <div class="property-input">
-
-                            <i class="fa-solid fa-location-dot"></i>
-
-                            <select name="location" class="form-select">
-
-                                <option value="">
-                                    <?= lang('select_location'); ?>
-                                </option>
-
-                                <option value="dhaka">
-                                    <?= lang('dhaka'); ?>
-                                </option>
-
-                                <option value="uttara">
-                                    <?= lang('uttara'); ?>
-                                </option>
-
-                                <option value="purbachal">
-                                    <?= lang('purbachal'); ?>
-                                </option>
-
-                                <option value="bashundhara">
-                                    <?= lang('bashundhara'); ?>
-                                </option>
-
-                                <option value="keraniganj">
-                                    <?= lang('keraniganj'); ?>
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Budget -->
-                    <div class="col-lg-3 col-md-6">
-
-                        <label class="property-label">
-                            <?= lang('budget'); ?>
-                        </label>
-
-                        <div class="property-input">
-
-                            <i class="fa-solid fa-money-bill-wave"></i>
-
-                            <select name="budget" class="form-select">
-
-                                <option value="">
-                                    <?= lang('select_budget'); ?>
-                                </option>
-
-                                <option value="10-30">
-                                    <?= lang('budget_10_30'); ?>
-                                </option>
-
-                                <option value="30-50">
-                                    <?= lang('budget_30_50'); ?>
-                                </option>
-
-                                <option value="50-100">
-                                    <?= lang('budget_50_100'); ?>
-                                </option>
-
-                                <option value="100+">
-                                    <?= lang('budget_100_plus'); ?>
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Search Button -->
-                    <div class="col-lg-3 col-md-6">
-
-                        <button type="submit" class="property-search-btn">
-
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                            <?= lang('search_property'); ?>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </form>
-
-        </div>
-
     </div>
 
 </section>
 
+<section class="py-5 bg-light">
+    <div class="container">
 
-  <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row g-4">
-                <!-- Search Box Card -->
-                <div class="col-lg-3">
-                    <div class="card border-0 text-white p-3 h-100" style="background-color: #0d5c3a;">
-                        <span class="text-uppercase small fw-semibold text-warning">Available Plots</span>
-                        <h3 class="fw-bold mb-4">Find Your Perfect Plot</h3>
-                        
-                        <div class="text-center my-auto py-3">
-                            <i class="bi bi-geo-alt-fill display-3 text-warning"></i>
-                            <h5 class="mt-3 fw-bold">Looking for a plot?</h5>
-                            <p class="small text-light">We have wide range of plots in prime locations.</p>
-                        </div>
-                        
+        <div class="row g-4">
+
+            <!-- Left Information Card -->
+            <div class="col-lg-3">
+                <div class="card border-0 text-white p-4 h-100"
+                     style="background-color: #0d5c3a;">
+
+                    <span class="text-uppercase small fw-semibold text-warning">
+                        Available Plots
+                    </span>
+
+                    <h3 class="fw-bold mb-4">
+                        Find Your Perfect Plot
+                    </h3>
+
+                    <div class="text-center my-auto py-3">
+
+                        <i class="bi bi-geo-alt-fill display-3 text-warning"></i>
+
+                        <h5 class="mt-3 fw-bold">
+                            Looking for a plot?
+                        </h5>
+
+                        <p class="small text-light mb-0">
+                            We have a wide range of properties
+                            in prime locations.
+                        </p>
+
                     </div>
-                </div>
 
-                <!-- Plot Table -->
-                <div class="col-lg-9">
-                    <div class="table-responsive bg-white rounded shadow-sm p-3">
+                </div>
+            </div>
+
+
+            <!-- Recent Properties -->
+            <div class="col-lg-9">
+
+                <div class="bg-white rounded shadow-sm p-3">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <div>
+                            <h5 class="fw-bold mb-1">
+                                Recent Properties
+                            </h5>
+
+                            <p class="text-muted small mb-0">
+                                Explore our latest available properties
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-responsive">
+
                         <table class="table table-hover align-middle mb-0">
+
                             <thead class="table-light">
                                 <tr>
                                     <th>Project Name</th>
@@ -212,54 +110,104 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                <tr>
-                                    <td class="fw-semibold">Green Valley</td>
-                                    <td>Gazipur, Dhaka</td>
-                                    <td>3 Katha</td>
-                                    <td>1,350,000</td>
-                                    <td><span class="badge badge-available px-3 py-2">Available</span></td>
-                                    <td><a href="#" class="btn btn-green btn-sm px-3">Book Now</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-semibold">City View</td>
-                                    <td>Savar, Dhaka</td>
-                                    <td>5 Katha</td>
-                                    <td>2,250,000</td>
-                                    <td><span class="badge badge-available px-3 py-2">Available</span></td>
-                                    <td><a href="#" class="btn btn-green btn-sm px-3">Book Now</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-semibold">Lake City</td>
-                                    <td>Narsingdi</td>
-                                    <td>4 Katha</td>
-                                    <td>1,800,000</td>
-                                    <td><span class="badge badge-available px-3 py-2">Available</span></td>
-                                    <td><a href="#" class="btn btn-green btn-sm px-3">Book Now</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-semibold">Sunshine Avenue</td>
-                                    <td>Keraniganj, Dhaka</td>
-                                    <td>3 Katha</td>
-                                    <td>1,250,000</td>
-                                    <td><span class="badge badge-booked px-3 py-2">Booked</span></td>
-                                    <td><a href="#" class="btn btn-outline-secondary btn-sm px-3">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-semibold">Meadow Land</td>
-                                    <td>Munshiganj</td>
-                                    <td>6 Katha</td>
-                                    <td>2,650,000</td>
-                                    <td><span class="badge badge-available px-3 py-2">Available</span></td>
-                                    <td><a href="#" class="btn btn-green btn-sm px-3">Book Now</a></td>
-                                </tr>
+
+                                <?php if (!empty($projects)): ?>
+
+                                    <?php
+                                    // Only show latest 5
+                                    $recent_projects = array_slice($projects, 0, 5);
+                                    ?>
+
+                                    <?php foreach ($recent_projects as $project): ?>
+
+                                        <tr>
+
+                                            <!-- Project Name -->
+                                            <td class="fw-semibold">
+                                                <?= html_escape($project['property_name']); ?>
+                                            </td>
+
+                                            <!-- Location -->
+                                            <td>
+                                                <?= html_escape($project['location']); ?>
+                                            </td>
+
+                                            <!-- Size -->
+                                            <td>
+                                                <?= html_escape($project['size']); ?>
+                                            </td>
+
+                                            <!-- Price -->
+                                            <td>
+                                                <?= number_format((float)$project['price']); ?>
+                                            </td>
+
+                                            <!-- Status -->
+                                            <td>
+                                                <span class="badge badge-available px-3 py-2">
+                                                    Available
+                                                </span>
+                                            </td>
+
+                                            <!-- Action -->
+                                            <td>
+                                                <a href="<?= base_url('properties/details/' . $project['id']); ?>"
+                                                   class="btn btn-green btn-sm px-3">
+                                                    View
+                                                </a>
+                                            </td>
+
+                                        </tr>
+
+                                    <?php endforeach; ?>
+
+                                <?php else: ?>
+
+                                    <tr>
+                                        <td colspan="6"
+                                            class="text-center text-muted py-4">
+
+                                            <i class="bi bi-building fs-2 d-block mb-2"></i>
+
+                                            No properties available at the moment.
+
+                                        </td>
+                                    </tr>
+
+                                <?php endif; ?>
+
                             </tbody>
+
                         </table>
+
                     </div>
+
+
+                    <!-- See All Button -->
+                    <div class="text-center mt-4">
+
+                        <a href="<?= base_url('properties'); ?>"
+                           class="btn btn-green px-4 py-2">
+
+                            See All Properties
+
+                            <i class="bi bi-arrow-right ms-2"></i>
+
+                        </a>
+
+                    </div>
+
                 </div>
+
             </div>
+
         </div>
-    </section>
+
+    </div>
+</section>
+
 
 
 
@@ -700,4 +648,155 @@
     }
 
 }
-</style>
+</style> 
+
+
+
+
+
+
+
+        <!-- <div class="property-search-card">
+
+            <form action="<?= base_url('properties/search'); ?>" method="GET">
+
+                <div class="row g-3 align-items-end">
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <label class="property-label">
+                            <?= lang('property_type'); ?>
+                        </label>
+
+                        <div class="property-input">
+
+                            <i class="fa-solid fa-building"></i>
+
+                            <select name="property_type" class="form-select">
+
+                                <option value="">
+                                    <?= lang('select_property_type'); ?>
+                                </option>
+
+                                <option value="apartment">
+                                    <?= lang('apartment'); ?>
+                                </option>
+
+                                <option value="plot">
+                                    <?= lang('plot'); ?>
+                                </option>
+
+                                <option value="land">
+                                    <?= lang('land'); ?>
+                                </option>
+
+                                <option value="commercial">
+                                    <?= lang('commercial'); ?>
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <label class="property-label">
+                            <?= lang('location'); ?>
+                        </label>
+
+                        <div class="property-input">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <select name="location" class="form-select">
+
+                                <option value="">
+                                    <?= lang('select_location'); ?>
+                                </option>
+
+                                <option value="dhaka">
+                                    <?= lang('dhaka'); ?>
+                                </option>
+
+                                <option value="uttara">
+                                    <?= lang('uttara'); ?>
+                                </option>
+
+                                <option value="purbachal">
+                                    <?= lang('purbachal'); ?>
+                                </option>
+
+                                <option value="bashundhara">
+                                    <?= lang('bashundhara'); ?>
+                                </option>
+
+                                <option value="keraniganj">
+                                    <?= lang('keraniganj'); ?>
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <label class="property-label">
+                            <?= lang('budget'); ?>
+                        </label>
+
+                        <div class="property-input">
+
+                            <i class="fa-solid fa-money-bill-wave"></i>
+
+                            <select name="budget" class="form-select">
+
+                                <option value="">
+                                    <?= lang('select_budget'); ?>
+                                </option>
+
+                                <option value="10-30">
+                                    <?= lang('budget_10_30'); ?>
+                                </option>
+
+                                <option value="30-50">
+                                    <?= lang('budget_30_50'); ?>
+                                </option>
+
+                                <option value="50-100">
+                                    <?= lang('budget_50_100'); ?>
+                                </option>
+
+                                <option value="100+">
+                                    <?= lang('budget_100_plus'); ?>
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <button type="submit" class="property-search-btn">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            <?= lang('search_property'); ?>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div> -->

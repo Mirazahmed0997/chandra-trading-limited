@@ -79,26 +79,26 @@
                         <div class="card-body p-4 p-md-5">
                             <h3 class="card-title fw-bold text-dark mb-4">Send Us a Message</h3>
                             
-                            <form action="#" method="POST">
+                            <form action="<?= base_url('contact_messages_create'); ?>" method="POST" enctype="multipart/form-data">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="fullName" class="form-label fw-semibold">Full Name</label>
-                                        <input type="text" class="form-field form-control" id="fullName" placeholder="John Doe" required>
+                                        <input name="full_name" type="text" class="form-field form-control" id="fullName" placeholder="John Doe" required>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="phone" class="form-label fw-semibold">Phone Number</label>
-                                        <input type="tel" class="form-field form-control" id="phone" placeholder="+880 1700 000000" required>
+                                        <input name="phone" type="tel" class="form-field form-control" id="phone" placeholder="+880 1700 000000" required>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="email" class="form-label fw-semibold">Email Address</label>
-                                        <input type="email" class="form-field form-control" id="email" placeholder="john@example.com" required>
+                                        <input name='email' type="email" class="form-field form-control" id="email" placeholder="john@example.com" required>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="propertyType" class="form-label fw-semibold">Interested In</label>
-                                        <select class="form-select" id="propertyType" required>
+                                        <select name="property_type" class="form-select" id="propertyType" required>
                                             <option value="" selected disabled>Select property type...</option>
                                             <option value="apartment">Ready Apartments</option>
                                             <option value="land">Land Plots</option>
@@ -109,7 +109,7 @@
 
                                     <div class="col-12">
                                         <label for="message" class="form-label fw-semibold">Message</label>
-                                        <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your requirements..." required></textarea>
+                                        <textarea name="message" class="form-control" id="message" rows="4" placeholder="Tell us about your requirements..." required></textarea>
                                     </div>
 
                                     <div class="col-12">

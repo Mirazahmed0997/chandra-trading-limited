@@ -52,8 +52,27 @@ $route['view_member/(:num)'] = 'Admin/view_member/$1';
 $route['delete_member/(:num)'] = 'Admin/delete_member/$1';
 $route['members_account_details_admin'] = 'Admin/members_account';
 
+// leads
+$route['landowners_query'] = 'Admin_landowner_controller/landowners_query';
+$route['landowners_query_details/(:num)'] = 'Admin_landowner_controller/landowners_query_details/$1';
+$route['update_land_query_status/(:num)'] = 'Admin_landowner_controller/update_land_query_status/$1';
+$route['delete_land_query/(:num)'] = 'Admin_landowner_controller/delete_land_query/$1';
 
-// $route['calculator'] = 'Admin/calculator';
+
+$route['contact_messages'] = 'Admin_landowner_controller/contact_messages';
+$route['contact_messages_details/(:num)'] = 'Admin_landowner_controller/contact_messages_details/$1';
+$route['delete_contact_message/(:num)'] = 'Admin_landowner_controller/delete_contact_message/$1';
+
+
+$route['deposit_vouchar'] = 'Admin_landowner_controller/deposit_vouchar';
+
+
+
+// --------------USer Leads ----------------------
+$route['landowners_query_create'] = 'Leads_controller/landowners_query_create';
+$route['contact_messages_create'] = 'Leads_controller/contact_messages_create';
+$route['properties'] = 'User_controllers/properties';
+
 
 
 
@@ -67,7 +86,7 @@ $route['news_details/(:num)'] = 'View_content_controller/news_details/$1';
 $route['notice_details/(:num)'] = 'View_content_controller/notice_details/$1';
 $route['management_details/(:num)'] = 'View_content_controller/management_details/$1';
 $route['all_managment'] = 'View_content_controller/all_managment';
-$route['all_products'] = 'Site/admin_registration_form';
+// $route['all_products'] = 'Site/admin_registration_form';
 $route['our_mission'] = 'Site/our_mission';
 $route['our_managment'] = 'Site/our_managment';
 $route['contact_us'] = 'Site/contact_us';

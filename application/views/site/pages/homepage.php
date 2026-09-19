@@ -128,7 +128,7 @@
     $language_selected = $this->session->userdata('language_selected');
     $language_selected_at = $this->session->userdata('language_selected_at');
     $current_time = time();
-    $popup_time = 6;
+    $popup_time = 6000;
     $show_language_popup = false;
 
     if (!$language_selected || !$language_selected_at || (($current_time - $language_selected_at) >= $popup_time)) {

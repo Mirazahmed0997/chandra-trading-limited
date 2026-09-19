@@ -240,7 +240,7 @@
 
 <div class="form-container ">
     <div class="form-header">
-        <h2 class="form-title">Create New Account</h2>
+        <h2 class="form-title">Create New User</h2>
         <p class="form-subtitle">Fill in the details below to register a new user</p>
     </div>
 

@@ -1,6 +1,12 @@
 <!-- Content Wrapper -->
 <div class="content-wrapper bg-light">
 
+    <?php if ($this->session->flashdata('access_error')): ?>
+        <div class="alert alert-danger">
+            <?php echo $this->session->flashdata('access_error'); ?>
+        </div>
+    <?php endif; ?>
+
     <section class="content-header py-4">
         <div class="container-fluid">
 
@@ -120,10 +126,6 @@
 
             </div>
 
-
-            <!-- Flash Messages -->
-
-           
 
 
             <!-- Users Card -->

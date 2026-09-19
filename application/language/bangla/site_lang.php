@@ -26,61 +26,13 @@ $lang['nav_projects'] = 'প্রকল্পসমূহ';
 $lang['nav_contact'] = 'যোগাযোগ করুন';
 $lang['book_a_site'] = 'সাইট বুক করুন';
 
-// property search
 
-$lang['smart_property_search'] = 'স্মার্ট প্রপার্টি সার্চ';
-$lang['find_your'] = 'আপনার পছন্দের প্রপার্টি';
-$lang['perfect_property'] = 'খুঁজে নিন';
-$lang['property_search_description'] = 'আপনার জীবনযাত্রা, বিনিয়োগের লক্ষ্য এবং বাজেটের সাথে মানানসই প্রপার্টি খুঁজে নিন।';
-
-$lang['property_type'] = 'প্রপার্টির ধরন';
-$lang['select_property_type'] = 'প্রপার্টির ধরন নির্বাচন করুন';
-$lang['apartment'] = 'অ্যাপার্টমেন্ট';
-$lang['plot'] = 'প্লট';
-$lang['land'] = 'জমি';
-$lang['commercial'] = 'কমার্শিয়াল';
-
-$lang['location'] = 'লোকেশন';
-$lang['select_location'] = 'লোকেশন নির্বাচন করুন';
-$lang['dhaka'] = 'ঢাকা';
-$lang['uttara'] = 'উত্তরা';
-$lang['purbachal'] = 'পূর্বাচল';
-$lang['bashundhara'] = 'বসুন্ধরা';
-$lang['keraniganj'] = 'কেরানীগঞ্জ';
-
-$lang['budget'] = 'বাজেট';
-$lang['select_budget'] = 'বাজেট নির্বাচন করুন';
-$lang['budget_10_30'] = '৳ ১০ - ৩০ লাখ';
-$lang['budget_30_50'] = '৳ ৩০ - ৫০ লাখ';
-$lang['budget_50_100'] = '৳ ৫০ লাখ - ১ কোটি';
-$lang['budget_100_plus'] = '৳ ১ কোটি+';
-
-$lang['search_property'] = 'প্রপার্টি সার্চ করুন';
-
-
-// Property catagories
-$lang['property_categories'] = 'প্রপার্টির ক্যাটাগরি';
-$lang['explore_our'] = 'আমাদের';
-$lang['property_categories_title'] = 'প্রপার্টির ক্যাটাগরি দেখুন';
-$lang['property_categories_description'] = 'বসবাস, বিনিয়োগ, ব্যবসা এবং ভবিষ্যৎ উন্নয়নের জন্য আপনার উপযুক্ত প্রপার্টি খুঁজে নিন।';
-
-$lang['residential'] = 'আবাসিক';
-$lang['residential_description'] = 'উন্নত জীবনযাপনের জন্য পরিকল্পিত আবাসন।';
-
-$lang['land_plots'] = 'জমি ও প্লট';
-$lang['land_plots_description'] = 'দীর্ঘমেয়াদি মূল্য বৃদ্ধির সম্ভাবনাময় সুযোগ।';
-
-$lang['commercial'] = 'বাণিজ্যিক';
-$lang['commercial_description'] = 'ব্যবসার জন্য পরিকল্পিত আধুনিক স্পেস।';
-
-$lang['investment'] = 'বিনিয়োগ';
-$lang['investment_description'] = 'আপনার ভবিষ্যতের জন্য সম্ভাবনাময় প্রপার্টি বিনিয়োগের সুযোগ।';
 
 
 
 // Home page -->> Hero Banner
 $lang['hero_tagline'] = 'উন্নত বাড়ি নির্মাণ, সুন্দর জীবন গড়ার অঙ্গীকার';
-$lang['hero_title'] = 'আপনার ভবিষ্যতের সূচনা সঠিক ঠিকানায়।';
+$lang['hero_title'] = 'স্বপ্নের ঠিকানা, আমাদের প্রতিশ্রুতি✨';
 $lang['hero_subtitle'] = 'চান্দ্রা ট্রেডিং লিমিটেড-এর সাথে উন্নত মানের প্রপার্টি, নির্ভরযোগ্য বিনিয়োগের সুযোগ এবং সুপরিকল্পিত আবাসন প্রকল্প খুঁজে নিন।';
 $lang['explore_projects'] = 'প্রকল্পসমূহ দেখুন';
 $lang['book_plot'] = 'প্লট বুক করুন';
@@ -214,4 +166,56 @@ $lang['explore_developments'] =
 $lang['contact_our_team'] =
     'আমাদের সঙ্গে যোগাযোগ করুন';
 
+
+
+
+// property search
+
+$lang['smart_property_search'] = 'স্মার্ট প্রপার্টি সার্চ';
+$lang['find_your'] = 'আপনার পছন্দের প্রপার্টি';
+$lang['perfect_property'] = 'খুঁজে নিন';
+$lang['property_search_description'] = 'আপনার জীবনযাত্রা, বিনিয়োগের লক্ষ্য এবং বাজেটের সাথে মানানসই প্রপার্টি খুঁজে নিন।';
+
+$lang['property_type'] = 'প্রপার্টির ধরন';
+$lang['select_property_type'] = 'প্রপার্টির ধরন নির্বাচন করুন';
+$lang['apartment'] = 'অ্যাপার্টমেন্ট';
+$lang['plot'] = 'প্লট';
+$lang['land'] = 'জমি';
+$lang['commercial'] = 'কমার্শিয়াল';
+
+$lang['location'] = 'লোকেশন';
+$lang['select_location'] = 'লোকেশন নির্বাচন করুন';
+$lang['dhaka'] = 'ঢাকা';
+$lang['uttara'] = 'উত্তরা';
+$lang['purbachal'] = 'পূর্বাচল';
+$lang['bashundhara'] = 'বসুন্ধরা';
+$lang['keraniganj'] = 'কেরানীগঞ্জ';
+
+$lang['budget'] = 'বাজেট';
+$lang['select_budget'] = 'বাজেট নির্বাচন করুন';
+$lang['budget_10_30'] = '৳ ১০ - ৩০ লাখ';
+$lang['budget_30_50'] = '৳ ৩০ - ৫০ লাখ';
+$lang['budget_50_100'] = '৳ ৫০ লাখ - ১ কোটি';
+$lang['budget_100_plus'] = '৳ ১ কোটি+';
+
+$lang['search_property'] = 'প্রপার্টি সার্চ করুন';
+
+
+// Property catagories
+$lang['property_categories'] = 'প্রপার্টির ক্যাটাগরি';
+$lang['explore_our'] = 'আমাদের';
+$lang['property_categories_title'] = 'প্রপার্টির ক্যাটাগরি দেখুন';
+$lang['property_categories_description'] = 'বসবাস, বিনিয়োগ, ব্যবসা এবং ভবিষ্যৎ উন্নয়নের জন্য আপনার উপযুক্ত প্রপার্টি খুঁজে নিন।';
+
+$lang['residential'] = 'আবাসিক';
+$lang['residential_description'] = 'উন্নত জীবনযাপনের জন্য পরিকল্পিত আবাসন।';
+
+$lang['land_plots'] = 'জমি ও প্লট';
+$lang['land_plots_description'] = 'দীর্ঘমেয়াদি মূল্য বৃদ্ধির সম্ভাবনাময় সুযোগ।';
+
+$lang['commercial'] = 'বাণিজ্যিক';
+$lang['commercial_description'] = 'ব্যবসার জন্য পরিকল্পিত আধুনিক স্পেস।';
+
+$lang['investment'] = 'বিনিয়োগ';
+$lang['investment_description'] = 'আপনার ভবিষ্যতের জন্য সম্ভাবনাময় প্রপার্টি বিনিয়োগের সুযোগ।';
 

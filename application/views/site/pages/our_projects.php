@@ -1,13 +1,24 @@
+<?php
+// Optimized query: Select only required columns to improve speed and lower memory usage
+$projects = $this->db
+    ->select('id, property_name, location, description, size, project_status, property_type, gallery')
+    ->where('status', 'Published')
+    ->order_by('created_at', 'DESC')
+    ->get('properties')
+    ->result_array();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project Showcase | Premium Real Estate Group</title>
+  
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  
   <style>
     :root {
       --navy: #0b1d3a;
@@ -21,36 +32,11 @@
     }
 
     .bg-navy { background-color: var(--navy); }
+    .text-navy { color: var(--navy); }
     .text-gold { color: var(--gold); }
     .bg-gold { background-color: var(--gold); }
 
-    /* --- 3D Grid Header Background --- */
-    .hero-3d-bg {
-      position: relative;
-      background: radial-gradient(circle at 50% 20%, #152e5a 0%, var(--navy) 70%);
-      overflow: hidden;
-    }
-    
-    .hero-3d-bg::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(rgba(197, 160, 89, 0.05) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(197, 160, 89, 0.05) 1px, transparent 1px);
-      background-size: 50px 50px;
-      transform: perspective(500px) rotateX(60deg) translateY(-100px);
-      animation: gridMove 20s linear infinite;
-    }
-
-    @keyframes gridMove {
-      0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-      100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
-    }
-
-    /* --- Filter Pill Buttons --- */
+    /* --- Filter Buttons --- */
     .filter-btn {
       background: rgba(11, 29, 58, 0.05);
       border: 1px solid rgba(11, 29, 58, 0.15);
@@ -69,10 +55,18 @@
       box-shadow: 0 8px 20px rgba(11, 29, 58, 0.2);
     }
 
+    /* --- Smooth Filtering Animation --- */
+    .project-item {
+      transition: all 0.4s ease-in-out;
+    }
+    .project-item.d-none-filter {
+      display: none !important;
+    }
+
     /* --- 3D Interactive Showcase Cards --- */
     .showcase-card {
       position: relative;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.6);
       border-radius: 24px;
@@ -83,21 +77,19 @@
     }
 
     .showcase-card:hover {
-      box-shadow: 0 30px 60px rgba(11, 29, 58, 0.22),
-                  0 0 25px var(--gold-glow);
+      box-shadow: 0 30px 60px rgba(11, 29, 58, 0.22), 0 0 25px var(--gold-glow);
       border-color: rgba(197, 160, 89, 0.6);
     }
 
-    .tilt-z1 { transform: translateZ(25px); }
-    .tilt-z2 { transform: translateZ(50px); }
-    .tilt-z3 { transform: translateZ(75px); }
+    .tilt-z2 { transform: translateZ(30px); }
+    .tilt-z3 { transform: translateZ(50px); }
 
     /* --- Card Image Wrapper --- */
     .showcase-img-wrapper {
       position: relative;
       border-radius: 18px;
       overflow: hidden;
-      height: 280px;
+      height: 240px;
       box-shadow: 0 10px 20px rgba(11, 29, 58, 0.15);
     }
 
@@ -112,7 +104,7 @@
       transform: scale(1.08);
     }
 
-    /* Floating Status Badge */
+    /* Floating Status & Category Badges */
     .status-badge-3d {
       position: absolute;
       top: 15px;
@@ -128,7 +120,6 @@
       letter-spacing: 1px;
     }
 
-    /* Category Pill Badge */
     .category-badge-3d {
       position: absolute;
       bottom: 15px;
@@ -148,198 +139,161 @@
       color: #fff !important;
       border: none;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.4),
-                  0 4px 0px #7a5c25;
+      box-shadow: 0 8px 20px rgba(197, 160, 89, 0.4), 0 4px 0px #7a5c25;
       transition: all 0.15s ease;
+      text-decoration: none;
     }
 
     .btn-3d-gold:active {
       transform: translateY(3px);
-      box-shadow: 0 4px 10px rgba(197, 160, 89, 0.4),
-                  0 1px 0px #7a5c25;
+      box-shadow: 0 4px 10px rgba(197, 160, 89, 0.4), 0 1px 0px #7a5c25;
     }
   </style>
 </head>
 <body>
 
-  
-
-  <!-- Filter Category Bar -->
-  <section class="py-4">
+<!-- Filter Category Bar -->
+<section class="py-4">
     <div class="container text-center">
-      <div class="d-flex flex-wrap justify-content-center gap-2">
-        <button class="filter-btn active">All Projects</button>
-        <button class="filter-btn">Upcoming</button>
-        <button class="filter-btn">Ongoing</button>
-        <button class="filter-btn">Completed</button>
-      </div>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+            <button type="button" class="filter-btn active" data-filter="all">All Projects</button>
+            <button type="button" class="filter-btn" data-filter="Upcoming">Upcoming</button>
+            <button type="button" class="filter-btn" data-filter="Ongoing">Ongoing</button>
+            <button type="button" class="filter-btn" data-filter="Completed">Completed</button>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- Showcase Cards Grid -->
-  <section class="py-4">
+<!-- Showcase Cards Grid -->
+<section class="py-4">
     <div class="container pb-5">
-      <div class="row g-4">
-        
-        <!-- Project 1 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="p-4 showcase-card h-100 d-flex flex-column" data-tilt data-tilt-max="12" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-            <div class="showcase-img-wrapper tilt-z2 mb-4">
-              <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" alt="The Grand Horizon">
-              <span class="status-badge-3d">COMPLETED</span>
-              <span class="category-badge-3d">RESIDENTIAL</span>
-            </div>
-            <div class="tilt-z2 flex-grow-1">
-              <h4 class="fw-bold text-navy mb-1">The Grand Horizon</h4>
-              <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-gold me-1"></i>Downtown Financial District</p>
-              <p class="text-secondary small mb-4">
-                A 45-story luxury residential tower featuring biophilic sky gardens, infinity pools, and panoramic skyline views.
-              </p>
-            </div>
-            <div class="tilt-z3 mt-auto pt-3 border-top border-light d-flex justify-content-between align-items-center">
-              <div>
-                <span class="text-muted small d-block">Land Area</span>
-                <strong class="text-navy">2.4 Acres</strong>
-              </div>
-              <a href="#" class="btn btn-3d-gold px-3 py-2 small fw-bold">View Project</a>
-            </div>
-          </div>
-        </div>
+        <div class="row g-4" id="projectsGrid">
 
-        <!-- Project 2 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="p-4 showcase-card h-100 d-flex flex-column" data-tilt data-tilt-max="12" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-            <div class="showcase-img-wrapper tilt-z2 mb-4">
-              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Aura Villa Estates">
-              <span class="status-badge-3d">ONGOING</span>
-              <span class="category-badge-3d">LUXURY VILLAS</span>
-            </div>
-            <div class="tilt-z2 flex-grow-1">
-              <h4 class="fw-bold text-navy mb-1">Aura Villa Estates</h4>
-              <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-gold me-1"></i>Waterfront Boulevard</p>
-              <p class="text-secondary small mb-4">
-                Gated collection of 18 exclusive waterfront smart villas with private boat docks and automated climate control.
-              </p>
-            </div>
-            <div class="tilt-z3 mt-auto pt-3 border-top border-light d-flex justify-content-between align-items-center">
-              <div>
-                <span class="text-muted small d-block">Units</span>
-                <strong class="text-navy">18 Bespoke Villas</strong>
-              </div>
-              <a href="#" class="btn btn-3d-gold px-3 py-2 small fw-bold">View Project</a>
-            </div>
-          </div>
-        </div>
+            <?php if (!empty($projects)): ?>
+                <?php foreach ($projects as $project): ?>
+                    <?php
+                    $project_status = !empty($project['project_status']) ? $project['project_status'] : 'Upcoming';
+                    $property_type  = !empty($project['property_type']) ? $project['property_type'] : 'PROPERTY';
+                    
+                    // Decode image gallery safely
+                    $project_image = base_url('assets/images/default-property.jpg');
+                    if (!empty($project['gallery'])) {
+                        $gallery = json_decode($project['gallery'], true);
+                        if (is_array($gallery) && !empty($gallery[0])) {
+                            $project_image = base_url('assets/uploads/properties/images/' . $gallery[0]);
+                        }
+                    }
 
-        <!-- Project 3 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="p-4 showcase-card h-100 d-flex flex-column" data-tilt data-tilt-max="12" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-            <div class="showcase-img-wrapper tilt-z2 mb-4">
-              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Apex Tech Park">
-              <span class="status-badge-3d">COMPLETED</span>
-              <span class="category-badge-3d">COMMERCIAL</span>
-            </div>
-            <div class="tilt-z2 flex-grow-1">
-              <h4 class="fw-bold text-navy mb-1">Apex Tech Park</h4>
-              <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-gold me-1"></i>Silicon Corridor</p>
-              <p class="text-secondary small mb-4">
-                Grade-A LEED Platinum certified corporate headquarters engineered for sustainability and high-tech enterprises.
-              </p>
-            </div>
-            <div class="tilt-z3 mt-auto pt-3 border-top border-light d-flex justify-content-between align-items-center">
-              <div>
-                <span class="text-muted small d-block">Floor Space</span>
-                <strong class="text-navy">450,000 Sq.Ft</strong>
-              </div>
-              <a href="#" class="btn btn-3d-gold px-3 py-2 small fw-bold">View Project</a>
-            </div>
-          </div>
-        </div>
+                    // Safe short description formatting
+                    $clean_desc = !empty($project['description']) ? strip_tags($project['description']) : '';
+                    $short_desc = (mb_strlen($clean_desc) > 110) ? mb_substr($clean_desc, 0, 110) . '...' : $clean_desc;
+                    ?>
 
-        <!-- Project 4 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="p-4 showcase-card h-100 d-flex flex-column" data-tilt data-tilt-max="12" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-            <div class="showcase-img-wrapper tilt-z2 mb-4">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Serenade Heights">
-              <span class="status-badge-3d">UPCOMING</span>
-              <span class="category-badge-3d">RESIDENTIAL</span>
-            </div>
-            <div class="tilt-z2 flex-grow-1">
-              <h4 class="fw-bold text-navy mb-1">Serenade Heights</h4>
-              <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-gold me-1"></i>Green Park Precinct</p>
-              <p class="text-secondary small mb-4">
-                Contemporary high-rise apartments designed around 5 acres of private parkland, wellness centers, and running tracks.
-              </p>
-            </div>
-            <div class="tilt-z3 mt-auto pt-3 border-top border-light d-flex justify-content-between align-items-center">
-              <div>
-                <span class="text-muted small d-block">Completion</span>
-                <strong class="text-navy">Q4 2027</strong>
-              </div>
-              <a href="#" class="btn btn-3d-gold px-3 py-2 small fw-bold">View Project</a>
-            </div>
-          </div>
-        </div>
+                    <div class="col-lg-4 col-md-6 project-item" data-status="<?= htmlspecialchars($project_status, ENT_QUOTES, 'UTF-8'); ?>">
+                        <div class="p-4 showcase-card h-100 d-flex flex-column"
+                             data-tilt
+                             data-tilt-max="10"
+                             data-tilt-speed="400"
+                             data-tilt-glare
+                             data-tilt-max-glare="0.15">
 
-        <!-- Project 5 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="p-4 showcase-card h-100 d-flex flex-column" data-tilt data-tilt-max="12" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-            <div class="showcase-img-wrapper tilt-z2 mb-4">
-              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" alt="Vance Galleria">
-              <span class="status-badge-3d">COMPLETED</span>
-              <span class="category-badge-3d">RETAIL</span>
-            </div>
-            <div class="tilt-z2 flex-grow-1">
-              <h4 class="fw-bold text-navy mb-1">Vance Galleria</h4>
-              <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-gold me-1"></i>Central Promenade</p>
-              <p class="text-secondary small mb-4">
-                Luxury retail mall housing global flagship fashion brands, fine-dining restaurants, and a state-of-the-art IMAX hall.
-              </p>
-            </div>
-            <div class="tilt-z3 mt-auto pt-3 border-top border-light d-flex justify-content-between align-items-center">
-              <div>
-                <span class="text-muted small d-block">Retail Stores</span>
-                <strong class="text-navy">120+ Outlets</strong>
-              </div>
-              <a href="#" class="btn btn-3d-gold px-3 py-2 small fw-bold">View Project</a>
-            </div>
-          </div>
-        </div>
+                            <!-- Project Image -->
+                            <div class="showcase-img-wrapper tilt-z2 mb-4">
+                                <img src="<?= htmlspecialchars($project_image, ENT_QUOTES, 'UTF-8'); ?>"
+                                     alt="<?= htmlspecialchars($project['property_name'], ENT_QUOTES, 'UTF-8'); ?>">
 
-        <!-- Project 6 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="p-4 showcase-card h-100 d-flex flex-column" data-tilt data-tilt-max="12" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-            <div class="showcase-img-wrapper tilt-z2 mb-4">
-              <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="EcoSphere Center">
-              <span class="status-badge-3d">ONGOING</span>
-              <span class="category-badge-3d">GREEN TECH</span>
-            </div>
-            <div class="tilt-z2 flex-grow-1">
-              <h4 class="fw-bold text-navy mb-1">EcoSphere Center</h4>
-              <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-gold me-1"></i>Innovation Hub</p>
-              <p class="text-secondary small mb-4">
-                Zero-carbon mixed-use development combining solar-roofed workspace modules with communal organic gardens.
-              </p>
-            </div>
-            <div class="tilt-z3 mt-auto pt-3 border-top border-light d-flex justify-content-between align-items-center">
-              <div>
-                <span class="text-muted small d-block">Energy Rating</span>
-                <strong class="text-navy">Net-Zero Carbon</strong>
-              </div>
-              <a href="#" class="btn btn-3d-gold px-3 py-2 small fw-bold">View Project</a>
-            </div>
-          </div>
-        </div>
+                                <span class="status-badge-3d">
+                                    <?= htmlspecialchars(strtoupper($project_status), ENT_QUOTES, 'UTF-8'); ?>
+                                </span>
 
-      </div>
+                                <span class="category-badge-3d">
+                                    <?= htmlspecialchars(strtoupper($property_type), ENT_QUOTES, 'UTF-8'); ?>
+                                </span>
+                            </div>
+
+                            <!-- Project Info -->
+                            <div class="tilt-z2 flex-grow-1">
+                                <h4 class="fw-bold text-navy mb-1">
+                                    <?= htmlspecialchars($project['property_name'], ENT_QUOTES, 'UTF-8'); ?>
+                                </h4>
+
+                                <?php if (!empty($project['location'])): ?>
+                                    <p class="text-muted small mb-3">
+                                        <i class="bi bi-geo-alt-fill text-gold me-1"></i>
+                                        <?= htmlspecialchars($project['location'], ENT_QUOTES, 'UTF-8'); ?>
+                                    </p>
+                                <?php endif; ?>
+
+                                <?php if (!empty($short_desc)): ?>
+                                    <p class="text-secondary small mb-4">
+                                        <?= htmlspecialchars($short_desc, ENT_QUOTES, 'UTF-8'); ?>
+                                    </p>
+                                <?php endif; ?>
+                            </div>
+
+                            <!-- Bottom Info -->
+                            <div class="tilt-z3 mt-auto pt-3 border-top border-light d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-muted small d-block">Land Area</span>
+                                    <strong class="text-navy">
+                                        <?= !empty($project['size']) ? htmlspecialchars($project['size'], ENT_QUOTES, 'UTF-8') : 'N/A'; ?>
+                                    </strong>
+                                </div>
+
+                                <a href="<?= base_url('properties/details/' . $project['id']); ?>" class="btn btn-3d-gold px-3 py-2 small fw-bold">
+                                    View Project
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="col-12 text-center py-5">
+                    <div class="text-muted">
+                        <i class="bi bi-building fs-1 d-block mb-3"></i>
+                        <h5>No projects available</h5>
+                        <p class="mb-0">Please check back later for our latest projects.</p>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+        </div>
     </div>
-  </section>
+</section>
 
-  
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
-  <!-- Bootstrap 5 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Vanilla-Tilt JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // 1. Initialize VanillaTilt explicitly
+    VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+
+    // 2. Client-side Category Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.getAttribute('data-filter');
+
+            projectItems.forEach(function (item) {
+                const status = item.getAttribute('data-status');
+                if (filter === 'all' || status.toLowerCase() === filter.toLowerCase()) {
+                    item.classList.remove('d-none-filter');
+                } else {
+                    item.classList.add('d-none-filter');
+                }
+            });
+        });
+    });
+});
+</script>
+
 </body>
 </html>

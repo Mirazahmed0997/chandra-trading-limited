@@ -89,10 +89,26 @@ class Admin extends CI_Controller
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 
+	public function check_access($menu)
+	{
+		$user = $this->session->userdata('login_user_info_all');
+		$hasAccess = $this->db
+			->where('user_id', $user->id)
+			->where('menu_key', $menu) // Your menu key
+			->count_all_results('user_menu_access');
+
+		if ($hasAccess == 0) {
+			$this->session->set_flashdata('access_error', "You don't have access.");
+			redirect('admin/users_list/users_list');
+			exit;
+		}
+	}
+
 
 
 	public function admin_registration()
 	{
+		$this->check_access('Add new User');
 		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
 
 		$path = 'admin/registration/registration';
@@ -106,6 +122,7 @@ class Admin extends CI_Controller
 		// print_r($this->input->post());
 		// echo '</pre>';
 		// exit;
+		$this->check_access('Add new User');
 		$username = $this->input->post('username');
 		$mobile_number = $this->input->post('mobile_number');
 		$email = $this->input->post('email');
@@ -270,6 +287,7 @@ class Admin extends CI_Controller
 
 	public function users_list()
 	{
+		$this->check_access('User');
 		$data = $this->engine->store_nav('users_list', 'users_list', 'User List');
 
 		$where_data = array();
@@ -311,6 +329,7 @@ class Admin extends CI_Controller
 
 	public function update_users_role($id)
 	{
+		$this->check_access('User');
 		$this->require_super_admin();
 		$users = $this->db->get_where('users', ['id' => $id])->row();
 
@@ -333,7 +352,7 @@ class Admin extends CI_Controller
 
 	public function view_user($id = null)
 	{
-
+		$this->check_access('User');
 		if (empty($id)) {
 			redirect(base_url('Admin/users_list'));
 		}
@@ -352,6 +371,7 @@ class Admin extends CI_Controller
 
 	public function view_profile()
 	{
+		$this->check_access('User');
 		$data = $this->engine->store_nav(
 			'users_list',
 			'users_list',
@@ -388,6 +408,7 @@ class Admin extends CI_Controller
 	// -------------------Upadate USer-----------------
 	public function update_users_details($id)
 	{
+		$this->check_access('User');
 		$users = $this->db->get_where('users', ['id' => $id])->row();
 
 		$update_data = [
@@ -415,6 +436,7 @@ class Admin extends CI_Controller
 
 	public function delete_user($id)
 	{
+		$this->check_access('User');
 		$this->require_super_admin();
 		$this->Common->delete_data('users', 'id', $id);
 		redirect('admin/users_list/users_details');

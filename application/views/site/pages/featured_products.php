@@ -1,87 +1,162 @@
- <!-- Featured Projects Section -->
-    <section class="py-5 mt-4">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-end mb-4">
-                <div>
-                    <span class="text-muted text-uppercase fw-semibold small"><?= lang('Our_Projects'); ?></span>
-                    <h2 class="fw-bold mb-0"><?= lang('Featured_Projects'); ?></h2>
-                </div>
-                <a href="#" class="btn btn-outline-green">View All Projects</a>
+<?php
+$projects = $this->db
+    ->order_by('created_at', 'DESC')
+    ->where('featured', 1)
+    ->where('status', 'Published')
+    ->limit(4)
+    ->get('properties')
+    ->result_array();
+?>
+
+<!-- Featured Projects Section -->
+<section class="py-5 mt-4">
+    <div class="container">
+
+        <!-- Section Header -->
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <span class="text-muted text-uppercase fw-semibold small">
+                    <?= lang('Our_Projects'); ?>
+                </span>
+
+                <h2 class="fw-bold mb-0">
+                    <?= lang('Featured_Projects'); ?>
+                </h2>
             </div>
 
-            <div class="row g-4">
-                <!-- Project 1 -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Project">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Green Valley</h5>
-                            <p class="text-muted small mb-2"><i class="bi bi-geo-alt"></i> Gazipur, Dhaka</p>
-                            <hr>
-                            <div class="d-flex justify-content-between small text-muted mb-2">
-                                <span><i class="bi bi-border-all"></i> Residential Plots</span>
-                            </div>
-                            <div class="d-flex justify-content-between small text-muted mb-3">
-                                <span><i class="bi bi-aspect-ratio"></i> 3 - 10 Katha</span>
-                            </div>
-                            <a href="#" class="btn btn-green w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 2 -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Project">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">City View</h5>
-                            <p class="text-muted small mb-2"><i class="bi bi-geo-alt"></i> Savar, Dhaka</p>
-                            <hr>
-                            <div class="d-flex justify-content-between small text-muted mb-2">
-                                <span><i class="bi bi-border-all"></i> Residential Plots</span>
-                            </div>
-                            <div class="d-flex justify-content-between small text-muted mb-3">
-                                <span><i class="bi bi-aspect-ratio"></i> 2 - 8 Katha</span>
-                            </div>
-                            <a href="#" class="btn btn-green w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 3 -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Project">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Lake City</h5>
-                            <p class="text-muted small mb-2"><i class="bi bi-geo-alt"></i> Narsingdi</p>
-                            <hr>
-                            <div class="d-flex justify-content-between small text-muted mb-2">
-                                <span><i class="bi bi-border-all"></i> Residential Plots</span>
-                            </div>
-                            <div class="d-flex justify-content-between small text-muted mb-3">
-                                <span><i class="bi bi-aspect-ratio"></i> 3 - 7 Katha</span>
-                            </div>
-                            <a href="#" class="btn btn-green w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project 4 -->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Project">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Sunshine Avenue</h5>
-                            <p class="text-muted small mb-2"><i class="bi bi-geo-alt"></i> Keraniganj, Dhaka</p>
-                            <hr>
-                            <div class="d-flex justify-content-between small text-muted mb-2">
-                                <span><i class="bi bi-border-all"></i> Residential Plots</span>
-                            </div>
-                            <div class="d-flex justify-content-between small text-muted mb-3">
-                                <span><i class="bi bi-aspect-ratio"></i> 2 - 6 Katha</span>
-                            </div>
-                            <a href="#" class="btn btn-green w-100">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a href="<?= base_url('properties'); ?>" class="btn btn-outline-green">
+                View All Projects
+            </a>
         </div>
-    </section>
+
+        <!-- Projects -->
+        <div class="row g-4">
+
+            <?php if (!empty($projects)): ?>
+
+                <?php foreach ($projects as $project): ?>
+
+                    <?php
+                    // Default image
+                    $image = base_url('assets/frontend/images/default-property.jpg');
+
+                    // Get first gallery image
+                    if (!empty($project['gallery'])) {
+
+                        $gallery = json_decode($project['gallery'], true);
+
+                        if (is_array($gallery) && !empty($gallery)) {
+
+                            $first_image = reset($gallery);
+
+                            if (!empty($first_image)) {
+                                $image = base_url('assets/uploads/properties/images/' . $first_image);
+                            }
+                        }
+                    }
+                    ?>
+
+                    <div class="col-md-6 col-lg-3">
+
+                        <div class="card h-100 border-0 shadow-sm overflow-hidden">
+
+                            <!-- Property Image -->
+                            <div class="property-image-wrapper">
+
+                                <img
+                                    src="<?= htmlspecialchars($image); ?>"
+                                    class="card-img-top property-card-image"
+                                    alt="<?= htmlspecialchars($project['property_name']); ?>"
+                                
+                                >
+
+                                <!-- <?php if (!empty($project['featured']) && $project['featured'] == 1): ?>
+                                    <span class="featured-badge">
+                                        <i class="bi bi-star-fill me-1"></i>
+                                        Featured
+                                    </span>
+                                <?php endif; ?> -->
+
+                            </div>
+
+                            <!-- Property Content -->
+                            <div class="card-body d-flex flex-column">
+
+                                <h5 class="card-title fw-bold mb-2">
+                                    <?= htmlspecialchars($project['property_name']); ?>
+                                </h5>
+
+                                <!-- Location -->
+                                <?php if (!empty($project['location'])): ?>
+                                    <p class="text-muted small mb-2">
+                                        <i class="bi bi-geo-alt me-1"></i>
+                                        <?= htmlspecialchars($project['location']); ?>
+                                    </p>
+                                <?php endif; ?>
+
+                                <hr>
+
+                                <!-- Property Type -->
+                                <?php if (!empty($project['property_type'])): ?>
+                                    <div class="d-flex align-items-center small text-muted mb-2">
+                                        <i class="bi bi-building me-2"></i>
+                                        <span>
+                                            <?= htmlspecialchars($project['property_type']); ?>
+                                        </span>
+                                    </div>
+                                <?php endif; ?>
+
+                                <!-- Size -->
+                                <?php if (!empty($project['size'])): ?>
+                                    <div class="d-flex align-items-center small text-muted mb-3">
+                                        <i class="bi bi-aspect-ratio me-2"></i>
+                                        <span>
+                                            <?= htmlspecialchars($project['size']); ?>
+                                        </span>
+                                    </div>
+                                <?php endif; ?>
+
+                                <!-- View Details -->
+                                <a
+                                    href="<?= base_url('properties/details/' . $project['id']); ?>"
+                                    class="btn btn-green w-100 mt-auto"
+                                >
+                                    View Details
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            <?php else: ?>
+
+                <!-- No Projects -->
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <i class="bi bi-building fs-1 text-muted"></i>
+
+                        <h5 class="mt-3">
+                            No Featured Projects Available
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Featured projects will appear here.
+                        </p>
+                    </div>
+                </div>
+
+            <?php endif; ?>
+
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .property-card-image{
+        height: 300px;
+    }
+</style>

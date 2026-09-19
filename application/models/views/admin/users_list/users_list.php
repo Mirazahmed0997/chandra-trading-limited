@@ -52,9 +52,9 @@
 
     <section class="content">
         <div class="container-fluid">
-            <?php if ($this->session->flashdata('error')): ?>
+            <?php if ($this->session->flashdata('access_error')): ?>
                 <div class="alert alert-danger">
-                    <?php echo $this->session->flashdata('error'); ?>
+                    <?php echo $this->session->flashdata('access_error'); ?>
                 </div>
             <?php endif; ?>
             <div class="card shadow">

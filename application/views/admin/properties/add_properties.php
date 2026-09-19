@@ -65,13 +65,8 @@
                                             <i class="bi bi-building"></i>
                                         </span>
 
-                                        <input
-                                            type="text"
-                                            name="property_name"
-                                            class="form-control"
-                                            placeholder="e.g. Chandra Trading Limited"
-                                            required
-                                        >
+                                        <input type="text" name="property_name" class="form-control"
+                                            placeholder="e.g. Chandra Trading Limited" required>
                                     </div>
 
                                 </div>
@@ -91,13 +86,8 @@
                                             <i class="bi bi-hash"></i>
                                         </span>
 
-                                        <input
-                                            type="text"
-                                            name="property_id"
-                                            class="form-control"
-                                            placeholder="PROP-001"
-                                            required
-                                        >
+                                        <input type="text" name="property_id" class="form-control"
+                                            placeholder="PROP-001" required>
 
                                     </div>
 
@@ -105,34 +95,11 @@
 
 
                                 <!-- Property Type -->
-                                <div class="col-md-6">
-
-                                    <label class="form-label">
-                                        Property Type
-                                    </label>
-
-                                    <select
-                                        name="property_type"
-                                        class="form-select"
-                                    >
-                                        <option value="Apartment">
-                                            Apartment
-                                        </option>
-
-                                        <option value="Villa">
-                                            Villa
-                                        </option>
-
-                                        <option value="Commercial">
-                                            Commercial
-                                        </option>
-                                    </select>
-
-                                </div>
+                                
 
 
                                 <!-- Location -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     <label class="form-label">
                                         Location
@@ -144,12 +111,8 @@
                                             <i class="bi bi-geo-alt"></i>
                                         </span>
 
-                                        <input
-                                            type="text"
-                                            name="location"
-                                            class="form-control"
-                                            placeholder="Property location"
-                                        >
+                                        <input type="text" name="location" class="form-control"
+                                            placeholder="Property location">
 
                                     </div>
 
@@ -157,7 +120,7 @@
 
 
                                 <!-- Price -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     <label class="form-label">
                                         Price
@@ -169,13 +132,8 @@
                                             ৳
                                         </span>
 
-                                        <input
-                                            type="number"
-                                            step="0.01"
-                                            name="price"
-                                            class="form-control"
-                                            placeholder="0.00"
-                                        >
+                                        <input type="number" step="0.01" name="price" class="form-control"
+                                            placeholder="0.00">
 
                                     </div>
 
@@ -183,7 +141,7 @@
 
 
                                 <!-- Size -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     <label class="form-label">
                                         Property Size
@@ -191,12 +149,7 @@
 
                                     <div class="input-group">
 
-                                        <input
-                                            type="text"
-                                            name="size"
-                                            class="form-control"
-                                            placeholder="e.g. 1,500"
-                                        >
+                                        <input type="text" name="size" class="form-control" placeholder="e.g. 1,500">
 
                                         <span class="input-group-text">
                                             sq ft
@@ -249,13 +202,8 @@
                                             <i class="bi bi-door-open"></i>
                                         </span>
 
-                                        <input
-                                            type="number"
-                                            name="bedrooms"
-                                            class="form-control"
-                                            min="0"
-                                            placeholder="0"
-                                        >
+                                        <input type="number" name="bedrooms" class="form-control" min="0"
+                                            placeholder="0">
 
                                     </div>
 
@@ -275,13 +223,8 @@
                                             <i class="bi bi-droplet"></i>
                                         </span>
 
-                                        <input
-                                            type="number"
-                                            name="bathrooms"
-                                            class="form-control"
-                                            min="0"
-                                            placeholder="0"
-                                        >
+                                        <input type="number" name="bathrooms" class="form-control" min="0"
+                                            placeholder="0">
 
                                     </div>
 
@@ -295,12 +238,7 @@
                                         Floor
                                     </label>
 
-                                    <input
-                                        type="text"
-                                        name="floor"
-                                        class="form-control"
-                                        placeholder="e.g. 5th Floor"
-                                    >
+                                    <input type="text" name="floor" class="form-control" placeholder="e.g. 5th Floor">
 
                                 </div>
 
@@ -312,12 +250,7 @@
                                         Parking
                                     </label>
 
-                                    <input
-                                        type="text"
-                                        name="parking"
-                                        class="form-control"
-                                        placeholder="e.g. 2 Cars"
-                                    >
+                                    <input type="text" name="parking" class="form-control" placeholder="e.g. 2 Cars">
 
                                 </div>
 
@@ -329,12 +262,8 @@
                                         Property Description
                                     </label>
 
-                                    <textarea
-                                        name="description"
-                                        class="form-control"
-                                        rows="6"
-                                        placeholder="Write a detailed description of the property..."
-                                    ></textarea>
+                                    <textarea name="description" class="form-control" rows="6"
+                                        placeholder="Write a detailed description of the property..."></textarea>
 
                                 </div>
 
@@ -372,11 +301,7 @@
 
                                     <label class="amenity-option">
 
-                                        <input
-                                            type="checkbox"
-                                            name="amenities[]"
-                                            value="Gym"
-                                        >
+                                        <input type="checkbox" name="amenities[]" value="Gym">
 
                                         <span class="amenity-icon">
                                             <i class="bi bi-person-arms-up"></i>
@@ -396,11 +321,7 @@
 
                                     <label class="amenity-option">
 
-                                        <input
-                                            type="checkbox"
-                                            name="amenities[]"
-                                            value="Pool"
-                                        >
+                                        <input type="checkbox" name="amenities[]" value="Pool">
 
                                         <span class="amenity-icon">
                                             <i class="bi bi-water"></i>
@@ -420,11 +341,7 @@
 
                                     <label class="amenity-option">
 
-                                        <input
-                                            type="checkbox"
-                                            name="amenities[]"
-                                            value="Security"
-                                        >
+                                        <input type="checkbox" name="amenities[]" value="Security">
 
                                         <span class="amenity-icon">
                                             <i class="bi bi-shield-check"></i>
@@ -482,13 +399,7 @@
                                     Upload multiple property images
                                 </p>
 
-                                <input
-                                    type="file"
-                                    name="gallery[]"
-                                    class="form-control"
-                                    multiple
-                                    accept="image/*"
-                                >
+                                <input type="file" name="gallery[]" class="form-control" multiple accept="image/*">
 
                                 <small class="text-muted">
                                     JPG, JPEG, PNG, WEBP
@@ -510,12 +421,7 @@
 
                                         <i class="bi bi-diagram-3"></i>
 
-                                        <input
-                                            type="file"
-                                            name="floor_plan"
-                                            class="form-control"
-                                            accept="image/*,.pdf"
-                                        >
+                                        <input type="file" name="floor_plan" class="form-control" accept="image/*,.pdf">
 
                                     </div>
 
@@ -533,12 +439,8 @@
 
                                         <i class="bi bi-file-earmark-pdf"></i>
 
-                                        <input
-                                            type="file"
-                                            name="brochure"
-                                            class="form-control"
-                                            accept=".pdf,.doc,.docx"
-                                        >
+                                        <input type="file" name="brochure" class="form-control"
+                                            accept=".pdf,.doc,.docx">
 
                                     </div>
 
@@ -582,10 +484,7 @@
                                 Property Status
                             </label>
 
-                            <select
-                                name="status"
-                                class="form-select mb-4"
-                            >
+                            <select name="status" class="form-select mb-4">
 
                                 <option value="Publish">
                                     Publish
@@ -624,13 +523,37 @@
 
                                 </span>
 
-                                <input
-                                    type="checkbox"
-                                    name="featured"
-                                    value="1"
-                                >
+                                <input type="checkbox" name="featured" value="1">
 
                             </label>
+
+                        </div>
+                        <!-- Property Type -->
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Property Type
+                            </label>
+
+                            <select name="property_type" class="form-select">
+                                <option value="Apartment">
+                                    Apartment
+                                </option>
+
+                                <option value="Villa">
+                                    Villa
+                                </option>
+
+                                <option value="Commercial">
+                                    Commercial
+                                </option>
+                                <option value="Office">
+                                    Office
+                                </option>
+                                <option value="Shop/Showroom">
+                                    Shop/Showroom
+                                </option>
+                            </select>
 
                         </div>
 
@@ -662,12 +585,8 @@
                                 Map URL / Embed Code
                             </label>
 
-                            <textarea
-                                name="map_location"
-                                class="form-control"
-                                rows="5"
-                                placeholder="Paste Google Maps URL or embed code"
-                            ></textarea>
+                            <textarea name="map_location" class="form-control" rows="5"
+                                placeholder="Paste Google Maps URL or embed code"></textarea>
 
                             <div class="form-text mt-2">
 
@@ -707,10 +626,7 @@
                     <!-- Buttons -->
                     <div class="d-grid gap-2 mt-3">
 
-                        <button
-                            type="submit"
-                            class="btn btn-primary btn-lg"
-                        >
+                        <button type="submit" class="btn btn-primary btn-lg">
 
                             <i class="bi bi-check-lg me-2"></i>
 
@@ -719,10 +635,7 @@
                         </button>
 
 
-                        <a
-                            href="<?= base_url('properties') ?>"
-                            class="btn btn-light border"
-                        >
+                        <a href="<?= base_url('properties') ?>" class="btn btn-light border">
 
                             Cancel
 

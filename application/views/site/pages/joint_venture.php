@@ -18,7 +18,7 @@
                     <div class="card-body p-4 p-md-5">
                         <h3 class="card-title h4 text-primary fw-bold mb-4">Partner With Us</h3>
                         
-                        <?php echo form_open('landowner/submit_lead', ['class' => 'needs-validation']); ?>
+                        <form action="<?= base_url('landowners_query_create'); ?>" method="POST" enctype="multipart/form-data">
                             
                             <div class="row g-3">
                                 <!-- Name -->
@@ -76,7 +76,7 @@
                                 </div>
                             </div>
 
-                        <?php echo form_close(); ?>
+                        </form>
                     </div>
                 </div>
             </div>

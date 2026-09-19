@@ -378,13 +378,17 @@ $user = $this->session->userdata('login_user_info_all');
                         </a>
 
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('properties_list') ?>"
-                                    class="nav-link <?= active_nav('properties', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Our Properties</p>
-                                </a>
-                            </li>
+                            <?php if (has_menu_access('Our Properties')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('properties_list') ?>"
+                                        class="nav-link <?= active_nav('properties', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Our Properties</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if (has_menu_access('Add new Properties')): ?>
                             <li class="nav-item">
                                 <a href="<?php echo base_url('add_properties') ?>"
                                     class="nav-link <?= active_nav('add_properties', $sub_nav); ?>">
@@ -392,6 +396,7 @@ $user = $this->session->userdata('login_user_info_all');
                                     <p>Add new Properties</p>
                                 </a>
                             </li>
+                            <?php endif; ?>
                         </ul>
                     </li>
 
@@ -415,8 +420,31 @@ $user = $this->session->userdata('login_user_info_all');
                             <i class="nav-icon fas fa-user-plus"></i>
                             <p>
                                 Leads
+                                <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
+
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Landowners')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('landowners_query') ?>"
+                                        class="nav-link <?= active_nav('Landowners', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Landowners</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if (has_menu_access('General Inquiry')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('contact_messages') ?>"
+                                        class="nav-link <?= active_nav('contact_messages', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>General Inquiry</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </li>
                 <?php endif; ?>
 
@@ -541,23 +569,54 @@ $user = $this->session->userdata('login_user_info_all');
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('admin/users_list/users_list') ?>"
-                                    class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>User</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('admin_registration_form') ?>"
-                                    class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add new User</p>
-                                </a>
-                            </li>
+                            <?php if (has_menu_access('User')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('admin/users_list/users_list') ?>"
+                                        class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <?php if (has_menu_access('Add new User')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('admin_registration_form') ?>"
+                                        class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add new User</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                 <?php endif; ?>
+
+
+                <li class="nav-item has-treeview <?= active_open('User Management', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('User Management', $main_nav); ?>">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Vouchars
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('deposit_vouchar') ?>"
+                                class="nav-link <?= active_nav('deposit_vouchar', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Deposite Vouchar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('admin_registration_form') ?>"
+                                class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Add new User</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </nav>

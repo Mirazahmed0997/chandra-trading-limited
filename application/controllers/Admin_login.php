@@ -25,7 +25,7 @@ class Admin_login extends CI_Controller
 
     public function admin_registration()
     {
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'শিক্ষিত বেকার কেন্দ্রীয় সঞ্চয় ও ঋণদান সমবায় সমিতি');
+        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
 
         $path = 'admin/registration/registration';
         $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);

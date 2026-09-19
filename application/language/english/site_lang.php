@@ -19,7 +19,7 @@ $lang['book_a_site'] = 'Book a site';
 
 
 $lang['hero_tagline'] = 'Building Better Homes, Creating Better Lives';
-$lang['hero_title'] = 'Your Future Starts With The Right Address.✨';
+$lang['hero_title'] = 'Your Dream Destination is Our Promise.✨';
 $lang['hero_subtitle'] = 'Discover Quality Properties, trusted investment opportunities and thoughtfully planned developments with Chandra Trading LTD';
 $lang['explore_projects'] = 'Explore Projects';
 $lang['book_plot'] = 'Book a Plot';

@@ -8,10 +8,27 @@ $menu_access = $this->db
 
 $assigned_menus = array_column($menu_access, 'menu_key');
 
+// $available_menus = [
+//     'Properties', 'Projects', 'Leads', 'Site Visits', 
+//     'Customers', 'Landowner Enquiries', 'Investment Enquiries', 
+//     'News', 'Gallery', 'Team', 'Testimonials', 'Documents', 'User Management','Add new User'
+// ];
+
+
 $available_menus = [
-    'Properties', 'Projects', 'Leads', 'Site Visits', 
-    'Customers', 'Landowner Enquiries', 'Investment Enquiries', 
-    'News', 'Gallery', 'Team', 'Testimonials', 'Documents', 'User Management'
+    'Properties'          => ["Our Properties","Add new Properties"],
+    'Projects'            => [],
+    'Leads'               => ["Landowners","General Inquiry"],
+    'Site Visits'         => [],
+    'Customers'           => [],
+    'Landowner Enquiries' => [],
+    'Investment Enquiries'=> [],
+    'News'                => [],
+    'Gallery'             => [],
+    'Team'                => [],
+    'Testimonials'        => [],
+    'Documents'           => [],
+    'User Management'     => ['Add new User', 'User'],
 ];
 ?>
 
@@ -92,8 +109,108 @@ $available_menus = [
                                 </div>
                             </div>
 
+                            
+
                             <!-- Menu Access Section -->
-                            <?php if ($loggedUser->role == 'super_admin'): ?>
+                             <?php if ($loggedUser->role == 'super_admin'): ?>
+                            <hr class="my-4 text-muted opacity-25">
+
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h6 class="text-uppercase text-muted fw-bold mb-0 small tracking-wider">
+                                    মেনু অ্যাক্সেস কন্ট্রোল (Menu Permissions)
+                                </h6>
+                                <span class="badge bg-light text-muted border">Super Admin Only</span>
+                            </div>
+
+                            <form action="<?= base_url('menu_access/' . $user->id); ?>" method="post">
+                                <div class="row g-3 mb-4">
+                                    <?php $index = 0; ?>
+                                    <?php foreach ($available_menus as $parent_menu => $sub_menus): ?>
+                                        <?php 
+                                            $is_simple_item = is_numeric($parent_menu);
+                                            $parent_name = $is_simple_item ? $sub_menus : $parent_menu;
+                                            $has_submenus = !$is_simple_item && !empty($sub_menus);
+                                            $parent_id = 'menu_check_' . $index++;
+                                        ?>
+
+                                        <div class="col-12">
+                                            <div class="card border rounded-3 p-3">
+                                                <!-- Parent Menu Checkbox -->
+                                                <div class="form-check d-flex align-items-center">
+                                                    <input class="form-check-input me-2 parent-checkbox" 
+                                                        type="checkbox" 
+                                                        id="<?= $parent_id ?>" 
+                                                        name="menus[]"
+                                                        value="<?= $parent_name ?>" 
+                                                        <?= in_array($parent_name, $assigned_menus) ? 'checked' : ''; ?>>
+                                                    <label class="form-check-label fw-bold text-dark cursor-pointer mb-0" for="<?= $parent_id ?>">
+                                                        <?= $parent_name ?>
+                                                    </label>
+                                                </div>
+
+                                                <!-- Sub-Menus Section -->
+                                                <?php if ($has_submenus): ?>
+                                                    <div class="row g-2 mt-2 ms-3 pt-2 border-top">
+                                                        <?php foreach ($sub_menus as $sub_index => $sub_menu): ?>
+                                                            <?php $sub_id = $parent_id . '_sub_' . $sub_index; ?>
+                                                            <div class="col-sm-6 col-md-4">
+                                                                <div class="form-check d-flex align-items-center">
+                                                                    <input class="form-check-input me-2 sub-checkbox" 
+                                                                        type="checkbox" 
+                                                                        id="<?= $sub_id ?>" 
+                                                                        name="menus[]"
+                                                                        value="<?= $sub_menu ?>" 
+                                                                        <?= in_array($sub_menu, $assigned_menus) ? 'checked' : ''; ?>>
+                                                                    <label class="form-check-label text-muted cursor-pointer mb-0 small" for="<?= $sub_id ?>">
+                                                                        <?= $sub_menu ?>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 py-2.5 rounded-3 fw-semibold shadow-sm">
+                                    Save Access Permissions
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                         
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .tracking-wider { letter-spacing: 0.05em; }
+    .cursor-pointer { cursor: pointer; }
+    .custom-checkbox-card {
+        transition: all 0.2s ease-in-out;
+        background-color: #fff;
+    }
+    .custom-checkbox-card:hover {
+        border-color: #0d6efd !important;
+        background-color: #f8f9fa;
+    }
+    .custom-checkbox-card .form-check-input:checked + .form-check-label {
+        color: #0d6efd !important;
+        font-weight: 600;
+    }
+</style>
+
+
+
+   <!-- <?php if ($loggedUser->role == 'super_admin'): ?>
                                 <hr class="my-4 text-muted opacity-25">
 
                                 <div class="d-flex align-items-center justify-content-between mb-3">
@@ -127,31 +244,4 @@ $available_menus = [
                                         Save Access Permissions
                                     </button>
                                 </form>
-                            <?php endif; ?>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<style>
-    .tracking-wider { letter-spacing: 0.05em; }
-    .cursor-pointer { cursor: pointer; }
-    .custom-checkbox-card {
-        transition: all 0.2s ease-in-out;
-        background-color: #fff;
-    }
-    .custom-checkbox-card:hover {
-        border-color: #0d6efd !important;
-        background-color: #f8f9fa;
-    }
-    .custom-checkbox-card .form-check-input:checked + .form-check-label {
-        color: #0d6efd !important;
-        font-weight: 600;
-    }
-</style>
+                            <?php endif; ?> -->

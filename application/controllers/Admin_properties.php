@@ -27,12 +27,30 @@ class Admin_Properties extends CI_Controller
             return;
         }
 
+
+
+    }
+
+    public function check_access($menu)
+    {
+        $user = $this->session->userdata('login_user_info_all');
+        $hasAccess = $this->db
+            ->where('user_id', $user->id)
+            ->where('menu_key', $menu) // Your menu key
+            ->count_all_results('user_menu_access');
+
+        if ($hasAccess == 0) {
+            $this->session->set_flashdata('access_error', "You don't have access.");
+            redirect('admin/users_list/users_list');
+            exit;
+        }
     }
 
 
 
     public function add_properties()
     {
+        $this->check_access('Add new Properties');
         $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
 
         $path = 'admin/properties/add_properties';
@@ -41,6 +59,7 @@ class Admin_Properties extends CI_Controller
 
     public function create_properties()
     {
+        $this->check_access('Add new Properties');
         // 1. Check login
         $loggedUser = $this->session->userdata('login_user_info_all');
 
@@ -181,7 +200,7 @@ class Admin_Properties extends CI_Controller
 
                 $config['upload_path'] = './assets/uploads/properties/images';
                 // $config['upload_path'] = $upload_path;
-                $config['allowed_types'] = 'jpg|jpeg|png|webp';
+                $config['allowed_types'] = 'jpg|jpeg|png|webp|avif';
                 $config['max_size'] = 5120;
                 $config['encrypt_name'] = TRUE;
 
@@ -348,6 +367,7 @@ class Admin_Properties extends CI_Controller
 
     public function properties_list()
     {
+        $this->check_access('Our Properties');
         $data = $this->engine->store_nav(
             'properties',
             'properties',
@@ -476,6 +496,7 @@ class Admin_Properties extends CI_Controller
 
     public function properties_details($id = NULL)
     {
+        $this->check_access('Our Properties');
         if (empty($id)) {
             show_404();
         }
@@ -507,6 +528,7 @@ class Admin_Properties extends CI_Controller
 
     public function update_properties_form($id)
     {
+        $this->check_access('Our Properties');
         if (empty($id)) {
             redirect('properties_list');
             return;
@@ -558,6 +580,7 @@ class Admin_Properties extends CI_Controller
 
     public function update_properties($id)
     {
+        $this->check_access('Our Properties');
         // 1. Authentication check
         $loggedUser = $this->session->userdata('login_user_info_all');
         if (!$loggedUser) {
@@ -640,7 +663,7 @@ class Admin_Properties extends CI_Controller
 
                 $config = [
                     'upload_path' => $img_dir,
-                    'allowed_types' => 'jpg|jpeg|png|webp',
+                    'allowed_types' => 'jpg|jpeg|png|webp|avif',
                     'max_size' => 5120,
                     'encrypt_name' => TRUE
                 ];
@@ -746,6 +769,7 @@ class Admin_Properties extends CI_Controller
     // Optional Method to Handle Single Gallery Image Deletion
     public function delete_property_image($id, $image_name)
     {
+        $this->check_access('Our Properties');
         $image_name = urldecode($image_name);
         $property = $this->db->where('id', $id)->get('properties')->row();
 
@@ -773,10 +797,11 @@ class Admin_Properties extends CI_Controller
     }
 
     public function delete_property($id)
-	{
-		$this->Common->delete_data('properties', 'id', $id);
-		redirect('properties_list');
-	}
+    {
+        $this->check_access('Our Properties');
+        $this->Common->delete_data('properties', 'id', $id);
+        redirect('properties_list');
+    }
 
 
 
