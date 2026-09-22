@@ -1,802 +1,621 @@
 
 <?php
-$projects = $this->db->order_by('created_at', 'DESC')
-    ->where('status', 'Published')
-    ->limit(5)
-    ->get('properties')
-    ->result_array();
+$selected_type     = $this->input->get('property_type', TRUE);
+$selected_location = $this->input->get('location', TRUE);
+$selected_status   = $this->input->get('status', TRUE);
+$min_price         = $this->input->get('min_price', TRUE);
+$max_price         = $this->input->get('max_price', TRUE);
+$min_size          = $this->input->get('min_size', TRUE);
+$keyword           = $this->input->get('keyword', TRUE);
+
+// 2. Build Query using Active Record
+$this->db->select('*');
+$this->db->from('properties');
+$this->db->where('status', 'Published');
+
+if (!empty($selected_type)) {
+    $this->db->where('property_type', $selected_type);
+}
+
+if (!empty($selected_location)) {
+    $this->db->where('location', $selected_location);
+}
+
+if (!empty($selected_status)) {
+    $this->db->where('project_status', $selected_status);
+}
+
+if ($min_price !== null && $min_price !== '') {
+    $this->db->where('price >=', (float) $min_price);
+}
+
+if ($max_price !== null && $max_price !== '') {
+    $this->db->where('price <=', (float) $max_price);
+}
+
+if ($min_size !== null && $min_size !== '') {
+    $this->db->where("CAST(size AS UNSIGNED) >=", (int) $min_size);
+}
+
+if (!empty($keyword)) {
+    $this->db->like('property_name', trim($keyword));
+}
+
+$this->db->order_by('created_at', 'DESC');
+$this->db->limit(10);
+$projects = $this->db->get()->result_array();
 ?>
 
-
-
-
-<section class="smart-property-section">
-
-    <div class="property-bg-shape property-bg-shape-1"></div>
-    <div class="property-bg-shape property-bg-shape-2"></div>
+<section class="property-filter-section">
+    <div class="decor-circle"></div>
+    <div class="decor-circle-2"></div>
 
     <div class="container position-relative">
-
-        <div class="text-center property-heading">
-
-            <span class="property-subtitle">
+        
+        <!-- Header -->
+        <div class="filter-header">
+            <span class="filter-subtitle">
+                <i class="bi bi-buildings"></i>
                 <?= lang('smart_property_search'); ?>
             </span>
-
-            <h2>
-                <?= lang('find_your'); ?>
-                <span><?= lang('perfect_property'); ?></span>
-            </h2>
-
-            <p>
-                <?= lang('property_search_description'); ?>
-            </p>
-
+            <h2><?= lang('find_your'); ?> <span><?= lang('perfect_property'); ?></span></h2>
+            <p><?= lang('property_search_description'); ?></p>
         </div>
 
+        <!-- Filter Card Form -->
+        <div class="filter-card">
+            <form action="<?= current_url(); ?>" method="GET" id="propertyFilterForm">
+                <div class="row g-4">
 
-    </div>
+                    <!-- PROPERTY TYPE -->
+                    <div class="col-lg-6">
+                        <div class="filter-box">
+                            <div class="filter-label">
+                                <i class="bi bi-house-door-fill"></i>
+                                <?= lang('property_type'); ?>
+                            </div>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" name="property_type" id="type_all" value="" <?= empty($selected_type) ? 'checked' : ''; ?>>
+                                    <label for="type_all">All</label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="property_type" id="type_apartment" value="apartment" <?= ($selected_type === 'apartment') ? 'checked' : ''; ?>>
+                                    <label for="type_apartment"><?= lang('apartment'); ?></label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="property_type" id="type_plot" value="plot" <?= ($selected_type === 'plot') ? 'checked' : ''; ?>>
+                                    <label for="type_plot"><?= lang('plot'); ?></label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="property_type" id="type_land" value="land" <?= ($selected_type === 'land') ? 'checked' : ''; ?>>
+                                    <label for="type_land"><?= lang('land'); ?></label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="property_type" id="type_commercial" value="commercial" <?= ($selected_type === 'commercial') ? 'checked' : ''; ?>>
+                                    <label for="type_commercial"><?= lang('commercial'); ?></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-</section>
+                    <!-- LOCATION -->
+                    <div class="col-lg-6">
+                        <div class="filter-box">
+                            <div class="filter-label">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <?= lang('location'); ?>
+                            </div>
+                            <div class="option-list">
+                                <div class="option-item">
+                                    <input type="radio" name="location" id="loc_all" value="" <?= empty($selected_location) ? 'checked' : ''; ?>>
+                                    <label for="loc_all">All</label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="location" id="loc_dhaka" value="dhaka" <?= ($selected_location === 'dhaka') ? 'checked' : ''; ?>>
+                                    <label for="loc_dhaka"><?= lang('dhaka'); ?></label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="location" id="loc_uttara" value="uttara" <?= ($selected_location === 'uttara') ? 'checked' : ''; ?>>
+                                    <label for="loc_uttara"><?= lang('uttara'); ?></label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="location" id="loc_purbachal" value="purbachal" <?= ($selected_location === 'purbachal') ? 'checked' : ''; ?>>
+                                    <label for="loc_purbachal"><?= lang('purbachal'); ?></label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="location" id="loc_bashundhara" value="bashundhara" <?= ($selected_location === 'bashundhara') ? 'checked' : ''; ?>>
+                                    <label for="loc_bashundhara"><?= lang('bashundhara'); ?></label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" name="location" id="loc_keraniganj" value="keraniganj" <?= ($selected_location === 'keraniganj') ? 'checked' : ''; ?>>
+                                    <label for="loc_keraniganj"><?= lang('keraniganj'); ?></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<section class="py-5 bg-light">
-    <div class="container">
+                    <!-- PRICE RANGE -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="filter-box">
+                            <div class="filter-label">
+                                <i class="bi bi-cash-stack"></i>
+                                Price Range (BDT)
+                            </div>
+                            <div class="price-wrapper">
+                                <div class="price-field">
+                                    <span class="currency">৳</span>
+                                    <input type="number" name="min_price" class="price-input" placeholder="Min" value="<?= html_escape($min_price); ?>">
+                                </div>
+                                <span class="price-to">to</span>
+                                <div class="price-field">
+                                    <span class="currency">৳</span>
+                                    <input type="number" name="max_price" class="price-input" placeholder="Max" value="<?= html_escape($max_price); ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="row g-4">
+                    <!-- MIN SIZE -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="filter-box">
+                            <div class="filter-label">
+                                <i class="bi bi-aspect-ratio"></i>
+                                Min Plot Size
+                            </div>
+                            <div class="size-field">
+                                <input type="number" name="min_size" class="size-input" placeholder="e.g. 1500" value="<?= html_escape($min_size); ?>">
+                                <span class="size-unit">Sq Ft / Katha</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Left Information Card -->
-            <div class="col-lg-3">
-                <div class="card border-0 text-white p-4 h-100"
-                     style="background-color: #0d5c3a;">
-
-                    <span class="text-uppercase small fw-semibold text-warning">
-                        Available Plots
-                    </span>
-
-                    <h3 class="fw-bold mb-4">
-                        Find Your Perfect Plot
-                    </h3>
-
-                    <div class="text-center my-auto py-3">
-
-                        <i class="bi bi-geo-alt-fill display-3 text-warning"></i>
-
-                        <h5 class="mt-3 fw-bold">
-                            Looking for a plot?
-                        </h5>
-
-                        <p class="small text-light mb-0">
-                            We have a wide range of properties
-                            in prime locations.
-                        </p>
-
+                    <!-- KEYWORD / PROJECT NAME -->
+                    <div class="col-lg-4 col-md-12">
+                        <div class="filter-box">
+                            <div class="filter-label">
+                                <i class="bi bi-search"></i>
+                                Project Name
+                            </div>
+                            <input type="text" name="keyword" class="size-input pe-3" placeholder="Search property..." value="<?= html_escape($keyword); ?>">
+                        </div>
                     </div>
 
                 </div>
-            </div>
 
+                <!-- Action Buttons -->
+                <div class="filter-action">
+                    <a href="<?= current_url(); ?>" class="reset-btn text-decoration-none">
+                        <i class="bi bi-arrow-counterclockwise"></i> Reset Filters
+                    </a>
+                    <button type="submit" class="search-property-btn">
+                        <i class="bi bi-search me-1"></i> <?= lang('search_property'); ?>
+                    </button>
+                </div>
+            </form>
+        </div>
 
-            <!-- Recent Properties -->
-            <div class="col-lg-9">
-
-                <div class="bg-white rounded shadow-sm p-3">
-
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-
-                        <div>
-                            <h5 class="fw-bold mb-1">
-                                Recent Properties
-                            </h5>
-
-                            <p class="text-muted small mb-0">
-                                Explore our latest available properties
-                            </p>
-                        </div>
-
+        <!-- Filtered Dynamic Results -->
+        <div class="mt-5">
+            <div class="bg-white rounded-4 shadow-sm p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h4 class="fw-bold mb-1">Available Properties</h4>
+                        <p class="text-muted small mb-0">Explore properties based on your chosen filter parameters</p>
                     </div>
+                </div>
 
-
-                    <div class="table-responsive">
-
-                        <table class="table table-hover align-middle mb-0">
-
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Project Name</th>
-                                    <th>Location</th>
-                                    <th>Plot Size</th>
-                                    <th>Price (BDT)</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                <?php if (!empty($projects)): ?>
-
-                                    <?php
-                                    // Only show latest 5
-                                    $recent_projects = array_slice($projects, 0, 5);
-                                    ?>
-
-                                    <?php foreach ($recent_projects as $project): ?>
-
-                                        <tr>
-
-                                            <!-- Project Name -->
-                                            <td class="fw-semibold">
-                                                <?= html_escape($project['property_name']); ?>
-                                            </td>
-
-                                            <!-- Location -->
-                                            <td>
-                                                <?= html_escape($project['location']); ?>
-                                            </td>
-
-                                            <!-- Size -->
-                                            <td>
-                                                <?= html_escape($project['size']); ?>
-                                            </td>
-
-                                            <!-- Price -->
-                                            <td>
-                                                <?= number_format((float)$project['price']); ?>
-                                            </td>
-
-                                            <!-- Status -->
-                                            <td>
-                                                <span class="badge badge-available px-3 py-2">
-                                                    Available
-                                                </span>
-                                            </td>
-
-                                            <!-- Action -->
-                                            <td>
-                                                <a href="<?= base_url('properties/details/' . $project['id']); ?>"
-                                                   class="btn btn-green btn-sm px-3">
-                                                    View
-                                                </a>
-                                            </td>
-
-                                        </tr>
-
-                                    <?php endforeach; ?>
-
-                                <?php else: ?>
-
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Project Name</th>
+                                <th>Location</th>
+                                <th>Plot Size</th>
+                                <th>Price (BDT)</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($projects)): ?>
+                                <?php foreach ($projects as $project): ?>
                                     <tr>
-                                        <td colspan="6"
-                                            class="text-center text-muted py-4">
-
-                                            <i class="bi bi-building fs-2 d-block mb-2"></i>
-
-                                            No properties available at the moment.
-
+                                        <td class="fw-semibold">
+                                            <?= html_escape($project['property_name']); ?>
+                                        </td>
+                                        <td>
+                                            <?= html_escape($project['location']); ?>
+                                        </td>
+                                        <td>
+                                            <?= html_escape($project['size']); ?>
+                                        </td>
+                                        <td class="fw-bold text-success">
+                                            ৳<?= number_format((float) $project['price']); ?>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill">
+                                                <?= html_escape($project['project_status'] ?? 'Available'); ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="<?= base_url('properties_details_view/' . $project['id']); ?>" class="btn btn-sm text-white px-3 fw-bold" style="background: var(--navy);">
+                                                View
+                                            </a>
                                         </td>
                                     </tr>
-
-                                <?php endif; ?>
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-
-                    <!-- See All Button -->
-                    <div class="text-center mt-4">
-
-                        <a href="<?= base_url('properties'); ?>"
-                           class="btn btn-green px-4 py-2">
-
-                            See All Properties
-
-                            <i class="bi bi-arrow-right ms-2"></i>
-
-                        </a>
-
-                    </div>
-
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-5">
+                                        <i class="bi bi-building-exclamation display-6 d-block mb-2"></i>
+                                        No properties found matching your selection criteria.
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
 
+                <div class="text-center mt-4">
+                    <a href="<?= base_url('properties'); ?>" class="btn px-4 py-2 text-white fw-bold" style="background: linear-gradient(135deg, var(--gold-light), #a8813b); border-radius: 10px;">
+                        See All Properties <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
+                </div>
             </div>
-
         </div>
 
     </div>
 </section>
 
-
-
-
 <style>
- 
+:root {
+    --navy: #0b1d3a;
+    --navy-light: #152e5a;
+    --gold: #c5a059;
+    --gold-light: #d8b878;
+    --gold-glow: rgba(197, 160, 89, 0.35);
+    --light-bg: #f4f6f9;
+}
 
-.smart-property-section {
+.property-filter-section {
     position: relative;
-    overflow: hidden;
-
     padding: 90px 0;
-
+    overflow: hidden;
     background:
-        linear-gradient(
-            135deg,
-            #f4fbf8 0%,
-            #ffffff 50%,
-            #eef7ff 100%
-        );
+        radial-gradient(circle at 90% 20%, rgba(197, 160, 89, 0.12), transparent 30%),
+        radial-gradient(circle at 10% 80%, rgba(11, 29, 58, 0.08), transparent 30%),
+        #f4f6f9;
 }
 
-
-/* Background Shapes */
-
-.property-bg-shape {
+.decor-circle {
     position: absolute;
-
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(197, 160, 89, 0.15);
     border-radius: 50%;
-
-    filter: blur(2px);
-
-    opacity: 0.45;
-
-    pointer-events: none;
+    right: -100px;
+    top: 40px;
 }
 
-.property-bg-shape-1 {
-    width: 300px;
-    height: 300px;
-
-    background: #d8f2e6;
-
-    top: -120px;
-    left: -100px;
+.decor-circle-2 {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border: 1px solid rgba(11, 29, 58, 0.08);
+    border-radius: 50%;
+    left: -70px;
+    bottom: 30px;
 }
 
-.property-bg-shape-2 {
-    width: 350px;
-    height: 350px;
-
-    background: #dcecff;
-
-    right: -150px;
-    bottom: -160px;
+.filter-header {
+    text-align: center;
+    margin-bottom: 45px;
 }
 
-
-/* ============================================
-   HEADING
-============================================= */
-
-.property-heading {
-    margin-bottom: 40px;
-}
-
-.property-subtitle {
-    display: inline-block;
-
-    font-size: 13px;
+.filter-subtitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 50px;
+    background: rgba(11, 29, 58, 0.06);
+    border: 1px solid rgba(11, 29, 58, 0.12);
+    color: var(--gold);
+    font-size: 12px;
     font-weight: 700;
-
     letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-    color: #159447;
-
+.filter-header h2 {
+    margin-top: 18px;
     margin-bottom: 12px;
-}
-
-.property-heading h2 {
-    margin: 0;
-
-    font-size: 42px;
-
+    font-size: clamp(32px, 5vw, 48px);
     font-weight: 800;
-
-    line-height: 1.2;
-
-    color: #152d24;
+    color: var(--navy);
 }
 
-.property-heading h2 span {
-    color: #159447;
+.filter-header h2 span {
+    color: var(--gold);
 }
 
-.property-heading p {
-    margin-top: 15px;
-
-    margin-bottom: 0;
-
-    color: #6b7772;
-
+.filter-header p {
+    max-width: 650px;
+    margin: auto;
+    color: #737b89;
     font-size: 16px;
 }
 
-
-/* ============================================
-   SEARCH CARD
-============================================= */
-
-.property-search-card {
+.filter-card {
     position: relative;
-
-    background: #ffffff;
-
-    padding: 30px;
-
-    border-radius: 18px;
-
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 28px;
+    padding: 38px;
     box-shadow:
-        0 15px 50px rgba(26, 75, 50, 0.10);
-
-    border: 1px solid rgba(21, 148, 71, 0.08);
+        0 25px 60px rgba(11, 29, 58, 0.10),
+        0 5px 15px rgba(11, 29, 58, 0.04);
+    transition: all 0.4s ease;
 }
 
-
-/* ============================================
-   LABEL
-============================================= */
-
-.property-label {
-    display: block;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    color: #263a31;
-
-    margin-bottom: 9px;
+.filter-card:hover {
+    box-shadow:
+        0 35px 80px rgba(11, 29, 58, 0.16),
+        0 0 35px var(--gold-glow);
 }
 
+.filter-box {
+    height: 100%;
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(11, 29, 58, 0.08);
+    transition: all 0.3s ease;
+}
 
-/* ============================================
-   INPUT
-============================================= */
+.filter-box:hover {
+    transform: translateY(-4px);
+    border-color: rgba(197, 160, 89, 0.45);
+    box-shadow: 0 12px 30px rgba(11, 29, 58, 0.08);
+}
 
-.property-input {
+.filter-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--navy);
+}
+
+.filter-label i {
+    color: var(--gold);
+    font-size: 18px;
+}
+
+.option-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.option-item {
     position: relative;
 }
 
-.property-input > i {
+.option-item input {
     position: absolute;
-
-    left: 16px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    z-index: 5;
-
-    color: #159447;
-
-    font-size: 15px;
-
+    opacity: 0;
     pointer-events: none;
 }
 
-.property-input .form-select {
-    height: 55px;
-
-    border-radius: 10px;
-
-    border: 1px solid #dfe8e3;
-
-    padding-left: 45px;
-
-    padding-right: 35px;
-
-    font-size: 14px;
-
-    color: #53625b;
-
-    background-color: #fbfdfc;
-
-    box-shadow: none;
+.option-item label {
+    display: inline-block;
+    padding: 9px 15px;
+    border-radius: 30px;
+    border: 1px solid #dfe3e8;
+    background: #fff;
+    color: #555d68;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
-.property-input .form-select:focus {
-    border-color: #159447;
-
-    box-shadow:
-        0 0 0 3px rgba(21, 148, 71, 0.10);
+.option-item label:hover {
+    border-color: var(--gold);
+    color: var(--navy);
+    transform: translateY(-2px);
 }
 
+.option-item input:checked + label {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--gold);
+    box-shadow: 0 7px 18px rgba(11, 29, 58, 0.18);
+}
 
-/* ============================================
-   SEARCH BUTTON
-============================================= */
+.price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-.property-search-btn {
+.price-field {
+    position: relative;
+    flex: 1;
+}
+
+.currency {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.price-input {
     width: 100%;
-
-    height: 55px;
-
-    border: 0;
-
+    padding: 12px 10px 12px 32px;
+    border: 1px solid #dfe3e8;
     border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    color: var(--navy);
+    background: #fff;
+    transition: all 0.25s ease;
+}
 
-    background: linear-gradient(
-        135deg,
-        #159447,
-        #08783a
-    );
+.price-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
+}
 
-    color: #ffffff;
-
+.price-to {
     font-size: 13px;
+    color: #858c96;
+}
 
+.size-field {
+    position: relative;
+}
+
+.size-input {
+    width: 100%;
+    padding: 12px 65px 12px 15px;
+    border: 1px solid #dfe3e8;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+    background: #fff;
+    transition: all 0.25s ease;
+}
+
+.size-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
+}
+
+.size-unit {
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.filter-action {
+    margin-top: 28px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(11, 29, 58, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.search-property-btn {
+    position: relative;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--gold-light), #a8813b);
+    color: #fff;
+    font-size: 14px;
     font-weight: 800;
-
-    letter-spacing: 0.5px;
-
-    transition: all 0.3s ease;
-
-    box-shadow:
-        0 8px 20px rgba(21, 148, 71, 0.20);
+    letter-spacing: .5px;
+    box-shadow: 0 10px 25px rgba(197, 160, 89, 0.35), 0 4px 0 #7a5c25;
+    transition: all 0.2s ease;
 }
 
-.property-search-btn i {
-    margin-right: 8px;
-}
-
-.property-search-btn:hover {
+.search-property-btn:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 12px 25px rgba(21, 148, 71, 0.30);
-
-    background: linear-gradient(
-        135deg,
-        #08783a,
-        #159447
-    );
+    box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4), 0 4px 0 #7a5c25;
 }
 
-
-/* ============================================
-   ADVANCED SEARCH
-============================================= */
-
-.advanced-search {
-    text-align: right;
-
-    margin-top: 18px;
+.search-property-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 5px 10px rgba(197, 160, 89, 0.3), 0 1px 0 #7a5c25;
 }
 
-.advanced-search a {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    text-decoration: none;
-
-    color: #159447;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    transition: 0.3s ease;
-}
-
-.advanced-search a:hover {
-    color: #086d35;
-}
-
-.advanced-search a i:last-child {
-    font-size: 11px;
-}
-
-
-.property-categories {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-top: 35px;
-
-    flex-wrap: wrap;
-}
-
-.property-category {
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 13px 25px;
-
-    border-radius: 50px;
-
-    text-decoration: none;
-
-    background: #ffffff;
-
-    color: #53625b;
-
-    border: 1px solid #e4ebe7;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    transition: all 0.3s ease;
-}
-
-.property-category i {
-    color: #159447;
-
-    font-size: 15px;
-}
-
-.property-category:hover,
-.property-category.active {
-    color: #ffffff;
-
-    background: #159447;
-
-    border-color: #159447;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 20px rgba(21, 148, 71, 0.20);
-}
-
-.property-category:hover i,
-.property-category.active i {
-    color: #ffffff;
-}
-
-
-.property-search-message {
-    margin-top: 25px;
-
+.reset-btn {
+    border: none;
+    background: transparent;
+    color: #7c8490;
     font-size: 13px;
-
-    color: #78857f;
+    font-weight: 600;
+    transition: .25s;
 }
 
-.property-search-message i {
-    color: #159447;
-
-    margin-right: 5px;
+.reset-btn:hover {
+    color: var(--navy);
 }
-
 
 @media (max-width: 991px) {
-
-    .smart-property-section {
+    .property-filter-section {
         padding: 70px 0;
     }
 
-    .property-heading h2 {
-        font-size: 36px;
-    }
-
-    .property-search-card {
+    .filter-card {
         padding: 25px;
     }
-
 }
 
-
-@media (max-width: 767px) {
-
-    .smart-property-section {
+@media (max-width: 575px) {
+    .property-filter-section {
         padding: 55px 0;
     }
 
-    .property-heading {
+    .filter-header {
         margin-bottom: 30px;
     }
 
-    .property-heading h2 {
-        font-size: 30px;
+    .filter-header h2 {
+        font-size: 32px;
     }
 
-    .property-heading p {
-        font-size: 14px;
+    .filter-card {
+        padding: 15px;
+        border-radius: 20px;
     }
 
-    .property-search-card {
-        padding: 20px;
-
-        border-radius: 14px;
+    .filter-box {
+        padding: 18px;
     }
 
-    .advanced-search {
+    .price-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .price-to {
         text-align: center;
     }
 
-    .property-categories {
-        gap: 10px;
-
-        margin-top: 25px;
+    .filter-action {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .property-category {
-        padding: 11px 18px;
-
-        font-size: 13px;
+    .search-property-btn {
+        width: 100%;
     }
 
+    .reset-btn {
+        text-align: center;
+    }
 }
+</style>
 
 
 
-@media (max-width: 480px) {
-
-    .property-heading h2 {
-        font-size: 26px;
-    }
-
-    .property-category {
-        flex: 1;
-
-        justify-content: center;
-
-        min-width: 130px;
-    }
-
-}
-</style> 
-
-
-
-
-
-
-
-        <!-- <div class="property-search-card">
-
-            <form action="<?= base_url('properties/search'); ?>" method="GET">
-
-                <div class="row g-3 align-items-end">
-
-                    <div class="col-lg-3 col-md-6">
-
-                        <label class="property-label">
-                            <?= lang('property_type'); ?>
-                        </label>
-
-                        <div class="property-input">
-
-                            <i class="fa-solid fa-building"></i>
-
-                            <select name="property_type" class="form-select">
-
-                                <option value="">
-                                    <?= lang('select_property_type'); ?>
-                                </option>
-
-                                <option value="apartment">
-                                    <?= lang('apartment'); ?>
-                                </option>
-
-                                <option value="plot">
-                                    <?= lang('plot'); ?>
-                                </option>
-
-                                <option value="land">
-                                    <?= lang('land'); ?>
-                                </option>
-
-                                <option value="commercial">
-                                    <?= lang('commercial'); ?>
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-lg-3 col-md-6">
-
-                        <label class="property-label">
-                            <?= lang('location'); ?>
-                        </label>
-
-                        <div class="property-input">
-
-                            <i class="fa-solid fa-location-dot"></i>
-
-                            <select name="location" class="form-select">
-
-                                <option value="">
-                                    <?= lang('select_location'); ?>
-                                </option>
-
-                                <option value="dhaka">
-                                    <?= lang('dhaka'); ?>
-                                </option>
-
-                                <option value="uttara">
-                                    <?= lang('uttara'); ?>
-                                </option>
-
-                                <option value="purbachal">
-                                    <?= lang('purbachal'); ?>
-                                </option>
-
-                                <option value="bashundhara">
-                                    <?= lang('bashundhara'); ?>
-                                </option>
-
-                                <option value="keraniganj">
-                                    <?= lang('keraniganj'); ?>
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-lg-3 col-md-6">
-
-                        <label class="property-label">
-                            <?= lang('budget'); ?>
-                        </label>
-
-                        <div class="property-input">
-
-                            <i class="fa-solid fa-money-bill-wave"></i>
-
-                            <select name="budget" class="form-select">
-
-                                <option value="">
-                                    <?= lang('select_budget'); ?>
-                                </option>
-
-                                <option value="10-30">
-                                    <?= lang('budget_10_30'); ?>
-                                </option>
-
-                                <option value="30-50">
-                                    <?= lang('budget_30_50'); ?>
-                                </option>
-
-                                <option value="50-100">
-                                    <?= lang('budget_50_100'); ?>
-                                </option>
-
-                                <option value="100+">
-                                    <?= lang('budget_100_plus'); ?>
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="col-lg-3 col-md-6">
-
-                        <button type="submit" class="property-search-btn">
-
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                            <?= lang('search_property'); ?>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </form>
-
-        </div> -->

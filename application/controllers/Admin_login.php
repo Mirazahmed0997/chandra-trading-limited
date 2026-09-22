@@ -17,7 +17,7 @@ class Admin_login extends CI_Controller
     public function index()
     {
         $data = $this->engine->store_nav('recruitment', 'Nothing', 'Chandra Trading Limited');
-        $data['homapage_info'] = $this->Common->get_data('job_homepage')->row();
+        // $data['homapage_info'] = $this->Common->get_data('job_homepage')->row();
 
         $path = 'login/login';
         $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);

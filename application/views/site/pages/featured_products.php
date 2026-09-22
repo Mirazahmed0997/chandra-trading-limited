@@ -118,7 +118,7 @@ $projects = $this->db
 
                                 <!-- View Details -->
                                 <a
-                                    href="<?= base_url('properties/details/' . $project['id']); ?>"
+                                    href="<?= base_url('properties_details_view/' . $project['id']); ?>"
                                     class="btn btn-green w-100 mt-auto"
                                 >
                                     View Details

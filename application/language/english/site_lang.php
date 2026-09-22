@@ -14,6 +14,7 @@ $lang['nav_mission'] = 'Mission';
 $lang['nav_vision'] = 'Vision';
 $lang['nav_projects'] = 'Projects';
 $lang['nav_contact'] = 'Contact Us';
+$lang['login'] = 'Login';
 $lang['book_a_site'] = 'Book a site';
 
 
@@ -125,7 +126,7 @@ $lang['transparency'] = 'Transparency';
 $lang['value'] = 'Value';
 $lang['commitment'] = 'Commitment';
 
-$lang['trust_description'] = 'We are committed to conducting our business with honesty and responsibility while earning the trust of our customers.';
+$lang['trust_description'] = 'Doing business with transparency and accountability.';
 
 $lang['quality_description'] = 'We have a strong commitment to providing quality properties and development.';
 

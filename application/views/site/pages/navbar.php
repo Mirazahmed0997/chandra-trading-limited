@@ -1,3 +1,9 @@
+<?php
+$user = $this->session->userdata('login_user_info_all');
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,7 +165,9 @@
 
       <!-- Logo -->
       <a class="navbar-brand fw-bold fs-4" href="#">
-        <img style="width: 180px;" class="logo" src="./assets/uploads/CTL_logo_Finalll.png" alt="Logo">
+        <!-- <img style="width: 180px;" class="logo" src="./assets/uploads/CTL_logo_Finalll.png" alt="Logo"> -->
+        <img style="width: 180px;" class="logo" src="<?= base_url('assets/uploads/CTL_logo_Finalll.png'); ?>"
+          alt="Logo">
       </a>
 
       <div class="mobile-bar">
@@ -184,28 +192,43 @@
             </ul>
           </li>
 
-          <li class="dropdown">
-            <a href="javascript:void(0)" onclick="toggleDropdown(this)">
-              <?= lang('nav_projects'); ?> <i class="fas fa-chevron-down"></i>
-            </a>
-            <ul class="submenu">
-              <li><a href="properties"><?= lang('properties'); ?></a></li>
-              <li><a href="showcase"><?= lang('nav_projects'); ?></a></li>
-            </ul>
-          </li>
-
+          <li><a href="properties"><?= lang('properties'); ?></a></li>
+          <li><a href="showcase"><?= lang('nav_projects'); ?></a></li>
           <li><a href=""><?= lang('investment'); ?></a></li>
           <li><a href=""><?= lang('services'); ?></a></li>
           <li><a href=""><?= lang('news&insights'); ?></a></li>
           <li><a href="contact_us"><?= lang('nav_contact'); ?></a></li>
 
+          <?php if ($user): ?>
+
+            <li class="dropdown">
+              <a href="javascript:void(0)" onclick="toggleDropdown(this)"><?= $user->first_name[0] ,$user->last_name[0]  ?? 'Account'; ?> <i
+                  class="fas fa-chevron-down"></i></a>
+              <ul class="submenu">
+
+                <li>
+                  <a href="<?= base_url('') ?>" class="">
+                    Dashboard
+                  </a>
+                </li>
+
+                <li> <a href="<?= base_url('user_logout') ?>" class="">
+                    Logout
+                  </a></li>
+              </ul>
+            </li>
+
+          <?php else: ?>
+            <li><a href="<?php echo base_url("user_login_form"); ?>"><?= lang('login'); ?></a></li>
+          <?php endif; ?>
+
           <!-- Search Modal Button -->
-          <li>
+          <!-- <li>
             <button class="btn btn-outline-secondary btn-sm rounded-circle px-2 py-1" data-bs-toggle="modal"
               data-bs-target="#searchModal" title="Search">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-          </li>
+          </li> -->
 
           <!-- CTA Button -->
           <li>
@@ -216,7 +239,7 @@
       </nav>
 
     </div>
-</nav>
+  </nav>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

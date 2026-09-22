@@ -12,8 +12,9 @@
 </head>
 
 <body>
+
     <?php if ($this->session->flashdata('login_success')): ?>
-        <div class="alert alert-danger">
+        <div class="alert alert-success auto-hide-alert">
             <?= $this->session->flashdata('login_success'); ?>
         </div>
     <?php endif; ?>
@@ -29,7 +30,7 @@
 
     </div>
     <?php $this->load->view('site/pages/news_headline'); ?>
-    
+
 
 </body>
 
@@ -38,3 +39,21 @@
         /* background: linear-gradient(90deg, #32aaba, #feb47b); */
     }
 </style>
+
+
+
+<script>
+    setTimeout(function () {
+        const alerts = document.querySelectorAll('.auto-hide-alert');
+
+        alerts.forEach(function (alert) {
+            alert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            alert.style.opacity = '0';
+            alert.style.transform = 'translateY(-10px)';
+
+            setTimeout(function () {
+                alert.remove();
+            }, 500);
+        });
+    }, 3000);  // 3 second
+</script>

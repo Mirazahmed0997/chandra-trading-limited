@@ -11,6 +11,32 @@ class View_content_controller extends CI_Controller
         $this->load->database();
     }
 
+
+
+     public function properties_details_view($id = null)
+    {
+        if (!$id) {
+            show_404();
+        }
+
+        $data['property'] = $this->db->where('id', $id)
+            ->where('status', 'Published')
+            ->get('properties')
+            ->row();
+
+        if (!$data['property']) {
+            show_404();
+        }
+
+        $this->load->view('site/pages/properties/properties_Details', $data);
+    }
+
+
+
+
+
+
+
     public function ica()
     {
         $this->load->view('site/pages/ica/ica');
@@ -33,6 +59,8 @@ class View_content_controller extends CI_Controller
 
         $this->load->view('site/pages/notice&current_projects/project_details', $data);
     }
+
+
 
     // -------------------news details------------
     public function news_details($id = null)

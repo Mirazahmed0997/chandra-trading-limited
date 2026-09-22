@@ -389,13 +389,13 @@ $user = $this->session->userdata('login_user_info_all');
                             <?php endif; ?>
 
                             <?php if (has_menu_access('Add new Properties')): ?>
-                            <li class="nav-item">
-                                <a href="<?php echo base_url('add_properties') ?>"
-                                    class="nav-link <?= active_nav('add_properties', $sub_nav); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add new Properties</p>
-                                </a>
-                            </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('add_properties') ?>"
+                                        class="nav-link <?= active_nav('add_properties', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add new Properties</p>
+                                    </a>
+                                </li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -425,22 +425,35 @@ $user = $this->session->userdata('login_user_info_all');
                         </a>
 
                         <ul class="nav nav-treeview">
-                            <?php if (has_menu_access('Landowners')): ?>
+                            <?php if (has_menu_access('Landowner Enquiries')): ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('landowners_query') ?>"
                                         class="nav-link <?= active_nav('Landowners', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Landowners</p>
+                                        <p> Landowner Enquiries</p>
                                     </a>
                                 </li>
                             <?php endif; ?>
 
-                            <?php if (has_menu_access('General Inquiry')): ?>
+                            <?php if (has_menu_access('General Enquiries')): ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('contact_messages') ?>"
                                         class="nav-link <?= active_nav('contact_messages', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>General Inquiry</p>
+                                        <p>General Enquiries</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                          
+
+                            <?php if (has_menu_access('Investment Enquiries')): ?>
+                                <li class="nav-item has-treeview <?= active_open('Investment Enquiries', $main_nav); ?>">
+                                    <a href="#" class="nav-link <?= active_nav('Investment Enquiries', $main_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Investment Enquiries
+                                        </p>
                                     </a>
                                 </li>
                             <?php endif; ?>
@@ -471,27 +484,6 @@ $user = $this->session->userdata('login_user_info_all');
                 <?php endif; ?>
 
 
-                <?php if (has_menu_access('Landowner Enquiries')): ?>
-                    <li class="nav-item has-treeview <?= active_open('Landowner Enquiries', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('Landowner Enquiries', $main_nav); ?>">
-                            <i class="nav-icon fas fa-user-tie"></i>
-                            <p>
-                                Landowner Enquiries
-                            </p>
-                        </a>
-                    </li>
-                <?php endif; ?>
-
-                <?php if (has_menu_access('Investment Enquiries')): ?>
-                    <li class="nav-item has-treeview <?= active_open('Investment Enquiries', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('Investment Enquiries', $main_nav); ?>">
-                            <i class="nav-icon fas fa-hand-holding-usd"></i>
-                            <p>
-                                Investment Enquiries
-                            </p>
-                        </a>
-                    </li>
-                <?php endif; ?>
 
                 <?php if (has_menu_access('News')): ?>
                     <li class="nav-item has-treeview <?= active_open('News', $main_nav); ?>">
@@ -609,10 +601,10 @@ $user = $this->session->userdata('login_user_info_all');
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('admin_registration_form') ?>"
+                            <a href="<?php echo base_url('cost_vouchar') ?>"
                                 class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Add new User</p>
+                                <p>Cost Vouchar</p>
                             </a>
                         </li>
                     </ul>

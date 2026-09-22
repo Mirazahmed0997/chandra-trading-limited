@@ -7,6 +7,7 @@ class User_controllers extends MY_Controller
     private $main_layout = 'site/master_layout';
     private $header = 'site/header';
     private $footer = 'site/footer';
+    private $serverDateTime = '';
 
     public function __construct()
     {
@@ -74,6 +75,121 @@ class User_controllers extends MY_Controller
         );
     }
 
+
+    public function user_login_form()
+    {
+        $data = $this->engine->store_nav('login', 'Nothing', 'User Login');
+
+        $path = "site/pages/user_registration/user_login_form";
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
+
+
+    public function user_login_process()
+    {
+
+        $userInfo = $this->input->post('userInfo');
+        $password = $this->input->post('password');
+
+        $this->db->group_start();
+        $this->db->where('mobile_number', $userInfo);
+        $this->db->or_where('email', $userInfo);
+        $this->db->group_end();
+
+        $user = $this->db->get('clients')->row();
+
+        if ($user) {
+
+            // if (password_verify($password, $user->password))
+            if ($password == $user->password) {
+
+                $this->session->set_userdata('current_type', 2);
+                $this->session->set_userdata('login_user_info_all', $user);
+                $this->session->set_flashdata('login_success', 'Successfully logged in');
+                redirect(base_url());
+                // redirect('members');
+
+            } else {
+
+                $this->session->set_flashdata('login_failed', 'Wrong Password');
+                redirect('user_login_form');
+
+            }
+
+        } else {
+
+            $this->session->set_flashdata('login_failed', 'Mobile number not found');
+            redirect('user_login_form');
+        }
+    }
+
+    public function user_logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url());
+    }
+
+
+
+
+
+
+
+    public function user_registration_form()
+    {
+        $data = $this->engine->store_nav('registration', 'Nothing', 'User Registration');
+
+        $path = "site/pages/user_registration/user_registration_form";
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
+
+    public function user_registration_save()
+    {
+
+        $mobile_number = $this->input->post('mobile_number');
+        $email = $this->input->post('email');
+
+
+        $this->db->where('mobile_number', $mobile_number);
+        $existing_member = $this->db->get('clients')->row();
+
+        if ($existing_member) {
+            $this->session->set_flashdata('reg_error', 'Already have account with this Mobile number');
+            redirect('user_registration_form');
+            return;
+        }
+
+        $this->db->where('email', $email);
+        $existing_member = $this->db->get('clients')->row();
+
+        if ($existing_member) {
+            $this->session->set_flashdata('reg_error', 'Already have account with this Email');
+            redirect('user_registration_form');
+            return;
+        }
+
+        $data = array(
+
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'email' => $this->input->post('email'),
+
+            'username' => $this->input->post('username'),
+            'mobile_number' => $this->input->post('mobile_number'),
+            'password' => $this->input->post('password'),
+            'created_at' => date('Y-m-d H:i:s')
+        );
+
+        $this->db->insert('clients', $data);
+        $this->session->set_flashdata('reg_success', 'Registration Completed');
+        redirect('user_login_form');
+    }
+
+
+
+
+
+    // ------------Clients Site-------------
     public function properties()
     {
         $data = $this->engine->store_nav(
@@ -153,6 +269,34 @@ class User_controllers extends MY_Controller
         $data['sl_start'] = $page + 1;
 
         $path = 'site/pages/property_search_section';
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
+
+
+    public function properties_details_view($id = NULL)
+    {
+        if (empty($id)) {
+            show_404();
+        }
+
+        $this->db->where('id', $id);
+        $property = $this->db->get('properties')->row();
+
+        if (!$property) {
+            show_404();
+        }
+
+        $data = $this->engine->store_nav(
+            'properties',
+            'properties',
+            'Property Details: ' . $property->property_name
+        );
+
+        // $data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
+
+        $data['property'] = $property;
+
+        $path = 'site/pages/properties/properties_Details_view';
         $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
     }
 

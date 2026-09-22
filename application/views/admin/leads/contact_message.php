@@ -7,9 +7,9 @@
             <div class="d-flex justify-content-between align-items-center">
 
                 <div>
-                    <h2 class="mb-1">Contact Messages</h2>
+                    <h2 class="mb-1">General Enquiries/Contact Messages</h2>
                     <p class="text-muted mb-0">
-                        Manage landowner enquiries and submitted information
+                        Manage General Enquiries and submitted information
                     </p>
                 </div>
 
@@ -35,7 +35,7 @@
                         <div>
                             <h5 class="mb-0">Search & Filter</h5>
                             <small class="text-muted">
-                                Find landowner queries quickly
+                                Find General Enquiries quickly
                             </small>
                         </div>
                     </div>
@@ -68,45 +68,6 @@
                                 </div>
 
                             </div>
-
-
-                            <!-- Property ID -->
-                            <!-- <div class="col-md-2">
-
-                                <label class="form-label">
-                                    Property ID
-                                </label>
-
-                                <input type="text" name="property_id" class="form-control" placeholder="Property ID"
-                                    value="<?= html_escape(isset($id) ? $id : ''); ?>">
-
-                            </div> -->
-
-
-                            <!-- Property Type -->
-                            <!-- <div class="col-md-2">
-
-                                <label class="form-label">
-                                    Property Type
-                                </label>
-
-                                <input type="text" name="property_type" class="form-control" placeholder="Property type"
-                                    value="<?= html_escape(isset($name) ? $name : ''); ?>">
-
-                            </div> -->
-
-
-                            <!-- Location -->
-                            <!-- <div class="col-md-2">
-
-                                <label class="form-label">
-                                    Location
-                                </label>
-
-                                <input type="text" name="location" class="form-control" placeholder="Location"
-                                    value="<?= html_escape(isset($location) ? $location : ''); ?>">
-
-                            </div> -->
 
 
                             <!-- Mobile -->
@@ -175,7 +136,7 @@
                         <div>
 
                             <h5 class="mb-0">
-                                Landowner Query List
+                                General Enquiries List
                             </h5>
 
                             <small class="text-muted">

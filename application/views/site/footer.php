@@ -4,7 +4,7 @@
                 <div class="col-lg-3">
                     <a class="navbar-brand d-flex align-items-center mb-3" href="#">
                         <div>
-                             <a class="navbar-brand fw-bold fs-4 " href="#"><img width="150px;" class="logo" src="./assets/uploads/CTL_logo_Finalll.png" alt="Logo"></a>
+                             <a class="navbar-brand fw-bold fs-4 " href="#"><img width="150px;" class="logo" src="<?= base_url('assets/uploads/CTL_logo_Finalll.png'); ?>" alt="Logo"></a>
                         </div>
                     </a>
                     <p class="small">We are committed to building better communities with quality development and trusted service.</p>

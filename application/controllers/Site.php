@@ -18,7 +18,7 @@ class Site extends  MY_Controller
 		$user = $this->session->userdata('login_user_info_all');
 
 		if (!$user) {
-			$this->session->set_flashdata('error', 'পেইজটি এক্সেসেস করতে, দয়া করে মেম্বার আইডি লগইন করুন');
+			$this->session->set_flashdata('login_error', 'Please login first');
 			redirect('member_login');
 			// exit;
 		}

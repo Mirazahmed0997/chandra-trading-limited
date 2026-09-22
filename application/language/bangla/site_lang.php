@@ -24,6 +24,7 @@ $lang['nav_vision'] = 'আমাদের দৃষ্টিভঙ্গি';
 $lang['nav_projects'] = 'প্রকল্পসমূহ';
 
 $lang['nav_contact'] = 'যোগাযোগ করুন';
+$lang['login'] = 'লগইন';
 $lang['book_a_site'] = 'সাইট বুক করুন';
 
 

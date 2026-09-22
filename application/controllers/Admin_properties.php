@@ -494,36 +494,7 @@ class Admin_Properties extends CI_Controller
 
 
 
-    public function properties_details($id = NULL)
-    {
-        $this->check_access('Our Properties');
-        if (empty($id)) {
-            show_404();
-        }
-
-        $this->db->where('id', $id);
-        $property = $this->db->get('properties')->row();
-
-        if (!$property) {
-            show_404();
-        }
-
-        $data = $this->engine->store_nav(
-            'properties',
-            'properties',
-            'Property Details: ' . $property->property_name
-        );
-
-        $data['property'] = $property;
-
-        $path = 'admin/properties/property_details';
-        $this->engine->render_view(
-            $data,
-            $path,
-            $this->side_menu,
-            $this->main_layout
-        );
-    }
+   
 
 
     public function update_properties_form($id)

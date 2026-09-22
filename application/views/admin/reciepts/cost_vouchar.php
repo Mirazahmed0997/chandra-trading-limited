@@ -24,7 +24,7 @@
         body {
             margin: 0;
             padding: 25px;
-            /* background: #eef9fe; */
+            /* background: #e9ecef; */
             font-family: "Sutonnny MJ", Arial, sans-serif;
             color: #111;
         }
@@ -240,7 +240,7 @@
             border-radius: 8px;
             overflow: hidden;
             font-size: 14px;
-            /* background-color: #eef9fe; */
+            /* background-color: #E9ECEF; */
         }
 
         .transaction-table th,
@@ -264,7 +264,7 @@
             text-align: center;
             font-weight: 400;
             height: 38px;
-            /* background-color: #eef9fe; */
+            /* background-color: #E9ECEF; */
         }
 
         .serial-column {
@@ -303,11 +303,11 @@
 
         .signature-area {
             display: grid;
-            grid-template-columns: 1.25fr 1fr 1fr 1fr;
+            grid-template-columns: 1.25fr 1.25fr 1.25fr;
             gap: 30px;
             margin-top: 45px;
             padding: 0 30px;
-            /* background-color: #eef9fe; */
+            /* background-color: #E9ECEF; */
         }
 
         .signature-box {
@@ -331,7 +331,7 @@
             bottom: -1px;
             height: 30px;
             display: flex;
-            background: #008fd5;
+            background: #2487c9;
             color: white;
             font-size: 16px;
             font-weight: 500;
@@ -343,7 +343,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            background: #f7a900;
+            background: #fcb452;
             color: #111;
             font-weight: bold;
             text-align: end;
@@ -393,8 +393,8 @@
                 background: linear-gradient(to bottom,
                         #f7a900 0%,
                         #f7a900 20.5%,
-                        #008fd5 20.5%,
-                        #008fd5 100%);
+                        #2487c9 20.5%,
+                        #2487c9 100%);
                 z-index: 1;
             }
 
@@ -418,7 +418,7 @@
         <!-- LEFT COLOR STRIP -->
         <div class="left-strip"></div>
         <div class="vertical-company">
-            জমা রশিদ 
+            খরচ ভাউচার 
         </div>
 
         <div class="receipt-content">
@@ -462,7 +462,7 @@
             <!-- RECEIPT / CODE -->
             <div class="receipt-top">
                 <div class="reciept_no">
-                    রশিদ নং:
+                    ভাউচার নং:
                     <span class="ms-2">
                         <?= isset($receipt_no) ? htmlspecialchars($receipt_no) : ''; ?>
                     </span>
@@ -578,11 +578,7 @@
                 </div>
                 <div class="signature-box">
                     <div class="signature-line"></div>
-                    <div class="signature-title">ব্যবস্থাপক</div>
-                </div>
-                <div class="signature-box">
-                    <div class="signature-line"></div>
-                    <div class="signature-title">জমাকারী</div>
+                    <div class="signature-title">গ্রহণকারী</div>
                 </div>
                 <div class="signature-box">
                     <div class="signature-line"></div>

@@ -46,7 +46,7 @@ class Admin_landowner_controller extends CI_Controller
     }
     public function landowners_query()
     {
-        $this->check_access('Landowners');
+        $this->check_access('Landowner Enquiries');
         $data = $this->engine->store_nav(
             'Landowners',
             'Landowners',
@@ -166,7 +166,7 @@ class Admin_landowner_controller extends CI_Controller
 
     public function landowners_query_details($id = NULL)
     {
-        $this->check_access('Landowners');
+        $this->check_access('Landowner Enquiries');
         if (empty($id)) {
             show_404();
         }
@@ -197,7 +197,7 @@ class Admin_landowner_controller extends CI_Controller
 
     public function update_land_query_status($id)
     {
-        $this->check_access('Landowners');
+        $this->check_access('Landowner Enquiries');
         $query = $this->db->get_where('landowner_leads', ['id' => $id])->row();
 
         $update_data = [
@@ -214,7 +214,7 @@ class Admin_landowner_controller extends CI_Controller
 
     public function delete_land_query($id)
     {
-        $this->check_access('Landowners');
+        $this->check_access('Landowner Enquiries');
         $this->Common->delete_data('landowner_leads', 'id', $id);
         redirect('landowners_query');
     }
@@ -222,7 +222,7 @@ class Admin_landowner_controller extends CI_Controller
 
     public function contact_messages()
     {
-        $this->check_access('General Inquiry');
+        $this->check_access('General Enquiries');
         $data = $this->engine->store_nav(
             'contact_messages',
             'contact_messages',
@@ -308,9 +308,12 @@ class Admin_landowner_controller extends CI_Controller
     }
 
 
+    // General Enquiries
+
+
     public function contact_messages_details($id = NULL)
     {
-        $this->check_access('General Inquiry');
+        $this->check_access('General Enquiries');
         if (empty($id)) {
             show_404();
         }
@@ -341,7 +344,7 @@ class Admin_landowner_controller extends CI_Controller
 
     public function delete_contact_message($id)
     {
-        $this->check_access('General Inquiry');
+        $this->check_access('General Enquiries');
         $this->Common->delete_data('contact_messages', 'id', $id);
         redirect('contact_messages');
     }
@@ -353,6 +356,18 @@ class Admin_landowner_controller extends CI_Controller
         $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
 
         $path = 'admin/reciepts/deposit_vouchar';
+        $this->engine->render_view(
+            $data,
+            $path,
+            $this->side_menu,
+            $this->main_layout
+        );
+    }
+    public function cost_vouchar()
+    {
+        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+
+        $path = 'admin/reciepts/cost_vouchar';
         $this->engine->render_view(
             $data,
             $path,

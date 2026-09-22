@@ -184,7 +184,6 @@ $projects = $this->db
                         }
                     }
 
-                    // Safe short description formatting
                     $clean_desc = !empty($project['description']) ? strip_tags($project['description']) : '';
                     $short_desc = (mb_strlen($clean_desc) > 110) ? mb_substr($clean_desc, 0, 110) . '...' : $clean_desc;
                     ?>
@@ -240,7 +239,7 @@ $projects = $this->db
                                     </strong>
                                 </div>
 
-                                <a href="<?= base_url('properties/details/' . $project['id']); ?>" class="btn btn-3d-gold px-3 py-2 small fw-bold">
+                                <a href="<?= base_url('properties_details_view/' . $project['id']); ?>" class="btn btn-3d-gold px-3 py-2 small fw-bold">
                                     View Project
                                 </a>
                             </div>

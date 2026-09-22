@@ -65,10 +65,27 @@ $route['delete_contact_message/(:num)'] = 'Admin_landowner_controller/delete_con
 
 
 $route['deposit_vouchar'] = 'Admin_landowner_controller/deposit_vouchar';
+$route['cost_vouchar'] = 'Admin_landowner_controller/cost_vouchar';
 
 
 
-// --------------USer Leads ----------------------
+// --------------------Member Registration----------------------
+
+
+$route['user_registration_form'] = 'User_controllers/user_registration_form';
+$route['user_registration_save'] = 'User_controllers/user_registration_save';
+$route['user_login_form'] = 'User_controllers/user_login_form';
+$route['user_login_process'] = 'User_controllers/user_login_process';
+$route['user_logout'] = 'User_controllers/user_logout';
+
+
+
+$route['member_register'] = 'Site/member_application_save';
+$route['member_login'] = 'Member_login/index';
+
+
+
+// --------------User Leads ----------------------
 $route['landowners_query_create'] = 'Leads_controller/landowners_query_create';
 $route['contact_messages_create'] = 'Leads_controller/contact_messages_create';
 $route['properties'] = 'User_controllers/properties';
@@ -79,6 +96,13 @@ $route['properties'] = 'User_controllers/properties';
 
 
 // --------------for user home page view ----------------------
+
+$route['properties_details_view/(:num)'] = 'User_controllers/properties_details_view/$1';
+
+
+
+
+
 
 $route['view_all_news'] = 'View_content_controller/view_news';
 $route['company_details'] = 'View_content_controller/details_description';
@@ -193,16 +217,7 @@ $route['order_status/(:num)'] = 'Admin/order_status/$1';
 
 
 
-// --------------------Member Registration----------------------
 
-
-$route['member_registration'] = 'Site/member_application';
-$route['member_register'] = 'Site/member_application_save';
-$route['member_login'] = 'Member_login/index';
-$route['members_login'] = 'Member_login/login_process';
-$route['member_logout'] = 'Member_login/logout';
-
-$route['member_logout'] = 'Member_login/logout';
 
 
 
