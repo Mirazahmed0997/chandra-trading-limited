@@ -50,6 +50,7 @@
                                     registration</p>
                                 <input type="submit" value="Submit" class="btn btn-info">
                             </div>
+                            
 
                         </div>
                 </form>

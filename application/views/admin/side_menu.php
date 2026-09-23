@@ -584,31 +584,6 @@ $user = $this->session->userdata('login_user_info_all');
                 <?php endif; ?>
 
 
-                <li class="nav-item has-treeview <?= active_open('User Management', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('User Management', $main_nav); ?>">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Vouchars
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('deposit_vouchar') ?>"
-                                class="nav-link <?= active_nav('deposit_vouchar', $sub_nav); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Deposite Vouchar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('cost_vouchar') ?>"
-                                class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Cost Vouchar</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
 
             </ul>
         </nav>

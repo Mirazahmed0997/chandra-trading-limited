@@ -70,8 +70,6 @@ class Admin_login extends CI_Controller
     public function reset_email_form()
     {
         $data = $this->engine->store_nav('ctl', 'ctl', 'Chandra Trading Limited');
-        $data['homapage_info'] = $this->Common->get_data('job_homepage')->row();
-
         $path = 'admin/reset_pass_form/reset_pass';
         $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
     }

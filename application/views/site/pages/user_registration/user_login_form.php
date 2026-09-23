@@ -44,7 +44,8 @@
 
                         <!-- Mobile Number Field -->
                         <div class="mb-3 row align-items-center">
-                            <label class="col-4 col-form-label">Email/Mobile No <span class="text-danger">*</span></label>
+                            <label class="col-4 col-form-label">Email/Mobile No <span
+                                    class="text-danger">*</span></label>
                             <div class="col-8">
                                 <input type="text" name="userInfo" class="form-control" required>
                             </div>
@@ -69,8 +70,12 @@
                                     <a href="<?= base_url('user_registration_form'); ?>">click here</a> for
                                     registration.
                                 </p>
-                                <input type="submit" value="Submit" class="btn btn-info px-4">
+                                <div class="text-center mt-3">
+                                    <a href="<?= base_url('user_forget_password'); ?>">Forgot Password?</a>
+                                </div>
                             </div>
+                            <input type="submit" value="Submit" class="btn btn-info px-4">
+
                         </div>
                     </form>
                 </div>

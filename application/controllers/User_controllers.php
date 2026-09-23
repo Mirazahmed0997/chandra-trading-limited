@@ -126,6 +126,247 @@ class User_controllers extends MY_Controller
         redirect(base_url());
     }
 
+    
+    public function user_reset_email_form()
+    {
+        $data = $this->engine->store_nav('ctl', 'ctl', 'Chandra Trading Limited');
+        $path = 'site/pages/user_reset_pass_form/user_reset_pass';
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
+
+    public function user_send_reset_link()
+    {
+        $email = trim($this->input->post('email'));
+
+        // Validate email
+        if (empty($email)) {
+
+            $this->session->set_flashdata(
+                'error',
+                'Please enter your email address.'
+            );
+
+            redirect('user_forget_password');
+            return;
+        }
+
+
+        // Find user
+        $user = $this->db
+            ->where('email', $email)
+            ->get('clients')
+            ->row();
+
+
+        // Email does not exist
+        if (!$user) {
+
+            $this->session->set_flashdata(
+                'error',
+                'Email not found.'
+            );
+
+            redirect('user_forget_password');
+            return;
+        }
+
+
+        $token = bin2hex(random_bytes(32));
+
+
+        $expire = date(
+            'Y-m-d H:i:s',
+            strtotime('+1 hour')
+        );
+
+
+        $this->db
+            ->where('id', $user->id)
+            ->update('clients', [
+
+                'reset_token' => $token,
+
+                'token_expire' => $expire
+
+            ]);
+
+
+        $reset_link = site_url(
+            'user_reset_password/' . $token
+        );
+
+
+        $this->load->library('email');
+
+
+        $this->email->from(
+            'ctl05.2026@gmail.com',
+            'Chandra Trading Limited'
+        );
+
+
+        $this->email->to($email);
+
+
+        $this->email->subject(
+            'Reset Your Password  - Chandra Trading Limited'
+        );
+
+
+        $this->email->set_mailtype('html');
+
+
+        $message = '
+
+        <div style="
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        ">
+
+            <h2>
+                Password Reset
+            </h2>
+
+            <p>
+                Hello ' . htmlspecialchars($user->first_name ?? '') . ',
+            </p>
+
+            <p>
+                We received a request to reset your password.
+            </p>
+
+            <p>
+                Click the button below to create a new password.
+            </p>
+
+            <p style="margin:30px 0;">
+
+                <a href="' . $reset_link . '"
+                   style="
+                       background:#212529;
+                       color:#ffffff;
+                       padding:12px 25px;
+                       text-decoration:none;
+                       border-radius:5px;
+                       display:inline-block;
+                   ">
+
+                    Reset Password
+
+                </a>
+
+            </p>
+
+            <p>
+                This link will expire in <strong>1 hour</strong>.
+            </p>
+
+            <p>
+                If you did not request a password reset,
+                you can safely ignore this email.
+            </p>
+
+            <hr>
+
+            <p>
+                Chandra Trading Limited
+            </p>
+
+        </div>
+
+    ';
+
+
+        $this->email->message($message);
+
+
+        // Send email
+        if ($this->email->send()) {
+
+            $this->session->set_flashdata(
+                'success',
+                'Password reset link has been sent to your email.'
+            );
+
+            redirect('user_forget_password');
+
+        } else {
+
+            echo '<pre>';
+
+            echo $this->email->print_debugger();
+
+            echo '</pre>';
+
+            exit;
+        }
+    }
+
+    public function user_reset_password($token)
+    {
+        $user = $this->db
+            ->where('reset_token', $token)
+            ->where('token_expire >', date('Y-m-d H:i:s'))
+            ->get('clients')
+            ->row();
+
+        if (!$user) {
+            echo "Invalid or expired token";
+            return;
+        }
+
+        $data['token'] = $token;
+        $path = 'site/pages/user_reset_pass_form/user_update_pass';
+
+
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
+
+
+    public function user_update_new_password()
+    {
+        $token = $this->input->post('token');
+
+        $password = $this->input->post('password');
+
+        // echo $password;
+        // exit;
+
+        $user = $this->db
+            ->where('reset_token', $token)
+            ->get('clients')
+            ->row();
+
+        if ($user) {
+
+            $this->db->where('id', $user->id);
+
+            $this->db->update('clients', [
+
+                'password' => $password,
+
+                'reset_token' => NULL,
+
+                'token_expire' => NULL
+            ]);
+
+            $this->session->set_flashdata(
+                'success',
+                'Password updated successfully'
+            );
+
+            redirect('User_dashboard');
+
+        } else {
+
+            echo "Invalid token";
+        }
+    }
+
 
 
 

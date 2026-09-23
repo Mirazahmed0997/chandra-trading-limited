@@ -72,6 +72,12 @@ $route['user_login_form'] = 'User_controllers/user_login_form';
 $route['user_login_process'] = 'User_controllers/user_login_process';
 $route['user_logout'] = 'User_controllers/user_logout';
 
+$route['user_forget_password'] = 'User_controllers/user_reset_email_form';
+$route['user_send_reset_link'] = 'User_controllers/user_send_reset_link';
+$route['user_reset_password/(:any)'] = 'User_controllers/user_reset_password/$1';
+$route['user_update_new_password'] = 'User_controllers/user_update_new_password';
+
+
 
 // --------------------User Dashboard----------------------
 $route['User_dashboard'] = 'User_dashboard/index';
