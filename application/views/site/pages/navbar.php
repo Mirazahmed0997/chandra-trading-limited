@@ -207,7 +207,7 @@ $user = $this->session->userdata('login_user_info_all');
               <ul class="submenu">
 
                 <li>
-                  <a href="<?= base_url('') ?>" class="">
+                  <a href="<?= base_url('User_dashboard') ?>" class="">
                     Dashboard
                   </a>
                 </li>

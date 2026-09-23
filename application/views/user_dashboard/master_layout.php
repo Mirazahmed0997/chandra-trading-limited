@@ -4,7 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title><?= $tittle ?></title>
+	<title>Chandra Trading LTD</title>
+	<link rel="icon" type="image/x-icon" href="<?php echo base_url('./assets/uploads/CTL_logo_Finalll.png'); ?>">
 	<!--	datatable start-->
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="<?php echo base_url('') ?>assets/backend/plugins/fontawesome-free/css/all.min.css">
@@ -65,15 +66,25 @@
 	<!-- Google Font: Source Sans Pro -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 	<link href="<?php echo base_url('') ?>assets/backend/css/family.css" rel="stylesheet">
+	
 	<style>
 		.accounts_profile {
 			font-weight: 900;
-			color: #000 !important;
+			color: #fff;
+
 		}
 
 		.accounts_profile_menu a:hover {
 			background-color: #007bff;
-			color: #fff;
+			color: white !important;
+		}
+
+		.navbar {
+			background-color: #0B0F19;
+		}
+
+		.nav-link {
+			color: #fff !important;
 		}
 	</style>
 </head>
@@ -100,24 +111,19 @@
 					<a class="nav-link dropdown-toggle accounts_profile" data-toggle="dropdown" href="#" role="button"
 						aria-haspopup="true" aria-expanded="false">Accounts</a>
 					<div class="dropdown-menu accounts_profile_menu">
-						<?php if (!empty($login_user_info_all->e_image)) { ?>
-							<a class="dropdown-item  middle-align"
-								href="<?php echo base_url('project/authority/Accountant_2/employee_info_view/' . $login_user_info_all->e_a_id) ?>">
-								<img src="<?php if (!empty($login_user_info_all->e_image)) {
-									echo base_url('assets/uploads/employee/' . $login_user_info_all->e_image);
-								} else {
-									echo base_url('assets/backend/dist/img/user.jpg');
-								} ?>" style="height:15px;width:15px;" class="img-circle elevation-2" alt="User Image"> Profile</a>
-						<?php } ?><a class="dropdown-item middle-align" href="<?php echo base_url('logout') ?>"><i
-								class="fa fa-power-off" style="color:red"></i> Logout</a>
+						<a class="dropdown-item middle-align" href="<?php echo base_url('user_logout') ?>"><i
+								class="fa fa-power-off" style="color:red !important"></i> Logout</a>
 					</div>
 				</li>
+
+				
 				<!-- <li class="nav-item">
 				<a href="<?php echo base_url('logout') ?>">
 					<button type="button" class="btn btn-block btn-danger">Logout</button>
 				</a>
 			</li> -->
 			</ul>
+
 		</nav>
 		<!-- /.navbar -->
 		<!-- Main Sidebar Container -->
@@ -133,10 +139,10 @@
 	<!-- /.content-wrapper -->
 	<footer class="main-footer">
 
-		<strong>Page rendered in <strong>{elapsed_time}</strong> seconds.</strong>
+		<!-- <strong>Page rendered in <strong>{elapsed_time}</strong> seconds.</strong> -->
 
 		<div class="float-right d-none d-sm-inline-block">
-			<b><?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></b>
+			<!-- <b><?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></b> -->
 		</div>
 	</footer>
 
@@ -230,17 +236,6 @@
 				theme: 'bootstrap4'
 			})
 
-			//Datemask dd/mm/yyyy
-			$('#datemask').inputmask('dd/mm/yyyy', {
-				'placeholder': 'dd/mm/yyyy'
-			})
-			//Datemask2 mm/dd/yyyy
-			$('#datemask2').inputmask('mm/dd/yyyy', {
-				'placeholder': 'mm/dd/yyyy'
-			})
-			//Money Euro
-			$('[data-mask]').inputmask()
-
 			//Date range picker
 			$('#reservationdate').datetimepicker({
 				format: 'L'
@@ -255,40 +250,12 @@
 					format: 'MM/DD/YYYY hh:mm A'
 				}
 			})
-			//Date range as a button
-			$('#daterange-btn').daterangepicker({
-				ranges: {
-					'Today': [moment(), moment()],
-					'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-					'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-					'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-					'This Month': [moment().startOf('month'), moment().endOf('month')],
-					'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-				},
-				startDate: moment().subtract(29, 'days'),
-				endDate: moment()
-			},
-				function (start, end) {
-					$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-				}
-			)
+
 
 			//Timepicker
 			$('#timepicker').datetimepicker({
 				format: 'LT'
 			})
-
-			//Bootstrap Duallistbox
-			$('.duallistbox').bootstrapDualListbox()
-
-			//Colorpicker
-			$('.my-colorpicker1').colorpicker()
-			//color picker with addon
-			$('.my-colorpicker2').colorpicker()
-
-			$('.my-colorpicker2').on('colorpickerChange', function (event) {
-				$('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-			});
 
 			$("input[data-bootstrap-switch]").each(function () {
 				$(this).bootstrapSwitch('state', $(this).prop('checked'));
@@ -303,5 +270,4 @@
 		})
 	</script>
 </body>
-
 </html>

@@ -351,30 +351,7 @@ class Admin_landowner_controller extends CI_Controller
 
 
 
-    public function deposit_vouchar()
-    {
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
-
-        $path = 'admin/reciepts/deposit_vouchar';
-        $this->engine->render_view(
-            $data,
-            $path,
-            $this->side_menu,
-            $this->main_layout
-        );
-    }
-    public function cost_vouchar()
-    {
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
-
-        $path = 'admin/reciepts/cost_vouchar';
-        $this->engine->render_view(
-            $data,
-            $path,
-            $this->side_menu,
-            $this->main_layout
-        );
-    }
+   
 
 
 

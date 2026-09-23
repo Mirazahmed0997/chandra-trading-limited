@@ -14,8 +14,6 @@ class User_controllers extends MY_Controller
         parent::__construct();
     }
 
-
-
     public function index()
     {
         $data = $this->engine->store_nav(
@@ -74,7 +72,6 @@ class User_controllers extends MY_Controller
             $this->main_layout
         );
     }
-
 
     public function user_login_form()
     {
