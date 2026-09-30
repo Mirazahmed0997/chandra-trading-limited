@@ -403,16 +403,43 @@ $user = $this->session->userdata('login_user_info_all');
 
                 <?php endif; ?>
 
+
                 <?php if (has_menu_access('Projects')): ?>
-                    <li class="nav-item has-treeview <?= active_open('Projects', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('Projects', $main_nav); ?>">
+                    <li class="nav-item has-treeview <?= active_open('Properties', $main_nav); ?>">
+                        <a href="#" class="nav-link <?= active_nav('Properties', $main_nav); ?>">
                             <i class="nav-icon fas fa-landmark"></i>
                             <p>
                                 Projects
+                                <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
+
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Our Projects')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('projects_category') ?>"
+                                        class="nav-link <?= active_nav('projects_category', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Our Projects</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if (has_menu_access('Add new Project')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('add_project') ?>"
+                                        class="nav-link <?= active_nav('add_project', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add new Project</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </li>
+
+
                 <?php endif; ?>
+
 
                 <?php if (has_menu_access('Leads')): ?>
                     <li class="nav-item has-treeview <?= active_open('Leads', $main_nav); ?>">
@@ -457,13 +484,24 @@ $user = $this->session->userdata('login_user_info_all');
                                     </a>
                                 </li>
                             <?php endif; ?>
+
+                            <?php if (has_menu_access('Bookings')): ?>
+                                <li class="nav-item has-treeview <?= active_open('admin_property_book_data', $main_nav); ?>">
+                                    <a href="<?php echo base_url('admin_property_book_data') ?>" class="nav-link <?= active_nav('admin_property_book_data', $main_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Bookings
+                                        </p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                 <?php endif; ?>
 
                 <?php if (has_menu_access('Site Visits')): ?>
                     <li class="nav-item has-treeview <?= active_open('Site Visits', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('Site Visits', $main_nav); ?>">
+                        <a href="<?php echo base_url('admin_property_visit_data') ?>" class="nav-link <?= active_nav('Site Visits', $main_nav); ?>">
                             <i class="nav-icon fas fa-map-marker-alt"></i>
                             <p>
                                 Site Visits

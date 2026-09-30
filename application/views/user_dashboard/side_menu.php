@@ -386,8 +386,25 @@ $user = $this->session->userdata('login_user_info_all');
                         <i class="nav-icon fas fa-landmark"></i>
                         <p>
                             Bookings
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('user_property_book_data') ?>"
+                                class="nav-link <?= active_nav('user_property_book_data', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Property Bookings</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('user_visit_book_data') ?>"
+                                class="nav-link <?= active_nav('user_visit_book_data', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Visit Bookings</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
 

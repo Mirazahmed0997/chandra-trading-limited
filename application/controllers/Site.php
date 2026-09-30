@@ -19,18 +19,9 @@ class Site extends  MY_Controller
 
 		if (!$user) {
 			$this->session->set_flashdata('login_error', 'Please login first');
-			redirect('member_login');
+			redirect('user_login_form');
 			// exit;
 		}
-
-		echo($user->active_status);
-
-		if ($user->active_status != 1) {
-			$this->session->set_flashdata('error', 'আপনার মেম্বারশিপ একটিভ নয়, দয়া করে কতৃপক্ষের সাথে যোগাযোগ করুন');
-			redirect('member_login');
-			exit;
-		}
-
 
 		return $user;
 	}
@@ -43,9 +34,6 @@ class Site extends  MY_Controller
 			redirect('admin');
 			// exit;
 		}
-
-
-
 		return $user;
 	}
 
@@ -196,6 +184,14 @@ class Site extends  MY_Controller
 		$data = $this->engine->store_nav('site', 'Nothing', 'Our Mission');
 
 		$path = "site/pages/properties/properties";
+		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+	}
+	public function visit_book()
+	{
+		$this->check_login();
+		$data = $this->engine->store_nav('site', 'Nothing', 'Our Mission');
+
+		$path = "site/pages/visit_book/visit_book";
 		$this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
 	}
 

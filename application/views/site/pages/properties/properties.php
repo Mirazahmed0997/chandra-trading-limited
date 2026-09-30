@@ -38,7 +38,7 @@ if ($this->input->get('keyword')) {
 
 // Execute query
 $projects = $builder->order_by('created_at', 'DESC')
-    ->limit(10)
+    // ->limit(10)
     ->get()
     ->result_array();
 ?>

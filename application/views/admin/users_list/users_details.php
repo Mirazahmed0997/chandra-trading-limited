@@ -17,8 +17,8 @@ $assigned_menus = array_column($menu_access, 'menu_key');
 
 $available_menus = [
     'Properties'          => ["Our Properties","Add new Properties"],
-    'Projects'            => [],
-    'Leads'               => ["Landowner Enquiries","General Enquiries","Investment Enquiries"],
+    'Projects'            => ["Our Projects","Add new Project"],
+    'Leads'               => ["Landowner Enquiries","General Enquiries","Investment Enquiries","Bookings"],
     'Site Visits'         => [],
     'Customers'           => [],
     'News'                => [],

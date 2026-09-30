@@ -443,134 +443,386 @@ class Admin extends CI_Controller
 	}
 
 
-
-
-	public function admin_orders_table()
+	public function admin_property_book_data()
 	{
-		$data = $this->engine->store_nav('my_orders', 'my_orders', 'তালিকা');
 
+		
 
-		$where_data = array();
+		$this->check_access('Bookings');
+		// Filters
+		$search = trim($this->input->get('search', TRUE));
+		$booking_date = $this->input->get('booking_date', TRUE);
+		$status = $this->input->get('status', TRUE);
 
-		$id = $this->input->get('id');
-		$name = $this->input->get('name');
-		$mobile_number = $this->input->get('mobile_number');
-		$address = $this->input->get('address');
-		$status = $this->input->get('status');
-		$payment_method = $this->input->get('payment_method');
-		$total_amount = $this->input->get('total_amount');
-		$from_date = $this->input->get('from_date');
-		$to_date = $this->input->get('to_date');
+		// Pagination
+		$per_page = 10;
+		$page = (int) $this->input->get('page');
 
-
-
-		if (!empty($id)) {
-			$where_data['id'] = $id;
+		if ($page < 1) {
+			$page = 1;
 		}
 
-		if (!empty($name)) {
-			$where_data['name'] = $name;
+		$offset = ($page - 1) * $per_page;
+
+
+		if (!empty($search)) {
+			$this->db->group_start();
+			$this->db->like('property_name', $search);
+			$this->db->or_like('property_id', $search);
+			$this->db->group_end();
 		}
 
-		if (!empty($mobile_number)) {
-			$where_data['mobile_number'] = $mobile_number;
+		if (!empty($booking_date)) {
+			$this->db->where('booking_date', $booking_date);
 		}
-
-		if (!empty($address)) {
-			$where_data['address'] = $address;
-		}
-
 
 		if (!empty($status)) {
-			$where_data['status'] = $status;
+			$this->db->where('status', $status);
 		}
 
-		if (!empty($total_amount)) {
-			$where_data['total_amount'] = $total_amount;
-		}
-		if (!empty($payment_method)) {
-			$where_data['payment_method'] = $payment_method;
-		}
+		$total_rows = $this->db
+			->count_all_results('property_bookings');
 
 
+		/*
+		 * -------------------------
+		 * DATA QUERY
+		 * -------------------------
+		 */
 
-		if (!empty($where_data)) {
-			$this->db->where($where_data);
-		}
-
-		if (!empty($from_date)) {
-			$this->db->where('created_at >=', $from_date);
-		}
-
-		if (!empty($to_date)) {
-			$this->db->where('created_at <=', $to_date);
+		if (!empty($search)) {
+			$this->db->group_start();
+			$this->db->like('property_name', $search);
+			$this->db->or_like('property_id', $search);
+			$this->db->group_end();
 		}
 
-		// $data['orders'] = $this->db->get('orders_table')->result();
-		$data['orders'] = $this->db
-			->order_by('id', 'DESC')
-			->get('orders_table')
+		if (!empty($booking_date)) {
+			$this->db->where('booking_date', $booking_date);
+		}
+
+		if (!empty($status)) {
+			$this->db->where('status', $status);
+		}
+
+		$this->db->order_by('id', 'DESC');
+		$this->db->limit($per_page, $offset);
+
+		$property_bookings = $this->db
+			->get('property_bookings')
 			->result();
 
-		$path = 'admin/orders_table/orders_table';
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 
+		/*
+		 * -------------------------
+		 * PAGINATION
+		 * -------------------------
+		 */
+		$this->load->library('pagination');
 
-	}
+		$config['base_url'] = base_url('admin_property_book_data');
+		$config['total_rows'] = $total_rows;
+		$config['per_page'] = $per_page;
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
+		$config['reuse_query_string'] = TRUE;
 
-	public function order_details($order_id)
-	{
-		$this->db->where('id', $order_id);
-		$data = $this->engine->store_nav('my_orders', 'my_orders', 'তালিকা');
-		$data['orders'] = $this->db->get_where('orders_table', [
-			'id' => $order_id
-		])->row();
+		$config['full_tag_open'] = '<ul class="pagination mb-0">';
+		$config['full_tag_close'] = '</ul>';
 
-		$this->db->select('order_items.*, products.title');
-		$this->db->from('order_items');
-		$this->db->join('products', 'products.id = order_items.product_id');
-		$this->db->where('order_items.order_id', $order_id);
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
 
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
 
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
 
-		$data['items'] = $this->db->get()->result();
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
 
-		// $this->load->view('order_details', $data);
-		$path = 'admin/orders_table/orders_details';
-		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-	}
+		$config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+		$config['cur_tag_close'] = '</span></li>';
 
-	public function order_status($id)
-	{
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = '</li>';
 
-		$order = $this->db->get_where('orders_table', ['id' => $id])->row();
-
-
-
-		$update_data = [
-
-			'status' => $this->input->post('status'),
-
+		$config['attributes'] = [
+			'class' => 'page-link'
 		];
 
-		if ($update_data['status'] == 'completed') {
-			$this->db->where('id', $id);
-			$this->db->update('orders_table', [
-				'payment_status' => 'paid'
-			]);
+		$this->pagination->initialize($config);
+
+
+		/*
+		 * -------------------------
+		 * VIEW DATA
+		 * -------------------------
+		 */
+		$data = $this->engine->store_nav(
+			'property_bookings',
+			'property_bookings',
+			'Property Bookings'
+		);
+
+		$data['property_bookings'] = $property_bookings;
+
+		$data['search'] = $search;
+		$data['booking_date'] = $booking_date;
+		$data['status'] = $status;
+
+		$data['total_rows'] = $total_rows;
+		$data['pagination'] = $this->pagination->create_links();
+
+		$data['sl_start'] = $offset + 1;
+
+		$path = 'admin/admin_property_book_data/admin_property_book_data';
+		
+
+		$this->engine->render_view(
+			$data,
+			$path,
+			$this->side_menu,
+			$this->main_layout
+		);
+	}
+
+	public function admin_booked_property_details($id = NULL)
+	{
+		$this->check_access('Bookings');
+
+
+		if (empty($id)) {
+			show_404();
 		}
 
-		// echo '<pre>';
-		// print_r($update_data);
-		// exit;
-
 		$this->db->where('id', $id);
-		$this->db->update('orders_table', $update_data);
+		$property = $this->db->get('properties')->row();
 
 
+		if (!$property) {
+			show_404();
+		}
 
-		redirect(base_url('admin_orders_table'));
+		$data = $this->engine->store_nav(
+			'properties',
+			'properties',
+			'Property Details: ' . $property->property_name
+		);
+
+		// $data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
+
+		$data['property'] = $property;
+
+		$path = 'admin/admin_property_book_data/admin_booked_property_details';
+		$this->engine->render_view(
+			$data,
+			$path,
+			$this->side_menu,
+			$this->main_layout
+		);
 	}
 
 
+
+	public function update_booked_property_status($id)
+    {
+        $property = $this->db->get_where('property_bookings', ['id' => $id])->row();
+
+        $update_data = [
+
+            'status' => $this->input->post('status'),
+        ];
+
+
+        $this->db->where('id', $id);
+        $this->db->update('property_bookings', $update_data);
+
+        redirect(base_url('admin_property_book_data'));
+    }
+
+	public function admin_property_visit_data()
+	{
+
+		
+
+		$this->check_access('Site Visits');
+		// Filters
+		$search = trim($this->input->get('search', TRUE));
+		$booking_date = $this->input->get('booking_date', TRUE);
+		$status = $this->input->get('status', TRUE);
+
+		// Pagination
+		$per_page = 10;
+		$page = (int) $this->input->get('page');
+
+		if ($page < 1) {
+			$page = 1;
+		}
+
+		$offset = ($page - 1) * $per_page;
+
+
+		if (!empty($search)) {
+			$this->db->group_start();
+			$this->db->like('property_name', $search);
+			$this->db->or_like('property_id', $search);
+			$this->db->group_end();
+		}
+
+		if (!empty($booking_date)) {
+			$this->db->where('booking_date', $booking_date);
+		}
+
+		if (!empty($status)) {
+			$this->db->where('status', $status);
+		}
+
+		$total_rows = $this->db
+			->count_all_results('visit_bookings');
+
+
+
+		if (!empty($search)) {
+			$this->db->group_start();
+			$this->db->like('property_name', $search);
+			$this->db->or_like('property_id', $search);
+			$this->db->group_end();
+		}
+
+		if (!empty($booking_date)) {
+			$this->db->where('booking_date', $booking_date);
+		}
+
+		if (!empty($status)) {
+			$this->db->where('status', $status);
+		}
+
+		$this->db->order_by('id', 'DESC');
+		$this->db->limit($per_page, $offset);
+
+		$property_bookings = $this->db
+			->get('visit_bookings')
+			->result();
+
+
+	
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url('admin_property_visit_data');
+		$config['total_rows'] = $total_rows;
+		$config['per_page'] = $per_page;
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
+		$config['reuse_query_string'] = TRUE;
+
+		$config['full_tag_open'] = '<ul class="pagination mb-0">';
+		$config['full_tag_close'] = '</ul>';
+
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+		$config['cur_tag_close'] = '</span></li>';
+
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = '</li>';
+
+		$config['attributes'] = [
+			'class' => 'page-link'
+		];
+
+		$this->pagination->initialize($config);
+
+
+	
+		$data = $this->engine->store_nav(
+			'visit_bookings',
+			'visit_bookings',
+			'visit Bookings'
+		);
+
+		$data['visit_bookings'] = $property_bookings;
+
+		$data['search'] = $search;
+		$data['booking_date'] = $booking_date;
+		$data['status'] = $status;
+
+		$data['total_rows'] = $total_rows;
+		$data['pagination'] = $this->pagination->create_links();
+
+		$data['sl_start'] = $offset + 1;
+
+		$path = 'admin/admin_visit_bookings/admin_visit_bookings';
+		
+
+		$this->engine->render_view(
+			$data,
+			$path,
+			$this->side_menu,
+			$this->main_layout
+		);
+	}
+
+	public function admin_booked_property_visit_details($id = NULL)
+	{
+		$this->check_access('Site Visits');
+
+
+		if (empty($id)) {
+			show_404();
+		}
+
+		$this->db->where('id', $id);
+		$property = $this->db->get('properties')->row();
+
+
+		if (!$property) {
+			show_404();
+		}
+
+		$data = $this->engine->store_nav(
+			'properties',
+			'properties',
+			'Property Details: ' . $property->property_name
+		);
+
+		// $data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
+
+		$data['property'] = $property;
+
+		$path = 'admin/admin_property_book_data/admin_booked_property_details';
+		$this->engine->render_view(
+			$data,
+			$path,
+			$this->side_menu,
+			$this->main_layout
+		);
+	}
+
+	public function update_booked_property_visit_status($id)
+    {
+        $property = $this->db->get_where('visit_bookings', ['id' => $id])->row();
+
+        $update_data = [
+
+            'status' => $this->input->post('status'),
+        ];
+
+
+        $this->db->where('id', $id);
+        $this->db->update('visit_bookings', $update_data);
+
+        redirect(base_url('admin_property_visit_data'));
+    }
 }

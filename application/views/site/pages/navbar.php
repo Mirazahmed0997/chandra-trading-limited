@@ -186,14 +186,14 @@ $user = $this->session->userdata('login_user_info_all');
               <?= lang('nav_about'); ?> <i class="fas fa-chevron-down"></i>
             </a>
             <ul class="submenu">
-              <li><a href="our_managment"><?= lang('nav_management'); ?></a></li>
-              <li><a href="our_mission"><?= lang('nav_mission'); ?></a></li>
-              <li><a href="our_vission"><?= lang('nav_vision'); ?></a></li>
+              <li><a href="<?= base_url('our_managment')?>"><?= lang('nav_management'); ?></a></li>
+              <li><a href="<?= base_url('our_mission')?>"><?= lang('nav_mission'); ?></a></li>
+              <li><a href="<?= base_url('our_vission')?>"><?= lang('nav_vision'); ?></a></li>
             </ul>
           </li>
 
-          <li><a href="properties"><?= lang('properties'); ?></a></li>
-          <li><a href="showcase"><?= lang('nav_projects'); ?></a></li>
+          <li><a href="<?= base_url('properties') ?>"><?= lang('properties'); ?></a></li>
+          <li><a href="<?=base_url('showcase')?>"><?= lang('nav_projects'); ?></a></li>
           <li><a href=""><?= lang('investment'); ?></a></li>
           <li><a href=""><?= lang('services'); ?></a></li>
           <li><a href=""><?= lang('news&insights'); ?></a></li>
@@ -232,7 +232,7 @@ $user = $this->session->userdata('login_user_info_all');
 
           <!-- CTA Button -->
           <li>
-            <a href="<?php echo base_url(); ?>"
+            <a href="<?php echo base_url('visit_book'); ?>"
               class="btn btn-sm btn-primary text-white px-3 py-1"><?= lang('book_a_site'); ?></a>
           </li>
         </ul>

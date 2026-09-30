@@ -36,6 +36,20 @@ $route['update_properties_form/(:num)'] = 'Admin_properties/update_properties_fo
 $route['update_properties/(:num)'] = 'Admin_properties/update_properties/$1';
 $route['delete_property/(:num)'] = 'Admin_properties/delete_property/$1';
 
+$route['create_category'] = 'Admin_properties/create_category';
+$route['create_type'] = 'Admin_properties/create_type';
+$route['delete_category/(:num)'] = 'Admin_properties/delete_category/$1';
+
+
+
+
+$route['add_project'] = 'Admin_Projects/add_project';
+$route['create_projects'] = 'Admin_Projects/create_projects';
+$route['projects_category'] = 'Admin_Projects/projects_category';
+$route['get_all_categories'] = 'Admin_Projects/get_all_categories';
+$route['projects_list/(:any)'] = 'Admin_Projects/projects_list/$1';
+
+
 
 
 
@@ -58,6 +72,16 @@ $route['delete_land_query/(:num)'] = 'Admin_landowner_controller/delete_land_que
 $route['contact_messages'] = 'Admin_landowner_controller/contact_messages';
 $route['contact_messages_details/(:num)'] = 'Admin_landowner_controller/contact_messages_details/$1';
 $route['delete_contact_message/(:num)'] = 'Admin_landowner_controller/delete_contact_message/$1';
+
+$route['admin_property_book_data'] = 'Admin/admin_property_book_data';
+$route['admin_booked_property_details/(:num)'] = 'Admin/admin_booked_property_details/$1';
+$route['update_booked_property_status/(:num)'] = 'Admin/update_booked_property_status/$1';
+
+
+$route['admin_property_visit_data'] = 'Admin/admin_property_visit_data';
+$route['admin_booked_property_visit_details/(:num)'] = 'Admin/admin_booked_property_visit_details/$1';
+$route['update_booked_property_visit_status/(:num)'] = 'Admin/update_booked_property_visit_status/$1';
+
 
 
 
@@ -83,12 +107,17 @@ $route['user_update_new_password'] = 'User_controllers/user_update_new_password'
 $route['User_dashboard'] = 'User_dashboard/index';
 $route['deposit_vouchar'] = 'User_dashboard/deposit_vouchar';
 $route['cost_vouchar'] = 'User_dashboard/cost_vouchar';
+$route['user_property_book_data'] = 'User_dashboard/user_property_book_data';
+$route['user_visit_book_data'] = 'User_dashboard/user_visit_book_data';
 
 
 // --------------User Leads create form----------------------
 $route['landowners_query_create'] = 'Leads_controller/landowners_query_create';
 $route['contact_messages_create'] = 'Leads_controller/contact_messages_create';
 $route['properties'] = 'User_controllers/properties';
+$route['property_book/(:any)'] = 'User_dashboard/property_book/$1';
+$route['visit_book/(:any)'] = 'User_dashboard/visit_book/$1';
+$route['booked_property_details/(:any)'] = 'User_dashboard/booked_property_details/$1';
 
 
 
@@ -112,6 +141,7 @@ $route['our_vission'] = 'Site/our_vission';
 $route['our_concern'] = 'Site/our_concern';
 $route['showcase'] = 'Site/showcase';
 $route['properties'] = 'Site/properties';
+$route['visit_book'] = 'Site/visit_book';
 
 
 

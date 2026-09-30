@@ -1,6 +1,59 @@
+<?php
+$categories = $this->db
+    ->order_by('name', 'ASC')
+    ->get('property_categories')
+    ->result();
+
+$types = $this->db
+    ->order_by('name', 'ASC')
+    ->get(' property_types')
+    ->result();
+
+
+// echo '<pre>';
+// print_r($data['categories']);
+// echo '</pre>';
+// exit;
+?>
+
+
+
+
 <form action="<?= base_url('create_properties') ?>" method="POST" enctype="multipart/form-data">
 
+
     <div class="content-wrapper">
+
+
+        <?php if ($this->session->flashdata('property_error')): ?>
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= $this->session->flashdata('property_error'); ?>
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('cat_error')): ?>
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= $this->session->flashdata('cat_error'); ?>
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+        <?php endif; ?>
+
+
+        <?php if ($this->session->flashdata('property_success')): ?>
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= $this->session->flashdata('property_success'); ?>
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+        <?php endif; ?>
 
         <div class="container-fluid py-4">
 
@@ -53,7 +106,7 @@
                             <div class="row g-3">
 
                                 <!-- Property Name -->
-                                <div class="col-md-8">
+                                <div class="col-md-6">
 
                                     <label class="form-label">
                                         Property Name
@@ -73,7 +126,7 @@
 
 
                                 <!-- Property ID -->
-                                <div class="col-md-4">
+                                <!-- <div class="col-md-4">
 
                                     <label class="form-label">
                                         Property ID
@@ -91,15 +144,15 @@
 
                                     </div>
 
-                                </div>
+                                </div> -->
 
 
                                 <!-- Property Type -->
-                                
+
 
 
                                 <!-- Location -->
-                                <div class="col-md-4">
+                                <div class="col-md-6">
 
                                     <label class="form-label">
                                         Location
@@ -120,7 +173,7 @@
 
 
                                 <!-- Price -->
-                                <div class="col-md-4">
+                                <div class="col-md-6">
 
                                     <label class="form-label">
                                         Price
@@ -141,7 +194,7 @@
 
 
                                 <!-- Size -->
-                                <div class="col-md-4">
+                                <div class="col-md-6">
 
                                     <label class="form-label">
                                         Property Size
@@ -478,7 +531,7 @@
                         </div>
 
 
-                        <div class="property-card-body">
+                        <div class="property-card-body col-md-6">
 
                             <label class="form-label">
                                 Property Status
@@ -528,34 +581,52 @@
                             </label>
 
                         </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="category_id" class="form-label">
+                                Property Category
+                            </label>
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#createCategoryModal">
+                                Create Category
+                            </button>
+
+                            <select name="category" id="category_id" class="form-select ">
+                                <option value="">Select Category</option>
+
+                                <?php foreach ($categories as $category): ?>
+                                    <option value="<?= $category->name; ?>">
+                                        <?= htmlspecialchars($category->name); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+
+                        </div>
+
+
                         <!-- Property Type -->
                         <div class="col-md-6">
 
                             <label class="form-label">
                                 Property Type
                             </label>
+                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#createTypeModal">
+                                Create Property Type
+                            </button>
 
-                            <select name="property_type" class="form-select">
-                                <option value="Apartment">
-                                    Apartment
-                                </option>
+                            <select name="property_type" id="category_id" class="form-select ">
+                                <option value="">Select Type</option>
 
-                                <option value="Villa">
-                                    Villa
-                                </option>
-
-                                <option value="Commercial">
-                                    Commercial
-                                </option>
-                                <option value="Office">
-                                    Office
-                                </option>
-                                <option value="Shop/Showroom">
-                                    Shop/Showroom
-                                </option>
+                                <?php foreach ($types as $type): ?>
+                                    <option value="<?= $type->name; ?>">
+                                        <?= htmlspecialchars($type->name); ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
 
                         </div>
+
+
 
                     </div>
 
@@ -652,3 +723,32 @@
     </div>
 
 </form>
+
+<?php $this->load->view('admin/properties/category_form.php'); ?>
+<?php $this->load->view('admin/properties/types_form.php'); ?>
+
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Your page content -->
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    setTimeout(function () {
+        const alerts = document.querySelectorAll('.auto-hide-alert');
+
+        alerts.forEach(function (alert) {
+            alert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            alert.style.opacity = '0';
+            alert.style.transform = 'translateY(-10px)';
+
+            setTimeout(function () {
+                alert.remove();
+            }, 500);
+        });
+    }, 3000); // 3 seconds
+</script>
