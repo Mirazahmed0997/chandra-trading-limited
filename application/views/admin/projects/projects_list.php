@@ -1,4 +1,11 @@
+<?php
 
+echo '<pre>';
+        print_r($category);
+        echo '</pre>';
+        // exit;
+
+?>
 
 <div class="content-wrapper">
 
@@ -7,12 +14,12 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h2 class="mb-1">Projects</h2>
+                    <h2 class="mb-1">Properties</h2>
                     <p class="text-muted mb-0">Manage all projects listings</p>
                 </div>
                 <div>
-                    <a href="<?= base_url('add_project'); ?>" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Add Project
+                    <a href="<?= base_url('add_project/'. urlencode($category)); ?>" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Property
                     </a>
                 </div>
             </div>
@@ -76,7 +83,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h5 class="mb-0">Property List</h5>
-                            <small class="text-muted"><?= number_format($total_rows); ?> properties found</small>
+                            <small class="text-muted"><?= number_format($total_rows); ?> Project found</small>
                         </div>
                     </div>
                 </div>
@@ -141,11 +148,11 @@
                                                         class="btn btn-sm btn-outline-info" title="View">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?= base_url('update_properties_form/' . $project->id); ?>"
+                                                    <a href="<?= base_url('project_update_form/' . $project->id); ?>"
                                                         class="btn btn-sm btn-outline-primary" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="<?= base_url('delete_property/' . $project->id); ?>"
+                                                    <a href="<?= base_url('delete_project/' . $project->id); ?>"
                                                         class="btn btn-sm btn-outline-danger" title="Delete"
                                                         onclick="return confirm('Are you sure you want to delete this property?');">
                                                         <i class="fas fa-trash"></i>

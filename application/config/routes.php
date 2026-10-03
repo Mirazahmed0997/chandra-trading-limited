@@ -36,18 +36,31 @@ $route['update_properties_form/(:num)'] = 'Admin_properties/update_properties_fo
 $route['update_properties/(:num)'] = 'Admin_properties/update_properties/$1';
 $route['delete_property/(:num)'] = 'Admin_properties/delete_property/$1';
 
-$route['create_category'] = 'Admin_properties/create_category';
+
 $route['create_type'] = 'Admin_properties/create_type';
 $route['delete_category/(:num)'] = 'Admin_properties/delete_category/$1';
 
 
 
 
-$route['add_project'] = 'Admin_Projects/add_project';
-$route['create_projects'] = 'Admin_Projects/create_projects';
-$route['projects_category'] = 'Admin_Projects/projects_category';
-$route['get_all_categories'] = 'Admin_Projects/get_all_categories';
+$route['add_project/(:any)'] = 'Admin_Projects/add_project/$1';
+$route['create_projects/(:any)'] = 'Admin_Projects/create_projects/$1';
+$route['projects_details/(:num)'] = 'Admin_Projects/projects_details/$1';
+
+$route['project_update_form/(:num)'] = 'Admin_Projects/project_update_form/$1';
+$route['update_project/(:num)'] = 'Admin_Projects/update_project/$1';
 $route['projects_list/(:any)'] = 'Admin_Projects/projects_list/$1';
+$route['delete_project/(:num)'] = 'Admin_Projects/delete_project/$1';
+
+
+
+// ----------------------category------------------------
+$route['create_category'] = 'Admin_Projects/create_category';
+$route['get_all_categories'] = 'Admin_Projects/get_all_categories';
+$route['projects_category'] = 'Admin_Projects/projects_category';
+$route['delete_category/(:num)'] = 'Admin_Projects/delete_category/$1';
+
+
 
 
 

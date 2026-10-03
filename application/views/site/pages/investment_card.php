@@ -1,35 +1,28 @@
-<!-- ============================================
-     SECTION 08 — INVESTMENT
-============================================= -->
-
 <section class="investment-section">
 
     <div class="container">
 
-        <!-- Heading -->
         <div class="section-heading investment-heading text-center">
 
             <span class="section-subtitle">
-                INVESTMENT
+                <?= lang('investment'); ?>
             </span>
 
             <h2>
-                Invest in <span>Tomorrow</span>
+                <?= lang('invest_in'); ?>
+                <span><?= lang('tomorrow'); ?></span>
             </h2>
 
             <p>
-                Explore real estate opportunities designed
-                for long-term value.
+                <?= lang('investment_description'); ?>
             </p>
 
         </div>
 
 
-        <!-- Investment Cards -->
         <div class="row g-4 mb-5">
 
 
-            <!-- Residential Investment -->
             <div class="col-lg-4 col-md-6">
 
                 <a href="<?= base_url('investment/residential'); ?>"
@@ -48,13 +41,11 @@
                         </span>
 
                         <h3>
-                            Residential Investment
+                            <?= lang('residential_investment'); ?>
                         </h3>
 
                         <p>
-                            Invest in carefully selected
-                            residential opportunities for
-                            sustainable long-term growth.
+                            <?= lang('residential_investment_description'); ?>
                         </p>
 
                     </div>
@@ -89,13 +80,11 @@
                         </span>
 
                         <h3>
-                            Land Investment
+                            <?= lang('land_investment'); ?>
                         </h3>
 
                         <p>
-                            Secure land opportunities with
-                            strong location potential and
-                            long-term value.
+                            <?= lang('land_investment_description'); ?>
                         </p>
 
                     </div>
@@ -130,13 +119,11 @@
                         </span>
 
                         <h3>
-                            Commercial Investment
+                            <?= lang('commercial_investment'); ?>
                         </h3>
 
                         <p>
-                            Discover commercial properties
-                            designed for business and future
-                            growth.
+                            <?= lang('commercial_investment_description'); ?>
                         </p>
 
                     </div>
@@ -160,12 +147,11 @@
             <div>
 
                 <h3>
-                    Looking for the right investment?
+                    <?= lang('looking_for_right_investment'); ?>
                 </h3>
 
                 <p>
-                    Talk with our team and discover
-                    opportunities that fit your goals.
+                    <?= lang('investment_cta_description'); ?>
                 </p>
 
             </div>
@@ -175,7 +161,7 @@
 
                 <i class="fa-solid fa-comments"></i>
 
-                Talk to an Investment Advisor
+                <?= lang('talk_investment_advisor'); ?>
 
             </a>
 
@@ -184,6 +170,7 @@
     </div>
 
 </section>
+
 
 
 

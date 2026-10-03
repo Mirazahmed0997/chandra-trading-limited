@@ -131,21 +131,20 @@
 		<?php echo $side_menu; ?>
 
 
-		<section id="main-content">
-			<section class="wrapper">
+		<section id="main-content ">
+			<section class="wrapper h-screen">
 				<?= $main_content; ?>
 			</section>
 		</section>
 	</div>
 	<!-- /.content-wrapper -->
-	<footer class="main-footer">
 
-		<!-- <strong>Page rendered in <strong>{elapsed_time}</strong> seconds.</strong> -->
-
+	
+	<!-- <footer class="main-footer">
 		<div class="float-right d-none d-sm-inline-block">
-			<!-- <b><?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></b> -->
+			<?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?>
 		</div>
-	</footer>
+	</footer> -->
 
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">

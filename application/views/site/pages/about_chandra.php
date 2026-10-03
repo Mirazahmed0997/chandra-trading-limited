@@ -1,7 +1,3 @@
-<!-- ============================================
-     SECTION 07 — ABOUT CHANDRA
-============================================= -->
-
 <section class="about-chandra-section">
 
     <div class="container">
@@ -14,29 +10,22 @@
                 <div class="about-content">
 
                     <span class="section-subtitle">
-                        ABOUT CHANDRA
+                        <?= lang('about_chandra'); ?>
                     </span>
 
                     <h2>
-                        Building More Than
-                        <span>Properties</span>
+                        <?= lang('building_more_than'); ?>
+                        <span><?= lang('properties'); ?></span>
                     </h2>
 
                     <div class="about-line"></div>
 
                     <p class="about-lead">
-                        Chandra Trading Limited is committed
-                        to creating trusted real estate
-                        opportunities that combine quality,
-                        location, value and long-term vision.
+                        <?= lang('about_lead'); ?>
                     </p>
 
                     <p>
-                        We focus on creating meaningful
-                        opportunities for homeowners,
-                        investors and businesses through
-                        carefully selected real estate
-                        solutions.
+                        <?= lang('about_description'); ?>
                     </p>
 
 
@@ -52,7 +41,7 @@
                                 </h3>
 
                                 <p>
-                                    Years Experience
+                                    <?= lang('years_experience'); ?>
                                 </p>
 
                             </div>
@@ -69,7 +58,7 @@
                                 </h3>
 
                                 <p>
-                                    Happy Clients
+                                    <?= lang('happy_clients'); ?>
                                 </p>
 
                             </div>
@@ -86,7 +75,7 @@
                                 </h3>
 
                                 <p>
-                                    Projects
+                                    <?= lang('projects'); ?>
                                 </p>
 
                             </div>
@@ -100,7 +89,7 @@
                     <a href="<?= base_url('about'); ?>"
                        class="about-btn">
 
-                        Discover Chandra
+                        <?= lang('discover_chandra'); ?>
 
                         <i class="fa-solid fa-arrow-right"></i>
 
@@ -120,7 +109,7 @@
 
                         <img
                             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
-                            alt="Chandra Trading Limited"
+                            alt="<?= lang('about_chandra'); ?>"
                             class="img-fluid">
 
                     </div>
@@ -138,11 +127,11 @@
                         <div>
 
                             <strong>
-                                Trusted Real Estate
+                                <?= lang('trusted_real_estate'); ?>
                             </strong>
 
                             <span>
-                                Quality • Value • Vision
+                                <?= lang('quality_value_vision'); ?>
                             </span>
 
                         </div>
@@ -164,10 +153,8 @@
 
     .about-chandra-section {
         padding: 100px 0;
-
         background: #ffffff;
     }
-
 
     .about-content {
         padding-right: 30px;
@@ -175,13 +162,9 @@
 
     .about-content h2 {
         margin: 0;
-
         font-size: 42px;
-
         line-height: 1.2;
-
         font-weight: 800;
-
         color: #172d24;
     }
 
@@ -189,46 +172,29 @@
         color: #159447;
     }
 
-
-    /* Green Line */
-
     .about-line {
         width: 65px;
         height: 4px;
-
         margin: 22px 0;
-
         border-radius: 10px;
-
         background: #159447;
     }
 
-
     .about-content p {
         color: #708078;
-
         font-size: 15px;
-
         line-height: 1.8;
-
         margin-bottom: 15px;
     }
 
-
     .about-content .about-lead {
         font-size: 17px;
-
         color: #34463d;
-
         font-weight: 500;
     }
 
-
-    /* Stats */
-
     .about-stats {
         margin-top: 30px;
-
         margin-bottom: 30px;
     }
 
@@ -242,54 +208,34 @@
 
     .about-stat h3 {
         margin: 0;
-
         font-size: 28px;
-
         font-weight: 800;
-
         color: #159447;
     }
 
     .about-stat p {
         margin: 5px 0 0;
-
         font-size: 12px;
-
         color: #7a867f;
     }
 
-
-    /* Button */
-
     .about-btn {
         display: inline-flex;
-
         align-items: center;
-
         gap: 10px;
-
         padding: 14px 24px;
-
         border-radius: 8px;
-
         background: #159447;
-
         color: #ffffff;
-
         text-decoration: none;
-
         font-size: 14px;
-
         font-weight: 700;
-
         transition: all 0.3s ease;
     }
 
     .about-btn:hover {
         background: #08783a;
-
         color: #ffffff;
-
         transform: translateY(-2px);
     }
 
@@ -301,49 +247,32 @@
         transform: translateX(4px);
     }
 
-
-    /* About Image */
-
     .about-visual {
         position: relative;
-
         padding: 15px;
     }
 
     .about-main-image {
         position: relative;
-
         overflow: hidden;
-
         border-radius: 22px;
-
-        box-shadow:
-            0 20px 50px rgba(20, 60, 40, 0.13);
+        box-shadow: 0 20px 50px rgba(20, 60, 40, 0.13);
     }
 
     .about-main-image img {
         display: block;
-
         width: 100%;
-
         min-height: 450px;
-
         object-fit: cover;
     }
 
-
-    /* Floating Card */
-
     .about-floating-card {
         position: absolute;
-
         left: -10px;
         bottom: 45px;
 
         display: flex;
-
         align-items: center;
-
         gap: 12px;
 
         padding: 17px 20px;
@@ -352,8 +281,7 @@
 
         background: #ffffff;
 
-        box-shadow:
-            0 15px 40px rgba(20, 60, 40, 0.15);
+        box-shadow: 0 15px 40px rgba(20, 60, 40, 0.15);
     }
 
     .floating-icon {
@@ -361,32 +289,26 @@
         height: 45px;
 
         display: flex;
-
         align-items: center;
         justify-content: center;
 
         border-radius: 10px;
 
         background: #eaf8f0;
-
         color: #159447;
     }
 
     .about-floating-card strong {
         display: block;
-
         color: #20372c;
-
         font-size: 13px;
     }
 
     .about-floating-card span {
         display: block;
-
         margin-top: 3px;
-
         color: #87928c;
-
         font-size: 11px;
     }
+
 </style>

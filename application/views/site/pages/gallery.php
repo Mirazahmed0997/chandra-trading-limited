@@ -1,9 +1,4 @@
- <!-- Post Content
-============================================= -->
-<!-- <div class="postcontent bothsidebar nobottommargin clearfix"> -->
 
-    <!-- Posts<div class="postcontent nobottommargin clearfix">
-    ============================================= -->
     <div id="posts" class="small-thumbs alt">
 
         <div class="promo promo-dark promo-flat promo-center bottommargin">
@@ -35,7 +30,5 @@
 
         </div>
 
-    </div><!-- #posts end -->
-
-<!-- </div> -->
-<!-- .postcontent end -->
+    </div>
+    

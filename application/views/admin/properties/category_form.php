@@ -13,7 +13,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="<?= base_url('create_category') ?>" method="POST">
+            <form action="<?= base_url('create_category/') ?>" method="POST">
 
                 <div class="modal-body">
 

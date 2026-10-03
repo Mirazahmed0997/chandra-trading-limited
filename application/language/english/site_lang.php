@@ -203,3 +203,81 @@ $lang['explore_developments'] =
 
 $lang['contact_our_team'] =
     'Contact Our Team';
+
+
+
+// ------------------------About Chandra-----------------------------
+$lang['about_chandra'] = 'ABOUT CHANDRA';
+$lang['building_more_than'] = 'Building More Than';
+$lang['properties'] = 'Properties';
+
+$lang['about_lead'] = 'Chandra Trading Limited is committed to creating trusted real estate opportunities that combine quality, location, value and long-term vision.';
+
+$lang['about_description'] = 'We focus on creating meaningful opportunities for homeowners, investors and businesses through carefully selected real estate solutions.';
+
+$lang['years_experience'] = 'Years Experience';
+$lang['happy_clients'] = 'Happy Clients';
+$lang['projects'] = 'Projects';
+
+$lang['discover_chandra'] = 'Discover Chandra';
+
+$lang['trusted_real_estate'] = 'Trusted Real Estate';
+$lang['quality_value_vision'] = 'Quality • Value • Vision';
+
+
+
+// ----------------------------Investment Card-------------------------
+$lang['investment'] = 'INVESTMENT';
+$lang['invest_in'] = 'Invest in';
+$lang['tomorrow'] = 'Tomorrow';
+$lang['investment_description'] = 'Explore real estate opportunities designed for long-term value.';
+
+$lang['residential_investment'] = 'Residential Investment';
+$lang['residential_investment_description'] = 'Invest in carefully selected residential opportunities for sustainable long-term growth.';
+
+$lang['land_investment'] = 'Land Investment';
+$lang['land_investment_description'] = 'Secure land opportunities with strong location potential and long-term value.';
+
+$lang['commercial_investment'] = 'Commercial Investment';
+$lang['commercial_investment_description'] = 'Discover commercial properties designed for business and future growth.';
+
+$lang['looking_for_right_investment'] = 'Looking for the right investment?';
+$lang['investment_cta_description'] = 'Talk with our team and discover opportunities that fit your goals.';
+$lang['talk_investment_advisor'] = 'Talk to an Investment Advisor';
+
+
+
+// ---------------------joint venture-------------------
+$lang['joint_venture_opportunities'] = 'Joint Venture Opportunities';
+$lang['have_land_build_together'] = "Have Land? Let's Build Together.";
+$lang['landowner_lead_description'] = 'Do you own land and are looking for a trusted development partner?';
+$lang['submit_your_property'] = 'Submit Your Property';
+
+$lang['partner_with_us'] = 'Partner With Us';
+
+$lang['name'] = 'Name';
+$lang['full_name'] = 'Full Name';
+
+$lang['mobile'] = 'Mobile';
+$lang['mobile_number'] = 'Mobile Number';
+
+$lang['email'] = 'Email';
+$lang['email_placeholder'] = 'name@example.com';
+
+$lang['land_location'] = 'Land Location';
+$lang['land_location_placeholder'] = 'e.g. Uttara, Dhaka';
+
+$lang['land_size'] = 'Land Size';
+$lang['land_size_placeholder'] = 'e.g. 5 Katha / 10 Decimal';
+
+$lang['property_type'] = 'Property Type';
+$lang['select_property_type'] = 'Select Property Type';
+
+$lang['residential_land'] = 'Residential Land';
+$lang['commercial_land'] = 'Commercial Land';
+$lang['mixed_use'] = 'Mixed Use (Residential + Commercial)';
+
+$lang['message'] = 'Message';
+$lang['message_placeholder'] = 'Additional details about your property...';
+
+$lang['submit_enquiry'] = 'Submit Enquiry';

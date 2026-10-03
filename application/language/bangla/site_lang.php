@@ -220,3 +220,80 @@ $lang['commercial_description'] = 'ব্যবসার জন্য পরি�
 $lang['investment'] = 'বিনিয়োগ';
 $lang['investment_description'] = 'আপনার ভবিষ্যতের জন্য সম্ভাবনাময় প্রপার্টি বিনিয়োগের সুযোগ।';
 
+
+
+// -------------------About Chandra----------------------------
+$lang['about_chandra'] = 'চন্দ্র সম্পর্কে';
+$lang['building_more_than'] = 'শুধু';
+$lang['properties'] = 'প্রপার্টি নয়, আরও কিছু নির্মাণ করছি';
+
+$lang['about_lead'] = 'চন্দ্র ট্রেডিং লিমিটেড মানসম্মত, সঠিক অবস্থান, মূল্য এবং দীর্ঘমেয়াদি পরিকল্পনার সমন্বয়ে বিশ্বস্ত রিয়েল এস্টেটের সুযোগ তৈরি করতে প্রতিশ্রুতিবদ্ধ।';
+
+$lang['about_description'] = 'নির্বাচিত রিয়েল এস্টেট সমাধানের মাধ্যমে আমরা বাড়ির মালিক, বিনিয়োগকারী এবং ব্যবসায়ীদের জন্য অর্থবহ সুযোগ তৈরি করতে কাজ করি।';
+
+$lang['years_experience'] = 'বছরের অভিজ্ঞতা';
+$lang['happy_clients'] = 'সন্তুষ্ট ক্লায়েন্ট';
+$lang['projects'] = 'প্রকল্প';
+
+$lang['discover_chandra'] = 'চন্দ্র সম্পর্কে জানুন';
+
+$lang['trusted_real_estate'] = 'বিশ্বস্ত রিয়েল এস্টেট';
+$lang['quality_value_vision'] = 'মান • মূল্য • দূরদর্শিতা';
+
+
+
+
+// ----------------------------Investment Card-------------------------
+$lang['investment'] = 'বিনিয়োগ';
+$lang['invest_in'] = 'আগামীর জন্য';
+$lang['tomorrow'] = 'বিনিয়োগ করুন';
+$lang['investment_description'] = 'দীর্ঘমেয়াদি মূল্য বৃদ্ধির জন্য তৈরি রিয়েল এস্টেট বিনিয়োগের সুযোগগুলো দেখুন।';
+
+$lang['residential_investment'] = 'আবাসিক বিনিয়োগ';
+$lang['residential_investment_description'] = 'টেকসই দীর্ঘমেয়াদি প্রবৃদ্ধির জন্য সতর্কতার সাথে নির্বাচিত আবাসিক বিনিয়োগের সুযোগে বিনিয়োগ করুন।';
+
+$lang['land_investment'] = 'জমি বিনিয়োগ';
+$lang['land_investment_description'] = 'সম্ভাবনাময় অবস্থান এবং দীর্ঘমেয়াদি মূল্যসম্পন্ন জমি বিনিয়োগের সুযোগ নিশ্চিত করুন।';
+
+$lang['commercial_investment'] = 'বাণিজ্যিক বিনিয়োগ';
+$lang['commercial_investment_description'] = 'ব্যবসা এবং ভবিষ্যৎ প্রবৃদ্ধির জন্য তৈরি বাণিজ্যিক প্রপার্টির সুযোগ আবিষ্কার করুন।';
+
+$lang['looking_for_right_investment'] = 'সঠিক বিনিয়োগের সুযোগ খুঁজছেন?';
+$lang['investment_cta_description'] = 'আপনার লক্ষ্য অনুযায়ী বিনিয়োগের সুযোগ আবিষ্কার করতে আমাদের টিমের সাথে কথা বলুন।';
+$lang['talk_investment_advisor'] = 'বিনিয়োগ পরামর্শকের সাথে কথা বলুন';
+
+
+// ---------------------joint venture-------------------
+$lang['joint_venture_opportunities'] = 'যৌথ উদ্যোগের সুযোগ';
+$lang['have_land_build_together'] = 'জমি আছে? চলুন একসাথে গড়ে তুলি।';
+$lang['landowner_lead_description'] = 'আপনার কি জমি আছে এবং আপনি কি একজন বিশ্বস্ত ডেভেলপমেন্ট পার্টনার খুঁজছেন?';
+$lang['submit_your_property'] = 'আপনার সম্পত্তি জমা দিন';
+
+$lang['partner_with_us'] = 'আমাদের সাথে অংশীদার হোন';
+
+$lang['name'] = 'নাম';
+$lang['full_name'] = 'পূর্ণ নাম';
+
+$lang['mobile'] = 'মোবাইল';
+$lang['mobile_number'] = 'মোবাইল নম্বর';
+
+$lang['email'] = 'ইমেইল';
+$lang['email_placeholder'] = 'name@example.com';
+
+$lang['land_location'] = 'জমির অবস্থান';
+$lang['land_location_placeholder'] = 'যেমন: উত্তরা, ঢাকা';
+
+$lang['land_size'] = 'জমির পরিমাণ';
+$lang['land_size_placeholder'] = 'যেমন: ৫ কাঠা / ১০ ডেসিমেল';
+
+$lang['property_type'] = 'সম্পত্তির ধরন';
+$lang['select_property_type'] = 'সম্পত্তির ধরন নির্বাচন করুন';
+
+$lang['residential_land'] = 'আবাসিক জমি';
+$lang['commercial_land'] = 'বাণিজ্যিক জমি';
+$lang['mixed_use'] = 'মিশ্র ব্যবহার (আবাসিক + বাণিজ্যিক)';
+
+$lang['message'] = 'বার্তা';
+$lang['message_placeholder'] = 'আপনার সম্পত্তি সম্পর্কে অতিরিক্ত তথ্য...';
+
+$lang['submit_enquiry'] = 'অনুসন্ধান জমা দিন';
