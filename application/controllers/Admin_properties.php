@@ -464,7 +464,6 @@ class Admin_Properties extends CI_Controller
 
         $name = trim($this->input->post('name'));
         $slug = trim($this->input->post('slug'));
-        
         $data = array(
 
             'name' => $name,

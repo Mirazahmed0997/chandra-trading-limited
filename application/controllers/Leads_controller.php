@@ -9,6 +9,8 @@ class Leads_controller extends MY_Controller
     {
         parent::__construct();
     }
+
+
     public function landowners_query_create()
     {
 
@@ -166,10 +168,10 @@ class Leads_controller extends MY_Controller
         $email = trim($this->input->post('email'));
         $property_type = trim($this->input->post('property_type'));
         $message = trim($this->input->post('message'));
+        $investments = trim($this->input->post('investments'));
         
 
 
-        // 3. Validation
 
         if (empty($full_name)) {
 
@@ -231,7 +233,6 @@ class Leads_controller extends MY_Controller
         }
 
 
-        // 4. Prepare data
 
         $data = array(
 
@@ -244,6 +245,8 @@ class Leads_controller extends MY_Controller
             'property_type' => $property_type,
 
             'message' => $message,
+
+            'investments' => $investments,
 
             'status' => 'New',
 
@@ -278,4 +281,6 @@ class Leads_controller extends MY_Controller
             redirect($_SERVER['HTTP_REFERER']);
         }
     }
+
+    
 }

@@ -472,7 +472,7 @@ $user = $this->session->userdata('login_user_info_all');
                                 </li>
                             <?php endif; ?>
 
-                          
+
 
                             <?php if (has_menu_access('Investment Enquiries')): ?>
                                 <li class="nav-item has-treeview <?= active_open('Investment Enquiries', $main_nav); ?>">
@@ -487,7 +487,8 @@ $user = $this->session->userdata('login_user_info_all');
 
                             <?php if (has_menu_access('Bookings')): ?>
                                 <li class="nav-item has-treeview <?= active_open('admin_property_book_data', $main_nav); ?>">
-                                    <a href="<?php echo base_url('admin_property_book_data') ?>" class="nav-link <?= active_nav('admin_property_book_data', $main_nav); ?>">
+                                    <a href="<?php echo base_url('admin_property_book_data') ?>"
+                                        class="nav-link <?= active_nav('admin_property_book_data', $main_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>
                                             Bookings
@@ -501,7 +502,8 @@ $user = $this->session->userdata('login_user_info_all');
 
                 <?php if (has_menu_access('Site Visits')): ?>
                     <li class="nav-item has-treeview <?= active_open('Site Visits', $main_nav); ?>">
-                        <a href="<?php echo base_url('admin_property_visit_data') ?>" class="nav-link <?= active_nav('Site Visits', $main_nav); ?>">
+                        <a href="<?php echo base_url('admin_property_visit_data') ?>"
+                            class="nav-link <?= active_nav('Site Visits', $main_nav); ?>">
                             <i class="nav-icon fas fa-map-marker-alt"></i>
                             <p>
                                 Site Visits
@@ -521,14 +523,12 @@ $user = $this->session->userdata('login_user_info_all');
                     </li>
                 <?php endif; ?>
 
-
-
-                <?php if (has_menu_access('News')): ?>
-                    <li class="nav-item has-treeview <?= active_open('News', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('News', $main_nav); ?>">
-                            <i class="nav-icon fas fa-newspaper"></i>
+                <?php if (has_menu_access('News Management')): ?>
+                    <li class="nav-item has-treeview <?= active_open('news_list', $main_nav); ?>">
+                        <a href="<?php echo base_url('news_list') ?>" class="nav-link <?= active_nav('news_list', $main_nav); ?>">
+                            <i class="nav-icon fas fa-comments"></i>
                             <p>
-                                News
+                                News Management
                             </p>
                         </a>
                     </li>
@@ -601,7 +601,7 @@ $user = $this->session->userdata('login_user_info_all');
                         <ul class="nav nav-treeview">
                             <?php if (has_menu_access('User')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('admin/users_list/users_list') ?>"
+                                    <a href="<?php echo base_url('user_list') ?>"
                                         class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User</p>

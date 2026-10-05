@@ -74,6 +74,8 @@ $route['view_profile'] = 'Admin/view_profile';
 $route['view_member/(:num)'] = 'Admin/view_member/$1';
 $route['delete_member/(:num)'] = 'Admin/delete_member/$1';
 $route['members_account_details_admin'] = 'Admin/members_account';
+$route['user_list'] = 'Admin/users_list';
+
 
 // leads
 $route['landowners_query'] = 'Admin_landowner_controller/landowners_query';
@@ -137,16 +139,9 @@ $route['booked_property_details/(:any)'] = 'User_dashboard/booked_property_detai
 
 
 
-// --------------for user home page view ----------------------
-
-$route['properties_details_view/(:num)'] = 'User_controllers/properties_details_view/$1';
+// --------------For User Home Page View ----------------------
 
 
-
-
-
-
-$route['view_all_news'] = 'View_content_controller/view_news';
 $route['our_mission'] = 'Site/our_mission';
 $route['our_managment'] = 'Site/our_managment';
 $route['contact_us'] = 'Site/contact_us';
@@ -155,6 +150,10 @@ $route['our_concern'] = 'Site/our_concern';
 $route['showcase'] = 'Site/showcase';
 $route['properties'] = 'Site/properties';
 $route['visit_book'] = 'Site/visit_book';
+
+$route['news_details/(:num)'] = 'User_controllers/news_details/$1';
+$route['properties_details_view/(:num)'] = 'User_controllers/properties_details_view/$1';
+
 
 
 

@@ -126,7 +126,7 @@ class User_controllers extends MY_Controller
         redirect(base_url());
     }
 
-    
+
     public function user_reset_email_form()
     {
         $data = $this->engine->store_nav('ctl', 'ctl', 'Chandra Trading Limited');
@@ -575,6 +575,32 @@ class User_controllers extends MY_Controller
         if ($filters['max_price'] !== '' && is_numeric($filters['max_price'])) {
             $this->db->where('price <=', (float) $filters['max_price']);
         }
+    }
+
+    public function news_details($id = null)
+    {
+        if (empty($id)) {
+            redirect(base_url('news'));
+        }
+        $this->db->where('id', $id);
+        $news_item = $this->db->get('news')->row();
+
+        if (!$news_item) {
+            show_404();
+        }
+
+        $data = $this->engine->store_nav(
+            'news',
+            'news',
+            'neews Details: '
+        );
+
+        // $data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
+
+        $data['news_item'] = $news_item;
+
+        $path = 'site/pages/news_details';
+        $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
     }
 
 

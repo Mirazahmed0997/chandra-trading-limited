@@ -156,7 +156,7 @@
 
             </div>
 
-            <a href="<?= base_url('contact'); ?>"
+            <a href="<?= base_url('contact_us'); ?>"
                class="investment-btn">
 
                 <i class="fa-solid fa-comments"></i>

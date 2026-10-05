@@ -197,7 +197,7 @@ $user = $this->session->userdata('login_user_info_all');
           <li><a href=""><?= lang('investment'); ?></a></li>
           <li><a href=""><?= lang('services'); ?></a></li>
           <li><a href=""><?= lang('news&insights'); ?></a></li>
-          <li><a href="contact_us"><?= lang('nav_contact'); ?></a></li>
+          <li><a href="<?= base_url('contact_us') ?>"><?= lang('nav_contact'); ?></a></li>
 
           <?php if ($user): ?>
 

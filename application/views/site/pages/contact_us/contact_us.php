@@ -64,7 +64,7 @@
                             <!-- Social Links -->
                             <h6 class="fw-bold mb-3">Follow Us</h6>
                             <div class="d-flex gap-3">
-                                <a href="#" class="btn btn-outline-primary rounded-circle"><i class="bi bi-facebook"></i></a>
+                                <a href="https://web.facebook.com/profile.php?id=61592764217077" class="btn btn-outline-primary rounded-circle"><i class="bi bi-facebook"></i></a>
                                 <a href="#" class="btn btn-outline-primary rounded-circle"><i class="bi bi-linkedin"></i></a>
                                 <a href="#" class="btn btn-outline-primary rounded-circle"><i class="bi bi-instagram"></i></a>
                             </div>
@@ -99,7 +99,8 @@
                                     <div class="col-12">
                                         <label for="propertyType" class="form-label fw-semibold">Interested In</label>
                                         <select name="property_type" class="form-select" id="propertyType" required>
-                                            <option value="" selected disabled>Select property type...</option>
+                                            <option value="" selected disabled>Select ...</option>
+                                            <option value="investments">Investments</option>
                                             <option value="apartment">Ready Apartments</option>
                                             <option value="land">Land Plots</option>
                                             <option value="commercial">Commercial Space</option>

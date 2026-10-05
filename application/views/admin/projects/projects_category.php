@@ -1,7 +1,5 @@
-<!-- Google Font Injection -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Custom Light Theme CSS for Project Category Cards -->
 <style>
     .dashboard-wrapper-light {
         background-color: #0B0F19;
@@ -135,9 +133,7 @@
     }
 </style>
 
-<!-- Content Wrapper -->
 <div class="content-wrapper dashboard-wrapper-light py-4">
-    <!-- Page Header -->
     <div class="content-header mb-4">
         <div class="container-fluid">
             <div
@@ -177,7 +173,6 @@
 
                         <div class="col-lg-3 col-md-6 col-12 ">
                             <div class="stat-card-light card">
-                                <!-- Delete Action Button -->
                                 <a href="<?= base_url('delete_category/' . $category->id); ?>"
                                     class="btn btn-sm btn-danger border-0 delete-btn-top" title="Delete"
                                     onclick="return confirm('Are you sure you want to delete this category?');">
@@ -193,7 +188,8 @@
                                         <?= htmlspecialchars($catName, ENT_QUOTES, 'UTF-8'); ?>
                                     </div>
                                     <p class="stat-label">
-                                        Project
+                                        Total Project: 
+                                        <?= htmlspecialchars($count, ENT_QUOTES, 'UTF-8'); ?>
                                     </p>
                                 </div>
 

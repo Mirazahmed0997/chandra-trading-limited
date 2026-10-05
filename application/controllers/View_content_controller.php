@@ -37,10 +37,6 @@ class View_content_controller extends CI_Controller
 
 
 
-    public function ica()
-    {
-        $this->load->view('site/pages/ica/ica');
-    }
 
     public function project_details($id = null)
     {

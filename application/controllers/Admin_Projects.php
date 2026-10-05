@@ -174,7 +174,7 @@ class Admin_Projects extends CI_Controller
 
             'address' => $address,
 
-            'status' => !empty($status) ? $status : 'Draft',
+            'status' => !empty($status) ? $status : 'Publish',
 
             'created_by' => $loggedUser->username,
 
@@ -242,7 +242,7 @@ class Admin_Projects extends CI_Controller
 
         if (!$project) {
             $this->session->set_flashdata('Project_error', 'Project not found.');
-            redirect('projects_list/'.$project->category);
+            redirect('projects_list/' . $project->category);
             return;
         }
 
@@ -252,7 +252,7 @@ class Admin_Projects extends CI_Controller
         $category = trim($this->input->post('category'));
         $address = trim($this->input->post('address'));
 
-        
+
 
         // 4. Form Validation
         if (empty($project_name) || empty($project_id) || empty($category) || empty($address)) {
@@ -261,8 +261,8 @@ class Admin_Projects extends CI_Controller
             return;
         }
 
-       
-       
+
+
 
         $update_data = [
             'project_name' => $project_name,
@@ -279,7 +279,7 @@ class Admin_Projects extends CI_Controller
             $this->session->set_flashdata('projects_error', 'Failed to update projects details.');
         }
 
-        redirect('projects_list/'.$category);
+        redirect('projects_list/' . $category);
     }
     public function delete_project($id)
     {
@@ -347,16 +347,31 @@ class Admin_Projects extends CI_Controller
     {
         $this->check_access('Add new Project');
         $data = $this->engine->store_nav('Category', 'Category', 'Chandra Trading Limited');
-        $categories = $this->db
-            // ->select('name')
-            ->order_by('id', 'ASC')
-            ->get('property_categories')
-            ->result();
-
-        //      echo '<pre>';
+      
+        // echo '<pre>';
         // print_r($categories);
         // echo '</pre>';
         // exit;
+
+        $categories = $this->db
+            ->select('
+            property_categories.id,
+            property_categories.name,
+            COUNT(projects.id) AS project_count
+        ')
+            ->from('property_categories')
+            ->join(
+                'projects',
+                'property_categories.name = projects.category',
+                'left'
+            )
+            ->group_by([
+                // 'property_categories.id',
+                'property_categories.name'
+            ])
+            ->order_by('property_categories.id', 'ASC')
+            ->get()
+            ->result();
 
         $data['categories'] = $categories ? $categories : [];
 

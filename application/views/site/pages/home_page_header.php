@@ -12,7 +12,7 @@
             </div>
 
              <div class="d-flex align-items-center gap-3 mb-1 mb-lg-0">
-                <a href="#" class="text-white text-decoration-none" aria-label="Facebook">
+                <a href="https://web.facebook.com/profile.php?id=61592764217077" class="text-white text-decoration-none" aria-label="Facebook">
                     <i class="fa-brands fa-facebook-f fs-6"></i>
                 </a>
                 <a href="#" class="text-white text-decoration-none" aria-label="Instagram">
@@ -46,5 +46,3 @@
         font-size: 0.75rem;
     }
 </style>
-
-

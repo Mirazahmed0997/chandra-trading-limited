@@ -221,11 +221,11 @@
                                 <i class="fas fa-th-large"></i>
                             </div>
                             <div class="stat-value">
-                                <?= !empty($total_plots) ? $total_plots : 0; ?>
+                                <?= !empty($projects_count) ? $projects_count : 0; ?>
                             </div>
-                            <p class="stat-label">Total Plots/Flats Count</p>
+                            <p class="stat-label">Total Projects</p>
                         </div>
-                        <a href="<?php echo base_url(); ?>Housing/plots_list" class="stat-card-footer-dark">
+                        <a href="<?php echo base_url('projects_category'); ?>" class="stat-card-footer-dark">
                             <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -240,11 +240,11 @@
                                 <i class="fas fa-file-contract"></i>
                             </div>
                             <div class="stat-value">
-                                <?= !empty($allocated_plots) ? $allocated_plots : 0; ?>
+                                <?= !empty($landowner_leads_count) ? $landowner_leads_count : 0; ?>
                             </div>
-                            <p class="stat-label">Allocated Plots</p>
+                            <p class="stat-label">Landowners Query</p>
                         </div>
-                        <a href="<?php echo base_url(); ?>Housing/allocated_list" class="stat-card-footer-dark">
+                        <a href="<?php echo base_url('landowners_query'); ?>" class="stat-card-footer-dark">
                             <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -256,14 +256,14 @@
                     <div class="stat-card-dark card-theme-purple">
                         <div class="card-body-custom">
                             <div class="stat-icon">
-                                <i class="fas fa-home"></i>
+                                <i class="fas fa-comment"></i>
                             </div>
                             <div class="stat-value">
-                                <?= !empty($available_plots) ? $available_plots : 0; ?>
+                                <?= !empty($contact_messages_count) ? $contact_messages_count : 0; ?>
                             </div>
-                            <p class="stat-label">Vacant/Unallocated Plots</p>
+                            <p class="stat-label">Contact Messages</p>
                         </div>
-                        <a href="<?php echo base_url(); ?>Housing/available_list" class="stat-card-footer-dark">
+                        <a href="<?php echo base_url('contact_messages'); ?>" class="stat-card-footer-dark">
                             <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -278,11 +278,11 @@
                                 <i class="fas fa-users"></i>
                             </div>
                             <div class="stat-value">
-                                <?= !empty($member_count) ? $member_count : 0; ?>
+                                <?= !empty($users_count) ? $users_count : 0; ?>
                             </div>
-                            <p class="stat-label">Registered Owners/Members</p>
+                            <p class="stat-label">Registered Users</p>
                         </div>
-                        <a href="<?php echo base_url(); ?>Applicant/members_list" class="stat-card-footer-dark">
+                        <a href="<?php echo base_url('user_list'); ?>" class="stat-card-footer-dark">
                             <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -294,14 +294,15 @@
                     <div class="stat-card-dark card-theme-amber">
                         <div class="card-body-custom">
                             <div class="stat-icon">
-                                <i class="fas fa-file-invoice-dollar"></i>
+                                <i class="fas fa-newspaper"></i>
+                                <!-- <i class="fas fa-file-invoice-dollar"></i> -->
                             </div>
                             <div class="stat-value">
-                                <?= !empty($pending_installments) ? $pending_installments : 0; ?>
+                                <?= !empty($news_count) ? $news_count : 0; ?>
                             </div>
-                            <p class="stat-label">Pending Installments</p>
+                            <p class="stat-label">News</p>
                         </div>
-                        <a href="<?php echo base_url(); ?>Housing/due_installments" class="stat-card-footer-dark">
+                        <a href="<?php echo base_url('news_list'); ?>" class="stat-card-footer-dark">
                             <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -313,14 +314,15 @@
                     <div class="stat-card-dark card-theme-red">
                         <div class="card-body-custom">
                             <div class="stat-icon">
-                                <i class="fas fa-user-slash"></i>
+                                <!-- <i class="fas fa-user-slash"></i> -->
+                                 <i class="fas fa-file-invoice-dollar"></i>
                             </div>
                             <div class="stat-value">
-                                <?= !empty($defaulter_count) ? $defaulter_count : 0; ?>
+                                <?= !empty($property_bookings_count) ? $property_bookings_count : 0; ?>
                             </div>
-                            <p class="stat-label">Defaulted Allocations</p>
+                            <p class="stat-label">Bookings</p>
                         </div>
-                        <a href="<?php echo base_url(); ?>Housing/defaulters_list" class="stat-card-footer-dark">
+                        <a href="<?php echo base_url('admin_property_book_data'); ?>" class="stat-card-footer-dark">
                             <span>View Details</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>

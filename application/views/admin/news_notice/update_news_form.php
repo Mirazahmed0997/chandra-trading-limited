@@ -5,7 +5,7 @@
     <div class="modal-dialog ">
         <div class="modal-content">
 
-            <form action="<?= base_url('news_notice_management/update_news'); ?>" method="post">
+            <form action="<?= base_url('news_notice_management/update_news'); ?>" method="post" enctype="multipart/form-data">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Update News</h5>
@@ -26,6 +26,13 @@
                         <label class="text-green">Details</label>
                         <div style="position:relative;">
                             <textarea name="details" id="details" class="form-control" placeholder="Details"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-green">Image</label>
+                        <div style="position:relative;">
+                            <input type="file" name="image" id="image" class="form-control"></input>
                         </div>
                     </div>
 

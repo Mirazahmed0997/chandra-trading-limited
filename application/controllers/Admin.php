@@ -34,8 +34,20 @@ class Admin extends CI_Controller
 	{
 		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
 
-		// Get member count
-		$data['member_count'] = $this->db->count_all('members_n');
+		$data['users_count'] = $this->db->count_all('users');
+
+		$data['contact_messages_count'] = $this->db->count_all('contact_messages');
+
+		$data['landowner_leads_count'] = $this->db->count_all('landowner_leads');
+
+		$data['projects_count'] = $this->db->count_all('projects');
+
+		$data['property_bookings_count'] = $this->db->count_all('property_bookings');
+
+
+		$data['news_count'] = $this->db
+			->where('status', 1)
+			->count_all_results('news');
 
 		$path = 'admin/dashboard';
 
@@ -446,7 +458,7 @@ class Admin extends CI_Controller
 	public function admin_property_book_data()
 	{
 
-		
+
 
 		$this->check_access('Bookings');
 		// Filters
@@ -578,7 +590,7 @@ class Admin extends CI_Controller
 		$data['sl_start'] = $offset + 1;
 
 		$path = 'admin/admin_property_book_data/admin_property_book_data';
-		
+
 
 		$this->engine->render_view(
 			$data,
@@ -627,25 +639,25 @@ class Admin extends CI_Controller
 
 
 	public function update_booked_property_status($id)
-    {
-        $property = $this->db->get_where('property_bookings', ['id' => $id])->row();
+	{
+		$property = $this->db->get_where('property_bookings', ['id' => $id])->row();
 
-        $update_data = [
+		$update_data = [
 
-            'status' => $this->input->post('status'),
-        ];
+			'status' => $this->input->post('status'),
+		];
 
 
-        $this->db->where('id', $id);
-        $this->db->update('property_bookings', $update_data);
+		$this->db->where('id', $id);
+		$this->db->update('property_bookings', $update_data);
 
-        redirect(base_url('admin_property_book_data'));
-    }
+		redirect(base_url('admin_property_book_data'));
+	}
 
 	public function admin_property_visit_data()
 	{
 
-		
+
 
 		$this->check_access('Site Visits');
 		// Filters
@@ -707,7 +719,7 @@ class Admin extends CI_Controller
 			->result();
 
 
-	
+
 		$this->load->library('pagination');
 
 		$config['base_url'] = base_url('admin_property_visit_data');
@@ -745,7 +757,7 @@ class Admin extends CI_Controller
 		$this->pagination->initialize($config);
 
 
-	
+
 		$data = $this->engine->store_nav(
 			'visit_bookings',
 			'visit_bookings',
@@ -764,7 +776,7 @@ class Admin extends CI_Controller
 		$data['sl_start'] = $offset + 1;
 
 		$path = 'admin/admin_visit_bookings/admin_visit_bookings';
-		
+
 
 		$this->engine->render_view(
 			$data,
@@ -811,18 +823,21 @@ class Admin extends CI_Controller
 	}
 
 	public function update_booked_property_visit_status($id)
-    {
-        $property = $this->db->get_where('visit_bookings', ['id' => $id])->row();
+	{
+		$property = $this->db->get_where('visit_bookings', ['id' => $id])->row();
 
-        $update_data = [
+		$update_data = [
 
-            'status' => $this->input->post('status'),
-        ];
+			'status' => $this->input->post('status'),
+		];
 
 
-        $this->db->where('id', $id);
-        $this->db->update('visit_bookings', $update_data);
+		$this->db->where('id', $id);
+		$this->db->update('visit_bookings', $update_data);
 
-        redirect(base_url('admin_property_visit_data'));
-    }
+		redirect(base_url('admin_property_visit_data'));
+	}
+
+
+
 }
