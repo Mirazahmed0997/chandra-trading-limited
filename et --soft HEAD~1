@@ -1,0 +1,15 @@
+[33m7a06e40[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m setup ref no in letter
+[33mb2eab2e[m emailSetupForAppointmentLetter
+[33mf0a0711[m Remove large Apidog installer files
+[33m421fd1b[m job portal working on process
+[33m8d1ddff[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m news mthods
+[33m3b06e2f[m created projects methods&design
+[33m9d0cf76[m added Project method
+[33mbb970d9[m implement reset password
+[33m341fe43[m created User dashboard
+[33m87501f6[m create User Login&Registration
+[33m6fddc3c[m fix the route access error
+[33m0c066ca[m dynamic access
+[33ma3b5cf5[m createProperties Method & Filtering system
+[33m7f61db1[m user management
+[33m3b31b02[m Initial commit
