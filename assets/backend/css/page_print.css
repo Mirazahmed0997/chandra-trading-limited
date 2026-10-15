@@ -1,0 +1,95 @@
+
+hr {
+    border-top: 1px solid black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 50%;
+}
+.font_size_5{
+font-size: 5px !important;
+}
+.font_size_6{
+font-size: 6px !important;
+}
+.font_size_7{
+font-size: 7px !important;
+}
+.font_size_8{
+font-size: 8px !important;
+}
+.font_size_9{
+font-size: 9px !important;
+}
+.font_size_10{
+font-size: 10px !important;
+} 
+.font_size_11{
+font-size: 11px !important;
+} 
+.font_size_12{
+font-size: 12px !important;
+} 
+.font_size_13{
+font-size: 13px !important;
+} 
+.font_size_14{
+font-size: 14px !important;
+} 
+.font_size_15{
+font-size: 15px !important;
+} 
+.font_size_16{
+font-size: 16px !important;
+} 
+.font_size_17{
+font-size: 17px !important;
+} 
+.font_size_18{
+font-size: 18px !important;
+} 
+.font_size_19{
+font-size: 19px !important;
+} 
+.font_size_20{
+font-size: 20px !important;
+} 
+.font_size_21{
+font-size: 21px !important;
+} 
+.font_size_22{
+font-size: 22px !important;
+} 
+.font_size_23{
+font-size: 23px !important;
+} 
+.font_size_24{
+font-size: 24px !important;
+} 
+.font_size_25{
+font-size: 25px !important;
+} 
+.font_size_26{
+font-size: 26px !important;
+} 
+.font_size_27{
+font-size: 27px !important;
+} 
+.font_size_28{
+font-size: 28px !important;
+} 
+.font_size_29{
+font-size: 29px !important;
+} 
+.font_size_30{
+font-size: 30px !important;
+} 
+.font_size_31{
+font-size: 31px !important;
+} 
+.font_size_32{
+font-size: 32px !important;
+} 
+#voucher_table th, #voucher_table td {
+font-size: 11px;
+padding: 8px;
+}

@@ -1,0 +1,215 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+$route['default_controller'] = 'Site/index';
+$route['home'] = 'Site/index';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+
+
+
+
+// --------------------Admin Registration----------------------
+
+$route['admin'] = 'Admin_login/index';
+$route['admin_registration_form'] = 'Admin/admin_registration';
+$route['admin_registration'] = 'Admin/admin_registration_saved';
+$route['update_users_role/(:num)'] = 'Admin/update_users_role/$1';
+$route['change_password'] = 'Admin/change_password';
+$route['menu_access/(:num)'] = 'Admin/menu_access/$1';
+
+
+$route['logout'] = 'Admin_login/logout';
+$route['forget_password'] = 'Admin_login/reset_email_form';
+$route['send_reset_link'] = 'Admin_login/send_reset_link';
+$route['reset_password/(:any)'] = 'Admin_login/reset_password/$1';
+$route['update_new_password'] = 'Admin_login/update_new_password';
+
+
+// Properties managment
+$route['add_properties'] = 'Admin_properties/add_properties';
+$route['create_properties'] = 'Admin_properties/create_properties';
+$route['properties_list'] = 'Admin_properties/properties_list';
+$route['properties_details/(:num)'] = 'Admin_properties/properties_details/$1';
+$route['update_properties_form/(:num)'] = 'Admin_properties/update_properties_form/$1';
+$route['update_properties/(:num)'] = 'Admin_properties/update_properties/$1';
+$route['delete_property/(:num)'] = 'Admin_properties/delete_property/$1';
+
+
+$route['create_type'] = 'Admin_properties/create_type';
+$route['delete_category/(:num)'] = 'Admin_properties/delete_category/$1';
+
+
+
+
+$route['add_project/(:any)'] = 'Admin_Projects/add_project/$1';
+$route['create_projects/(:any)'] = 'Admin_Projects/create_projects/$1';
+$route['projects_details/(:num)'] = 'Admin_Projects/projects_details/$1';
+
+$route['project_update_form/(:num)'] = 'Admin_Projects/project_update_form/$1';
+$route['update_project/(:num)'] = 'Admin_Projects/update_project/$1';
+$route['projects_list/(:any)'] = 'Admin_Projects/projects_list/$1';
+$route['delete_project/(:num)'] = 'Admin_Projects/delete_project/$1';
+
+$route['projects_cost'] = 'Admin_Projects/projects_cost';
+$route['add_cost'] = 'Admin_Projects/add_cost';
+
+
+
+
+// ----------------------category------------------------
+$route['create_category'] = 'Admin_Projects/create_category';
+$route['get_all_categories'] = 'Admin_Projects/get_all_categories';
+$route['projects_category'] = 'Admin_Projects/projects_category';
+$route['delete_category/(:num)'] = 'Admin_Projects/delete_category/$1';
+
+
+
+
+
+
+
+// --------------------Admin dashboard-------------------------
+
+$route['admin_dashboard'] = 'Admin/index';
+$route['members_list'] = 'Admin/members_list';
+$route['view_profile'] = 'Admin/view_profile';
+$route['view_member/(:num)'] = 'Admin/view_member/$1';
+$route['delete_member/(:num)'] = 'Admin/delete_member/$1';
+$route['members_account_details_admin'] = 'Admin/members_account';
+$route['user_list'] = 'Admin/users_list';
+
+
+// leads
+$route['landowners_query'] = 'Admin_landowner_controller/landowners_query';
+$route['landowners_query_details/(:num)'] = 'Admin_landowner_controller/landowners_query_details/$1';
+$route['update_land_query_status/(:num)'] = 'Admin_landowner_controller/update_land_query_status/$1';
+$route['delete_land_query/(:num)'] = 'Admin_landowner_controller/delete_land_query/$1';
+
+
+$route['contact_messages'] = 'Admin_landowner_controller/contact_messages';
+$route['contact_messages_details/(:num)'] = 'Admin_landowner_controller/contact_messages_details/$1';
+$route['delete_contact_message/(:num)'] = 'Admin_landowner_controller/delete_contact_message/$1';
+
+$route['admin_property_book_data'] = 'Admin/admin_property_book_data';
+$route['admin_booked_property_details/(:num)'] = 'Admin/admin_booked_property_details/$1';
+$route['update_booked_property_status/(:num)'] = 'Admin/update_booked_property_status/$1';
+
+
+$route['admin_property_visit_data'] = 'Admin/admin_property_visit_data';
+$route['admin_booked_property_visit_details/(:num)'] = 'Admin/admin_booked_property_visit_details/$1';
+$route['update_booked_property_visit_status/(:num)'] = 'Admin/update_booked_property_visit_status/$1';
+
+
+$route['DepositExpenseAccountHeadManagement'] = 'Admin_Accounts/DepositExpenseAccountHeadManagement';
+$route['accountHeadForm'] = 'Admin_Accounts/accountHeadForm';
+$route['Deposit_Expense_Account_HeadManagement_Save'] = 'Admin_Accounts/Deposit_Expense_Account_HeadManagement_Save';
+$route['delete_accountHead/(:num)'] = 'Admin_Accounts/delete_accountHead/$1';
+
+
+
+
+$route['application_form'] = 'Site/application_form';
+$route['create_application'] = 'Recruit_controllers/create_application';
+$route['success_page'] = 'Site/success_page';
+
+$route['recruit_form_view'] = 'Recruit_controllers/recruit_form_view';
+$route['appointment_letter_save'] = 'Recruit_controllers/appointment_letter_save';
+$route['appointment_letter/(:num)'] = 'Recruit_controllers/appointment_letter/$1';
+$route['appointment_letter_form/(:num)'] = 'Recruit_controllers/appointment_letter_form/$1';
+
+$route['pending_applications_list'] = 'Recruit_controllers/pending_applications_list';
+$route['accepted_applications_list'] = 'Recruit_controllers/accepted_applications_list';
+$route['rejected_applications_list'] = 'Recruit_controllers/rejected_applications_list';
+$route['applicant_details/(:num)'] = 'Recruit_controllers/applicant_details/$1';
+
+$route['update_application_verification/(:num)'] = 'Recruit_controllers/update_application_verification/$1';
+$route['accept_application/(:num)'] = 'Recruit_controllers/accept_application/$1';
+$route['delete_application/(:num)'] = 'Recruit_controllers/delete_application/$1';
+$route['reject_application/(:num)'] = 'Recruit_controllers/reject_application/$1';
+$route['send_appointment_letter/(:num)'] = 'Recruit_controllers/send_appointment_letter/$1';
+$route['appointment_letter_email/(:num)'] = 'Recruit_controllers/appointment_letter_email/$1';
+
+
+
+
+
+
+
+
+
+// --------------------User Registration----------------------
+
+
+$route['user_registration_form'] = 'User_controllers/user_registration_form';
+$route['user_registration_save'] = 'User_controllers/user_registration_save';
+$route['user_login_form'] = 'User_controllers/user_login_form';
+$route['user_login_process'] = 'User_controllers/user_login_process';
+$route['user_logout'] = 'User_controllers/user_logout';
+
+$route['user_forget_password'] = 'User_controllers/user_reset_email_form';
+$route['user_send_reset_link'] = 'User_controllers/user_send_reset_link';
+$route['user_reset_password/(:any)'] = 'User_controllers/user_reset_password/$1';
+$route['user_update_new_password'] = 'User_controllers/user_update_new_password';
+
+
+
+// --------------------User Dashboard----------------------
+$route['User_dashboard'] = 'User_dashboard/index';
+$route['deposit_vouchar'] = 'User_dashboard/deposit_vouchar';
+$route['cost_vouchar'] = 'User_dashboard/cost_vouchar';
+$route['user_property_book_data'] = 'User_dashboard/user_property_book_data';
+$route['user_visit_book_data'] = 'User_dashboard/user_visit_book_data';
+
+
+// --------------User Leads create form----------------------
+$route['landowners_query_create'] = 'Leads_controller/landowners_query_create';
+$route['contact_messages_create'] = 'Leads_controller/contact_messages_create';
+$route['properties'] = 'User_controllers/properties';
+$route['property_book/(:any)'] = 'User_dashboard/property_book/$1';
+$route['visit_book/(:any)'] = 'User_dashboard/visit_book/$1';
+$route['booked_property_details/(:any)'] = 'User_dashboard/booked_property_details/$1';
+
+
+
+
+
+
+// --------------For User Home Page View ----------------------
+
+
+$route['our_mission'] = 'Site/our_mission';
+$route['our_managment'] = 'Site/our_managment';
+$route['contact_us'] = 'Site/contact_us';
+$route['our_vission'] = 'Site/our_vission';
+$route['our_concern'] = 'Site/our_concern';
+$route['showcase'] = 'Site/showcase';
+$route['properties'] = 'Site/properties';
+$route['visit_book'] = 'Site/visit_book';
+
+$route['news_details/(:num)'] = 'User_controllers/news_details/$1';
+$route['properties_details_view/(:num)'] = 'User_controllers/properties_details_view/$1';
+
+
+
+
+
+
+
+$route['checkout'] = 'Site/checkout';
+// -----------------------news for Admin view---------------
+$route['news_list'] = 'News_notice_management/news_list';
+$route['update_news_status/(:num)'] = 'News_notice_management/news_active_status/$1';
+$route['delete_news/(:num)'] = 'News_notice_management/delete_news/$1';
+
+
+
+// ------------------------gallary list----------------------------
+
+$route['image_gallery_list'] = 'Gallary_controller/image_gallery_list';
+$route['all_images'] = 'Gallary_controller/all_images';
+$route['image_active_status/(:num)'] = 'Gallary_controller/image_active_status/$1';
+$route['delete_image/(:num)'] = 'Gallary_controller/delete_image/$1';
+
+
