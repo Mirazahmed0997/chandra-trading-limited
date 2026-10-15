@@ -1,0 +1,44 @@
+{
+    "font awesome 5 brands": {
+        "normal": "font_awesome_5_brands_normal_36faa0e194d3288643f7144dedd8e1b1"
+    },
+    "font awesome 5 free": {
+        "normal": "C:\\xampp\\htdocs\\ctl\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/font_awesome_5_free_normal_cf2d7daaeabedac0226ae26fc7e4f075",
+        "900": "font_awesome_5_free_900_665c8d2ea728525da852b5cd3a1d51a5"
+    },
+    "ionicons": {
+        "normal": "ionicons_normal_1b2b773bb3197b577cecee8d68579952"
+    },
+    "source sans pro": {
+        "italic": "C:\\xampp\\htdocs\\ctl2\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/source_sans_pro_italic_d171ad1e6c455b1bb0a389536c6f202b",
+        "300": "C:\\xampp\\htdocs\\ctl2\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/source_sans_pro_300_62778dfe92729cd3e12fa6df9fc1d6df",
+        "normal": "C:\\xampp\\htdocs\\ctl2\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/source_sans_pro_normal_3397a0bf03c233298a114f7ca61eb9f6",
+        "bold": "source_sans_pro_bold_d3d202aa7267888aaefdc420dd054edc"
+    },
+    "summernote": {
+        "normal": "summernote_normal_81615a59dd095a989c4e3b6ab46dbe65"
+    },
+    "hind siliguri": {
+        "300": "C:\\xampp\\htdocs\\ctl2\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/hind_siliguri_300_5538573b1beb641e810c65a9a128b565",
+        "normal": "C:\\xampp\\htdocs\\ctl2\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/hind_siliguri_normal_15b9b61605e9fff824911b45ac85b7ed",
+        "500": "C:\\xampp\\htdocs\\ctl2\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/hind_siliguri_500_81810ebfedbbf531fc9a3fba3c6413ce",
+        "600": "C:\\xampp\\htdocs\\ctl2\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/hind_siliguri_600_30ea921696e11a259eed574d1878d8d4",
+        "bold": "hind_siliguri_bold_f0ff0e518faa51de1d4138edccfee6eb"
+    },
+    "noto sans bengali": {
+        "normal": "C:\\xampp\\htdocs\\ctl\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/noto_sans_bengali_normal_542ec1ea18f225b6ade9a2ca3e1d19af",
+        "500": "C:\\xampp\\htdocs\\ctl\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/noto_sans_bengali_500_fdc7d86a17e827871e65b4d1a391d9df",
+        "600": "noto_sans_bengali_600_aab783dbe1b7d8e15647f965725153f5",
+        "bold": "C:\\xampp\\htdocs\\ctl\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/noto_sans_bengali_bold_af66e0edcf4032410da861b5d5d294f6"
+    },
+    "font awesome 6 brands": {
+        "normal": "font_awesome_6_brands_normal_36faa0e194d3288643f7144dedd8e1b1"
+    },
+    "font awesome 6 free": {
+        "normal": "font_awesome_6_free_normal_cf2d7daaeabedac0226ae26fc7e4f075",
+        "900": "C:\\xampp\\htdocs\\ctl\\application\\third_party\\dompdf\\vendor\\dompdf\\dompdf\/lib\/fonts\/font_awesome_6_free_900_665c8d2ea728525da852b5cd3a1d51a5"
+    },
+    "fontawesome": {
+        "normal": "fontawesome_normal_6aa5cc0b95be2651581a2d7ad4a9d038"
+    }
+}
