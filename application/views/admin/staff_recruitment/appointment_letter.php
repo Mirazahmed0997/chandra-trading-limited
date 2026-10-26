@@ -43,7 +43,8 @@
             max-width: 850px;
             min-height: 1050px;
             margin: 0 auto;
-            padding: 42px 48px 30px;
+            padding: 50px;
+            /* padding: 42px 48px 30px; */
             overflow: hidden;
             background: var(--paper);
             border: 1px solid #e1e8e3;
@@ -86,18 +87,12 @@
         }
 
         /* Company Header */
-        .header {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            padding-bottom: 23px;
-            border-bottom: 2px solid var(--brand);
-            background: #9DB9C6;
-            padding: 20px;
-            color: #fff;
-            font-weight: bold;
+        .header img {
+            width: 100%;
+            border-bottom: 2px solid #302D2E;
         }
+
+
 
         .logo {
             display: flex;
@@ -108,30 +103,26 @@
             height: 100px;
         }
 
-        .logo img {
-            display: block;
-            width: 200px;
-            /* max-height: 100px; */
-            object-fit: contain;
-            position: absolute;
-            left: 40px;
-        }
-
         .company-details {
             position: absolute;
-            right: 190px;
+            right: 243px;
         }
 
         .company-name {
-            margin: 0 0 5px;
-            /* color: var(--brand-dark); */
-            font-size: 25px;
+            margin: 5px 0 5px;
+            font-size: 14px;
             font-weight: 700;
             line-height: 1.3;
         }
 
+        .contact {
+            margin-top: -24px;
+            margin-left: 11px;
+        }
+
         .company-info {
-            /* color: var(--muted); */
+            display: flex;
+            justify-content: center;
             font-size: 11.5px;
             line-height: 1.8;
         }
@@ -140,7 +131,7 @@
         .letter-meta {
             display: flex;
             justify-content: space-between;
-            margin: 22px 0 8px;
+            margin: 0px 0 5px;
             color: var(--muted);
             font-size: 12px;
         }
@@ -149,20 +140,22 @@
         .title {
             margin: 10px 0 24px;
             text-align: center;
+
         }
 
         .title h2 {
             display: inline-block;
             margin: 0;
-            padding-bottom: 8px;
-            color: var(--brand-dark);
+            padding: 10px 12px 6px 12px;
+            color: #fff;
             border-bottom: 2px solid var(--brand);
             font-size: 22px;
             font-weight: 700;
             letter-spacing: .2px;
+            background: #3A4EA2;
+            border-radius: 5px;
         }
 
-        /* appointment_letters Information */
         .applicant-card {
             display: flex;
             align-items: center;
@@ -221,7 +214,6 @@
             box-shadow: 0 2px 8px rgba(20, 60, 38, .14);
         }
 
-        /* Letter Content */
         .content {
             margin-top: 0;
             font-size: 13px;
@@ -231,7 +223,7 @@
             margin: 0 0 19px;
             color: #303a34;
             font-size: 13px;
-            line-height: 1.9;
+            line-height: 1.6;
             text-align: justify;
         }
 
@@ -255,11 +247,11 @@
 
         .terms-list li {
             position: relative;
-            margin: 0 0 9px;
-            padding-left: 28px;
+            margin: 0 0 15px;
+            /* padding-left: 28px; */
             color: #303a34;
-            font-size: 12.5px;
-            line-height: 1.75;
+            font-size: 13px;
+            line-height: 1.7;
             text-align: justify;
         }
 
@@ -293,13 +285,22 @@
             min-height: 45px;
             padding-top: 9px;
             color: var(--ink);
-            border-top: 1px solid #7d8981;
+            /* border-top: 1px solid #7d8981; */
             font-size: 11.5px;
             line-height: 1.6;
         }
 
+        .signature-line img {
+            width: 100px;
+        }
+
         /* Footer */
-        .footer {
+        .footer img {
+            width: 100%;
+        }
+
+        /* Footer */
+        /* .footer {
             margin-top: 35px;
             padding-top: 13px;
             color: var(--muted);
@@ -309,13 +310,11 @@
             text-align: center;
             page-break-inside: avoid;
             background: #9DB9C6;
-            color: #fff;
+            color: #0C1232;
             font-weight: 800;
-        }
+        } */
 
-        .footer p {
-            margin: 2px 0;
-        }
+
 
         /* Responsive */
         @media (max-width: 640px) {
@@ -345,7 +344,7 @@
             }
 
             .company-name {
-                font-size: 19px;
+                font-size: 14px;
             }
 
             .company-info {
@@ -387,14 +386,14 @@
 
             .signature-section {
                 gap: 20px;
-                margin-top: 40px;
+                margin-top: 45px;
             }
         }
 
         /* A4 Print Layout */
         @page {
             size: A4 portrait;
-            /* margin: 12mm; */
+            /* margin: 12mm !important; */
         }
 
         @media print {
@@ -407,6 +406,41 @@
                 background: #fff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+
+                top: 0 !important;
+                margin-top: 0 !important;
+                position: static !important;
+            }
+
+
+            .goog-te-banner-frame,
+            .goog-te-banner-frame.skiptranslate,
+            iframe.goog-te-banner-frame,
+            #goog-gt-tt,
+            .goog-te-balloon-frame,
+            .skiptranslate {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+
+            .letter-meta {
+
+                margin-top: -10px !important;
+
+            }
+
+
+            footer {
+                margin-top: -20px !important;
+            }
+
+            .terms-list li {
+                line-height: 1.2;
+            }
+
+            .intro-text {
+                line-height: 1.2;
             }
 
             .letter-container {
@@ -414,15 +448,48 @@
                 max-width: none;
                 min-height: 0;
                 margin: 0 !important;
-                padding: 8mm 7mm 5mm !important;
+                padding: 10mm 22mm 10mm 22mm !important;
                 overflow: visible;
                 border: 0;
                 border-radius: 0;
                 box-shadow: none;
             }
 
+            .logo img {
+                display: block;
+                width: 200px;
+                /* max-height: 100px; */
+                object-fit: contain;
+                position: absolute;
+                left: 80px !important;
+            }
+
             .letter-container::before {
                 height: 4px;
+            }
+
+            .company-name {
+                font-size: 14px;
+                margin-top: -18px;
+                line-height: 1;
+            }
+
+            /* .company-name {
+                margin: 5px 0 5px;
+                font-size: 14px;
+                font-weight: 700;
+                
+            } */
+
+            .contact {
+                position: absolute;
+                top: 220px;
+                right: 320px;
+            }
+
+            .company-info {
+                font-size: 13px;
+                font-weight: bold;
             }
 
             .action-bar {
@@ -437,12 +504,13 @@
                 page-break-inside: avoid;
             }
 
+
             .header {
                 display: flex;
                 align-items: center;
                 justify-items: center !important;
                 padding-bottom: 23px;
-                border-bottom: 2px solid var(--brand);
+                /* border-bottom: 2px solid var(--brand); */
             }
 
             .logo img {
@@ -452,11 +520,12 @@
                 object-fit: contain;
                 position: absolute;
                 left: 20px;
+                top: 40px;
             }
 
             .company-details {
                 position: absolute;
-                right: 265px;
+                right: 320px;
             }
 
             .applicant-card {
@@ -468,7 +537,7 @@
             }
 
             .signature-section {
-                margin-top: 42px;
+                margin-top: 55px !important;
             }
 
             a {
@@ -483,12 +552,14 @@
 
 <body>
 
+
+
     <?php if ($appointment_letters): ?>
         <div class="letter-container">
 
             <!-- Print Button -->
             <div class="action-bar">
-                <?php if ($appointment_letters->is_sent==1): ?>
+                <?php if ($appointment_letters->is_sent == 1): ?>
                     <button type="button" class="btn btn-secondary px-4 me-2" disabled>
                         <i class="bi bi-check-circle-fill me-1"></i> Email Sent
                     </button>
@@ -500,80 +571,100 @@
                     </a>
                 <?php endif; ?>
 
+                <div class="translate-wrapper">
+                    <div id="google_translate_element"></div>
+                </div>
+
                 <button id="print_button" class="print-btn" onclick="window.print()">
                     <i class="fas fa-print"></i> Print
                 </button>
+
+
 
             </div>
 
             <!-- Company Header -->
             <div class="header">
+                <img src="<?= base_url('assets/uploads/letter_pad/CTL b Png-01.png'); ?>" alt="">
+            </div>
+            <!-- <div class="header">
                 <div class="logo">
                     <img src="<?= base_url('assets/uploads/CTL_logo_Finalll.png'); ?>" alt="CTL Logo">
                 </div>
 
                 <div class="company-details">
-                    <div class="company-name">Chandra Trading Ltd.</div>
+
+
+                    <div class="company-name">চান্দ্রা ট্রেডিং লিমিটেড</div>
 
                     <div class="company-info">
-                        Lily Pond Center, Floor 21, Mission Road,
-                        Motijheel, Dhaka-1203, Bangladesh
+                        লিলি পন্ড সেন্টার, ফ্লোর ২১, মিশন রোড, মতিঝিল, ঢাকা ।
                         <br>
 
+                        <p>
+                            <strong>ইমেইল :</strong>
+                            ctl05.2026@gmail.com
+                            |
+                            <strong>মোবাইল:</strong>
+                            ০১৭০৯৬৫৩৫৯৫
+                        </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Date -->
             <div class="letter-meta">
-                <div><strong>Ref:</strong> <?= html_escape($appointment_letters->letter_number ?? '-'); ?></div>
-                <div><strong>Date:</strong> <?= html_escape($appointment_letters->appointment_date ?? '-'); ?></div>
+                <div><strong>স্মারক নং:</strong> <?= html_escape($appointment_letters->letter_number ?? '-'); ?></div>
+                <div><strong>তারিখ:</strong><?= html_escape(explode('/', $appointment_letters->letter_number ?? '-')[1]); ?>
+                </div>
             </div>
 
-            <!-- Title -->
             <div class="title">
-                <h2>Appointment Letter</h2>
+                <h2>নিয়োগ পত্র</h2>
             </div>
 
-            <!-- Applicant Information -->
             <div class="applicant-card">
 
                 <div class="applicant-info">
 
                     <div class="info-row">
-                        <span class="info-label">Name</span>
-                        <span class="info-value">: <?= html_escape($appointment_letters->employee_name ?? '-'); ?></span>
+                        <span class="info-label">নাম</span>
+                        <span class="info-value">: </span>
+                        <span class="info-value"> <?= html_escape($appointment_letters->employee_name ?? '-'); ?></span>
                     </div>
 
                     <div class="info-row">
-                        <span class="info-label">Father's Name</span>
-                        <span class="info-value">: <?= html_escape($appointment_letters->father_name ?? '-'); ?></span>
+                        <span class="info-label">পিতা</span>
+                        <span class="info-value">: </span>
+                        <span class="info-value"> <?= html_escape($appointment_letters->father_name ?? '-'); ?></span>
                     </div>
 
                     <div class="info-row">
-                        <span class="info-label">Mother's Name</span>
-                        <span class="info-value">: <?= html_escape($appointment_letters->mother_name ?? '-'); ?></span>
+                        <span class="info-label">মাতা</span>
+                        <span class="info-value">: </span>
+                        <span class="info-value"><?= html_escape($appointment_letters->mother_name ?? '-'); ?></span>
                     </div>
 
                     <div class="info-row">
-                        <span class="info-label">Permanent Address</span>
+                        <span class="info-label">ঠিকানা</span>
                         <span class="info-value">
-                            : <?= html_escape($appointment_letters->permanent_address ?? '-'); ?>
+                            :
                         </span>
+                        <span class="info-value"><?= html_escape($appointment_letters->permanent_address ?? '-'); ?></span>
                     </div>
 
-                    <div class="info-row">
+                    <!-- <div class="info-row">
                         <span class="info-label">Present Address</span>
                         <span class="info-value">
                             : <?= html_escape($appointment_letters->present_address ?? '-'); ?>
                         </span>
-                    </div>
-                    <div class="info-row">
+                    </div> -->
+                    <!-- <div class="info-row">
                         <span class="info-label">Joinning Date</span>
                         <span class="info-value">
                             : <?= html_escape($appointment_letters->joining_date ?? '-'); ?>
                         </span>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -585,7 +676,6 @@
 
             </div>
 
-            <!-- Appointment Content -->
             <div class="content">
 
                 <p class="intro-text">
@@ -593,7 +683,7 @@
                 </p>
 
                 <div class="section-heading">
-                    Terms and Conditions of Appointment
+                    নিয়োগ শর্তাবলী :
                 </div>
 
                 <ol class="terms-list">
@@ -616,19 +706,28 @@
                     ?>
                 </ol>
 
-                <!-- Signatures -->
                 <div class="signature-section">
-
                     <div class="signature-box">
                         <!-- <div class="signature-line">
                         Employee's Signature
                     </div> -->
                     </div>
 
+
+                    <!-- <div class="signature-box">
+                        <div class="signature-line">
+                            <strong>মোঃ জসিম উদ্দিন</strong><br>
+                            চেয়ারম্যান ও ব্যবস্থাপনা পরিচালক<br>
+                            চান্দ্রা ট্রেডিং লিমিটেড
+                        </div>
+                    </div> -->
                     <div class="signature-box">
                         <div class="signature-line">
+                            <img src="<?= base_url('assets/uploads/letter_pad/' . $appointment_letters->reporting_authority_sign); ?>"
+                                alt="CTL Logo"> <br>
                             <strong><?= html_escape($appointment_letters->reporting_authority ?? 'N/A'); ?></strong><br>
-                            <?= html_escape($loggedUser->designation ?? 'N/A'); ?><br>
+                            <?= html_escape($appointment_letters->reporting_authority_designation ?? 'N/A'); ?><br>
+                            চান্দ্রা ট্রেডিং লিমিটেড
                         </div>
                     </div>
 
@@ -636,41 +735,59 @@
 
             </div>
 
-            <!-- Footer -->
             <div class="footer">
+                <img src="<?= base_url('assets/uploads/letter_pad/CTL b Png-02.png'); ?>" alt="">
+            </div>
 
-                <p>
-                    This appointment letter has been generated
-                    automatically. Please contact us if you require
-                    any assistance.
+
+
+            <!-- <div class="footer">
+         <p>
+
+                    এই অ্যাপয়েন্টমেন্ট লেটারটি স্বয়ংক্রিয়ভাবে তৈরি করা হয়েছে। আপনার কোনো সহায়তার প্রয়োজন হলে অনুগ্রহ করে
+                    আমাদের সাথে যোগাযোগ করুন।
                 </p>
 
                 <p>
-                    <strong>Email:</strong>
+                    <strong>ইমেইল :</strong>
                     ctl05.2026@gmail.com
                     |
-                    <strong>Mobile:</strong>
-                    +880 1709-653400
+                    <strong>মোবাইল:</strong>
+                    ০১৭০৯৬৫৩৫৯৫
                 </p>
 
-            </div>
+            </div> -->
 
         </div>
 
     <?php else: ?>
         <div class="content-wrapper" style="text-align: center; padding: 50px; font-weight: bold; color: #65716b;">
-            No appointment letter details found for <span class="text-red fw-bold"><?= html_escape($application->applicant_name ?? 'N/A'); ?></span>. <br>
+            No appointment letter details found for <span
+                class="text-red fw-bold"><?= html_escape($application->applicant_name ?? 'N/A'); ?></span>. <br>
             <a href="<?= base_url('appointment_letter_form/' . $application->application_id); ?>"
                 class="btn btn-success btn-sm rounded-3 px-3 fw-medium add_btn">
                 <i class="bi bi-plus-lg me-1"></i> Make Appointment Letter
             </a>
         </div>
     <?php endif; ?>
-
-
-
-
-
 </body>
 
 </html>
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'bn',
+                includedLanguages: 'en,bn',
+                autoDisplay: false,
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            },
+            'google_translate_element'
+        );
+    }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>

@@ -42,17 +42,16 @@
             <div>
                 <h2 class="h3 fw-bold text-dark mb-1 d-flex align-items-center gap-2">
                     <i class="bi bi-building text-primary"></i>
-                    Add New Cost
+                    Add Debit/Credit
                 </h2>
-                <p class="text-muted small mb-0">Create  projects Cost</p>
+                <p class="text-muted small mb-0">Create projects Cost</p>
             </div>
             <a href="<?= base_url('projects_cost') ?>" class="btn btn-outline-secondary btn-sm rounded-2">
                 <i class="bi bi-arrow-left me-1"></i> Back to Projects List
             </a>
         </div>
 
-        <form action="<?= base_url('') ?>" method="POST"
-            enctype="multipart/form-data">
+        <form action="<?= base_url('') ?>" method="POST" enctype="multipart/form-data">
             <div class="row g-4">
 
                 <!-- LEFT COLUMN: Main Form Inputs -->
@@ -76,8 +75,8 @@
                                         <span class="input-group-text bg-light text-muted">
                                             <!-- <i class="bi bi-building"></i> -->
                                         </span>
-                                        <input type="text" name="project_name" class="form-control"
-                                            placeholder="" required>
+                                        <input type="text" name="project_name" class="form-control" placeholder=""
+                                            required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -88,43 +87,43 @@
                                         <span class="input-group-text bg-light text-muted">
                                             <!-- <i class="bi bi-building"></i> -->
                                         </span>
-                                        <input type="text" name="project_name" class="form-control"
-                                            placeholder="" required>
+                                        <input type="text" name="project_name" class="form-control" placeholder=""
+                                            required>
                                     </div>
                                 </div>
 
                                 <!-- Property Address -->
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold small">Others</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light text-muted">
-                                            <!-- <i class="bi bi-geo-alt"></i> -->
-                                        </span>
-                                        <input type="text" name="address" class="form-control"
-                                            placeholder="">
-                                    </div>
-                                </div>
+
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold small">Amount</label>
                                     <div class="input-group">
                                         <span class="input-group-text bg-light text-muted">
                                             <!-- <i class="bi bi-geo-alt"></i> -->
                                         </span>
-                                        <input type="text" name="address" class="form-control"
-                                            placeholder="">
+                                        <input type="text" name="address" class="form-control" placeholder="">
                                     </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold small">Document</label>
                                     <div class="input-group">
                                         <span class="input-group-text bg-light text-muted">
                                             <!-- <i class="bi bi-geo-alt"></i> -->
                                         </span>
-                                        <input type="file" name="address" class="form-control"
-                                            placeholder="">
+                                        <input type="file" name="address" class="form-control" placeholder="">
                                     </div>
                                 </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label fw-semibold small">Descriptions</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light text-muted">
+                                            <!-- <i class="bi bi-geo-alt"></i> -->
+                                        </span>
+                                        <textarea name="address" class="form-control" placeholder="Enter your address"
+                                            rows="3"></textarea>
+                                    </div>
+                                </div>
+
 
 
                             </div>
@@ -132,10 +131,8 @@
                     </div>
                 </div>
 
-                <!-- RIGHT COLUMN: Publishing & Metadata -->
                 <div class="col-lg-4">
 
-                    <!-- Publishing Card -->
                     <div class="card card-custom mb-4">
                         <div class="card-header">
                             <h5 class="card-title fw-bold text-dark mb-1 d-flex align-items-center gap-2">
@@ -144,7 +141,6 @@
                         </div>
                         <div class="card-body d-flex flex-column gap-3">
 
-                            <!-- Status Select -->
                             <div>
                                 <label class="form-label fw-semibold small">Type of Costs</label>
                                 <select name="status" class="form-select">
@@ -169,7 +165,7 @@
                         </div>
                     </div>
 
-                
+
                     <!-- Submission Actions -->
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary btn-lg fw-semibold shadow-sm fs-6">

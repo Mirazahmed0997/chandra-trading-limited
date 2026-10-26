@@ -427,7 +427,7 @@ $application_count = $this->db->count_all_results('job_applications');
                                     </a>
                                 </li>
                             <?php endif; ?>
-                            <!-- 
+                            
                             <?php if (has_menu_access('Add new Project')): ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('add_project') ?>"
@@ -436,7 +436,7 @@ $application_count = $this->db->count_all_results('job_applications');
                                         <p>Add new Project</p>
                                     </a>
                                 </li>
-                            <?php endif; ?> -->
+                            <?php endif; ?>
                         </ul>
                     </li>
 

@@ -31,6 +31,25 @@ class Recruit_controllers extends CI_Controller
 
     }
 
+
+    private function upload_file($field_name, $file_path)
+    {
+        $config['upload_path'] = $file_path;
+        $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+        $config['max_size'] = 2048;
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload($field_name)) {
+            $data = $this->upload->data();
+            return $data['file_name'];
+        } else {
+            return '';
+        }
+    }
+
     public function check_access($menu)
     {
         $user = $this->session->userdata('login_user_info_all');
@@ -705,19 +724,29 @@ class Recruit_controllers extends CI_Controller
 
     public function appointment_letter_save()
     {
-        // $this->check_access('Add new Properties');
+
+        function convert_to_bangla_number($number)
+        {
+            $english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            $bangla = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+
+            return str_replace($english, $bangla, (string) $number);
+        }
         $loggedUser = $this->session->userdata('login_user_info_all');
-        // echo '<pre>';
-        // print_r($loggedUser->username);
-        // echo '</pre>';
-        // exit;
 
         if (!$loggedUser) {
             redirect('login');
             return;
         }
 
-        // 2. Form Data Extraction & Trimming
+        $count = $this->db->count_all_results('appointment_letters') + 1;
+        // echo '<pre>';
+        // print_r($count);
+        // echo '</pre>';
+        // exit;
+
+        $date = date('d-m-Y');
+
         $employee_name = trim($this->input->post('employee_name'));
         $father_name = trim($this->input->post('father_name'));
         $mother_name = $this->input->post('mother_name');
@@ -729,16 +758,18 @@ class Recruit_controllers extends CI_Controller
         $present_address = trim($this->input->post('present_address'));
         $designation = trim($this->input->post('designation'));
         $employment_type = trim($this->input->post('employment_type'));
-        $appointment_date = trim($this->input->post('appointment_date'));
+        // $appointment_date = trim($this->input->post('appointment_date'));
         $joining_date = trim($this->input->post('joining_date'));
         $probation_period = trim($this->input->post('probation_period'));
-        $reporting_authority = $loggedUser->username;
+        $reporting_authority = trim($this->input->post('reporting_authority'));
+        $reporting_authority_designation = trim($this->input->post('reporting_authority_designation'));
+        $reporting_authority_sign = $this->upload_file('reporting_authority_sign', './assets/uploads/letter_pad/');
         $basic_salary = trim($this->input->post('basic_salary'));
         $gross_salary = trim($this->input->post('gross_salary'));
         $conditions = trim($this->input->post('conditions'));
         $additional_instructions = trim($this->input->post('additional_instructions'));
         $applicant_id = trim($this->input->post('applicant_id'));
-        $letter_number = 'CTL0' . $applicant_id;
+        $letter_number = 'সিটিএল-০' . convert_to_bangla_number($count) . '/' . convert_to_bangla_number($date);
 
 
         $data = array(
@@ -753,17 +784,18 @@ class Recruit_controllers extends CI_Controller
             'present_address' => $present_address,
             'designation' => $designation,
             'employment_type' => $employment_type,
-            'appointment_date' => $appointment_date,
+            'appointment_date' => $date,
             'joining_date' => $joining_date,
             'probation_period' => $probation_period,
             'reporting_authority' => $reporting_authority,
+            'reporting_authority_designation' => $reporting_authority_designation,
+            'reporting_authority_sign' => $reporting_authority_sign,
             'basic_salary' => $basic_salary,
             'gross_salary' => $gross_salary,
             'conditions' => $conditions,
             'additional_instructions' => $additional_instructions,
             'letter_number' => $letter_number,
             'applicant_id' => $applicant_id,
-
             'created_at' => date('Y-m-d H:i:s')
         );
 
@@ -903,93 +935,167 @@ class Recruit_controllers extends CI_Controller
     }
 
 
-    public function send_appointment_letter($id = NULL)
-    {
-        $loggedUser = $this->session->userdata('login_user_info_all');
+    
+public function send_appointment_letter($id = NULL)
+{
+    $this->db->where('application_id', $id);
+    $applicant = $this->db->get('job_applications')->row();
 
 
-        $this->db->where('application_id', $id);
-        $applicant = $this->db->get('job_applications')->row();
-        $date = date('d-m-Y');
-        $letter_number = 'CTL0' . $id . ' -' . $date;
+
+    $date = date('d-m-Y');
+    // $letter_number = 'CTL0' . $id . '-' . $date;
+
+    if ($applicant && !empty($applicant->contact_email)) {
+        $email = 'ahmedmiraz87@gmail.com';
+        // $email = $applicant->contact_email;
+
+        
+        // echo '<pre>';
+        // print_r($body);
+        // echo '</pre>';
+        // exit;
+
+        $this->load->library('email');
+
+        $config['mailtype'] = 'html';
+        $this->email->initialize($config);
+
+        $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
+        $this->email->to($email);
+        $this->email->subject('Appointment Letter');
+
+        $data['applicant'] = $applicant;
+        $body = base_url(
+            'appointment_letter_email/' . $id
+        );
+        // echo '<pre>';
+        // print_r($body);
+        // echo '</pre>';
+        // exit;
+
+        $this->email->message($body);
+
+        $update_data = [
+
+            // 'letter_number ' => $letter_number,
+            'is_sent' => 1
+        ];
 
 
         $this->db->where('applicant_id', $id);
-        $appointment_letters = $this->db->get('appointment_letters')->row();
+        $this->db->update('appointment_letters', $update_data);
 
-        if ($applicant && !empty($applicant->contact_email)) {
-            $email = 'ahmedmiraz87@gmail.com';
-            // $email = $applicant->contact_email;
-
-            $data['application'] = $applicant;
-            $data['appointment_letters'] = $appointment_letters;
-            $data['loggedUser'] = $loggedUser;
-
-            $html_content = $this->load->view('admin/staff_recruitment/appointment_letter_email', $data, True);
-            // $html_content = $this->load->view('appointment_letter_email/'. $id);
-
-            // echo '<pre>';
-            // print_r($html_content);
-            // echo '</pre>';
-            // exit;
-
-
-            if (empty($html_content)) {
-                $this->session->set_flashdata('error', 'Failed to generate HTML content for the PDF.');
-                redirect($_SERVER['HTTP_REFERER']);
-                return;
-            }
-
-            $pdf_path = $this->generate_appointment_pdf($html_content, $id);
-
-
-
-            $this->load->library('email');
-
-            $config['mailtype'] = 'html';
-            $this->email->initialize($config);
-
-            $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
-            $this->email->to($email);
-            $this->email->subject('Appointment Letter');
-
-            $message = '<p>Dear ' . ($applicant->name ?? 'Applicant') . ',</p>';
-            $message .= '<p>Please find attached your official appointment letter from Chandra Trading Limited.</p>';
-            $this->email->message($message);
-
-            $this->email->attach($pdf_path);
-
-            $update_data = [
-                'letter_number' => $letter_number,
-                'is_sent' => 1
-            ];
-
-            $this->db->where('applicant_id', $id);
-            $this->db->update('appointment_letters', $update_data);
-
-            if ($this->email->send()) {
-                if (file_exists($pdf_path)) {
-                    unlink($pdf_path);
-                }
-
-                $this->session->set_flashdata(
-                    'success',
-                    'Appointment letter PDF sent successfully!'
-                );
-            } else {
-                echo $this->email->print_debugger();
-                return;
-            }
-
-        } else {
+        if ($this->email->send()) {
             $this->session->set_flashdata(
-                'error',
-                'Email not found or applicant does not exist'
+                'success',
+                'Appointment letter sent successfully!'
             );
+        } else {
+            echo $this->email->print_debugger();
+            return;
         }
 
-        redirect($_SERVER['HTTP_REFERER']);
+    } else {
+        $this->session->set_flashdata(
+            'error',
+            'Email not found or applicant does not exist'
+        );
     }
+
+    redirect($_SERVER['HTTP_REFERER']);
+}
+
+
+    // public function send_appointment_letter($id = NULL)
+    // {
+    //     $loggedUser = $this->session->userdata('login_user_info_all');
+
+
+    //     $this->db->where('application_id', $id);
+    //     $applicant = $this->db->get('job_applications')->row();
+    //     $date = date('d-m-Y');
+
+
+    //     $this->db->where('applicant_id', $id);
+    //     $appointment_letters = $this->db->get('appointment_letters')->row();
+
+    //     if ($applicant && !empty($applicant->contact_email)) {
+    //         $email = 'ahmedmiraz87@gmail.com';
+    //         // $email = $applicant->contact_email;
+
+    //         $data['application'] = $applicant;
+    //         $data['appointment_letters'] = $appointment_letters;
+    //         $data['loggedUser'] = $loggedUser;
+
+    //         $html_content = $this->load->view('admin/staff_recruitment/appointment_letter_email_pdf', $data, True);
+    //         // $html_content = $this->load->view('appointment_letter_email/'. $id);
+
+
+
+
+    //         if (empty($html_content)) {
+    //             $this->session->set_flashdata('error', 'Failed to generate HTML content for the PDF.');
+    //             redirect($_SERVER['HTTP_REFERER']);
+    //             return;
+    //         }
+
+    //         $pdf_path = $this->generate_appointment_pdf($html_content, $id);
+
+
+    //         // echo '<pre>';
+    //         // print_r($html_content);
+    //         // echo '</pre>';
+    //         // exit;
+
+    //         $this->load->library('email');
+
+    //         $config['mailtype'] = 'html';
+    //         $this->email->initialize($config);
+
+    //         $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
+    //         $this->email->to($email);
+    //         $this->email->subject('Appointment Letter');
+
+    //         $message = '<p>Dear ' . ($applicant->name ?? 'Applicant') . ',</p>';
+    //         $message .= '<p>Please find attached your official appointment letter from Chandra Trading Limited.</p>';
+    //         $this->email->message($message);
+
+    //         $this->email->attach($pdf_path);
+
+    //         $update_data = [
+    //             'is_sent' => 1
+    //         ];
+
+    //         $this->db->where('applicant_id', $id);
+    //         $this->db->update('appointment_letters', $update_data);
+
+    //         if ($this->email->send()) {
+    //             if (file_exists($pdf_path)) {
+    //                 unlink($pdf_path);
+    //             }
+
+    //             $this->session->set_flashdata(
+    //                 'success',
+    //                 'Appointment letter PDF sent successfully!'
+    //             );
+    //         } else {
+    //             echo $this->email->print_debugger();
+    //             return;
+    //         }
+
+    //     } else {
+    //         $this->session->set_flashdata(
+    //             'error',
+    //             'Email not found or applicant does not exist'
+    //         );
+    //     }
+
+    //     redirect($_SERVER['HTTP_REFERER']);
+    // }
+
+
+
 
     private function generate_appointment_pdf($html, $id)
     {
@@ -1116,138 +1222,6 @@ class Recruit_controllers extends CI_Controller
         }
     }
 
-    //  public function applications_list()
-    // {
-    //     // $this->check_access('Job Applications');
-
-    //     $data = $this->engine->store_nav(
-    //         'applications list',
-    //         'applications list',
-    //         'applications list'
-    //     );
-
-    //     // Filters
-    //     $applicant_name = trim($this->input->get('applicant_name'));
-    //     $applied_position = trim($this->input->get('applied_position'));
-    //     $contact_mobile = trim($this->input->get('contact_mobile'));
-    //     $application_status = trim($this->input->get('application_status'));
-
-    //     if (!empty($applicant_name)) {
-    //         $this->db->like('applicant_name', $applicant_name);
-    //     }
-
-    //     if (!empty($applied_position)) {
-    //         $this->db->like('applied_position', $applied_position);
-    //     }
-
-    //     if (!empty($contact_mobile)) {
-    //         $this->db->like('contact_mobile', $contact_mobile);
-    //     }
-
-    //     if (!empty($application_status)) {
-    //         $this->db->where('application_status', $application_status);
-    //     }
-
-    //     // Get applicants
-    //     $data['applications'] = $this->db
-    //         ->order_by('id', 'DESC')
-    //         ->get('job_applications')
-    //         ->result();
-
-    //     // Filter values for frontend
-    //     $data['applicant_name'] = $applicant_name;
-    //     $data['applied_position'] = $applied_position;
-    //     $data['contact_mobile'] = $contact_mobile;
-    //     $data['application_status'] = $application_status;
-
-    //     // Counts
-    //     $data['total_applications'] = $this->db
-    //         ->count_all('job_applications');
-
-    //     $data['pending_applications'] = $this->db
-    //         ->where('application_status', 'Pending')
-    //         ->count_all_results('job_applications');
-
-    //     $data['approved_applications'] = $this->db
-    //         ->where('application_status', 'Approved')
-    //         ->count_all_results('job_applications');
-
-    //     $data['rejected_applications'] = $this->db
-    //         ->where('application_status', 'Rejected')
-    //         ->count_all_results('job_applications');
-
-    //     // View
-
-    //     $path = 'admin/staff_recruitment/applications_list';
-    //     $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
-    // }
-
-
-
 }
 
 
-
-// public function send_appointment_letter($id = NULL)
-// {
-//     $this->db->where('application_id', $id);
-//     $applicant = $this->db->get('job_applications')->row();
-
-
-
-//     $date = date('d-m-Y');
-//     $letter_number = 'CTL0' . $id . ' -' . $date;
-
-//     if ($applicant && !empty($applicant->contact_email)) {
-//         $email = 'ahmedmiraz87@gmail.com';
-//         // $email = $applicant->contact_email;
-
-//         $this->load->library('email');
-
-//         $config['mailtype'] = 'html';
-//         $this->email->initialize($config);
-
-//         $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
-//         $this->email->to($email);
-//         $this->email->subject('Appointment Letter');
-
-//         $data['applicant'] = $applicant;
-//         $body = base_url(
-//             'appointment_letter_email/' . $id
-//         );
-//         // echo '<pre>';
-//         // print_r($body);
-//         // echo '</pre>';
-//         // exit;
-
-//         $this->email->message($body);
-
-//         $update_data = [
-
-//             'letter_number ' =>$letter_number,
-//             'is_sent'=>1
-//         ];
-
-
-//         $this->db->where('applicant_id', $id);
-//         $this->db->update('appointment_letters', $update_data);
-
-//         if ($this->email->send()) {
-//             $this->session->set_flashdata(
-//                 'success',
-//                 'Appointment letter sent successfully!'
-//             );
-//         } else {
-//             echo $this->email->print_debugger();
-//             return;
-//         }
-
-//     } else {
-//         $this->session->set_flashdata(
-//             'error',
-//             'Email not found or applicant does not exist'
-//         );
-//     }
-
-//     redirect($_SERVER['HTTP_REFERER']);
-// }

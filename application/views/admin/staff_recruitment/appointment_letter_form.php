@@ -100,6 +100,7 @@
     }
 
     @media (max-width: 576px) {
+
         .appointment-card-body,
         .appointment-card-header,
         .appointment-footer {
@@ -126,15 +127,12 @@
                 </div>
             </div>
 
-            <a href="<?= base_url('projects_list/') ?>"
-               class="btn btn-outline-secondary">
+            <a href="<?= base_url('projects_list/') ?>" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left me-2"></i>Back to List
             </a>
         </div>
 
-        <form action="<?= base_url('appointment_letter_save/') ?>"
-              method="POST"
-              id="appointmentForm">
+        <form action="<?= base_url('appointment_letter_save/') ?>" method="POST" id="appointmentForm"  enctype="multipart/form-data">
 
             <div class="appointment-card">
                 <div class="appointment-card-header">
@@ -158,83 +156,59 @@
                             <label class="form-label">
                                 Employee Full Name <span class="required">*</span>
                             </label>
-                            <input type="text"
-                                   name="employee_name"
-                                   class="form-control"
-                                   value="<?= html_escape($applicant->applicant_name); ?>"
-                                   placeholder="Enter employee's full name"
-                                   required>
+                            <input type="text" name="employee_name" class="form-control"
+                                value="<?= html_escape($applicant->applicant_name); ?>"
+                                placeholder="Enter employee's full name" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">
                                 Father's Name <span class="required">*</span>
                             </label>
-                            <input type="text"
-                                   name="father_name"
-                                   class="form-control"
-                                   value="<?= html_escape($applicant->father_name ?? '-'); ?>"
-                                   placeholder="Enter parent's name"
-                                   required>
+                            <input type="text" name="father_name" class="form-control"
+                                value="<?= html_escape($applicant->father_name ?? '-'); ?>"
+                                placeholder="Enter parent's name" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">
-                               Mother's Name <span class="required">*</span>
+                                Mother's Name <span class="required">*</span>
                             </label>
-                            <input type="text"
-                                   name="mother_name"
-                                   class="form-control"
-                                   value="<?= html_escape($applicant->mother_name ?? '-'); ?>"
-                                   placeholder="Enter parent's name"
-                                   required>
+                            <input type="text" name="mother_name" class="form-control"
+                                value="<?= html_escape($applicant->mother_name ?? '-'); ?>"
+                                placeholder="Enter parent's name" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Employee ID <span class="required">*</span></label>
-                            <input type="text"
-                                   name="employee_id"
-                                   class="form-control"
-                                   placeholder="Enter employee ID"
-                                   required>
+                            <input type="text" name="employee_id" class="form-control" placeholder="Enter employee ID"
+                                required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Email Address <span class="required">*</span></label>
-                            <input type="email"
-                                   name="employee_email"
-                                   class="form-control"
-                                   value="<?= html_escape($applicant->contact_email ?? '-'); ?>"
-                                   placeholder="employee@example.com"
-                                   required>
+                            <input type="email" name="employee_email" class="form-control"
+                                value="<?= html_escape($applicant->contact_email ?? '-'); ?>"
+                                placeholder="employee@example.com" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Contact Number <span class="required">*</span></label>
-                            <input type="tel"
-                                   name="employee_phone"
-                                   class="form-control"
-                                   value="<?= html_escape($applicant->contact_mobile ?? '-'); ?>"
-                                   placeholder="Enter contact number"
-                                   required>
+                            <input type="tel" name="employee_phone" class="form-control"
+                                value="<?= html_escape($applicant->contact_mobile ?? '-'); ?>"
+                                placeholder="Enter contact number" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Present Address <span class="required">*</span></label>
-                            <input type="text"
-                                   name="present_address"
-                                   class="form-control"
-                                   value="<?= html_escape($applicant->present_address ?? '-'); ?>"
-                                   placeholder="Enter present address"
-                                   required>
+                            <input type="text" name="present_address" class="form-control"
+                                value="<?= html_escape($applicant->present_address ?? '-'); ?>"
+                                placeholder="Enter present address" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Permanent Address <span class="required">*</span></label>
-                            <input type="text"
-                                   name="permanent_address"
-                                   class="form-control"
-                                   value="<?= html_escape($applicant->permanent_address ?? '-'); ?>"
-                                   placeholder="Enter Permanent address"
-                                   required>
+                            <input type="text" name="permanent_address" class="form-control"
+                                value="<?= html_escape($applicant->permanent_address ?? '-'); ?>"
+                                placeholder="Enter Permanent address" required>
                         </div>
 
                     </div>
@@ -263,26 +237,20 @@
                             <label class="form-label">
                                 Designation / Job Title <span class="required">*</span>
                             </label>
-                            <input type="text"
-                                   name="designation"
-                                   class="form-control"
-                                   placeholder="e.g. Software Engineer"
-                                   value="<?= html_escape($applicant->applied_position ?? 'N/A'); ?>"
-                                   required>
+                            <input type="text" name="designation" class="form-control"
+                                placeholder="e.g. Software Engineer"
+                                value="<?= html_escape($applicant->applied_position ?? 'N/A'); ?>" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">
                                 Application ID <span class="required">*</span>
                             </label>
-                            <input type="text"
-                                   name="applicant_id"
-                                   class="form-control"
-                                   placeholder="e.g. Software Engineer"
-                                   value="<?= html_escape($applicant->application_id ?? 'N/A'); ?>"
-                                   required>
+                            <input type="text" name="applicant_id" class="form-control"
+                                placeholder="e.g. Software Engineer"
+                                value="<?= html_escape($applicant->application_id ?? 'N/A'); ?>" required>
                         </div>
 
-                    
+
                         <div class="col-md-6">
                             <label class="form-label">Employment Type</label><span class="required">*</span>
                             <select name="employment_type" class="form-select" required>
@@ -303,24 +271,18 @@
                                    placeholder="Enter letter number">
                         </div> -->
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label class="form-label">
                                 Appointment Date <span class="required">*</span>
                             </label>
-                            <input type="date"
-                                   name="appointment_date"
-                                   class="form-control"
-                                   required>
-                        </div>
+                            <input type="date" name="appointment_date" class="form-control" required>
+                        </div> -->
 
                         <div class="col-md-6">
                             <label class="form-label">
                                 Joining Date <span class="required">*</span>
                             </label>
-                            <input type="date"
-                                   name="joining_date"
-                                   class="form-control"
-                                   required>
+                            <input type="date" name="joining_date" class="form-control" required>
                         </div>
 
                         <div class="col-md-6">
@@ -361,27 +323,17 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Monthly Basic Salary (BDT) <span class="required">*</span></label>
-                            <input type="number"
-                                   name="basic_salary"
-                                   class="form-control"
-                                   placeholder="Enter basic salary"
-                                   min="0"
-                                   step="0.01"
-                                   required>
+                            <input type="number" name="basic_salary" class="form-control"
+                                placeholder="Enter basic salary" min="0" step="0.01" required>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Gross Monthly Salary (BDT) <span class="required">*</span></label>
-                            <input type="number"
-                                   name="gross_salary"
-                                   class="form-control"
-                                   placeholder="Enter gross salary"
-                                   min="0"
-                                   step="0.01"
-                                   required>
+                            <input type="number" name="gross_salary" class="form-control"
+                                placeholder="Enter gross salary" min="0" step="0.01" required>
                         </div>
 
-                       
+
 
                     </div>
                 </div>
@@ -409,21 +361,54 @@
                         <div class="col-md-12">
                             <label class="form-label">Terms and Conditions <span class="required">*</span></label>
                             <small> ( Use <span class="text-red fw-bold">"-"</span> in every conditions )</small>
-                            <textarea name="conditions"
-                                      required
-                                      class="form-control"
-                                      rows="5"
-                                      placeholder="Enter employment rules, confidentiality requirements, leave policy, notice period, termination conditions, and other applicable terms."></textarea>
+                            <textarea name="conditions" required class="form-control" rows="5"
+                                placeholder="Enter employment rules, confidentiality requirements, leave policy, notice period, termination conditions, and other applicable terms."></textarea>
                         </div>
 
                         <div class="col-md-12">
                             <label class="form-label">Additional Instructions <span class="required">*</span></label>
-                            <textarea name="additional_instructions"
-                                      class="form-control"
-                                      rows="3"
-                                      required
-                                      placeholder="Enter any additional instructions for the employee."></textarea>
+                            <textarea name="additional_instructions" class="form-control" rows="3" required
+                                placeholder="Enter any additional instructions for the employee."></textarea>
                         </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="appointment-card">
+                <div class="appointment-card-header">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="section-icon">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Authority Details</h5>
+                          
+                        </div>
+                    </div>
+                </div>
+
+                <div class="appointment-card-body">
+                    <div class="row g-3">
+
+                        <div class="col-md-4">
+                            <label class="form-label">Authority Name <span class="required">*</span></label>
+                            <input type="text" name="reporting_authority" class="form-control"
+                                placeholder="Enter Authority Name"  required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Authority Designation <span class="required">*</span></label>
+                            <input type="text" name="reporting_authority_designation" class="form-control"
+                                placeholder="Designation" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Authority Signature <span class="required">*</span></label>
+                            <input type="file" name="reporting_authority_sign" class="form-control"
+                                placeholder="Designation" required>
+                        </div>
+
+
 
                     </div>
                 </div>
@@ -450,6 +435,8 @@
                     </div>
                 </div>
             </div>
+
+
 
         </form>
     </div>

@@ -8,7 +8,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -43,7 +42,7 @@
             max-width: 850px;
             min-height: 1050px;
             margin: 0 auto;
-            padding: 42px 48px 30px;
+            padding: 50px;
             overflow: hidden;
             background: var(--paper);
             border: 1px solid #e1e8e3;
@@ -56,7 +55,6 @@
             inset: 0 0 auto;
             height: 7px;
             background: #9DB9C6;
-            /* background: linear-gradient(90deg, var(--brand-dark), #2f875c); */
             content: "";
         }
 
@@ -86,17 +84,9 @@
         }
 
         /* Company Header */
-        .header {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            padding-bottom: 23px;
-            border-bottom: 2px solid var(--brand);
-            background: #9DB9C6;
-            padding: 20px;
-            color: #fff;
-            font-weight: bold;
+        .header img {
+            width: 100%;
+            border-bottom: 2px solid #302D2E;
         }
 
         .logo {
@@ -108,30 +98,26 @@
             height: 100px;
         }
 
-        .logo img {
-            display: block;
-            width: 200px;
-            /* max-height: 100px; */
-            object-fit: contain;
-            position: absolute;
-            left: 40px;
-        }
-
         .company-details {
             position: absolute;
-            right: 190px;
+            right: 243px;
         }
 
         .company-name {
-            margin: 0 0 5px;
-            /* color: var(--brand-dark); */
-            font-size: 25px;
+            margin: 5px 0 5px;
+            font-size: 14px;
             font-weight: 700;
             line-height: 1.3;
         }
 
+        .contact {
+            margin-top: -24px;
+            margin-left: 11px;
+        }
+
         .company-info {
-            /* color: var(--muted); */
+            display: flex;
+            justify-content: center;
             font-size: 11.5px;
             line-height: 1.8;
         }
@@ -140,7 +126,7 @@
         .letter-meta {
             display: flex;
             justify-content: space-between;
-            margin: 22px 0 8px;
+            margin: 0px 0 5px;
             color: var(--muted);
             font-size: 12px;
         }
@@ -154,15 +140,16 @@
         .title h2 {
             display: inline-block;
             margin: 0;
-            padding-bottom: 8px;
-            color: var(--brand-dark);
+            padding: 10px 12px 6px 12px;
+            color: #fff;
             border-bottom: 2px solid var(--brand);
             font-size: 22px;
             font-weight: 700;
             letter-spacing: .2px;
+            background: #3A4EA2;
+            border-radius: 5px;
         }
 
-        /* appointment_letters Information */
         .applicant-card {
             display: flex;
             align-items: center;
@@ -211,7 +198,8 @@
             flex: 0 0 94px;
         }
 
-        .applicant-img img {
+        .applicant-img img,
+        .appointment_letters-img img {
             display: block;
             width: 94px;
             height: 112px;
@@ -221,7 +209,6 @@
             box-shadow: 0 2px 8px rgba(20, 60, 38, .14);
         }
 
-        /* Letter Content */
         .content {
             margin-top: 0;
             font-size: 13px;
@@ -231,7 +218,7 @@
             margin: 0 0 19px;
             color: #303a34;
             font-size: 13px;
-            line-height: 1.9;
+            line-height: 1.6;
             text-align: justify;
         }
 
@@ -250,34 +237,26 @@
         .terms-list {
             margin: 0;
             padding: 0;
-            list-style: none;
+            list-style-type: none;
         }
 
         .terms-list li {
             position: relative;
-            margin: 0 0 9px;
-            padding-left: 28px;
+            margin: 0 0 10px;
             color: #303a34;
-            font-size: 12.5px;
-            line-height: 1.75;
+            font-size: 13px;
+            line-height: 1.6;
             text-align: justify;
         }
 
-        .terms-list li .num {
-            position: absolute;
-            top: 0;
-            left: 0;
-            color: var(--brand);
-            font-weight: 700;
-        }
 
-        /* Signature Section */
+
         .signature-section {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
             gap: 35px;
-            margin-top: 58px;
+            margin-top: 40px;
             page-break-inside: avoid;
             break-inside: avoid;
         }
@@ -291,30 +270,19 @@
 
         .signature-line {
             min-height: 45px;
-            padding-top: 9px;
+            padding-top: 5px;
             color: var(--ink);
-            border-top: 1px solid #7d8981;
             font-size: 11.5px;
-            line-height: 1.6;
+            line-height: 1.5;
+        }
+
+        .signature-line img {
+            width: 90px;
         }
 
         /* Footer */
-        .footer {
-            margin-top: 35px;
-            padding-top: 13px;
-            color: var(--muted);
-            border-top: 1px solid var(--line);
-            font-size: 10.5px;
-            line-height: 1.7;
-            text-align: center;
-            page-break-inside: avoid;
-            background: #9DB9C6;
-            color: #fff;
-            font-weight: 800;
-        }
-
-        .footer p {
-            margin: 2px 0;
+        .footer img {
+            width: 100%;
         }
 
         /* Responsive */
@@ -334,18 +302,8 @@
                 align-items: flex-start;
             }
 
-            .logo {
-                flex-basis: 76px;
-                width: 76px;
-                height: 76px;
-            }
-
-            .logo img {
-                max-height: 76px;
-            }
-
             .company-name {
-                font-size: 19px;
+                font-size: 14px;
             }
 
             .company-info {
@@ -376,278 +334,358 @@
                 font-size: 11px;
             }
 
-            .applicant-img {
-                flex-basis: 72px;
-            }
-
-            .applicant-img img {
+            .applicant-img img,
+            .appointment_letters-img img {
                 width: 72px;
                 height: 88px;
             }
 
             .signature-section {
                 gap: 20px;
-                margin-top: 40px;
+                margin-top: 30px;
             }
         }
 
-        /* A4 Print Layout */
+        /* ===================================================
+           OPTIMIZED A4 SINGLE PAGE PRINT STYLES
+           =================================================== */
         @page {
             size: A4 portrait;
-            /* margin: 12mm; */
+            margin: 0 !important;
+            /* Managed via padding in letter-container */
         }
 
         @media print {
 
             html,
             body {
-                width: 100%;
+                width: 210mm;
+                height: 297mm;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: #fff !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                overflow: hidden !important;
+            }
+
+            .goog-te-banner-frame,
+            .goog-te-banner-frame.skiptranslate,
+            #goog-gt-tt,
+            .goog-te-balloon-frame,
+            .skiptranslate,
+            .action-bar {
+                display: none !important;
+                visibility: hidden !important;
             }
 
             .letter-container {
-                width: 100%;
-                max-width: none;
-                min-height: 0;
+                width: 100% !important;
+                max-width: none !important;
+                min-height: 100vh !important;
+                height: 100% !important;
                 margin: 0 !important;
-                padding: 8mm 7mm 5mm !important;
-                overflow: visible;
-                border: 0;
-                border-radius: 0;
-                box-shadow: none;
+                padding: 8mm 15mm 8mm 15mm !important;
+                /* Reduced padding to ensure single page */
+                border: 0 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                box-sizing: border-box;
             }
 
             .letter-container::before {
                 height: 4px;
             }
 
-            .action-bar {
-                display: none !important;
+            /* Header Adjustments */
+            .header {
+                display: block;
+                padding-bottom: 0;
+                margin-bottom: 5px;
             }
 
-            .header,
-            .applicant-card,
-            .signature-section,
-            .footer {
+            .header img {
+                border-bottom: 2px solid #302D2E;
+            }
+
+            /* Meta Info & Title Spacing */
+            .letter-meta {
+                margin: 5px 0 5px !important;
+                font-size: 11px !important;
+            }
+
+            .title {
+                margin: 5px 0 10px !important;
+            }
+
+            .title h2 {
+                font-size: 16px !important;
+                padding: 5px 12px !important;
+            }
+
+            
+
+            /* Applicant Details Card */
+            .applicant-card {
+                margin-bottom: 10px !important;
+                padding: 8px 12px !important;
+                background: var(--brand-soft) !important;
+                border: 1px solid #d6e7dc !important;
+                border-left: 4px solid var(--brand) !important;
+            }
+
+            .info-row {
+                margin-bottom: 2px !important;
+                font-size: 11px !important;
+                line-height: 1.3 !important;
+            }
+
+            .info-label {
+                flex: 0 0 100px !important;
+                font-size: 11px !important;
+            }
+
+            .info-value {
+                font-size: 11px !important;
+            }
+
+            .appointment_letters-img img {
+                width: 70px !important;
+                height: 80px !important;
+            }
+
+            /* Content & Typography */
+            .content {
+                font-size: 11px !important;
+            }
+
+            .intro-text {
+                margin: 0 0 8px !important;
+                font-size: 11px !important;
+                line-height: 1.35 !important;
+            }
+
+            .section-heading {
+                margin: 8px 0 6px !important;
+                padding: 4px 8px !important;
+                font-size: 11.5px !important;
+                background: #f3f7f4 !important;
+            }
+
+            .terms-list {
+                margin: 0 !important;
+                padding-left: 18px !important;
+            }
+
+            .terms-list li {
+                margin-left: -15px !important;
+                font-size: 11px !important;
+                line-height: 1.7 !important;
+            }
+
+            /* Signature Block */
+            .signature-section {
+                margin-top: 15px !important;
                 break-inside: avoid;
                 page-break-inside: avoid;
             }
 
-            .header {
-                display: flex;
-                align-items: center;
-                justify-items: center !important;
-                padding-bottom: 23px;
-                border-bottom: 2px solid var(--brand);
+            .signature-line {
+                min-height: auto !important;
+                padding-top: 2px !important;
+                font-size: 10px !important;
+                line-height: 1.3 !important;
             }
 
-            .logo img {
-                display: block;
-                width: 220px;
-                /* max-height: 100px; */
-                object-fit: contain;
-                position: absolute;
-                left: 20px;
+            .signature-line img {
+                width: 75px !important;
             }
 
-            .company-details {
-                position: absolute;
-                right: 265px;
+            /* Footer */
+            .footer {
+                margin-top: auto !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
             }
 
-            .applicant-card {
-                background: var(--brand-soft) !important;
-            }
-
-            .section-heading {
-                background: #f3f7f4 !important;
-            }
-
-            .signature-section {
-                margin-top: 42px;
+            .footer img {
+                width: 100% !important;
             }
 
             a {
                 color: inherit;
                 text-decoration: none;
             }
-
-
         }
     </style>
 </head>
 
 <body>
 
-    <div class="letter-container">
+    <?php if ($appointment_letters): ?>
+        <div class="letter-container">
 
-        <!-- Print Button -->
-        <div class="action-bar">
-             <div>
-                
-             </div>
-            <button id="print_button" class="print-btn" onclick="window.print()">
-                <i class="fas fa-print"></i> Print
-            </button>
-         
-        </div>
-
-        <!-- Company Header -->
-        <div class="header">
-            <div class="logo">
-                <img src="<?= base_url('assets/uploads/CTL_logo_Finalll.png'); ?>" alt="CTL Logo">
-            </div>
-
-            <div class="company-details">
-                <div class="company-name">Chandra Trading Ltd.</div>
-
-                <div class="company-info">
-                    Lily Pond Center, Floor 21, Mission Road,
-                    Motijheel, Dhaka-1203, Bangladesh
-                    <br>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Date -->
-        <div class="letter-meta">
-            <div><strong>Ref:</strong> <?= html_escape($appointment_letters->letter_number ?? '-'); ?></div>
-            <div><strong>Date:</strong> <?= html_escape($appointment_letters->appointment_date ?? '-'); ?></div>
-        </div>
-
-        <!-- Title -->
-        <div class="title">
-            <h2>Appointment Letter</h2>
-        </div>
-
-        <!-- Applicant Information -->
-        <div class="applicant-card">
-
-            <div class="applicant-info">
-
-                <div class="info-row">
-                    <span class="info-label">Name</span>
-                    <span class="info-value">: <?= html_escape($appointment_letters->employee_name ?? '-'); ?></span>
+            <div>
+                <!-- Print Button -->
+                <div class="action-bar">
+                    <button id="print_button" class="print-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print
+                    </button>
                 </div>
 
-                <div class="info-row">
-                    <span class="info-label">Father's Name</span>
-                    <span class="info-value">: <?= html_escape($appointment_letters->father_name ?? '-'); ?></span>
+                <!-- Company Header -->
+                <div class="header">
+                    <img src="<?= base_url('assets/uploads/letter_pad/CTL b Png-01.png'); ?>" alt="CTL Header">
                 </div>
 
-                <div class="info-row">
-                    <span class="info-label">Mother's Name</span>
-                    <span class="info-value">: <?= html_escape($appointment_letters->mother_name ?? '-'); ?></span>
-                </div>
-
-                <div class="info-row">
-                    <span class="info-label">Permanent Address</span>
-                    <span class="info-value">
-                        : <?= html_escape($appointment_letters->permanent_address ?? '-'); ?>
-                    </span>
-                </div>
-
-                <div class="info-row">
-                    <span class="info-label">Present Address</span>
-                    <span class="info-value">
-                        : <?= html_escape($appointment_letters->present_address ?? '-'); ?>
-                    </span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Joinning Date</span>
-                    <span class="info-value">
-                        : <?= html_escape($appointment_letters->joining_date ?? '-'); ?>
-                    </span>
-                </div>
-
-            </div>
-
-            <div class="appointment_letters-img">
-                <img width="100px"
-                    src="<?= base_url('assets/uploads/applications/photo/' . $application->photo_url); ?>"
-                    alt="appointment_letters's Photo">
-            </div>
-
-        </div>
-
-        <!-- Appointment Content -->
-        <div class="content">
-
-            <p class="intro-text">
-                <?= html_escape($appointment_letters->additional_instructions ?? 'N/A'); ?>
-            </p>
-
-            <div class="section-heading">
-                Terms and Conditions of Appointment
-            </div>
-
-            <ol class="terms-list">
-                <?php
-                $conditions = $appointment_letters->conditions ?? '';
-
-                if (!empty($conditions)) {
-                    $items = explode('-', $conditions);
-
-                    foreach ($items as $item) {
-                        $item = trim($item);
-
-                        if (!empty($item)) {
-                            echo '<li>' . html_escape($item) . '</li>';
-                        }
-                    }
-                } else {
-                    echo '<li>N/A</li>';
-                }
-                ?>
-            </ol>
-
-            <!-- Signatures -->
-            <div class="signature-section">
-
-                <div class="signature-box">
-                    <!-- <div class="signature-line">
-                        Employee's Signature
-                    </div> -->
-                </div>
-
-                <div class="signature-box">
-                    <div class="signature-line">
-                        <strong><?= html_escape($appointment_letters->reporting_authority ?? 'N/A'); ?></strong><br>
-                        <?= html_escape($loggedUser->designation ?? 'N/A'); ?><br>
+                <!-- Date -->
+                <div class="letter-meta">
+                    <div><strong>স্মারক নং:</strong> <?= html_escape($appointment_letters->letter_number ?? '-'); ?></div>
+                    <div><strong>তারিখ:</strong>
+                        <?= html_escape(explode('/', $appointment_letters->letter_number ?? '-')[1] ?? '-'); ?>
                     </div>
                 </div>
 
+                <div class="title">
+                    <h2>নিয়োগ পত্র</h2>
+                </div>
+
+                <div class="applicant-card">
+
+                    <div class="applicant-info">
+
+                        <div class="info-row">
+                            <span class="info-label">নাম</span>
+                            <span class="info-value">: </span>
+                            <span class="info-value"> <?= html_escape($appointment_letters->employee_name ?? '-'); ?></span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">পিতা</span>
+                            <span class="info-value">: </span>
+                            <span class="info-value"> <?= html_escape($appointment_letters->father_name ?? '-'); ?></span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">মাতা</span>
+                            <span class="info-value">: </span>
+                            <span class="info-value"><?= html_escape($appointment_letters->mother_name ?? '-'); ?></span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">ঠিকানা</span>
+                            <span class="info-value">
+                                :
+                            </span>
+                            <span
+                                class="info-value"><?= html_escape($appointment_letters->permanent_address ?? '-'); ?></span>
+                        </div>
+
+                        <!-- <div class="info-row">
+                        <span class="info-label">Present Address</span>
+                        <span class="info-value">
+                            : <?= html_escape($appointment_letters->present_address ?? '-'); ?>
+                        </span>
+                    </div> -->
+                        <!-- <div class="info-row">
+                        <span class="info-label">Joinning Date</span>
+                        <span class="info-value">
+                            : <?= html_escape($appointment_letters->joining_date ?? '-'); ?>
+                        </span>
+                    </div> -->
+
+                    </div>
+
+                    <div class="appointment_letters-img">
+                        <img width="100px"
+                            src="<?= base_url('assets/uploads/applications/photo/' . $application->photo_url); ?>"
+                            alt="appointment_letters's Photo">
+                    </div>
+
+                </div>
+
+                <!-- Main Content -->
+                <div class="content">
+                    <p class="intro-text">
+                        <?= html_escape($appointment_letters->additional_instructions ?? 'N/A'); ?>
+                    </p>
+
+                    <div class="section-heading">
+                        নিয়োগ শর্তাবলী :
+                    </div>
+
+                    <ol class="terms-list">
+                        <?php
+                        $conditions = $appointment_letters->conditions ?? '';
+
+                        if (!empty($conditions)) {
+                            $items = explode('-', $conditions);
+
+                            foreach ($items as $item) {
+                                $item = trim($item);
+
+                                if (!empty($item)) {
+                                    echo '<li>' . html_escape($item) . '</li>';
+                                }
+                            }
+                        } else {
+                            echo '<li>N/A</li>';
+                        }
+                        ?>
+                    </ol>
+
+                    <div class="signature-section">
+                        <div class="signature-box">
+                            <!-- <div class="signature-line">
+                        Employee's Signature
+                    </div> -->
+                        </div>
+                        <div class="signature-box">
+                            <div class="signature-line">
+                                <img src="<?= base_url('assets/uploads/letter_pad/' . $appointment_letters->reporting_authority_sign); ?>"
+                                    alt="Signature"><br>
+                                <strong><?= html_escape($appointment_letters->reporting_authority ?? 'N/A'); ?></strong><br>
+                                <?= html_escape($appointment_letters->reporting_authority_designation ?? 'N/A'); ?><br>
+                                চান্দ্রা ট্রেডিং লিমিটেড
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Image -->
+            <div class="footer">
+                <img src="<?= base_url('assets/uploads/letter_pad/CTL b Png-02.png'); ?>" alt="CTL Footer">
             </div>
 
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-
-            <p>
-                This appointment letter has been generated
-                automatically. Please contact us if you require
-                any assistance.
-            </p>
-
-            <p>
-                <strong>Email:</strong>
-                ctl05.2026@gmail.com
-                |
-                <strong>Mobile:</strong>
-                +880 1709-653400
-            </p>
-
+    <?php else: ?>
+        <div class="content-wrapper" style="text-align: center; padding: 50px; font-weight: bold; color: #65716b;">
+            No appointment letter details found for <span
+                class="text-red fw-bold"><?= html_escape($application->applicant_name ?? 'N/A'); ?></span>.<br>
+            <a href="<?= base_url('appointment_letter_form/' . $application->application_id); ?>"
+                class="btn btn-success btn-sm rounded-3 px-3 fw-medium add_btn">
+                <i class="bi bi-plus-lg me-1"></i> Make Appointment Letter
+            </a>
         </div>
+    <?php endif; ?>
 
-    </div>
-
-
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'bn',
+                includedLanguages: 'en,bn',
+                autoDisplay: false,
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 
