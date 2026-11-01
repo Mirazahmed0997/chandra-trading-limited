@@ -242,9 +242,9 @@
                     placeholder="e.g. ACC-1092" required>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="category">Category</label>
-                <select id="category" name="category" class="form-control" required>
+                <select id="category" name="category" class="form-control" >
                     <option value="" disabled selected>Select category</option>
                     <optgroup label="Expenses">
                         <option value="Operating Expenses">Operating Expenses</option>
@@ -258,7 +258,7 @@
                         <option value="Capital & Financing">Capital & Financing</option>
                     </optgroup>
                 </select>
-            </div>
+            </div> -->
 
             <div class="button-group">
                 <button type="submit" class="btn-custom btn-submit">

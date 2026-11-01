@@ -1,3 +1,17 @@
+<?php
+function convert_to_bangla_number($number)
+{
+    $english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    $bangla = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+
+    return str_replace($english, $bangla, (string) $number);
+}
+
+$amount = isset($account->amount) ? $account->amount : '';
+$formatted_amount = is_numeric($amount) ? number_format($amount, 2) : $amount;
+
+?>
+
 <!DOCTYPE html>
 <html lang="bn">
 
@@ -194,7 +208,7 @@
 
         /* CUSTOMER BOX */
         .customer-box {
-            border: 2px solid #d4effc ;
+            border: 2px solid #d4effc;
             border-radius: 12px;
             padding: 6px 20px;
             margin: 0 25px 15px;
@@ -245,7 +259,7 @@
 
         .transaction-table th,
         .transaction-table td {
-            
+
             border-right: 2px solid #d4effc;
             border-bottom: 2px solid #d4effc;
             padding: 8px 12px;
@@ -274,7 +288,7 @@
 
         .description-column {
             width: 70%;
-            
+
         }
 
         .amount-column {
@@ -347,9 +361,9 @@
             color: #111;
             font-weight: bold;
             text-align: end;
-            
+
         }
-      
+
         .footer-address {
             flex: 1;
             display: flex;
@@ -411,6 +425,17 @@
         <button type="button" onclick="window.print()" class="btn btn-primary px-4">
             <i class="fa fa-print me-2"></i> Print Receipt
         </button>
+        <?php if ($account->status == 'Accepted'): ?>
+            <button type="button" class="btn btn-secondary px-4 me-2" disabled>
+                <i class="bi bi-check-circle-fill me-1"></i> Expense Accepted
+            </button>
+        <?php else: ?>
+
+            <a href="<?= base_url('accept_account/' . $account->id); ?>" class="btn btn-success px-4 me-2"
+                onclick="return confirm('Are you sure you want to accept this Cost?');">
+                <i class="bi bi-check-lg me-1"></i> Accept Now
+            </a>
+        <?php endif; ?>
     </div>
 
     <div class="receipt-paper content-wrapper">
@@ -418,7 +443,7 @@
         <!-- LEFT COLOR STRIP -->
         <div class="left-strip"></div>
         <div class="vertical-company">
-            খরচ ভাউচার 
+            খরচ ভাউচার
         </div>
 
         <div class="receipt-content">
@@ -426,7 +451,7 @@
             <!-- HEADER -->
             <div class="receipt-header">
                 <div class="company-area">
-                    <img src="./assets/uploads/ctl2_logo.png" class="company-logo" alt="CTL Logo">
+                    <img src="<?= base_url('assets/uploads/ctl2_logo.png'); ?>" class="company-logo" alt="CTL Logo">
                     <div class="company-info">
                         <div class="company-name">
                             চান্দ্রা ট্রেডিং লি.
@@ -464,37 +489,37 @@
                 <div class="reciept_no">
                     ভাউচার নং:
                     <span class="ms-2">
-                        <?= isset($receipt_no) ? htmlspecialchars($receipt_no) : ''; ?>
+                        <?= isset($account->vouchar_no) ? htmlspecialchars($account->vouchar_no) : ''; ?>
                     </span>
                 </div>
                 <div class="code">
                     কোড নং:
                     <span class="mr-2">
-                        <?= isset($code_no) ? htmlspecialchars($code_no) : ''; ?>
+                        <?= isset($account->code_no) ? htmlspecialchars($account->code_no) : ''; ?>
                     </span>
                 </div>
             </div>
 
             <!-- CUSTOMER INFORMATION -->
             <div class="customer-box">
-                <div class="customer-grid">
+                <div class="customer-grid p-2">
                     <!-- Row 1 -->
                     <div class="customer-field">
                         <span class="customer-label">শেয়ার হোল্ডার নং :</span>
                         <span class="customer-value">
-                            <?= isset($shareholder_no) ? htmlspecialchars($shareholder_no) : ''; ?>
+                            <?= isset($account->share_holder_no) ? htmlspecialchars($account->share_holder_no) : ''; ?>
                         </span>
                     </div>
                     <div class="customer-field">
                         <span class="customer-label">নাম :</span>
                         <span class="customer-value">
-                            <?= isset($name) ? htmlspecialchars($name) : ''; ?>
+                            <?= isset($account->name) ? htmlspecialchars($account->name) : ''; ?>
                         </span>
                     </div>
                     <div class="customer-field">
                         <span class="customer-label">পিতা/স্বামীর নাম :</span>
                         <span class="customer-value">
-                            <?= isset($father_husband_name) ? htmlspecialchars($father_husband_name) : ''; ?>
+                            <?= isset($account->father_or_hausband) ? htmlspecialchars($account->father_or_hausband) : ''; ?>
                         </span>
                     </div>
 
@@ -502,13 +527,13 @@
                     <div class="customer-field">
                         <span class="customer-label">তারিখ :</span>
                         <span class="customer-value">
-                            <!-- <?= isset($date) ? htmlspecialchars($date) : date('d-m-Y'); ?> -->
+                            <?= convert_to_bangla_number(date('d-m-y', strtotime($account->created_at))); ?>
                         </span>
                     </div>
                     <div class="customer-field">
                         <span class="customer-label">ঠিকানা :</span>
                         <span class="customer-value">
-                            <?= isset($address) ? htmlspecialchars($address) : ''; ?>
+                            <?= isset($account->address) ? htmlspecialchars($account->address) : ''; ?>
                         </span>
                     </div>
                     <div></div>
@@ -545,26 +570,31 @@
 
                         <!-- Empty space fill -->
                         <tr>
-                            <td colspan="" class="transaction-body"></td>
-                            <td colspan="" class="transaction-body"></td>
-                            <td colspan="" class="transaction-body"></td>
+                            <td colspan="" class="transaction-body text-center">১</td>
+                            <td colspan="" class="transaction-body text-center">
+                                <?= isset($account->account_head_name) ? htmlspecialchars($account->account_head_name) : ''; ?>
+                            </td>
+                            <td colspan="" class="transaction-body">
+                                <?= htmlspecialchars(convert_to_bangla_number($formatted_amount)); ?>
+                            </td>
                         </tr>
 
                         <!-- Remarks / Total -->
                         <tr class="remarks-row">
                             <td colspan="" class="remarks">
-                                কথায় : <?= isset($amount_words) ? htmlspecialchars($amount_words) : ''; ?>
+                                কথায় :
                             </td>
                             <td>
-                                <div class="total-label">
-                                    মোট =
-                                    <span class="ms-2">
+                                <div class="total-label d-flex justify-content-between">
+                                    <?= isset($account->amount_words) ? htmlspecialchars($account->amount_words) : ''; ?>
 
+                                    <span class="mt-1">
+                                        মোট =
                                     </span>
                                 </div>
                             </td>
                             <td colspan="" class="remarks">
-
+                                <?= htmlspecialchars(convert_to_bangla_number($formatted_amount)); ?>
                             </td>
                         </tr>
                     </tbody>

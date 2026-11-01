@@ -22,7 +22,7 @@
                     <p class="text-muted mb-0">Manage all projects listings</p>
                 </div>
                 <div>
-                    <a href="<?= base_url('add_cost'); ?>" class="btn btn-primary">
+                    <a href="<?= base_url('create_debit_credit_form'); ?>" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Add Cost
                     </a>
                 </div>

@@ -34,31 +34,7 @@ class User_dashboard extends CI_Controller
 
         $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
     }
-    public function deposit_vouchar()
-    {
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
-
-        $path = 'admin/reciepts/deposit_vouchar';
-        $this->engine->render_view(
-            $data,
-            $path,
-            $this->side_menu,
-            $this->main_layout
-        );
-    }
-    public function cost_vouchar()
-    {
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
-
-        $path = 'admin/reciepts/cost_vouchar';
-        $this->engine->render_view(
-            $data,
-            $path,
-            $this->side_menu,
-            $this->main_layout
-        );
-    }
-
+   
 
     public function property_book($id)
     {

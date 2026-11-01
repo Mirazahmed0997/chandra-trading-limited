@@ -598,38 +598,8 @@ class Admin_Projects extends CI_Controller
 
 
 
-    public function projects_cost()
-    {
-        $data = $this->engine->store_nav(
-            'projects cost',
-            'projects cost',
-            'Project costs'
-        );
-
-        $path = "admin/projects/projects_cost";
-        $this->engine->render_view(
-            $data,
-            $path,
-            $this->side_menu,
-            $this->main_layout
-        );
-    }
-    public function add_cost()
-    {
-        $data = $this->engine->store_nav(
-            'projects cost',
-            'projects cost',
-            'Project costs'
-        );
-
-        $path = "admin/projects/add_cost";
-        $this->engine->render_view(
-            $data,
-            $path,
-            $this->side_menu,
-            $this->main_layout
-        );
-    }
+   
+   
    
 
     //  public function projects_category()

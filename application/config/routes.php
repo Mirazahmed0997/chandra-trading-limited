@@ -52,8 +52,30 @@ $route['update_project/(:num)'] = 'Admin_Projects/update_project/$1';
 $route['projects_list/(:any)'] = 'Admin_Projects/projects_list/$1';
 $route['delete_project/(:num)'] = 'Admin_Projects/delete_project/$1';
 
-$route['projects_cost'] = 'Admin_Projects/projects_cost';
-$route['add_cost'] = 'Admin_Projects/add_cost';
+
+
+// ------------ Admin Account----------
+$route['projects_cost/(:any)'] = 'Admin_Accounts/projects_cost/$1';
+$route['create_debit_credit_form/(:any)'] = 'Admin_Accounts/create_debit_credit_form/$1';
+$route['create_debit_credit'] = 'Admin_Accounts/create_debit_credit';
+$route['vouchar/(:num)'] = 'Admin_Accounts/vouchars/$1';
+$route['accept_account/(:num)'] = 'Admin_Accounts/accept_account/$1';
+
+
+
+$route['deposit_vouchar/(:num)'] = 'Admin_Accounts/deposit_vouchar/$1';
+$route['cost_vouchar/(:num)'] = 'Admin_Accounts/cost_vouchar/$1';
+
+
+$route['transactions'] = 'Admin_Accounts/transactions';
+$route['transactions_table/(:any)'] = 'Admin_Accounts/transactions_table/$1';
+$route['projects_expenses/(:any)'] = 'Admin_Accounts/projects_expenses/$1';
+
+$route['office_expenses'] = 'Admin_Accounts/office_expenses';
+$route['office_expenses_list'] = 'Admin_Accounts/office_expenses_list';
+
+
+
 
 
 
@@ -157,8 +179,7 @@ $route['user_update_new_password'] = 'User_controllers/user_update_new_password'
 
 // --------------------User Dashboard----------------------
 $route['User_dashboard'] = 'User_dashboard/index';
-$route['deposit_vouchar'] = 'User_dashboard/deposit_vouchar';
-$route['cost_vouchar'] = 'User_dashboard/cost_vouchar';
+
 $route['user_property_book_data'] = 'User_dashboard/user_property_book_data';
 $route['user_visit_book_data'] = 'User_dashboard/user_visit_book_data';
 

@@ -935,76 +935,76 @@ class Recruit_controllers extends CI_Controller
     }
 
 
-    
-public function send_appointment_letter($id = NULL)
-{
-    $this->db->where('application_id', $id);
-    $applicant = $this->db->get('job_applications')->row();
+
+    public function send_appointment_letter($id = NULL)
+    {
+        $this->db->where('application_id', $id);
+        $applicant = $this->db->get('job_applications')->row();
 
 
 
-    $date = date('d-m-Y');
-    // $letter_number = 'CTL0' . $id . '-' . $date;
+        $date = date('d-m-Y');
+        // $letter_number = 'CTL0' . $id . '-' . $date;
 
-    if ($applicant && !empty($applicant->contact_email)) {
-        $email = 'ahmedmiraz87@gmail.com';
-        // $email = $applicant->contact_email;
-
-        
-        // echo '<pre>';
-        // print_r($body);
-        // echo '</pre>';
-        // exit;
-
-        $this->load->library('email');
-
-        $config['mailtype'] = 'html';
-        $this->email->initialize($config);
-
-        $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
-        $this->email->to($email);
-        $this->email->subject('Appointment Letter');
-
-        $data['applicant'] = $applicant;
-        $body = base_url(
-            'appointment_letter_email/' . $id
-        );
-        // echo '<pre>';
-        // print_r($body);
-        // echo '</pre>';
-        // exit;
-
-        $this->email->message($body);
-
-        $update_data = [
-
-            // 'letter_number ' => $letter_number,
-            'is_sent' => 1
-        ];
+        if ($applicant && !empty($applicant->contact_email)) {
+            $email = 'ahmedmiraz87@gmail.com';
+            // $email = $applicant->contact_email;
 
 
-        $this->db->where('applicant_id', $id);
-        $this->db->update('appointment_letters', $update_data);
+            // echo '<pre>';
+            // print_r($body);
+            // echo '</pre>';
+            // exit;
 
-        if ($this->email->send()) {
-            $this->session->set_flashdata(
-                'success',
-                'Appointment letter sent successfully!'
+            $this->load->library('email');
+
+            $config['mailtype'] = 'html';
+            $this->email->initialize($config);
+
+            $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
+            $this->email->to($email);
+            $this->email->subject('Appointment Letter');
+
+            $data['applicant'] = $applicant;
+            $body = base_url(
+                'appointment_letter_email/' . $id
             );
+            // echo '<pre>';
+            // print_r($body);
+            // echo '</pre>';
+            // exit;
+
+            $this->email->message($body);
+
+            $update_data = [
+
+                // 'letter_number ' => $letter_number,
+                'is_sent' => 1
+            ];
+
+
+            $this->db->where('applicant_id', $id);
+            $this->db->update('appointment_letters', $update_data);
+
+            if ($this->email->send()) {
+                $this->session->set_flashdata(
+                    'success',
+                    'Appointment letter sent successfully!'
+                );
+            } else {
+                echo $this->email->print_debugger();
+                return;
+            }
+
         } else {
-            echo $this->email->print_debugger();
-            return;
+            $this->session->set_flashdata(
+                'error',
+                'Email not found or applicant does not exist'
+            );
         }
 
-    } else {
-        $this->session->set_flashdata(
-            'error',
-            'Email not found or applicant does not exist'
-        );
+        redirect($_SERVER['HTTP_REFERER']);
     }
-
-    redirect($_SERVER['HTTP_REFERER']);
-}
 
 
     // public function send_appointment_letter($id = NULL)

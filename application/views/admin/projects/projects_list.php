@@ -98,7 +98,7 @@ echo '<pre>';
                                     <th>Address</th>
                                     <th>Status</th>
                                     <th>Category</th>
-                                    <th width="140">Action</th>
+                                    <th class="text-center" width="100">Action</th>
                                     <th width=""></th>
                                     <th width=""></th>
                                 </tr>
@@ -147,6 +147,10 @@ echo '<pre>';
                                                     <a href="<?= base_url('projects_details/' . $project->id); ?>"
                                                         class="btn btn-sm btn-outline-info" title="View">
                                                         <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a href="<?= base_url('projects_expenses/' . $project->project_id); ?>"
+                                                        class="btn btn-sm btn-outline-info" title="View">
+                                                        <i class="fas fa-coins"></i>
                                                     </a>
                                                    
                                                     <a href="<?= base_url('project_update_form/' . $project->id); ?>"

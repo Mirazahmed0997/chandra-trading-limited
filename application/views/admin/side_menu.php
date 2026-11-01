@@ -3,6 +3,9 @@ $user = $this->session->userdata('login_user_info_all');
 $application_count = 0;
 $this->db->where('application_status', 'Pending');
 $application_count = $this->db->count_all_results('job_applications');
+
+$this->db->where('status', 'Pending');
+$account_count = $this->db->count_all_results('a_account');
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
@@ -427,8 +430,8 @@ $application_count = $this->db->count_all_results('job_applications');
                                     </a>
                                 </li>
                             <?php endif; ?>
-                            
-                            <?php if (has_menu_access('Add new Project')): ?>
+
+                            <!-- <?php if (has_menu_access('Add new Project')): ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('add_project') ?>"
                                         class="nav-link <?= active_nav('add_project', $sub_nav); ?>">
@@ -436,7 +439,7 @@ $application_count = $this->db->count_all_results('job_applications');
                                         <p>Add new Project</p>
                                     </a>
                                 </li>
-                            <?php endif; ?>
+                            <?php endif; ?> -->
                         </ul>
                     </li>
 
@@ -456,7 +459,7 @@ $application_count = $this->db->count_all_results('job_applications');
 
                 <?php if (has_menu_access('Transaction')): ?>
                     <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                        <a href="<?php echo base_url('transactions') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
                             <i class="nav-icon fas fa-exchange-alt"></i>
                             <p>
                                 Transaction
@@ -466,14 +469,77 @@ $application_count = $this->db->count_all_results('job_applications');
                 <?php endif; ?>
 
                 <?php if (has_menu_access('Account')): ?>
-                    <li class="nav-item has-treeview <?= active_open('projects_cost', $main_nav); ?>">
-                        <a href="<?php echo base_url('projects_cost') ?>"
-                            class="nav-link <?= active_nav('projects_cost', $main_nav); ?>">
+                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
+                        <a href="" class="nav-link <?= active_nav('projects_cost', $main_nav); ?>">
                             <i class="nav-icon fas fa-user-circle"></i>
+
                             <p>
                                 Account
+                                <i class="fas fa-angle-left right"></i>
+                                <span class="badge bg-danger"><?php if ($account_count > 0) { ?>
+                                        <span class="badge bg-danger"><?= $account_count ?></span>
+                                    <?php } ?></span>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Pending Vouchars')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('projects_cost/' . 'Pending') ?>"
+                                        class="nav-link <?= active_nav('projects_cost/'.'Pending', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pending Vouchars</p>
+                                        <span class="badge bg-danger"><?php if ($account_count > 0) { ?>
+                                                <span class="badge bg-danger"><?= $account_count ?></span>
+                                            <?php } ?></span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Account Head Management')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('DepositExpenseAccountHeadManagement') ?>"
+                                        class="nav-link <?= active_nav('DepositExpenseAccountHeadManagement', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Account Head Management</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Project Deposit Vouchar')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('projects_cost/' . 'Deposit') ?>"
+                                        class="nav-link <?= active_nav('projects_cost', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Project Deposit Vouchar</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Project Expense Vouchar')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('projects_cost/' . 'Expense') ?>"
+                                        class="nav-link <?= active_nav('projects_cost', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Project Expense Vouchar</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Office Expense Managment')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('office_expenses_list') ?>"
+                                        class="nav-link <?= active_nav('office_expenses_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Office Expense Managment</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+
                     </li>
                 <?php endif; ?>
 
@@ -486,17 +552,7 @@ $application_count = $this->db->count_all_results('job_applications');
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <?php if (has_menu_access('Deposit/Expense Account Head Management')): ?>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url('DepositExpenseAccountHeadManagement') ?>"
-                                        class="nav-link <?= active_nav('DepositExpenseAccountHeadManagement', $sub_nav); ?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Deposit/Expense Account Head Management</p>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
+
                     </li>
                 <?php endif; ?>
 
@@ -507,105 +563,8 @@ $application_count = $this->db->count_all_results('job_applications');
                             <p>
                                 Communication & Messages
                             </p>
+                            <i class="fas fa-angle-left right"></i>
                         </a>
-                    </li>
-                <?php endif; ?>
-
-                <?php if (has_menu_access('Promotional Publications')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
-                            <i class="nav-icon fas fa-bullhorn"></i>
-                            <p>
-                                Promotional Publications
-                            </p>
-                        </a>
-                    </li>
-                <?php endif; ?>
-
-                <?php if (has_menu_access('Reporting')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
-                            <i class="nav-icon fas fa-chart-bar"></i>
-                            <p>
-                                Reporting
-                            </p>
-                        </a>
-                    </li>
-                <?php endif; ?>
-                <?php if (has_menu_access('Staff')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Staff
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-
-                            <?php if (has_menu_access('Staff list')): ?>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url('accepted_applications_list') ?>" class="nav-link <?= active_nav('accepted_applications_list', $sub_nav); ?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Staff list</p>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
-
-                    </li>
-                <?php endif; ?>
-                <?php if (has_menu_access('Job Portal')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
-                            <i class="nav-icon fas fa-briefcase"></i>
-                            <p>
-                                Job Portal
-                                <i class="fas fa-angle-left right"></i>
-                                <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
-                                        <span class="badge bg-danger"><?= $application_count ?></span>
-                                    <?php } ?></span>
-
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <?php if (has_menu_access('Pending Applications')): ?>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url('pending_applications_list') ?>"
-                                        class="nav-link <?= active_nav('pending_applications_list', $sub_nav); ?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pending Applications</p>
-                                        <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
-                                                <span class="badge bg-danger"><?= $application_count ?></span>
-                                            <?php } ?></span>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                           
-                            <?php if (has_menu_access('Rejected Applications')): ?>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url('rejected_applications_list') ?>"
-                                        class="nav-link <?= active_nav('rejected_applications_list', $sub_nav); ?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Rejected Applications</p>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-                <?php endif; ?>
-
-
-                <?php if (has_menu_access('Leads')): ?>
-                    <li class="nav-item has-treeview <?= active_open('Leads', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('Leads', $main_nav); ?>">
-                            <i class="nav-icon fas fa-user-plus"></i>
-                            <p>
-                                Leads
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-
                         <ul class="nav nav-treeview">
                             <?php if (has_menu_access('Landowner Enquiries')): ?>
                                 <li class="nav-item">
@@ -654,6 +613,92 @@ $application_count = $this->db->count_all_results('job_applications');
                         </ul>
                     </li>
                 <?php endif; ?>
+
+                <?php if (has_menu_access('Promotional Publications')): ?>
+                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
+                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                            <i class="nav-icon fas fa-bullhorn"></i>
+                            <p>
+                                Promotional Publications
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Reporting')): ?>
+                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
+                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                            <i class="nav-icon fas fa-chart-bar"></i>
+                            <p>
+                                Reporting
+                            </p>
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <?php if (has_menu_access('Staff')): ?>
+                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
+                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Staff
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <?php if (has_menu_access('Staff list')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('accepted_applications_list') ?>"
+                                        class="nav-link <?= active_nav('accepted_applications_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Staff list</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+
+                    </li>
+                <?php endif; ?>
+                <?php if (has_menu_access('Job Portal')): ?>
+                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
+                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Job Portal
+                                <i class="fas fa-angle-left right"></i>
+                                <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
+                                        <span class="badge bg-danger"><?= $application_count ?></span>
+                                    <?php } ?></span>
+
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Pending Applications')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('pending_applications_list') ?>"
+                                        class="nav-link <?= active_nav('pending_applications_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pending Applications</p>
+                                        <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
+                                                <span class="badge bg-danger"><?= $application_count ?></span>
+                                            <?php } ?></span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php if (has_menu_access('Rejected Applications')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('rejected_applications_list') ?>"
+                                        class="nav-link <?= active_nav('rejected_applications_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Rejected Applications</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
 
                 <?php if (has_menu_access('Site Visits')): ?>
                     <li class="nav-item has-treeview <?= active_open('Site Visits', $main_nav); ?>">
