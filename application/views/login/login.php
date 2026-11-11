@@ -47,7 +47,7 @@
                                     </span>
                                 </div>
                                 <input type="text" name="mobile_number" class="form-control"
-                                    placeholder="ইউজার নাম / মোবাইল নাম্বার" required>
+                                    placeholder="Email / Mobile" required>
                             </div>
                         </div>
 
@@ -60,7 +60,7 @@
                                     </span>
                                 </div>
                                 <input type="password" name="password" id="password" class="form-control"
-                                    placeholder="পাসওয়ার্ড" required>
+                                    placeholder="Password" required>
                                 <i class="fa fa-eye" onclick="togglePassword('password', this)"
                                     style="position:absolute; right:10px; top:10px; cursor:pointer;">
                                 </i>

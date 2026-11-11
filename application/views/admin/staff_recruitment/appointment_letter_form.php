@@ -241,14 +241,7 @@
                                 placeholder="e.g. Software Engineer"
                                 value="<?= html_escape($applicant->applied_position ?? 'N/A'); ?>" required>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label">
-                                Application ID <span class="required">*</span>
-                            </label>
-                            <input type="text" name="applicant_id" class="form-control"
-                                placeholder="e.g. Software Engineer"
-                                value="<?= html_escape($applicant->application_id ?? 'N/A'); ?>" required>
-                        </div>
+                        
 
 
                         <div class="col-md-6">
@@ -263,20 +256,6 @@
                             </select>
                         </div>
 
-                        <!-- <div class="col-md-6">
-                            <label class="form-label">Letter Number</label>
-                            <input type="text"
-                                   name="letter_number"
-                                   class="form-control"
-                                   placeholder="Enter letter number">
-                        </div> -->
-
-                        <!-- <div class="col-md-6">
-                            <label class="form-label">
-                                Appointment Date <span class="required">*</span>
-                            </label>
-                            <input type="date" name="appointment_date" class="form-control" required>
-                        </div> -->
 
                         <div class="col-md-6">
                             <label class="form-label">
@@ -296,6 +275,25 @@
                                 <option value="As per policy">As per policy</option>
                             </select>
                         </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                Password <span class="required">*</span>
+                            </label>
+                            <input type="text" name="password" class="form-control"
+                                placeholder="Enter Paasword"
+                                value="" required>
+                        </div>
+                        <div style="display: block;" class="col-md-6">
+                            <!-- <label class="form-label">
+                                Application ID <span class="required">*</span>
+                            </label> -->
+                            <input class="d-none" type="text" name="applicant_id" class="form-control" readonly
+                                placeholder="e.g. Software Engineer"
+                                value="<?= html_escape($applicant->application_id ?? 'N/A'); ?>" required>
+                        </div>
+
+                        
 
 
                     </div>

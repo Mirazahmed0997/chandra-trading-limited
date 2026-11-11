@@ -485,7 +485,7 @@ $account_count = $this->db->count_all_results('a_account');
                             <?php if (has_menu_access('Pending Vouchars')): ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('projects_cost/' . 'Pending') ?>"
-                                        class="nav-link <?= active_nav('projects_cost/'.'Pending', $sub_nav); ?>">
+                                        class="nav-link <?= active_nav('projects_cost/' . 'Pending', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pending Vouchars</p>
                                         <span class="badge bg-danger"><?php if ($account_count > 0) { ?>
@@ -648,10 +648,19 @@ $account_count = $this->db->count_all_results('a_account');
 
                             <?php if (has_menu_access('Staff list')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('accepted_applications_list') ?>"
-                                        class="nav-link <?= active_nav('accepted_applications_list', $sub_nav); ?>">
+                                    <a href="<?php echo base_url('staff_list') ?>"
+                                        class="nav-link <?= active_nav('staff_list', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Staff list</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <?php if (has_menu_access('Joining Letter')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('admin_joining_letter_list') ?>"
+                                        class="nav-link <?= active_nav('admin_joining_letter_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Joining Letter</p>
                                     </a>
                                 </li>
                             <?php endif; ?>
@@ -673,6 +682,15 @@ $account_count = $this->db->count_all_results('a_account');
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Accepted List')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('accepted_applications_list') ?>"
+                                        class="nav-link <?= active_nav('accepted_applications_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Accepted List</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                             <?php if (has_menu_access('Pending Applications')): ?>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url('pending_applications_list') ?>"

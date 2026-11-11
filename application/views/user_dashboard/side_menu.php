@@ -1,5 +1,13 @@
 <?php
+
 $user = $this->session->userdata('login_user_info_all');
+$staff = isset($staff_login_info) ? $staff_login_info : null;
+
+// echo '<pre>';
+// print_r($staff);
+// // print_r($password);
+// echo '</pre>';
+// exit;
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
@@ -55,9 +63,9 @@ $user = $this->session->userdata('login_user_info_all');
     }
 
     .user-panel .image {
-        width: 30%;
-        height: 30%;
-        border-radius: 100px;
+        width: 40%;
+        height: 40%;
+        border-radius: 50%;
         /* border: 2px solid rgba(255, 255, 255, 0.12); */
         overflow: hidden;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -65,9 +73,9 @@ $user = $this->session->userdata('login_user_info_all');
     }
 
     .user-panel .image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        width: 50px;
+        height: 50px;
+        object-fit: content;
     }
 
     .user-panel .info {
@@ -335,24 +343,21 @@ $user = $this->session->userdata('login_user_info_all');
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="#" class="brand-link">
-        <span class="brand-text font-weight-light">User</span>
+        <span class="brand-text font-weight-light">Staff Zone</span>
     </a>
 
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?php echo base_url('assets/backend/dist/img/user.jpg'); ?>" class="img-circle elevation-2"
-                    alt="User Image">
+                <img src="<?= base_url('assets/uploads/staff/' . html_escape($user->staff_image)); ?>"
+                    class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="<?php echo base_url('view_profile'); ?>" class="d-block">
+                <a href="#" class="d-block">
                     <span class="brand-text font-weight-light">
-                        <?= htmlspecialchars($user->first_name . ' ' . $user->last_name); ?>
-                        <!-- </span> <small><?= $user->role; ?></small></a> -->
+                        <?= htmlspecialchars($user->staff_name); ?>
+                    </span> <small><?= $user->designation; ?></small></a>
             </div>
-
-
-
 
         </div>
 
@@ -360,82 +365,75 @@ $user = $this->session->userdata('login_user_info_all');
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item has-treeview menu-open">
-                    <a href="<?php echo base_url('admin_dashboard') ?>"
-                        class="nav-link <?= active_nav('dashboard', $main_nav); ?>">
+                    <a href="<?php echo base_url('User_dashboard') ?>"
+                        class="nav-link <?= active_nav('User_dashboard', $main_nav); ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-
-                <li class="nav-item has-treeview <?= active_open('Properties', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('Properties', $main_nav); ?>">
-                        <i class="nav-icon fas fa-building"></i>
-                        <p>
-                           Properties
-                        </p>
-                    </a>
-
-
-                </li>
-
-
-
-
                 <li class="nav-item has-treeview <?= active_open('Projects', $main_nav); ?>">
                     <a href="#" class="nav-link <?= active_nav('Projects', $main_nav); ?>">
-                        <i class="nav-icon fas fa-landmark"></i>
+                        <i class="nav-icon fas fa-exchange-alt"></i>
                         <p>
-                            Bookings
+                            Handover & Takeover
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('user_property_book_data') ?>"
-                                class="nav-link <?= active_nav('user_property_book_data', $sub_nav); ?>">
+                            <a href="<?php echo base_url('joining_letter') ?>"
+                                class="nav-link <?= active_nav('joining_letter', $sub_nav); ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Property Bookings</p>
+                                <p>Joining Letter</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('user_visit_book_data') ?>"
-                                class="nav-link <?= active_nav('user_visit_book_data', $sub_nav); ?>">
+                            <a href="<?php echo base_url('joining_letter_form') ?>"
+                                class="nav-link <?= active_nav('joining_letter_form', $sub_nav); ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Visit Bookings</p>
+                                <p>Create joining Letter</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-
-
-
-                <li class="nav-item has-treeview <?= active_open('User Management', $main_nav); ?>">
-                    <a href="#" class="nav-link <?= active_nav('User Management', $main_nav); ?>">
-                        <i class="nav-icon fas fa-users"></i>
+                <li class="nav-item has-treeview <?= active_open('Projects', $main_nav); ?>">
+                    <a href="#" class="nav-link <?= active_nav('Projects', $main_nav); ?>">
+                        <i class="fas fa-clipboard-check"></i>
                         <p>
-                            Vouchars
+                            Attendences & leaves
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url('deposit_vouchar') ?>"
-                                class="nav-link <?= active_nav('deposit_vouchar', $sub_nav); ?>">
+                            <a href="<?php echo base_url('user_attendence') ?>"
+                                class="nav-link <?= active_nav('user_attendence', $sub_nav); ?>">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Deposite Vouchar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('cost_vouchar') ?>"
-                                class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Cost Vouchar</p>
+                                <p>Attendences</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </nav>
     </div>
 </aside>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function togglePassword(fieldId, iconId) {
+        var input = document.getElementById(fieldId);
+        var icon = document.getElementById(iconId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>

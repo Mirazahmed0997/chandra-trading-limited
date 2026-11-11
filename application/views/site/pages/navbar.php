@@ -186,24 +186,35 @@ $user = $this->session->userdata('login_user_info_all');
               <?= lang('nav_about'); ?> <i class="fas fa-chevron-down"></i>
             </a>
             <ul class="submenu">
-              <li><a href="<?= base_url('our_managment')?>"><?= lang('nav_management'); ?></a></li>
-              <li><a href="<?= base_url('our_mission')?>"><?= lang('nav_mission'); ?></a></li>
-              <li><a href="<?= base_url('our_vission')?>"><?= lang('nav_vision'); ?></a></li>
-              <li><a href="<?= base_url('application_form')?>"><?= lang('career'); ?></a></li>
+              <li><a href="<?= base_url('our_managment') ?>"><?= lang('nav_management'); ?></a></li>
+              <li><a href="<?= base_url('our_mission') ?>"><?= lang('nav_mission'); ?></a></li>
+              <li><a href="<?= base_url('our_vission') ?>"><?= lang('nav_vision'); ?></a></li>
+              <li><a href="<?= base_url('application_form') ?>"><?= lang('career'); ?></a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="javascript:void(0)" onclick="toggleDropdown(this)">
+              <?= lang('nav_projects'); ?> <i class="fas fa-chevron-down"></i>
+            </a>
+           <ul class="submenu">
+              <li><a href="<?= base_url('showcase') ?>"><?= lang('nav_projects'); ?></a></li>
+              <li><a href="<?= base_url('properties') ?>"><?= lang('nav_properties'); ?></a>
             </ul>
           </li>
 
-          <li><a href="<?= base_url('properties') ?>"><?= lang('properties'); ?></a></li>
-          <li><a href="<?=base_url('showcase')?>"><?= lang('nav_projects'); ?></a></li>
+          
+            
+          
           <li><a href=""><?= lang('investment'); ?></a></li>
           <li><a href=""><?= lang('services'); ?></a></li>
           <li><a href=""><?= lang('news&insights'); ?></a></li>
           <li><a href="<?= base_url('contact_us') ?>"><?= lang('nav_contact'); ?></a></li>
 
-          <?php if ($user): ?>
+          <!-- <?php if ($user): ?>
 
             <li class="dropdown">
-              <a href="javascript:void(0)" onclick="toggleDropdown(this)"><?= $user->first_name[0] ,$user->last_name[0]  ?? 'Account'; ?> <i
+              <a href="javascript:void(0)"
+                onclick="toggleDropdown(this)"><?= $user->first_name[0], $user->last_name[0] ?? 'Account'; ?> <i
                   class="fas fa-chevron-down"></i></a>
               <ul class="submenu">
 
@@ -221,7 +232,7 @@ $user = $this->session->userdata('login_user_info_all');
 
           <?php else: ?>
             <li><a href="<?php echo base_url("user_login_form"); ?>"><?= lang('login'); ?></a></li>
-          <?php endif; ?>
+          <?php endif; ?> -->
 
           <!-- Search Modal Button -->
           <!-- <li>

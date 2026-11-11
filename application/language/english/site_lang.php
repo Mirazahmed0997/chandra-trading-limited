@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Navbar
 
 $lang['nav_home'] = 'Home';
-$lang['properties'] = 'Properties';
+$lang['nav_properties'] = 'Properties';
 $lang['investment'] = 'Investment';
 $lang['services'] = 'Services';
 $lang['news&insights'] = 'News & insights';

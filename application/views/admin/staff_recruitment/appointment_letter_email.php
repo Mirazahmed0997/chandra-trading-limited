@@ -426,7 +426,7 @@
                 padding: 5px 12px !important;
             }
 
-            
+
 
             /* Applicant Details Card */
             .applicant-card {
@@ -544,10 +544,11 @@
                 <!-- Date -->
                 <div class="letter-meta">
                     <div><strong>স্মারক নং:</strong> <?= html_escape($appointment_letters->letter_number ?? '-'); ?></div>
-                    <div><strong>তারিখ:</strong>
-                        <?= html_escape(explode('/', $appointment_letters->letter_number ?? '-')[1] ?? '-'); ?>
+                    <div>
+                        <strong>তারিখ:</strong><?= html_escape(explode('/', $appointment_letters->letter_number ?? '-')[1]); ?>
                     </div>
                 </div>
+
 
                 <div class="title">
                     <h2>নিয়োগ পত্র</h2>

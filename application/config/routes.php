@@ -7,6 +7,9 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
+$route['language/set/(:any)'] = 'Language/set/$1';
+
+
 
 
 
@@ -133,7 +136,7 @@ $route['delete_accountHead/(:num)'] = 'Admin_Accounts/delete_accountHead/$1';
 
 
 $route['application_form'] = 'Site/application_form';
-$route['create_application'] = 'Recruit_controllers/create_application';
+$route['create_application'] = 'Site/create_application';
 $route['success_page'] = 'Site/success_page';
 
 $route['recruit_form_view'] = 'Recruit_controllers/recruit_form_view';
@@ -146,12 +149,26 @@ $route['accepted_applications_list'] = 'Recruit_controllers/accepted_application
 $route['rejected_applications_list'] = 'Recruit_controllers/rejected_applications_list';
 $route['applicant_details/(:num)'] = 'Recruit_controllers/applicant_details/$1';
 
+$route['staff_list'] = 'Recruit_controllers/staff_list';
+
+
 $route['update_application_verification/(:num)'] = 'Recruit_controllers/update_application_verification/$1';
 $route['accept_application/(:num)'] = 'Recruit_controllers/accept_application/$1';
 $route['delete_application/(:num)'] = 'Recruit_controllers/delete_application/$1';
 $route['reject_application/(:num)'] = 'Recruit_controllers/reject_application/$1';
-$route['send_appointment_letter/(:num)'] = 'Recruit_controllers/send_appointment_letter/$1';
-$route['appointment_letter_email/(:num)'] = 'Recruit_controllers/appointment_letter_email/$1';
+
+$route['admin_joining_letter_list'] = 'Recruit_controllers/joining_letter_list';
+$route['admin_joining_letter_details/(:num)'] = 'Recruit_controllers/joining_letter_details/$1';
+$route['accept_joining_letter/(:num)'] = 'Recruit_controllers/accept_joining_letter/$1';
+
+
+
+// ------------------Email Routes----------------
+
+$route['send_appointment_letter/(:num)'] = 'View_content_controller/send_appointment_letter/$1';
+$route['appointment_letter_email/(:num)'] = 'View_content_controller/appointment_letter_email/$1';
+$route['rejection_mail/(:num)'] = 'View_content_controller/rejection_mail/$1';
+$route['accept_mail/(:num)'] = 'View_content_controller/accept_mail/$1';
 
 
 
@@ -178,10 +195,21 @@ $route['user_update_new_password'] = 'User_controllers/user_update_new_password'
 
 
 // --------------------User Dashboard----------------------
-$route['User_dashboard'] = 'User_dashboard/index';
+$route['Staff_zone'] = 'User_dashboard/index';
 
 $route['user_property_book_data'] = 'User_dashboard/user_property_book_data';
+$route['joining_letter_form'] = 'User_dashboard/joining_letter_form';
+$route['joining_letter'] = 'User_dashboard/joining_letter';
+$route['joining_letter_save'] = 'User_dashboard/joining_letter_save';
+$route['joining_letter_details/(:num)'] = 'User_dashboard/joining_letter_details/$1';
 $route['user_visit_book_data'] = 'User_dashboard/user_visit_book_data';
+$route['update_profile'] = 'User_dashboard/update_profile';
+
+
+$route['user_attendence'] = 'User_attendence_controller/user_attendence';
+$route['user_entry'] = 'User_attendence_controller/user_entry';
+$route['user_exit'] = 'User_attendence_controller/user_exit';
+
 
 
 // --------------User Leads create form----------------------

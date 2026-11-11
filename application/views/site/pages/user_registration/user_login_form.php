@@ -32,7 +32,7 @@
                         <input type="hidden" name="userType" value="2">
                         <input type="hidden" name="login_value" value="1">
 
-                        <h1 class="text-center mb-3">User Login</h1>
+                        <h1 class="text-center mb-3">Staff Login</h1>
 
                         <?php if ($this->session->flashdata('success')): ?>
                             <div class="alert alert-success">
@@ -47,7 +47,7 @@
                             <label class="col-4 col-form-label">Email/Mobile No <span
                                     class="text-danger">*</span></label>
                             <div class="col-8">
-                                <input type="text" name="userInfo" class="form-control" required>
+                                <input type="text" name="staff_info" class="form-control" required>
                             </div>
                         </div>
 
@@ -62,14 +62,13 @@
                             </div>
                         </div>
 
-                        <!-- Submit & Registration Links -->
                         <div class="row">
                             <div class="col-12 text-center mt-3">
-                                <p class="mb-3">
+                                <!-- <p class="mb-3">
                                     If you are not registered, please
                                     <a href="<?= base_url('user_registration_form'); ?>">click here</a> for
                                     registration.
-                                </p>
+                                </p> -->
                                 <div class="text-center mt-3">
                                     <a href="<?= base_url('user_forget_password'); ?>">Forgot Password?</a>
                                 </div>

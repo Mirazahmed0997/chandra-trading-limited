@@ -129,19 +129,20 @@ function shorten_string($string, $wordsreturned)
 	}
 	return $retval;
 }
-
 function active_nav($nav, $check_nav)
 {
-	if ($nav == $check_nav) {
-		return "active";
-	}
+    if (is_array($nav)) {
+        return in_array($check_nav, $nav) ? "active" : "";
+    }
+    return ($nav == $check_nav) ? "active" : "";
 }
 
 function active_open($nav, $check_nav)
 {
-	if ($nav == $check_nav) {
-		return "menu-open";
-	}
+    if (is_array($nav)) {
+        return in_array($check_nav, $nav) ? "menu-open active" : "";
+    }
+    return ($nav == $check_nav) ? "menu-open active" : "";
 }
 
 function bn_date($str)

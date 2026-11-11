@@ -359,7 +359,7 @@
                 </p>
                 <p class="header-sub mb-3 text-white">
                     <i class="bi bi-envelope me-1 text-white"></i>ctl05.2026@gmail.com &nbsp;|&nbsp;
-                    <i class="bi bi-telephone me-1 text-white"></i>+880 1709-653400
+                    <i class="bi bi-telephone me-1 text-white"></i>+880 1709-653595
                 </p>
                 <span class="doc-badge">Job Application Form</span>
             </div>
@@ -858,7 +858,6 @@
         </div>
 
 
-        <!-- Decision / Signature Footer -->
         <div class="action-bar d-flex justify-content-between align-items-end">
             <div class="no-print">
                 <?php if ($applicant->application_status == 'Accepted'): ?>

@@ -73,6 +73,24 @@ class User_controllers extends MY_Controller
         );
     }
 
+    private function upload_file($field_name, $file_path)
+    {
+        $config['upload_path'] = $file_path;
+        $config['allowed_types'] = 'jpg|jpeg|png|pdf';
+        $config['max_size'] = 2048;
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload($field_name)) {
+            $data = $this->upload->data();
+            return $data['file_name'];
+        } else {
+            return '';
+        }
+    }
+
     public function user_login_form()
     {
         $data = $this->engine->store_nav('login', 'Nothing', 'User Login');
@@ -85,15 +103,19 @@ class User_controllers extends MY_Controller
     public function user_login_process()
     {
 
-        $userInfo = $this->input->post('userInfo');
+        $staff_info = $this->input->post('staff_info');
         $password = $this->input->post('password');
 
         $this->db->group_start();
-        $this->db->where('mobile_number', $userInfo);
-        $this->db->or_where('email', $userInfo);
+        $this->db->where('mobile', $staff_info);
+        $this->db->or_where('email', $staff_info);
         $this->db->group_end();
 
-        $user = $this->db->get('clients')->row();
+        $user = $this->db->get('staff_login_info')->row();
+        // echo '<pre>';
+        // print_r($user);
+        // echo '</pre>';
+        // exit;
 
         if ($user) {
 
@@ -103,7 +125,7 @@ class User_controllers extends MY_Controller
                 $this->session->set_userdata('current_type', 2);
                 $this->session->set_userdata('login_user_info_all', $user);
                 $this->session->set_flashdata('login_success', 'Successfully logged in');
-                redirect(base_url());
+                redirect(base_url('Staff_zone'));
                 // redirect('members');
 
             } else {
@@ -123,7 +145,7 @@ class User_controllers extends MY_Controller
     public function user_logout()
     {
         $this->session->sess_destroy();
-        redirect(base_url());
+        redirect('User_dashboard');
     }
 
 
@@ -366,7 +388,7 @@ class User_controllers extends MY_Controller
             echo "Invalid token";
         }
     }
-
+  
 
 
 
@@ -601,6 +623,77 @@ class User_controllers extends MY_Controller
 
         $path = 'site/pages/news_details';
         $this->engine->render_front_view($data, $path, $this->header, $this->footer, $this->main_layout);
+    }
+
+
+    public function send_appointment_letter($id = NULL)
+    {
+        $this->db->where('application_id', $id);
+        $applicant = $this->db->get('job_applications')->row();
+
+
+
+        $date = date('d-m-Y');
+        // $letter_number = 'CTL0' . $id . '-' . $date;
+
+        if ($applicant && !empty($applicant->contact_email)) {
+            $email = 'ahmedmiraz87@gmail.com';
+            // $email = $applicant->contact_email;
+
+
+            // echo '<pre>';
+            // print_r($body);
+            // echo '</pre>';
+            // exit;
+
+            $this->load->library('email');
+
+            $config['mailtype'] = 'html';
+            $this->email->initialize($config);
+
+            $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
+            $this->email->to($email);
+            $this->email->subject('Appointment Letter');
+
+            $data['applicant'] = $applicant;
+            $body = base_url(
+                'appointment_letter_email/' . $id
+            );
+            // echo '<pre>';
+            // print_r($body);
+            // echo '</pre>';
+            // exit;
+
+            $this->email->message($body);
+
+            $update_data = [
+
+                // 'letter_number ' => $letter_number,
+                'is_sent' => 1
+            ];
+
+
+            $this->db->where('applicant_id', $id);
+            $this->db->update('appointment_letters', $update_data);
+
+            if ($this->email->send()) {
+                $this->session->set_flashdata(
+                    'success',
+                    'Appointment letter sent successfully!'
+                );
+            } else {
+                echo $this->email->print_debugger();
+                return;
+            }
+
+        } else {
+            $this->session->set_flashdata(
+                'error',
+                'Email not found or applicant does not exist'
+            );
+        }
+
+        redirect($_SERVER['HTTP_REFERER']);
     }
 
 

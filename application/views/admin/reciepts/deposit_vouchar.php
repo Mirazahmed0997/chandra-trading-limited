@@ -411,11 +411,21 @@
         <button type="button" onclick="window.print()" class="btn btn-primary px-4">
             <i class="fa fa-print me-2"></i> Print Receipt
         </button>
+        <?php if ($account->status == 'Accepted'): ?>
+            <button type="button" class="btn btn-secondary px-4 me-2" disabled>
+                <i class="bi bi-check-circle-fill me-1"></i> Expense Accepted
+            </button>
+        <?php else: ?>
+
+            <a href="<?= base_url('accept_account/' . $account->id); ?>" class="btn btn-success px-4 me-2"
+                onclick="return confirm('Are you sure you want to accept this Cost?');">
+                <i class="bi bi-check-lg me-1"></i> Accept Now
+            </a>
+        <?php endif; ?>
     </div>
 
     <div class="receipt-paper content-wrapper">
 
-        <!-- LEFT COLOR STRIP -->
         <div class="left-strip"></div>
         <div class="vertical-company">
             জমা রশিদ
@@ -423,10 +433,9 @@
 
         <div class="receipt-content">
 
-            <!-- HEADER -->
             <div class="receipt-header">
                 <div class="company-area">
-                    <img src="./assets/uploads/ctl2_logo.png" class="company-logo" alt="CTL Logo">
+                    <img src="<?= base_url('assets/uploads/ctl2_logo.png'); ?>" class="company-logo" alt="CTL Logo">
                     <div class="company-info">
                         <div class="company-name">
                             চান্দ্রা ট্রেডিং লি.
@@ -459,7 +468,6 @@
                 </div>
             </div>
 
-            <!-- RECEIPT / CODE -->
             <div class="receipt-top">
                 <div class="reciept_no">
                     রশিদ নং:
@@ -475,7 +483,6 @@
                 </div>
             </div>
 
-            <!-- CUSTOMER INFORMATION -->
             <div class="customer-box">
                 <div class="customer-grid p-2">
                     <!-- Row 1 -->

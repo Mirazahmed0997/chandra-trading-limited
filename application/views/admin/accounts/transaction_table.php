@@ -40,10 +40,16 @@
                         Manage all project <?= html_escape($type ?? '-'); ?> and additional costs.
                     </p>
                 </div>
+                <?php if ($type == "Transactions"): ?>
+                    
+                <?php else: ?>
 
-                <a href="<?= base_url('create_debit_credit_form'); ?>" class="btn btn-outline-primary">
-                    <i class="fas fa-plus"></i> Add Deposit/Expense
-                </a>
+                    <a href="<?= base_url('create_debit_credit_form/' . $type); ?>" class="btn btn-outline-primary">
+                        <i class="fas fa-plus"></i>
+                        Add <?= html_escape($type ?? '-'); ?>
+                    </a>
+
+                <?php endif; ?>
             </div>
         </div>
     </div>

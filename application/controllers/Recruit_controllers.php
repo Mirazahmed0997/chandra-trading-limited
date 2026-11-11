@@ -68,6 +68,7 @@ class Recruit_controllers extends CI_Controller
     public function application_form()
     {
         // $this->check_access('Add new Properties');
+
         $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
 
         $path = 'admin/staff_recruitment/application_form';
@@ -75,282 +76,10 @@ class Recruit_controllers extends CI_Controller
     }
 
 
-    public function create_application()
-    {
-
-        $loggedUser = $this->session->userdata('login_user_info_all');
-
-        if (!$loggedUser) {
-            redirect('login');
-            return;
-        }
-
-        $applied_position = trim($this->input->post('applied_position'));
-        $applicant_name = trim($this->input->post('applicant_name'));
-        $gender = $this->input->post('gender');
-        $father_name = trim($this->input->post('father_name'));
-        $mother_name = trim($this->input->post('mother_name'));
-        $permanent_address = trim($this->input->post('permanent_address'));
-        $present_address = trim($this->input->post('present_address'));
-        $contact_address = trim($this->input->post('contact_address'));
-        $contact_mobile = trim($this->input->post('contact_mobile'));
-        $contact_email = trim($this->input->post('contact_email'));
-        $date_of_birth = $this->input->post('date_of_birth');
-        $marital_status = $this->input->post('marital_status');
-        $spouse_name = trim($this->input->post('spouse_name'));
-        $nationality = trim($this->input->post('nationality')) ?: 'Bangladeshi';
-        $religion = trim($this->input->post('religion'));
-        $blood_group = trim($this->input->post('blood_group'));
-        $nid_number = trim($this->input->post('nid_number'));
-        $emergency_contact_name = trim($this->input->post('emergency_contact_name'));
-        $emergency_contact_mobile = trim($this->input->post('emergency_contact_mobile'));
-        $it_skills = trim($this->input->post('it_skills'));
-        $expected_salary = $this->input->post('expected_salary');
-        $is_salary_negotiable = $this->input->post('is_salary_negotiable') ? 1 : 0;
-        $future_expectations = trim($this->input->post('future_expectations'));
-        $role_in_organization = trim($this->input->post('role_in_organization'));
-
-        if (empty($applied_position) || empty($applicant_name) || empty($contact_mobile) || empty($contact_email)) {
-            $this->session->set_flashdata('application_error', 'Position, Applicant Name, Mobile, and Email are required.');
-            redirect('application_form');
-            return;
-        }
-
-        if (!empty($nid_number)) {
-            $existingNid = $this->db->where('nid_number', $nid_number)->get('job_applications')->row();
-            if ($existingNid) {
-                $this->session->set_flashdata('application_error', 'NID Number already exists in system.');
-                redirect('application_form');
-                return;
-            }
-        }
-
-        $upload_base = FCPATH . 'assets/uploads/applications/';
-        $dirs = ['photo', 'nid', 'signature', 'education', 'experience', 'training'];
-        foreach ($dirs as $dir) {
-            if (!is_dir($upload_base . $dir)) {
-                mkdir($upload_base . $dir, 0777, true);
-            }
-        }
-
-        $upload_file = function ($field_name, $sub_folder, $allowed_types) {
-            if (isset($_FILES[$field_name]) && !empty($_FILES[$field_name]['name'])) {
-                $config['upload_path'] = './assets/uploads/applications/' . $sub_folder;
-                $config['allowed_types'] = $allowed_types;
-                $config['max_size'] = 5120;
-                $config['encrypt_name'] = TRUE;
-
-                $this->upload->initialize($config);
-
-                if ($this->upload->do_upload($field_name)) {
-                    $upload_data = $this->upload->data();
-                    return $upload_data['file_name'];
-                } else {
-                    log_message('error', "Upload failure ($field_name): " . $this->upload->display_errors('', ''));
-                    return null;
-                }
-            }
-            return null;
-        };
-
-        $photo_url = $upload_file('photo', 'photo', 'jpg|jpeg|png|webp');
-        $nid_document = $upload_file('nid_document', 'nid', 'pdf|jpg|jpeg|png');
-        $applicant_signature_url = $upload_file('applicant_signature', 'signature', 'jpg|jpeg|png');
-
-        $this->db->trans_start();
-
-        $main_data = array(
-            'applied_position' => $applied_position,
-            'applicant_name' => $applicant_name,
-            'photo_url' => $photo_url,
-            'gender' => $gender,
-            'father_name' => $father_name,
-            'mother_name' => $mother_name,
-            'permanent_address' => $permanent_address,
-            'present_address' => $present_address,
-            'contact_address' => $contact_address,
-            'contact_mobile' => $contact_mobile,
-            'contact_email' => $contact_email,
-            'date_of_birth' => !empty($date_of_birth) ? $date_of_birth : null,
-            'marital_status' => $marital_status,
-            'spouse_name' => $spouse_name,
-            'nationality' => $nationality,
-            'religion' => $religion,
-            'blood_group' => $blood_group,
-            'nid_number' => !empty($nid_number) ? $nid_number : null,
-            'nid_document' => $nid_document,
-            'emergency_contact_name' => $emergency_contact_name,
-            'emergency_contact_mobile' => $emergency_contact_mobile,
-            'it_skills' => $it_skills,
-            'expected_salary' => !empty($expected_salary) ? $expected_salary : null,
-            'is_salary_negotiable' => $is_salary_negotiable,
-            'future_expectations' => $future_expectations,
-            'role_in_organization' => $role_in_organization,
-            'applicant_signature_url' => $applicant_signature_url,
-            'application_status' => 'Pending',
-            'created_at' => date('Y-m-d H:i:s')
-        );
-
-        $this->db->insert('job_applications', $main_data);
-        $application_id = $this->db->insert_id();
-
-        $educations = $this->input->post('education');
-        if (!empty($educations) && is_array($educations)) {
-            foreach ($educations as $i => $edu) {
-                if (!empty($edu['exam_name'])) {
-                    $edu_doc = null;
-                    if (isset($_FILES['education']['name'][$i]['document']) && !empty($_FILES['education']['name'][$i]['document'])) {
-                        $_FILES['single_edu_doc']['name'] = $_FILES['education']['name'][$i]['document'];
-                        $_FILES['single_edu_doc']['type'] = $_FILES['education']['type'][$i]['document'];
-                        $_FILES['single_edu_doc']['tmp_name'] = $_FILES['education']['tmp_name'][$i]['document'];
-                        $_FILES['single_edu_doc']['error'] = $_FILES['education']['error'][$i]['document'];
-                        $_FILES['single_edu_doc']['size'] = $_FILES['education']['size'][$i]['document'];
-
-                        $config['upload_path'] = './assets/uploads/applications/education';
-                        $config['allowed_types'] = 'pdf|jpg|jpeg|png';
-                        $config['max_size'] = 5120;
-                        $config['encrypt_name'] = TRUE;
-
-                        $this->upload->initialize($config);
-                        if ($this->upload->do_upload('single_edu_doc')) {
-                            $edu_doc = $this->upload->data('file_name');
-                        }
-                    }
-
-                    $this->db->insert('applicant_educations', [
-                        'application_id' => $application_id,
-                        'exam_name' => trim($edu['exam_name']),
-                        'passing_year' => (int) $edu['passing_year'],
-                        'group_major' => trim($edu['group_major']),
-                        'board_institution' => trim($edu['board_institution']),
-                        'result_gpa' => !empty($edu['result_gpa']) ? $edu['result_gpa'] : null,
-                        'document' => $edu_doc
-                    ]);
-                }
-            }
-        }
-
-        $experiences = $this->input->post('experience');
-        if (!empty($experiences) && is_array($experiences)) {
-            foreach ($experiences as $i => $exp) {
-                if (!empty($exp['organization_name'])) {
-                    $exp_doc = null;
-                    if (isset($_FILES['experience']['name'][$i]['document_url']) && !empty($_FILES['experience']['name'][$i]['document_url'])) {
-                        $_FILES['single_exp_doc']['name'] = $_FILES['experience']['name'][$i]['document_url'];
-                        $_FILES['single_exp_doc']['type'] = $_FILES['experience']['type'][$i]['document_url'];
-                        $_FILES['single_exp_doc']['tmp_name'] = $_FILES['experience']['tmp_name'][$i]['document_url'];
-                        $_FILES['single_exp_doc']['error'] = $_FILES['experience']['error'][$i]['document_url'];
-                        $_FILES['single_exp_doc']['size'] = $_FILES['experience']['size'][$i]['document_url'];
-
-                        $config['upload_path'] = './assets/uploads/applications/experience';
-                        $config['allowed_types'] = 'pdf|jpg|jpeg|png';
-                        $config['max_size'] = 5120;
-                        $config['encrypt_name'] = TRUE;
-
-                        $this->upload->initialize($config);
-                        if ($this->upload->do_upload('single_exp_doc')) {
-                            $exp_doc = $this->upload->data('file_name');
-                        }
-                    }
-
-                    $this->db->insert('applicant_experiences', [
-                        'application_id' => $application_id,
-                        'experience_type' => trim($exp['experience_type']),
-                        'organization_name' => trim($exp['organization_name']),
-                        'address' => trim($exp['address']),
-                        'start_date' => !empty($exp['start_date']) ? $exp['start_date'] : null,
-                        'end_date' => !empty($exp['end_date']) ? $exp['end_date'] : null,
-                        'is_current_job' => isset($exp['is_current_job']) ? 1 : 0,
-                        'document_url' => $exp_doc
-                    ]);
-                }
-            }
-        }
-
-        $trainings = $this->input->post('training');
-        if (!empty($trainings) && is_array($trainings)) {
-            foreach ($trainings as $i => $trn) {
-                if (!empty($trn['training_title'])) {
-                    $trn_doc = null;
-                    if (isset($_FILES['training']['name'][$i]['document_url']) && !empty($_FILES['training']['name'][$i]['document_url'])) {
-                        $_FILES['single_trn_doc']['name'] = $_FILES['training']['name'][$i]['document_url'];
-                        $_FILES['single_trn_doc']['type'] = $_FILES['training']['type'][$i]['document_url'];
-                        $_FILES['single_trn_doc']['tmp_name'] = $_FILES['training']['tmp_name'][$i]['document_url'];
-                        $_FILES['single_trn_doc']['error'] = $_FILES['training']['error'][$i]['document_url'];
-                        $_FILES['single_trn_doc']['size'] = $_FILES['training']['size'][$i]['document_url'];
-
-                        $config['upload_path'] = './assets/uploads/applications/training';
-                        $config['allowed_types'] = 'pdf|jpg|jpeg|png';
-                        $config['max_size'] = 5120;
-                        $config['encrypt_name'] = TRUE;
-
-                        $this->upload->initialize($config);
-                        if ($this->upload->do_upload('single_trn_doc')) {
-                            $trn_doc = $this->upload->data('file_name');
-                        }
-                    }
-
-                    $this->db->insert('applicant_trainings', [
-                        'application_id' => $application_id,
-                        'training_title' => trim($trn['training_title']),
-                        'subject' => trim($trn['subject']),
-                        'institution_name' => trim($trn['institution_name']),
-                        'address' => trim($trn['address']),
-                        'country' => !empty($trn['country']) ? trim($trn['country']) : 'Bangladesh',
-                        'training_year' => !empty($trn['training_year']) ? (int) $trn['training_year'] : null,
-                        'duration' => trim($trn['duration']),
-                        'document_url' => $trn_doc
-                    ]);
-                }
-            }
-        }
-
-        $languages = $this->input->post('language');
-        if (!empty($languages) && is_array($languages)) {
-            foreach ($languages as $lang) {
-                if (!empty($lang['language_name'])) {
-                    $this->db->insert('applicant_languages', [
-                        'application_id' => $application_id,
-                        'language_name' => trim($lang['language_name']),
-                        'reading_skill' => $lang['reading_skill'],
-                        'writing_skill' => $lang['writing_skill'],
-                        'speaking_skill' => $lang['speaking_skill']
-                    ]);
-                }
-            }
-        }
-
-        $references = $this->input->post('reference');
-        if (!empty($references) && is_array($references)) {
-            foreach ($references as $ref) {
-                if (!empty($ref['ref_name'])) {
-                    $this->db->insert('applicant_references', [
-                        'application_id' => $application_id,
-                        'ref_name' => trim($ref['ref_name']),
-                        'designation' => trim($ref['designation']),
-                        'organization_name' => trim($ref['organization_name']),
-                        'email' => trim($ref['email']),
-                        'mobile_number' => trim($ref['mobile_number']),
-                        'address' => trim($ref['address'])
-                    ]);
-                }
-            }
-        }
-
-        $this->db->trans_complete();
-
-        if ($this->db->trans_status() === FALSE) {
-            $this->session->set_flashdata('application_error', 'Unable to submit application. Please try again.');
-            redirect('application_form');
-        } else {
-            $this->session->set_flashdata('application_success', 'Job application submitted successfully.');
-            redirect('success_page');
-        }
-    }
 
     public function pending_applications_list()
     {
-        $this->check_access('Application List');
+        $this->check_access('Pending Applications');
         $data = $this->engine->store_nav(
             'Applications',
             'Applications',
@@ -448,11 +177,11 @@ class Recruit_controllers extends CI_Controller
 
     public function accepted_applications_list()
     {
-        $this->check_access('Application List');
+        $this->check_access('Accepted List');
         $data = $this->engine->store_nav(
             'Applications',
             'Applications',
-            'Staffs List'
+            'Accepted Applications'
         );
         // echo '<pre>';
         // print_r($data);
@@ -531,12 +260,101 @@ class Recruit_controllers extends CI_Controller
             $this->main_layout
         );
     }
+    public function staff_list()
+    {
+        $this->check_access('Staff list');
+        $data = $this->engine->store_nav(
+            'Applications',
+            'Applications',
+            'Staffs List'
+        );
+        // echo '<pre>';
+        // print_r($data);
+        // echo '</pre>';
+        // exit;
+
+        $filters = array(
+            'search' => trim((string) $this->input->get('search', TRUE)),
+            'staff_name' => trim((string) $this->input->get('staff_name', TRUE)),
+            'mobile' => trim((string) $this->input->get('mobile', TRUE)),
+            'staff_id' => trim((string) $this->input->get('staff_id', TRUE)),
+            'designation' => trim((string) $this->input->get('designation', TRUE))
+        );
+
+        $per_page = 5;
+        $page = (int) $this->input->get('page');
+        if ($page < 0) {
+            $page = 0;
+        }
+
+        $this->_apply_staff_filters($filters);
+        $total_rows = $this->db->count_all_results('staff_login_info');
+
+        $this->load->library('pagination');
+        $config = array(
+            'base_url' => base_url('staff_list'),
+            'total_rows' => $total_rows,
+            'per_page' => $per_page,
+            'page_query_string' => TRUE,
+            'query_string_segment' => 'page',
+            'reuse_query_string' => TRUE,
+            'use_page_numbers' => FALSE,
+            'full_tag_open' => '<ul class="pagination pagination-sm mb-0">',
+            'full_tag_close' => '</ul>',
+            'first_link' => 'First',
+            'last_link' => 'Last',
+            'first_tag_open' => '<li class="page-item">',
+            'first_tag_close' => '</li>',
+            'last_tag_open' => '<li class="page-item">',
+            'last_tag_close' => '</li>',
+            'next_tag_open' => '<li class="page-item">',
+            'next_tag_close' => '</li>',
+            'prev_tag_open' => '<li class="page-item">',
+            'prev_tag_close' => '</li>',
+            'num_tag_open' => '<li class="page-item">',
+            'num_tag_close' => '</li>',
+            'cur_tag_open' => '<li class="page-item active"><a class="page-link" href="#">',
+            'cur_tag_close' => '</a></li>',
+            'attributes' => array('class' => 'page-link')
+        );
+
+        $this->pagination->initialize($config);
+
+        $this->_apply_staff_filters($filters);
+        $this->db->order_by('id', 'DESC');
+        // $this->db->where('status', 'Active');
+        $this->db->limit($per_page, $page);
+        $data['staff_login_info'] = $this->db->get('staff_login_info')->result();
+        // echo '<pre>';
+        // print_r($data);
+        // echo '</pre>';
+        // exit;
+
+        foreach ($filters as $key => $val) {
+            $data[$key] = $val;
+        }
+        $data['total_rows'] = $total_rows;
+        $data['pagination'] = $this->pagination->create_links();
+        $data['page'] = $page;
+        $data['per_page'] = $per_page;
+        $data['sl_start'] = $page + 1;
+
+        $data['title'] = $data['tittle'];
+
+        $path = 'admin/staff_recruitment/staff_list';
+        $this->engine->render_view(
+            $data,
+            $path,
+            $this->side_menu,
+            $this->main_layout
+        );
+    }
 
 
 
     public function rejected_applications_list()
     {
-        $this->check_access('Application List');
+        $this->check_access('Rejected Applications');
         $data = $this->engine->store_nav(
             'Applications',
             'Applications',
@@ -722,8 +540,10 @@ class Recruit_controllers extends CI_Controller
         $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
     }
 
+
     public function appointment_letter_save()
     {
+        $loggedUser = $this->session->userdata('login_user_info_all');
 
         function convert_to_bangla_number($number)
         {
@@ -732,44 +552,59 @@ class Recruit_controllers extends CI_Controller
 
             return str_replace($english, $bangla, (string) $number);
         }
-        $loggedUser = $this->session->userdata('login_user_info_all');
 
         if (!$loggedUser) {
             redirect('login');
             return;
         }
 
-        $count = $this->db->count_all_results('appointment_letters') + 1;
-        // echo '<pre>';
-        // print_r($count);
-        // echo '</pre>';
-        // exit;
-
-        $date = date('d-m-Y');
+        $password = trim($this->input->post('password'));
 
         $employee_name = trim($this->input->post('employee_name'));
         $father_name = trim($this->input->post('father_name'));
-        $mother_name = $this->input->post('mother_name');
+        $mother_name = trim($this->input->post('mother_name'));
 
         $employee_id = trim($this->input->post('employee_id'));
         $employee_email = trim($this->input->post('employee_email'));
+
         $permanent_address = trim($this->input->post('permanent_address'));
         $employee_phone = trim($this->input->post('employee_phone'));
         $present_address = trim($this->input->post('present_address'));
+
         $designation = trim($this->input->post('designation'));
         $employment_type = trim($this->input->post('employment_type'));
-        // $appointment_date = trim($this->input->post('appointment_date'));
+
         $joining_date = trim($this->input->post('joining_date'));
         $probation_period = trim($this->input->post('probation_period'));
+
         $reporting_authority = trim($this->input->post('reporting_authority'));
-        $reporting_authority_designation = trim($this->input->post('reporting_authority_designation'));
-        $reporting_authority_sign = $this->upload_file('reporting_authority_sign', './assets/uploads/letter_pad/');
+        $reporting_authority_designation = trim(
+            $this->input->post('reporting_authority_designation')
+        );
+
         $basic_salary = trim($this->input->post('basic_salary'));
         $gross_salary = trim($this->input->post('gross_salary'));
+
         $conditions = trim($this->input->post('conditions'));
-        $additional_instructions = trim($this->input->post('additional_instructions'));
+        $additional_instructions = trim(
+            $this->input->post('additional_instructions')
+        );
+
         $applicant_id = trim($this->input->post('applicant_id'));
+
+        $status = 'Draft';
+
+        $date = date('d-m-Y');
+
+        $count = $this->db->count_all('appointment_letters') + 1;
+
         $letter_number = 'সিটিএল-০' . convert_to_bangla_number($count) . '/' . convert_to_bangla_number($date);
+
+        $reporting_authority_sign = $this->upload_file(
+            'reporting_authority_sign',
+            './assets/uploads/letter_pad/'
+        );
+
 
 
         $data = array(
@@ -777,7 +612,7 @@ class Recruit_controllers extends CI_Controller
             'father_name' => $father_name,
             'mother_name' => $mother_name,
             'employee_id' => $employee_id,
-            'status' => !empty($status) ? $status : 'Draft',
+            'status' => $status,
             'employee_email' => $employee_email,
             'permanent_address' => $permanent_address,
             'employee_phone' => $employee_phone,
@@ -795,35 +630,64 @@ class Recruit_controllers extends CI_Controller
             'conditions' => $conditions,
             'additional_instructions' => $additional_instructions,
             'letter_number' => $letter_number,
+            'password' => $password,
             'applicant_id' => $applicant_id,
             'created_at' => date('Y-m-d H:i:s')
         );
 
-        $insert = $this->db
-            ->insert('appointment_letters', $data);
+        $staff_login_info = array(
+            'staff_id' => $employee_id,
+            'application_id' => $applicant_id,
+            'staff_name' => $employee_name,
+            'mobile' => $employee_phone,
+            'email' => $employee_email,
+            'password' => $password,
+            'designation' => $designation,
+            'address' => $permanent_address,
+            'created_at' => date('Y-m-d H:i:s')
+        );
 
 
-        if ($insert) {
+        // echo '<pre>';
+        // print_r($data);
+        // print_r($staff_login_info);
+        // echo '</pre>';
+        // exit;
+
+        $this->db->trans_begin();
+
+        $this->db->insert('appointment_letters', $data);
+
+        $appointment_insert_id = $this->db->insert_id();
+
+        if ($appointment_insert_id) {
+            $this->db->insert('staff_login_info', $staff_login_info);
+        }
+
+        if (
+            $appointment_insert_id &&
+            $this->db->trans_status() === TRUE
+        ) {
+            $this->db->trans_commit();
 
             $this->session->set_flashdata(
                 'appointment_success',
-                'appointment added successfully.'
+                'Appointment added successfully.'
             );
 
             redirect('appointment_letter/' . $applicant_id);
 
         } else {
 
+            $this->db->trans_rollback();
+
             $this->session->set_flashdata(
                 'appointment_error',
                 'Unable to save appointment. Please try again.'
             );
 
-            redirect($_SERVER['HTTP_REFERER']);
+            redirect($_SERVER['HTTP_REFERER'] ?? 'admin');
         }
-
-
-
     }
 
     public function update_application_verification($id)
@@ -867,21 +731,27 @@ class Recruit_controllers extends CI_Controller
         $this->db->where('application_id', $id);
         $this->db->update('job_applications', $update_data);
 
-        redirect($_SERVER['HTTP_REFERER']);
+        redirect('accept_mail/' . $id);
     }
-    public function reject_application($id)
+    public function reject_application($id = NULL)
     {
-
-        $update_data = [
-
-            'application_status' => 'Rejected'
-        ];
-
-
         $this->db->where('application_id', $id);
-        $this->db->update('job_applications', $update_data);
+        $applicant = $this->db->get('job_applications')->row();
 
-        redirect($_SERVER['HTTP_REFERER']);
+        if (!$applicant) {
+            $this->session->set_flashdata('error', 'Applicant not found.');
+            redirect($_SERVER['HTTP_REFERER'] ?? base_url('admin'));
+            return;
+        }
+
+        // Update application status
+        $this->db->where('application_id', $id);
+        $this->db->update('job_applications', [
+            'application_status' => 'Rejected'
+        ]);
+
+        redirect('rejection_mail/' . $id);
+
     }
 
     public function appointment_letter($id = NULL)
@@ -936,257 +806,137 @@ class Recruit_controllers extends CI_Controller
 
 
 
-    public function send_appointment_letter($id = NULL)
+
+
+    public function joining_letter_list()
     {
-        $this->db->where('application_id', $id);
-        $applicant = $this->db->get('job_applications')->row();
+        $this->check_access('Joining Letter');
+        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
 
+        $filters = array(
+            'search' => trim((string) $this->input->get('search', TRUE)),
+            'property_id' => trim((string) $this->input->get('property_id', TRUE)),
+            'property_type' => trim((string) $this->input->get('property_type', TRUE)),
+            'location' => trim((string) $this->input->get('location', TRUE)),
+            'status' => trim((string) $this->input->get('status', TRUE)),
+            'featured' => $this->input->get('featured', TRUE),
+            'min_price' => trim((string) $this->input->get('min_price', TRUE)),
+            'max_price' => trim((string) $this->input->get('max_price', TRUE))
+        );
 
-
-        $date = date('d-m-Y');
-        // $letter_number = 'CTL0' . $id . '-' . $date;
-
-        if ($applicant && !empty($applicant->contact_email)) {
-            $email = 'ahmedmiraz87@gmail.com';
-            // $email = $applicant->contact_email;
-
-
-            // echo '<pre>';
-            // print_r($body);
-            // echo '</pre>';
-            // exit;
-
-            $this->load->library('email');
-
-            $config['mailtype'] = 'html';
-            $this->email->initialize($config);
-
-            $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
-            $this->email->to($email);
-            $this->email->subject('Appointment Letter');
-
-            $data['applicant'] = $applicant;
-            $body = base_url(
-                'appointment_letter_email/' . $id
-            );
-            // echo '<pre>';
-            // print_r($body);
-            // echo '</pre>';
-            // exit;
-
-            $this->email->message($body);
-
-            $update_data = [
-
-                // 'letter_number ' => $letter_number,
-                'is_sent' => 1
-            ];
-
-
-            $this->db->where('applicant_id', $id);
-            $this->db->update('appointment_letters', $update_data);
-
-            if ($this->email->send()) {
-                $this->session->set_flashdata(
-                    'success',
-                    'Appointment letter sent successfully!'
-                );
-            } else {
-                echo $this->email->print_debugger();
-                return;
-            }
-
-        } else {
-            $this->session->set_flashdata(
-                'error',
-                'Email not found or applicant does not exist'
-            );
+        $per_page = 5;
+        $page = (int) $this->input->get('page');
+        if ($page < 0) {
+            $page = 0;
         }
 
-        redirect($_SERVER['HTTP_REFERER']);
-    }
+        $this->_apply_property_filters($filters);
 
+        $total_rows = $this->db->count_all_results('staff_joining_letters');
 
-    // public function send_appointment_letter($id = NULL)
-    // {
-    //     $loggedUser = $this->session->userdata('login_user_info_all');
+        $this->load->library('pagination');
+        $config = array(
+            'base_url' => base_url('joining_letter'),
+            'total_rows' => $total_rows,
+            'per_page' => $per_page,
+            'page_query_string' => TRUE,
+            'query_string_segment' => 'page',
+            'reuse_query_string' => TRUE,
+            'use_page_numbers' => FALSE,
+            'full_tag_open' => '<ul class="pagination pagination-sm mb-0">',
+            'full_tag_close' => '</ul>',
+            'first_link' => 'First',
+            'last_link' => 'Last',
+            'first_tag_open' => '<li class="page-item">',
+            'first_tag_close' => '</li>',
+            'last_tag_open' => '<li class="page-item">',
+            'last_tag_close' => '</li>',
+            'next_tag_open' => '<li class="page-item">',
+            'next_tag_close' => '</li>',
+            'prev_tag_open' => '<li class="page-item">',
+            'prev_tag_close' => '</li>',
+            'num_tag_open' => '<li class="page-item">',
+            'num_tag_close' => '</li>',
+            'cur_tag_open' => '<li class="page-item active"><a class="page-link" href="#">',
+            'cur_tag_close' => '</a></li>',
+            'attributes' => array('class' => 'page-link')
+        );
 
+        $this->pagination->initialize($config);
 
-    //     $this->db->where('application_id', $id);
-    //     $applicant = $this->db->get('job_applications')->row();
-    //     $date = date('d-m-Y');
-
-
-    //     $this->db->where('applicant_id', $id);
-    //     $appointment_letters = $this->db->get('appointment_letters')->row();
-
-    //     if ($applicant && !empty($applicant->contact_email)) {
-    //         $email = 'ahmedmiraz87@gmail.com';
-    //         // $email = $applicant->contact_email;
-
-    //         $data['application'] = $applicant;
-    //         $data['appointment_letters'] = $appointment_letters;
-    //         $data['loggedUser'] = $loggedUser;
-
-    //         $html_content = $this->load->view('admin/staff_recruitment/appointment_letter_email_pdf', $data, True);
-    //         // $html_content = $this->load->view('appointment_letter_email/'. $id);
-
-
-
-
-    //         if (empty($html_content)) {
-    //             $this->session->set_flashdata('error', 'Failed to generate HTML content for the PDF.');
-    //             redirect($_SERVER['HTTP_REFERER']);
-    //             return;
-    //         }
-
-    //         $pdf_path = $this->generate_appointment_pdf($html_content, $id);
-
-
-    //         // echo '<pre>';
-    //         // print_r($html_content);
-    //         // echo '</pre>';
-    //         // exit;
-
-    //         $this->load->library('email');
-
-    //         $config['mailtype'] = 'html';
-    //         $this->email->initialize($config);
-
-    //         $this->email->from('ctl05.2026@gmail.com', 'Chandra Trading Limited');
-    //         $this->email->to($email);
-    //         $this->email->subject('Appointment Letter');
-
-    //         $message = '<p>Dear ' . ($applicant->name ?? 'Applicant') . ',</p>';
-    //         $message .= '<p>Please find attached your official appointment letter from Chandra Trading Limited.</p>';
-    //         $this->email->message($message);
-
-    //         $this->email->attach($pdf_path);
-
-    //         $update_data = [
-    //             'is_sent' => 1
-    //         ];
-
-    //         $this->db->where('applicant_id', $id);
-    //         $this->db->update('appointment_letters', $update_data);
-
-    //         if ($this->email->send()) {
-    //             if (file_exists($pdf_path)) {
-    //                 unlink($pdf_path);
-    //             }
-
-    //             $this->session->set_flashdata(
-    //                 'success',
-    //                 'Appointment letter PDF sent successfully!'
-    //             );
-    //         } else {
-    //             echo $this->email->print_debugger();
-    //             return;
-    //         }
-
-    //     } else {
-    //         $this->session->set_flashdata(
-    //             'error',
-    //             'Email not found or applicant does not exist'
-    //         );
-    //     }
-
-    //     redirect($_SERVER['HTTP_REFERER']);
-    // }
-
-
-
-
-    private function generate_appointment_pdf($html, $id)
-    {
-        $autoloader_path = APPPATH . 'third_party/dompdf/autoload.inc.php';
-
-        if (!file_exists($autoloader_path)) {
-            show_error('Dompdf autoloader file not found at: ' . $autoloader_path);
-        }
-
-        require_once $autoloader_path;
-
-        if (!class_exists('Dompdf\Dompdf')) {
-            show_error('Dompdf class not found. Make sure you downloaded the official Dompdf Release ZIP package.');
-        }
-
-        $dompdf = new \Dompdf\Dompdf();
-
-        $options = $dompdf->getOptions();
-        $options->set('isRemoteEnabled', true);
-        $options->set('defaultFont', 'Helvetica');
-        $dompdf->setOptions($options);
-
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-
-        $previous_error_reporting = error_reporting();
-        error_reporting($previous_error_reporting & ~E_WARNING & ~E_NOTICE);
-
-        $dompdf->render();
-
-        error_reporting($previous_error_reporting);
-
-        $output = $dompdf->output();
-
-        $upload_dir = FCPATH . 'uploads/';
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, TRUE);
-        }
-
-        $file_path = $upload_dir . "appointment_letter_$id.pdf";
-
-        file_put_contents($file_path, $output);
-
-        return $file_path;
-    }
-
-
-
-
-    public function appointment_letter_email($id = NULL)
-    {
-        // $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
-        $loggedUser = $this->session->userdata('login_user_info_all');
-
-        if (empty($id)) {
-            show_404();
-        }
-
-        $this->db->where('applicant_id', $id);
-        $appointment_letters = $this->db->get('appointment_letters')->row();
-
-        $this->db->where('application_id', $id);
-        $application = $this->db->get('job_applications')->row();
-
-
-
-        if (!$id) {
-            show_404();
-        }
-
-        // $data = $this->engine->store_nav(
-        //     'appointment_letters',
-        //     'appointment_letters',
-        //     'appointment_letters Details: ' . $appointment_letters->employee_name
-        // );
-
-
-
-        $data['appointment_letters'] = $appointment_letters;
-        $data['application'] = $application;
-        $data['loggedUser'] = $loggedUser;
-
-
+        // Fetch records
+        $this->_apply_property_filters($filters);
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($per_page, $page);
+        $data['staff_joining_letters'] = $this->db->get('staff_joining_letters')->result();
 
         // echo '<pre>';
         // print_r($data);
         // echo '</pre>';
         // exit;
-        // $path = 'admin/staff_recruitment/appointment_letter_email';
-        $this->load->view('admin/staff_recruitment/appointment_letter_email', $data);
-        // $this->engine->render_view($data, $path);
+        foreach ($filters as $key => $val) {
+            $data[$key] = $val;
+        }
+        $data['total_rows'] = $total_rows;
+        $data['pagination'] = $this->pagination->create_links();
+        $data['page'] = $page;
+        $data['per_page'] = $per_page;
+        $data['sl_start'] = $page + 1;
+
+
+        $path = 'admin/staff_recruitment/joining_letter_list';
+
+        $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+    }
+
+
+    public function joining_letter_details($id = NULL)
+    {
+        if (empty($id)) {
+            show_404();
+        }
+
+        $this->db->where('id', $id);
+        $staff_joining_letters = $this->db->get('staff_joining_letters')->row();
+
+        if (!$staff_joining_letters) {
+            show_404();
+        }
+
+        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+
+
+        $data['staff_joining_letters'] = $staff_joining_letters;
+
+        // echo '<pre>';
+        // print_r($data);
+        // echo '</pre>';
+        // exit;
+
+        $path = 'admin/staff_recruitment/joining_letter_details';
+        $this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+    }
+
+    public function accept_joining_letter($id)
+    {
+        $staff = $this->session->userdata('login_user_info_all');
+        // echo '<pre>';
+        // print_r($staff);
+        // echo '</pre>';
+        // exit;
+        $date = date('d-m-Y');
+
+        $update_data = [
+
+            'status' => 'Approved',
+            'approved_by' => $staff->username,
+        ];
+
+
+        $this->db->where('id', $id);
+        $this->db->update('staff_joining_letters', $update_data);
+
+        redirect('admin_joining_letter_details/' . $id);
     }
 
 
@@ -1219,6 +969,73 @@ class Recruit_controllers extends CI_Controller
         }
         if (isset($filters['application_id']) && $filters['application_id'] !== '') {
             $this->db->where('application_id', $filters['application_id']);
+        }
+    }
+    private function _apply_staff_filters(array $filters)
+    {
+        if (isset($filters['search']) && $filters['search'] !== '') {
+            $this->db->group_start();
+            $this->db->like('staff_id', $filters['search']);
+            $this->db->or_like('staff_name', $filters['search']);
+            $this->db->or_like('mobile', $filters['search']);
+            $this->db->or_like('designation', $filters['search']);
+            $this->db->group_end();
+        }
+
+        if (isset($filters['staff_id']) && $filters['staff_id'] !== '') {
+            $this->db->like('staff_id', $filters['staff_id']);
+        }
+
+        if (isset($filters['staff_name']) && $filters['staff_name'] !== '') {
+            $this->db->like('staff_name', $filters['staff_name']);
+        }
+
+        if (isset($filters['mobile']) && $filters['mobile'] !== '') {
+            $this->db->like('mobile', $filters['mobile']);
+        }
+
+        if (isset($filters['designation']) && $filters['designation'] !== '') {
+            $this->db->like('designation', $filters['designation']);
+        }
+    }
+
+
+    private function _apply_property_filters(array $filters)
+    {
+        if ($filters['search'] !== '') {
+            $this->db->group_start();
+            $this->db->like('property_name', $filters['search']);
+            $this->db->or_like('property_id', $filters['search']);
+            $this->db->or_like('location', $filters['search']);
+            $this->db->group_end();
+        }
+
+        if ($filters['property_id'] !== '') {
+            $this->db->where('property_id', $filters['property_id']);
+        }
+
+        if ($filters['property_type'] !== '') {
+            $this->db->where('property_type', $filters['property_type']);
+        }
+
+        if ($filters['location'] !== '') {
+            $this->db->like('location', $filters['location']);
+        }
+
+        if ($filters['status'] !== '') {
+            $this->db->where('status', $filters['status']);
+        }
+
+        if ($filters['featured'] !== '' && $filters['featured'] !== NULL) {
+            $this->db->where('featured', $filters['featured']);
+        }
+
+        if ($filters['min_price'] !== '' && is_numeric($filters['min_price'])) {
+            $this->db->where('price >=', (float) $filters['min_price']);
+        }
+
+        if ($filters['max_price'] !== '' && is_numeric($filters['max_price'])) {
+            $this->db->where('price <=', (float) $filters['max_price']);
         }
     }
 

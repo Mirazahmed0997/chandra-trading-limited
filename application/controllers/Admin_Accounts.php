@@ -244,7 +244,7 @@ class Admin_Accounts extends CI_Controller
 
     public function create_debit_credit()
     {
-        $this->check_access('Project Deposite Vouchar');
+        // $this->check_access("Project {$type} Vouchar");
         $project_id = $this->input->post('project_id');
 
         $account_head = $this->input->post('account_head');
@@ -309,7 +309,7 @@ class Admin_Accounts extends CI_Controller
         if ($project_id === null || $project_id === '') {
             redirect("office_expenses_list");
         } else {
-            redirect("projects_cost");
+            redirect("projects_cost/".$account_type);
         }
     }
 
