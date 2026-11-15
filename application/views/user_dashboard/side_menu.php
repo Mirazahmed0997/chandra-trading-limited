@@ -412,6 +412,27 @@ $staff = isset($staff_login_info) ? $staff_login_info : null;
                                 <p>Attendences</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('user_movement_list') ?>"
+                                class="nav-link <?= active_nav('user_movement_list', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Movements List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('leave_appication_form') ?>"
+                                class="nav-link <?= active_nav('leave_appication_form', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Leave Application Form</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('leave_application_list') ?>"
+                                class="nav-link <?= active_nav('leave_application_list', $sub_nav); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Leave Application List</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

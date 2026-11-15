@@ -40,6 +40,7 @@ $lang['apartment'] = 'Apartment';
 $lang['plot'] = 'Plot';
 $lang['land'] = 'Land';
 $lang['commercial'] = 'Commercial';
+$lang['media'] = 'Media';
 
 $lang['location'] = 'Location';
 $lang['select_location'] = 'Select Location';

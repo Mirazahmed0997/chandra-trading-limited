@@ -117,6 +117,17 @@
                 <?= $this->session->flashdata('entry_attendece_success'); ?>
             </div>
         <?php endif; ?>
+        <?php if ($this->session->flashdata('weekend_error')): ?>
+            <div class="alert alert-danger">
+                <?= $this->session->flashdata('weekend_error'); ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('attendece_error')): ?>
+            <div class="alert alert-danger">
+                <?= $this->session->flashdata('attendece_error'); ?>
+            </div>
+        <?php endif; ?>
+       
 
 
         <div class="content-header dashboard-header-dark">
@@ -182,6 +193,20 @@
                             <a href="javascript:void(0);" class="stat-card-footer-dark" data-bs-toggle="modal"
                                 data-bs-target="#attendencePortal">
                                 <span>Submit Attendance</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="stat-card-dark card-theme-emerald">
+                            <div class="card-body-custom">
+                                <div class="stat-icon">
+                                    <i class="fas fa-route"></i>
+                                </div>
+                                <div class="stat-value">Movements</div>
+                            </div>
+                            <a href="<?= base_url('user_movement_list'); ?>" class="stat-card-footer-dark" >
+                                <span>Submit Movement</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>

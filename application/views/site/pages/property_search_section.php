@@ -95,6 +95,10 @@ $projects = $this->db->get()->result_array();
                                     <input type="radio" name="property_type" id="type_commercial" value="commercial" <?= ($selected_type === 'commercial') ? 'checked' : ''; ?>>
                                     <label for="type_commercial"><?= lang('commercial'); ?></label>
                                 </div>
+                                <div class="option-item">
+                                    <input type="radio" name="property_type" id="type_media" value="media" <?= ($selected_type === 'media') ? 'checked' : ''; ?>>
+                                    <label for="type_commercial"><?= lang('media'); ?></label>
+                                </div>
                             </div>
                         </div>
                     </div>

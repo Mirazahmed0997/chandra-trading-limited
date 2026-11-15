@@ -244,7 +244,7 @@
         <p class="form-subtitle">Fill in the details below to register a new user</p>
     </div>
 
-    <form action="<?php echo base_url('admin_registration'); ?>" method="post" onsubmit="return validatePassword();">
+    <form action="<?php echo base_url('admin_registration'); ?>" method="post" onsubmit="return validatePassword();" enctype="multipart/form-data">
         <div class="form-grid">
             <div class="form-group">
                 <label for="first_name">First Name</label>
@@ -290,6 +290,11 @@
                     <option value="Admin">Admin</option>
                     <option value="Super Admin">Super Admin</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="attachment">Signature </label>
+                <input type="file" name="user_sign" id="attachment" class="form-control">
+                <p class="help-block">Allowed files: jpg, png.</p>
             </div>
 
             <div class="form-group">

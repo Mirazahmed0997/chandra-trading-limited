@@ -23,10 +23,10 @@ $available_menus = [
     'Account'             => ['Account Head Management','Project Deposit Vouchar','Project Expense Vouchar','Office Expense Managment','Pending Vouchars'],
     'Communication & Messages'=> ["Landowner Enquiries","General Enquiries","Investment Enquiries","Bookings"],
     'Promotional Publications'  => [],
+    'Leave Applications'  => ['Applications List'],
     'Reporting'           => [],
     'Staff'               => ['Staff list','Joining Letter'],
     'Job Portal'          => ["Accepted List","Pending Applications","Rejected Applications"],
-    // 'Leads'               => [],
     'Site Visits'         => [],
     'Customers'           => [],
     'News Management'     => [],
@@ -34,7 +34,7 @@ $available_menus = [
     'Team'                => [],
     'Testimonials'        => [],
     'Documents'           => [],
-    'Settings'           => [''],
+    'Settings'           => ['Set Attendence','Set Holidays'],
     'User Management'     => ['Add new User', 'User'],
 ];
 ?>
@@ -216,39 +216,3 @@ $available_menus = [
 </style>
 
 
-
-   <!-- <?php if ($loggedUser->role == 'super_admin'): ?>
-                                <hr class="my-4 text-muted opacity-25">
-
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <h6 class="text-uppercase text-muted fw-bold mb-0 small tracking-wider">
-                                        মেনু অ্যাক্সেস কন্ট্রোল (Menu Permissions)
-                                    </h6>
-                                    <span class="badge bg-light text-muted border">Super Admin Only</span>
-                                </div>
-
-                                <form action="<?= base_url('menu_access/' . $user->id); ?>" method="post">
-                                    <div class="row g-2 mb-4">
-                                        <?php foreach ($available_menus as $index => $menu): ?>
-                                            <?php $menu_id = 'menu_check_' . $index; ?>
-                                            <div class="col-sm-6">
-                                                <div class="form-check custom-checkbox-card p-3 rounded-3 border h-100 d-flex align-items-center">
-                                                    <input class="form-check-input ms-0 me-3" 
-                                                           type="checkbox" 
-                                                           id="<?= $menu_id ?>" 
-                                                           name="menus[]"
-                                                           value="<?= $menu ?>" 
-                                                           <?= in_array($menu, $assigned_menus) ? 'checked' : ''; ?>>
-                                                    <label class="form-check-label fw-medium text-dark w-100 cursor-pointer mb-0" for="<?= $menu_id ?>">
-                                                        <?= $menu ?>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary w-100 py-2.5 rounded-3 fw-semibold shadow-sm">
-                                        Save Access Permissions
-                                    </button>
-                                </form>
-                            <?php endif; ?> -->

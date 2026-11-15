@@ -126,6 +126,19 @@ $route['admin_property_visit_data'] = 'Admin/admin_property_visit_data';
 $route['admin_booked_property_visit_details/(:num)'] = 'Admin/admin_booked_property_visit_details/$1';
 $route['update_booked_property_visit_status/(:num)'] = 'Admin/update_booked_property_visit_status/$1';
 
+// --------------Attendence & Holidays------------------
+$route['set_attendence_form'] = 'Admin/set_attendence_form';
+$route['set_attendence'] = 'Admin/set_attendence';
+$route['set_holidays_form'] = 'Admin/set_holidays_form';
+$route['set_holidays'] = 'Admin/set_holidays';
+
+$route['admin_leave_application_list'] = 'Admin/admin_leave_application_list';
+$route['admin_leave_application_details/(:num)'] = 'Admin/admin_leave_application_details/$1';
+$route['update_leave_application_status/(:num)'] = 'Admin/update_leave_application_status/$1';
+
+
+
+
 
 $route['DepositExpenseAccountHeadManagement'] = 'Admin_Accounts/DepositExpenseAccountHeadManagement';
 $route['accountHeadForm'] = 'Admin_Accounts/accountHeadForm';
@@ -209,6 +222,17 @@ $route['update_profile'] = 'User_dashboard/update_profile';
 $route['user_attendence'] = 'User_attendence_controller/user_attendence';
 $route['user_entry'] = 'User_attendence_controller/user_entry';
 $route['user_exit'] = 'User_attendence_controller/user_exit';
+$route['add_staff_movement_form'] = 'User_attendence_controller/add_staff_movement_form';
+$route['add_staff_movement'] = 'User_attendence_controller/add_staff_movement';
+$route['user_movement_list'] = 'User_attendence_controller/user_movement_list';
+$route['close_staff_movement/(:num)'] = 'User_attendence_controller/close_staff_movement/$1';
+
+$route['leave_appication_form'] = 'User_attendence_controller/leave_appication_form';
+$route['add_leave_appication'] = 'User_attendence_controller/add_leave_appication';
+$route['leave_application_list'] = 'User_attendence_controller/leave_application_list';
+$route['leave_application_details/(:num)'] = 'User_attendence_controller/leave_application_details/$1';
+
+
 
 
 

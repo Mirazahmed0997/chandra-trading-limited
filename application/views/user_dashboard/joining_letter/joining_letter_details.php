@@ -57,6 +57,13 @@
             box-shadow: 0 14px 42px rgba(22, 54, 37, .09);
         }
 
+        .header{
+            display: none !important;
+        }
+        .footer{
+            display: none !important;
+        }
+
         .letter-container::before {
             position: absolute;
             inset: 0 0 auto;
@@ -476,12 +483,13 @@
 
                     <div class="signature-line">
                             <img src="<?= base_url('./assets/uploads/staff_sign/' . $staff_joining_letters->signature) ?>"
-                                alt="Authorized Signature"><br>
+                                alt="Authorized Signature">
+                                <br>
                         <strong><?= html_escape($name); ?></strong><br>
 
                         <?= html_escape($designation); ?><br>
 
-                        Chandra Trading Limited
+                        Chandra Trading Limited.
 
                     </div>
 
@@ -504,109 +512,3 @@
 </body>
 
 </html>
-
-
-<!-- 
- <div class="applicant-card">
-
-        <div class="applicant-info">
-
-            <div class="info-row">
-                <span class="info-label">নাম</span>
-                <span>:</span>
-                <span class="info-value">
-                    <?= html_escape($name); ?>
-                </span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">পিতার নাম</span>
-                <span>:</span>
-                <span class="info-value">
-                    <?= html_escape($father); ?>
-                </span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">মাতার নাম</span>
-                <span>:</span>
-                <span class="info-value">
-                    <?= html_escape($mother); ?>
-                </span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">ঠিকানা</span>
-                <span>:</span>
-                <span class="info-value">
-                    <?= html_escape($address); ?>
-                </span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">পদবী</span>
-                <span>:</span>
-                <span class="info-value">
-                    <?= html_escape($designation); ?>
-                </span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">বিভাগ</span>
-                <span>:</span>
-                <span class="info-value">
-                    <?= html_escape($department); ?>
-                </span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">যোগদানের তারিখ</span>
-                <span>:</span>
-                <span class="info-value">
-                    <?= html_escape($joining_date); ?>
-                </span>
-            </div>
-
-        </div>
-
-        <div class="appointment_letters-img">
-
-            <img src="<?= $photo; ?>" alt="Employee Photo">
-
-        </div>
-
-    </div> -->
-
-
-
-
-<!-- <div class="section-heading">
-            যোগদান সংক্রান্ত তথ্য :
-        </div>
-
-        <ol class="terms-list">
-
-            <li>
-                আমার যোগদানের তারিখ:
-                <strong><?= html_escape($joining_date); ?></strong>।
-            </li>
-
-            <li>
-                আমার পদবী:
-                <strong><?= html_escape($designation); ?></strong>।
-            </li>
-
-            <li>
-                আমার কর্মস্থল ও বিভাগ কর্তৃপক্ষের নির্দেশনা অনুযায়ী নির্ধারিত হবে।
-            </li>
-
-            <li>
-                প্রতিষ্ঠানের সকল নিয়ম-কানুন, শৃঙ্খলা ও গোপনীয়তা
-                যথাযথভাবে মেনে চলতে বাধ্য থাকব।
-            </li>
-
-            <li>
-                কর্তৃপক্ষ কর্তৃক অর্পিত সকল দায়িত্ব যথাযথভাবে পালন করব।
-            </li>
-
-        </ol> -->

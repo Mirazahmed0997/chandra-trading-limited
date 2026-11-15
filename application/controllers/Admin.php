@@ -54,6 +54,25 @@ class Admin extends CI_Controller
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
 
+	private function upload_file($field_name, $file_path)
+	{
+		$config['upload_path'] = $file_path;
+		$config['allowed_types'] = 'jpg|jpeg|png|pdf';
+		$config['max_size'] = 2048;
+		$config['encrypt_name'] = TRUE;
+
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+
+		if ($this->upload->do_upload($field_name)) {
+			$data = $this->upload->data();
+			return $data['file_name'];
+		} else {
+			return '';
+		}
+	}
+
+
 	// function access_required()
 	// {
 	// 	$user = $this->session->userdata('login_user_info_all');
@@ -116,8 +135,6 @@ class Admin extends CI_Controller
 		}
 	}
 
-
-
 	public function admin_registration()
 	{
 		$this->check_access('Add new User');
@@ -126,7 +143,6 @@ class Admin extends CI_Controller
 		$path = 'admin/registration/registration';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
 	}
-
 
 	public function admin_registration_saved()
 	{
@@ -138,6 +154,7 @@ class Admin extends CI_Controller
 		$username = $this->input->post('username');
 		$mobile_number = $this->input->post('mobile_number');
 		$email = $this->input->post('email');
+		$user_sign = $this->upload_file('user_sign', './assets/uploads/user_sign/');
 
 
 
@@ -169,12 +186,13 @@ class Admin extends CI_Controller
 			'mobile_number' => $this->input->post('mobile_number'),
 			'designation' => $this->input->post('designation'),
 			'role' => $this->input->post('role'),
-			'password' => $this->input->post('password')
+			'password' => $this->input->post('password'),
+			'user_sign' => $user_sign
 			// 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 		);
 
 		$this->db->insert('users', $data);
-		redirect("admin");
+		redirect("user_list");
 
 
 	}
@@ -839,8 +857,272 @@ class Admin extends CI_Controller
 	}
 
 
-	
+	public function set_attendence_form()
+	{
+		$this->check_access('Set Attendence');
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+
+		$path = 'admin/attendance/set_attendance';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
 
 
+	public function set_attendence()
+	{
+		$this->check_access('Set Attendence');
+
+		$staff_id = trim($this->input->post('staff_id'));
+
+		$this->db->where('staff_id', $staff_id);
+		$existing_staff_id = $this->db->get('staff_attendance_settings')->row();
+
+		if ($existing_staff_id) {
+			$this->session->set_flashdata('existing_staff_id_error', 'Already set attendance for this staff');
+			redirect('set_attendence_form');
+			return;
+		}
+
+		$office_start = trim($this->input->post('office_start'));
+		$office_end = trim($this->input->post('office_end'));
+		$grace_minutes = trim($this->input->post('grace_minutes'));
+		$weekend_day = trim($this->input->post('weekend_day'));
+		$working_hours = trim($this->input->post('working_hours'));
+
+		// $entry_time = DateTime::createFromFormat('h:i A', $office_start);
+		// $exit_time = DateTime::createFromFormat('h:i A', $office_end);
+
+		$data = array(
+			'staff_id' => $staff_id,
+			'office_start' => $office_start,
+			'office_end' => $office_end,
+			// 'office_start' => $entry_time ? $entry_time->format('H:i:s') : $office_start,
+			// 'office_end' => $exit_time ? $exit_time->format('H:i:s') : $office_end,
+			'grace_minutes' => $grace_minutes,
+			'weekend_day' => $weekend_day,
+			'working_hours' => $working_hours
+		);
+
+		// echo '<pre>';
+		// print_r($data);
+		// echo '</pre>';
+		// exit;
+
+		$insert = $this->db->insert('staff_attendance_settings', $data);
+
+		if ($insert) {
+			$this->session->set_flashdata(
+				'set_attendence_success',
+				'Attendance set successfully.'
+			);
+			redirect('set_attendence_form');
+		} else {
+			$this->session->set_flashdata(
+				'set_attendence_error',
+				'Unable to set attendance. Please try again.'
+			);
+			redirect('set_attendence_form');
+		}
+	}
+
+	public function set_holidays_form()
+	{
+		$this->check_access('Set Holidays');
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+
+		$path = 'admin/attendance/set_holidays';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+
+	public function set_holidays()
+	{
+		$this->check_access('Set Holidays');
+
+		$holiday_name = $this->input->post("holiday_name");
+		$holiday_date = $this->input->post("holiday_date");
+		$holiday_type = $this->input->post("holiday_type");
+		$description = $this->input->post("description");
+
+		$data = array(
+			'holiday_name' => $holiday_name,
+			'holiday_date' => $holiday_date,
+			'holiday_type' => $holiday_type,
+			'description' => $description,
+		);
+
+		$insert = $this->db->insert('staff_holidays', $data);
+
+
+		if ($insert) {
+			$this->session->set_flashdata(
+				'set_holiday_success',
+				'Successfully set holiday.'
+			);
+			redirect('set_holidays_form');
+		} else {
+			$this->session->set_flashdata(
+				'set_holiday_error',
+				'Unable to set . Please try again.'
+			);
+			redirect('set_holidays_form');
+		}
+
+	}
+
+
+
+
+
+	public function admin_leave_application_list()
+	{
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+
+
+
+		$per_page = 10;
+
+		$page = (int) $this->input->get('page');
+
+		if ($page < 0) {
+			$page = 0;
+		}
+
+
+		$total_rows = $this->db->count_all_results('staff_leave_applications');
+
+		$this->load->library('pagination');
+
+		$config = array(
+			'base_url' => base_url('admin_leave_application_list'),
+			'total_rows' => $total_rows,
+			'per_page' => $per_page,
+			'page_query_string' => TRUE,
+			'query_string_segment' => 'page',
+			'reuse_query_string' => TRUE,
+			'use_page_numbers' => FALSE,
+
+			'full_tag_open' => '<ul class="pagination pagination-sm mb-0">',
+			'full_tag_close' => '</ul>',
+
+			'first_link' => 'First',
+			'last_link' => 'Last',
+
+			'first_tag_open' => '<li class="page-item">',
+			'first_tag_close' => '</li>',
+			'last_tag_open' => '<li class="page-item">',
+			'last_tag_close' => '</li>',
+
+			'next_tag_open' => '<li class="page-item">',
+			'next_tag_close' => '</li>',
+			'prev_tag_open' => '<li class="page-item">',
+			'prev_tag_close' => '</li>',
+
+			'num_tag_open' => '<li class="page-item">',
+			'num_tag_close' => '</li>',
+
+			'cur_tag_open' => '<li class="page-item active"><a class="page-link" href="#">',
+			'cur_tag_close' => '</a></li>',
+
+			'attributes' => array('class' => 'page-link')
+		);
+
+		$this->pagination->initialize($config);
+
+
+		$this->db->order_by('id', 'DESC');
+		$this->db->limit($per_page, $page);
+
+
+
+		$data['applications'] = $this->db
+			->get('staff_leave_applications')
+			->result();
+
+
+		$data['total_rows'] = $total_rows;
+		$data['pagination'] = $this->pagination->create_links();
+		$data['page'] = $page;
+		$data['per_page'] = $per_page;
+		$data['sl_start'] = $page + 1;
+
+		// echo '<pre>';
+		// print_r($data['staff_attendance']);
+		// echo '</pre>';
+		// exit;
+
+		$path = 'admin/attendance/leave_application_list';
+
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+
+	public function admin_leave_application_details($id = NULL)
+	{
+		if (empty($id)) {
+			show_404();
+		}
+
+		$this->db->where('id', $id);
+		$staff_leave_applications = $this->db->get('staff_leave_applications')->row();
+
+		$staff_id = $staff_leave_applications->staff_id;
+
+
+
+
+		$this->db->where('staff_id', $staff_id);
+		$staff_info = $this->db->get('staff_login_info')->row();
+
+		// echo '<pre>';
+		// print_r($staff_info);
+		// echo '</pre>';
+		// exit;
+
+		if (!$staff_leave_applications) {
+			show_404();
+		}
+
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+
+
+		$data['staff_leave_applications'] = $staff_leave_applications;
+		$data['staff_info'] = $staff_info;
+
+
+
+		$path = 'admin/attendance/leave_application_details';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+
+	public function update_leave_application_status($id = NULL)
+	{
+		$this->check_access('Leave Applications');
+		$user = $this->session->userdata('login_user_info_all');
+		$approved_by = $user->first_name . ' ' . $user->last_name;
+		$approved_at = date('Y-m-d H:i:s');
+
+		$status = $this->input->post('status');
+		// echo '<pre>';
+		// print_r($status);
+		// echo '</pre>';
+		// exit;
+
+		$update_data = [
+
+			'approved_by' => $approved_by,
+			'approved_at' => $approved_at,
+			'status' => $status
+		];
+
+
+		$this->db->where('id', $id);
+		$this->db->update('staff_leave_applications', $update_data);
+
+		redirect(base_url('admin_leave_application_list'));
+
+
+
+	}
 
 }

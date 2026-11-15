@@ -42,9 +42,10 @@
             position: relative;
             width: 100%;
             max-width: 850px;
-            min-height: 1850px !important;
+            /* min-height: 850px !important; */
             margin: 0 auto;
             padding: 40px 50px;
+            margin-top: 50px;
             background: var(--paper);
             border: 1px solid #e1e8e3;
             border-radius: 10px;
@@ -83,6 +84,12 @@
         .print-btn:hover {
             color: #fff;
             background: var(--brand-dark);
+        }
+        .header {
+            display: none !important;
+        }
+        .footer {
+            display: none !important;
         }
 
         .header img {

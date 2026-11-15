@@ -564,11 +564,13 @@
                         <i class="bi bi-check-circle-fill me-1"></i> Email Sent
                     </button>
 
+
                 <?php else: ?>
                     <a href="<?= base_url('send_appointment_letter/' . $application->application_id); ?>"
                         class="btn print-btn  btn-sm rounded-3 px-3 fw-medium add_btn ">
                         <i class="bi bi-plus-lg me-1"></i> Send Appointment Letter
                     </a>
+
                 <?php endif; ?>
 
                 <div class="translate-wrapper">
@@ -577,6 +579,9 @@
 
                 <button id="print_button" class="print-btn" onclick="window.print()">
                     <i class="fas fa-print"></i> Print
+                </button>
+                <button type="button" class="btn btn-secondary px-4 me-2">
+                   Staff ID:  <?= html_escape($appointment_letters->employee_id ?? '-'); ?>
                 </button>
 
 

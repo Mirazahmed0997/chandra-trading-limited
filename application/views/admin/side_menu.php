@@ -553,6 +553,52 @@ $account_count = $this->db->count_all_results('a_account');
                             </p>
                         </a>
 
+                        <ul class="nav nav-treeview">
+
+                            <?php if (has_menu_access('Set Attendence')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('set_attendence_form') ?>"
+                                        class="nav-link <?= active_nav('set_attendence_form', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Set Attendence</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <?php if (has_menu_access('Set Holidays')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('set_holidays_form') ?>"
+                                        class="nav-link <?= active_nav('set_holidays_form', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Set Holidays</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+
+                        </ul>
+
+                    </li>
+                <?php endif; ?>
+
+                <?php if (has_menu_access('Leave Applications')): ?>
+                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
+                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                            <i class="nav-icon fas fa-file-signature"></i>
+                            <p>
+                                Leave Applications
+                            </p>
+                            <i class="fas fa-angle-left right"></i>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <?php if (has_menu_access('Applications List')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('admin_leave_application_list') ?>"
+                                        class="nav-link <?= active_nav('admin_leave_application_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Applications List</p>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </li>
                 <?php endif; ?>
 
@@ -568,8 +614,8 @@ $account_count = $this->db->count_all_results('a_account');
                         <ul class="nav nav-treeview">
                             <?php if (has_menu_access('Landowner Enquiries')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('landowners_query') ?>"
-                                        class="nav-link <?= active_nav('Landowners', $sub_nav); ?>">
+                                    <a href="<?php echo base_url('admin_leave_application_list') ?>"
+                                        class="nav-link <?= active_nav('admin_leave_application_list', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p> Landowner Enquiries</p>
                                     </a>
@@ -613,6 +659,9 @@ $account_count = $this->db->count_all_results('a_account');
                         </ul>
                     </li>
                 <?php endif; ?>
+
+
+
 
                 <?php if (has_menu_access('Promotional Publications')): ?>
                     <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">

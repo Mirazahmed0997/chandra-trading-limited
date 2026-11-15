@@ -185,6 +185,8 @@ $lang['apartment'] = 'অ্যাপার্টমেন্ট';
 $lang['plot'] = 'প্লট';
 $lang['land'] = 'জমি';
 $lang['commercial'] = 'কমার্শিয়াল';
+$lang['media'] = 'মিডিয়াম';
+
 
 $lang['location'] = 'লোকেশন';
 $lang['select_location'] = 'লোকেশন নির্বাচন করুন';

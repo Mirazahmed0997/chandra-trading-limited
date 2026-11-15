@@ -389,12 +389,6 @@ class User_controllers extends MY_Controller
         }
     }
   
-
-
-
-
-
-
     public function user_registration_form()
     {
         $data = $this->engine->store_nav('registration', 'Nothing', 'User Registration');
