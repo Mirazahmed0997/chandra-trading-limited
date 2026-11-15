@@ -19,7 +19,9 @@ $route['admin'] = 'Admin_login/index';
 $route['admin_registration_form'] = 'Admin/admin_registration';
 $route['admin_registration'] = 'Admin/admin_registration_saved';
 $route['update_users_role/(:num)'] = 'Admin/update_users_role/$1';
+$route['admin_profile'] = 'Admin/admin_profile';
 $route['change_password'] = 'Admin/change_password';
+$route['update_admin_profile'] = 'Admin/update_admin_profile';
 $route['menu_access/(:num)'] = 'Admin/menu_access/$1';
 
 

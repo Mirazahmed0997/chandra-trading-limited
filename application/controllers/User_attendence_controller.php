@@ -541,7 +541,7 @@ class User_attendence_controller extends CI_Controller
             $this->session->set_flashdata('leave_applications_error', 'Failed to submit leave_applications request.');
         }
 
-        redirect('user_movement_list');
+        redirect('leave_application_list');
     }
 
 

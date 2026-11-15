@@ -73,21 +73,6 @@ class Admin extends CI_Controller
 	}
 
 
-	// function access_required()
-	// {
-	// 	$user = $this->session->userdata('login_user_info_all');
-	// 	$menu_access = $this->db
-	// 		->select('menu_key')
-	// 		->where('user_id', $user->id)
-	// 		->get('user_menu_access')
-	// 		->result_array();
-
-	// 	if ($menu_access) {
-	// 		$this->session->set_flashdata('error', `Don't have access`);
-	// 		redirect('admin/users_list/users_list');
-	// 		exit;
-	// 	}
-	// }
 
 	public function require_super_admin()
 	{
@@ -198,6 +183,21 @@ class Admin extends CI_Controller
 	}
 
 
+	public function admin_profile()
+	{
+		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+		$loggedUser = $this->session->userdata('login_user_info_all');
+
+		$data['user'] = $this->db
+			->where('id', $loggedUser->id)
+			->get('users')
+			->row();
+
+		$path = 'admin/users_list/users_profile';
+		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
+	}
+
+
 	public function change_password()
 	{
 		$loggedUser = $this->session->userdata('login_user_info_all');
@@ -211,6 +211,13 @@ class Admin extends CI_Controller
 		$current_password = $this->input->post('current_password');
 		$new_password = $this->input->post('new_password');
 		$confirm_password = $this->input->post('confirm_password');
+
+		// echo '<pre>';
+		// print_r($current_password);
+		// print_r($new_password);
+		// print_r($confirm_password);
+		// echo '</pre>';
+		// exit;
 
 
 
@@ -310,6 +317,68 @@ class Admin extends CI_Controller
 
 		redirect($_SERVER['HTTP_REFERER']);
 	}
+
+
+
+	public function update_admin_profile()
+	{
+		$loggedUser = $this->session->userdata('login_user_info_all');
+
+		if (!$loggedUser) {
+			redirect('admin_login');
+			return;
+		}
+
+		$user = $this->db->get_where('users', [
+			'id' => $loggedUser->id
+		])->row();
+
+		if (!$user) {
+			show_404();
+			return;
+		}
+
+		$update_data = [
+			'first_name' => $this->input->post('first_name', TRUE),
+			'last_name' => $this->input->post('last_name', TRUE),
+			'username' => $this->input->post('username', TRUE),
+			'mobile_number' => $this->input->post('mobile_number', TRUE),
+			'email' => $this->input->post('email', TRUE),
+			'designation' => $this->input->post('designation', TRUE),
+		];
+
+		if (!empty($_FILES['user_img']['name'])) {
+			$update_data['user_img'] = update_file(
+				'user_img',
+				'./assets/uploads/user_img/',
+				$user->user_img,
+				'jpg|jpeg|png'
+			);
+		}
+
+		if (!empty($_FILES['user_sign']['name'])) {
+			$update_data['user_sign'] = update_file(
+				'user_sign',
+				'./assets/uploads/user_sign/',
+				$user->user_sign,
+				'jpg|jpeg|png'
+			);
+		}
+
+		$this->db->where('id', $user->id);
+		$this->db->update('users', $update_data);
+
+		$updatedUser = $this->db->get_where('users', [
+			'id' => $user->id
+		])->row();
+
+		$this->session->set_userdata('login_user_info_all', $updatedUser);
+
+		$this->session->set_flashdata('success', 'Profile updated successfully.');
+
+		redirect('admin_profile');
+	}
+
 
 	// ----------------------------users list--------------------
 
@@ -475,9 +544,6 @@ class Admin extends CI_Controller
 
 	public function admin_property_book_data()
 	{
-
-
-
 		$this->check_access('Bookings');
 		// Filters
 		$search = trim($this->input->get('search', TRUE));

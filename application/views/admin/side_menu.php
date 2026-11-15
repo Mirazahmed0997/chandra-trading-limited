@@ -372,6 +372,13 @@ $account_count = $this->db->count_all_results('a_account');
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item has-treeview menu-open">
+                    <a href="<?php echo base_url('admin_profile') ?>"
+                        class="nav-link <?= active_nav('admin_profile', $sub_nav); ?>">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
 
                 <!-- <?php if (has_menu_access('Properties')): ?>
                     <li class="nav-item has-treeview <?= active_open('Properties', $main_nav); ?>">
@@ -573,6 +580,13 @@ $account_count = $this->db->count_all_results('a_account');
                                     </a>
                                 </li>
                             <?php endif; ?>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('admin_profile') ?>"
+                                    class="nav-link <?= active_nav('admin_profile', $sub_nav); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>My Profile</p>
+                                </a>
+                            </li>
 
                         </ul>
 
