@@ -45,11 +45,11 @@
 
                     <div>
                         <h5 class="mb-1 fw-bold">
-                            Attendance History
+                            Movements History
                         </h5>
 
                         <small class="text-muted">
-                            Your registered attendance records
+                            Your registered movements records
                         </small>
                     </div>
 

@@ -398,7 +398,7 @@ $staff = isset($staff_login_info) ? $staff_login_info : null;
                 </li>
                 <li class="nav-item has-treeview <?= active_open('Projects', $main_nav); ?>">
                     <a href="#" class="nav-link <?= active_nav('Projects', $main_nav); ?>">
-                        <i class="fas fa-clipboard-check"></i>
+                        <i class="nav-icon fas fa-calendar-check"></i>
                         <p>
                             Attendences & leaves
                             <i class="fas fa-angle-left right"></i>

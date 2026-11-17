@@ -6,6 +6,15 @@ $application_count = $this->db->count_all_results('job_applications');
 
 $this->db->where('status', 'Pending');
 $account_count = $this->db->count_all_results('a_account');
+
+
+$this->db->where('id', $user->id);
+$users = $this->db->get('users')->row();
+
+// echo '<pre>';
+// print_r($users);
+// echo '</pre>';
+// exit;
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
@@ -347,19 +356,15 @@ $account_count = $this->db->count_all_results('a_account');
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?php echo base_url('assets/backend/dist/img/user.jpg'); ?>" class="img-circle elevation-2"
-                    alt="User Image">
+                <img src="<?php echo base_url('assets/uploads/user_img/' . $users->user_img) ?>"
+                    class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="<?php echo base_url('view_profile'); ?>" class="d-block">
+                <a href="<?php echo base_url('admin_profile'); ?>" class="d-block">
                     <span class="brand-text font-weight-light">
                         <?= htmlspecialchars($user->first_name . ' ' . $user->last_name); ?>
                     </span> <small><?= $user->role; ?></small></a>
             </div>
-
-
-
-
         </div>
 
         <nav class="mt-2">
@@ -375,7 +380,7 @@ $account_count = $this->db->count_all_results('a_account');
                 <li class="nav-item has-treeview menu-open">
                     <a href="<?php echo base_url('admin_profile') ?>"
                         class="nav-link <?= active_nav('admin_profile', $sub_nav); ?>">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-id-badge"></i>
                         <p>Profile</p>
                     </a>
                 </li>
@@ -857,6 +862,48 @@ $account_count = $this->db->count_all_results('a_account');
                                 Documents
                             </p>
                         </a>
+                    </li>
+                <?php endif; ?>
+
+                 <?php if (has_menu_access('Share Holder Managment')): ?>
+                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
+                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Share Holder Managment
+                                <i class="fas fa-angle-left right"></i>
+                                <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
+                                        <span class="badge bg-danger"><?= $application_count ?></span>
+                                    <?php } ?></span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                           
+                            <?php if (has_menu_access('Share Holder Application')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('share_application_form') ?>"
+                                        class="nav-link <?= active_nav('share_application_form', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Share Holder Application</p>
+                                        <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
+                                                <span class="badge bg-danger"><?= $application_count ?></span>
+                                            <?php } ?></span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <?php if (has_menu_access('Pending Share Holder')): ?>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('pending_applications_list') ?>"
+                                        class="nav-link <?= active_nav('pending_applications_list', $sub_nav); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pending Share Holder</p>
+                                        <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
+                                                <span class="badge bg-danger"><?= $application_count ?></span>
+                                            <?php } ?></span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </li>
                 <?php endif; ?>
 

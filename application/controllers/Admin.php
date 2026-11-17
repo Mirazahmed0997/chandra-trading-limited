@@ -140,6 +140,7 @@ class Admin extends CI_Controller
 		$mobile_number = $this->input->post('mobile_number');
 		$email = $this->input->post('email');
 		$user_sign = $this->upload_file('user_sign', './assets/uploads/user_sign/');
+		$user_img = $this->upload_file('user_img', './assets/uploads/user_img/');
 
 
 
@@ -172,7 +173,8 @@ class Admin extends CI_Controller
 			'designation' => $this->input->post('designation'),
 			'role' => $this->input->post('role'),
 			'password' => $this->input->post('password'),
-			'user_sign' => $user_sign
+			'user_sign' => $user_sign,
+			'user_img' => $user_img
 			// 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 		);
 

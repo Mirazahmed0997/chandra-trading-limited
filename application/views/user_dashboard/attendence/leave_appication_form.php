@@ -66,7 +66,7 @@
                                 <div class="form-group">
                                     <label for="total_days">Total Days <span class="text-danger">*</span></label>
                                     <input type="number" step="0.5" name="total_days" id="total_days"
-                                        class="form-control" placeholder="e.g. 1.0 or 2.5" required readonly>
+                                        class="form-control" placeholder="e.g. 1 or 2" required readonly>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <label for="attachment">Attachment (Supporting Document)</label>
                             <input type="file" name="attachment" id="attachment" class="form-control">
-                            <p class="help-block">Allowed files: jpg, png, pdf, docx (Optional).</p>
+                            <p class="help-block">Allowed files: jpg, png, pdf</p>
                         </div>
 
                     </div>

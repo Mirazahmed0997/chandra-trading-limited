@@ -148,6 +148,10 @@ $route['Deposit_Expense_Account_HeadManagement_Save'] = 'Admin_Accounts/Deposit_
 $route['delete_accountHead/(:num)'] = 'Admin_Accounts/delete_accountHead/$1';
 
 
+$route['share_application_form'] = 'Admin_shareHolder_controller/share_application_form';
+
+
+
 
 
 $route['application_form'] = 'Site/application_form';

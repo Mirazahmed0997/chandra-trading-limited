@@ -90,12 +90,13 @@ $signatureImage = !empty($user->user_sign)
         font-size: 29px;
         font-weight: 750;
         color: #1c1e21;
-        margin-bottom: 5px;
+        margin-bottom: -1px;
     }
 
     .profile-designation {
         color: #65676b;
         font-size: 15px;
+        margin-bottom: -2px;
     }
 
     .profile-role {
@@ -306,7 +307,6 @@ $signatureImage = !empty($user->user_sign)
     <div class="profile-page">
         <div class="container-fluid profile-container">
 
-            <!-- FACEBOOK STYLE PROFILE HEADER -->
             <div class="profile-card">
 
                 <div class="cover-photo"></div>
@@ -357,7 +357,6 @@ $signatureImage = !empty($user->user_sign)
 
             </div>
 
-            <!-- ABOUT SECTION -->
             <div class="profile-card profile-section" id="about">
 
                 <h5 class="section-heading">
@@ -445,7 +444,6 @@ $signatureImage = !empty($user->user_sign)
                 </div>
             </div>
 
-            <!-- SIGNATURE SECTION -->
             <div class="profile-card profile-section" id="signature">
 
                 <h5 class="section-heading">
@@ -482,7 +480,7 @@ $signatureImage = !empty($user->user_sign)
 
                     <div class="row">
 
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
                             <label for="current_password">Current Password</label>
                             <div class="input-wrapper">
                                 <input value="<?= html_escape($user->password) ?>" type="password"
@@ -493,8 +491,7 @@ $signatureImage = !empty($user->user_sign)
                             </div>
                         </div>
 
-                        <!-- New Password -->
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
                             <label for="new_password">New Password</label>
                             <div class="input-wrapper">
                                 <input type="password" name="new_password" id="new_password" class="form-control"
@@ -503,8 +500,7 @@ $signatureImage = !empty($user->user_sign)
                             </div>
                         </div>
 
-                        <!-- Confirm Password -->
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-4">
                             <label for="confirm_password">Confirm Password</label>
                             <div class="input-wrapper">
                                 <input type="password" name="confirm_password" id="confirm_password"
@@ -531,7 +527,6 @@ $signatureImage = !empty($user->user_sign)
     </div>
 </div>
 
-<!-- EDIT PROFILE MODAL -->
 <div class="modal fade" id="editProfileModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
