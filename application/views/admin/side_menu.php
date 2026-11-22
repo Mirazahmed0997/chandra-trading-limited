@@ -893,8 +893,8 @@ $users = $this->db->get('users')->row();
                             <?php endif; ?>
                             <?php if (has_menu_access('Pending Share Holder')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('pending_applications_list') ?>"
-                                        class="nav-link <?= active_nav('pending_applications_list', $sub_nav); ?>">
+                                    <a href="<?php echo base_url('pending_shareholder_applications_list') ?>"
+                                        class="nav-link <?= active_nav('pending_shareholder_applications_list', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pending Share Holder</p>
                                         <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
@@ -949,11 +949,6 @@ $users = $this->db->get('users')->row();
                         </ul>
                     </li>
                 <?php endif; ?>
-
-
-
-
-
             </ul>
         </nav>
     </div>

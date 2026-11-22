@@ -149,6 +149,9 @@ $route['delete_accountHead/(:num)'] = 'Admin_Accounts/delete_accountHead/$1';
 
 
 $route['share_application_form'] = 'Admin_shareHolder_controller/share_application_form';
+$route['create_shareholder'] = 'Admin_shareHolder_controller/create_shareholder';
+$route['pending_shareholder_applications_list'] = 'Admin_shareHolder_controller/pending_shareholder_applications_list';
+$route['shareholder_details/(:num)'] = 'Admin_shareHolder_controller/shareholder_details/$1';
 
 
 
