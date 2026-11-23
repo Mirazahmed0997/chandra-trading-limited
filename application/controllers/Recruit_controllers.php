@@ -81,9 +81,9 @@ class Recruit_controllers extends CI_Controller
     {
         $this->check_access('Pending Applications');
         $data = $this->engine->store_nav(
-            'Applications',
-            'Applications',
-            'Pending Applications List'
+            'Job Portal',
+            'pending_applications_list',
+            'Pending Applications'
         );
 
 
@@ -179,9 +179,9 @@ class Recruit_controllers extends CI_Controller
     {
         $this->check_access('Accepted List');
         $data = $this->engine->store_nav(
-            'Applications',
-            'Applications',
-            'Accepted Applications'
+            'Job Portal',
+            'accepted_applications_list',
+            'Accepted List'
         );
         // echo '<pre>';
         // print_r($data);
@@ -264,9 +264,9 @@ class Recruit_controllers extends CI_Controller
     {
         $this->check_access('Staff list');
         $data = $this->engine->store_nav(
-            'Applications',
-            'Applications',
-            'Staffs List'
+            'Staff',
+            'staff_list',
+            'Staff List'
         );
         // echo '<pre>';
         // print_r($data);
@@ -356,9 +356,9 @@ class Recruit_controllers extends CI_Controller
     {
         $this->check_access('Rejected Applications');
         $data = $this->engine->store_nav(
-            'Applications',
-            'Applications',
-            'Rejected Applications List'
+            'Job Portal',
+            'rejected_applications_list',
+            'Rejected Applications'
         );
 
         $filters = array(
@@ -811,7 +811,11 @@ class Recruit_controllers extends CI_Controller
     public function joining_letter_list()
     {
         $this->check_access('Joining Letter');
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+        $data = $this->engine->store_nav(
+            'Staff',
+            'admin_joining_letter_list',
+            'Joining Letter'
+        );
 
         $filters = array(
             'search' => trim((string) $this->input->get('search', TRUE)),
@@ -903,7 +907,11 @@ class Recruit_controllers extends CI_Controller
             show_404();
         }
 
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+        $data = $this->engine->store_nav(
+            'Staff',
+            'admin_joining_letter_list',
+            'Joining Letter Details'
+        );
 
 
         $data['staff_joining_letters'] = $staff_joining_letters;

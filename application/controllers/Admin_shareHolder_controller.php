@@ -67,8 +67,12 @@ class Admin_shareHolder_controller extends CI_Controller
     public function share_application_form()
     {
 
-        // $this->check_access('Add new Project');
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+        $this->check_access('Share Holder Application');
+        $data = $this->engine->store_nav(
+            'Share Holder Managment',
+            'share_application_form',
+            'Share Holder Application'
+        );
 
         // echo '<pre>';
         // print_r($data);
@@ -86,6 +90,7 @@ class Admin_shareHolder_controller extends CI_Controller
         // print_r('Hitted');
         // echo '</pre>';
         // exit;
+        $this->check_access('Share Holder Application');
         $this->load->library('upload');
 
         $strPost = function ($key) {
@@ -578,9 +583,10 @@ class Admin_shareHolder_controller extends CI_Controller
 
     public function pending_shareholder_applications_list()
     {
+        $this->check_access('Pending Share Holder');
         $data = $this->engine->store_nav(
-            'Applications',
-            'Applications',
+            'Share Holder Managment',
+            'pending_shareholder_applications_list',
             'Pending Shareholder List'
         );
 
@@ -660,8 +666,7 @@ class Admin_shareHolder_controller extends CI_Controller
 
     public function shareholder_details($id = NULL)
     {
-
-
+        $this->check_access('Pending Share Holder');
         if (empty($id)) {
             show_404();
         }
@@ -690,9 +695,9 @@ class Admin_shareHolder_controller extends CI_Controller
         }
 
         $data = $this->engine->store_nav(
-            'apllicant',
-            'apllicant',
-            'apllicant Details'
+            'Share Holder Managment',
+            'pending_shareholder_applications_list',
+            'Shareholder Details'
         );
 
 
@@ -711,11 +716,5 @@ class Admin_shareHolder_controller extends CI_Controller
             $this->main_layout
         );
     }
-
-
-
-
-
-
 
 }

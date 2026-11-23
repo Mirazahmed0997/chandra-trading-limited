@@ -104,9 +104,9 @@ class Admin_Accounts extends CI_Controller
     {
         $this->check_access('Account Head Management');
         $data = $this->engine->store_nav(
-            'projects cost',
-            'projects cost',
-            'Project costs'
+            'Account',
+            'DepositExpenseAccountHeadManagement',
+            'Account Head Management'
         );
 
         $path = "admin/DepositExpenseAccountHeadManagement/accountHeadForm";
@@ -167,9 +167,9 @@ class Admin_Accounts extends CI_Controller
     {
         $this->check_access('Account Head Management');
         $data = $this->engine->store_nav(
-            'head list',
-            'head list',
-            'head list'
+            'Account',
+            'DepositExpenseAccountHeadManagement',
+            'Account Head Management'
         );
 
 
@@ -221,9 +221,9 @@ class Admin_Accounts extends CI_Controller
     {
         $this->check_access("Project {$type} Vouchar");
         $data = $this->engine->store_nav(
-            'projects cost',
-            'projects cost',
-            'Project costs'
+            'Account',
+            'projects_cost/' . $type,
+            'Project ' . $type . ' Vouchar'
         );
 
         $data['projects'] = $this->db->get('projects')->result();
@@ -309,22 +309,22 @@ class Admin_Accounts extends CI_Controller
         if ($project_id === null || $project_id === '') {
             redirect("office_expenses_list");
         } else {
-            redirect("projects_cost/".$account_type);
+            redirect("projects_cost/" . $account_type);
         }
     }
 
 
     public function projects_cost($type = '')
     {
-        if($type=='Pending'){
+        if ($type == 'Pending') {
             $this->check_access("Pending Vouchars");
-        }else{
+        } else {
             $this->check_access("Project {$type} Vouchar");
         }
         $data = $this->engine->store_nav(
-            'projects cost',
-            'projects cost',
-            'Project costs'
+            'Account',
+            'projects_cost/' . $type,
+            'Project ' . $type . ' Vouchar'
         );
 
         $filters = array(
@@ -410,7 +410,11 @@ class Admin_Accounts extends CI_Controller
 
     public function vouchars($id)
     {
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+        $data = $this->engine->store_nav(
+            'Account',
+            'projects_cost/' .'Pending',
+            'Project '.'Pending Vouchar'
+        );
 
         if (empty($id)) {
             redirect(base_url('projects_cost'));
@@ -487,7 +491,7 @@ class Admin_Accounts extends CI_Controller
     {
         // $this->check_access('Project Deposite/Expense Management');
         $data = $this->engine->store_nav(
-            'transactions',
+            'Transaction',
             'transactions',
             'transactions'
         );
@@ -525,7 +529,7 @@ class Admin_Accounts extends CI_Controller
 
         // $this->check_access('Project Deposite/Expense Management');
         $data = $this->engine->store_nav(
-            'transaction_table',
+            'Transaction',
             'transaction_table',
             'transaction_table'
         );
@@ -721,9 +725,9 @@ class Admin_Accounts extends CI_Controller
     {
         $this->check_access('Office Expense Managment');
         $data = $this->engine->store_nav(
-            'projects cost',
-            'projects cost',
-            'Project costs'
+            'Account',
+            'office_expenses_list',
+            'Office Expense Managment'
         );
 
         $data['account_heads'] = $this->db
@@ -746,9 +750,9 @@ class Admin_Accounts extends CI_Controller
     {
         $this->check_access('Office Expense Managment');
         $data = $this->engine->store_nav(
-            'projects cost',
-            'projects cost',
-            'Project costs'
+            'Account',
+            'office_expenses_list',
+            'Office Expense Managment'
         );
 
         $filters = array(

@@ -1,6 +1,8 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH'))
+	exit('No direct script access allowed');
 
-function getSet($set) {
+function getSet($set)
+{
 	$dataDriver = &get_instance();
 	$q = $dataDriver->db->select("value");
 	$q->from("config");
@@ -9,21 +11,24 @@ function getSet($set) {
 	$tmp = $q->get()->result();
 	return $tmp[0]->value;
 }
-function getwebSet($title) {
+function getwebSet($title)
+{
 	$dataDriver = &get_instance();
 	$where_data['title'] = $title;
 	$query = $dataDriver->Common->get_data_multi_conditional('weblogo', $where_data)->row();
-	$data=$query->value;
+	$data = $query->value;
 	return $data;
 }
 
-function listPage() {
+function listPage()
+{
 	$dataDriver = &get_instance();
 	$q = $dataDriver->db->select("id,title")->from('website');
 	$r = $q->get()->result();
 	return $r;
 }
-function pageNamebyId($id) {
+function pageNamebyId($id)
+{
 	$dataDriver = &get_instance();
 	if ($id != '-1') {
 		$q = $dataDriver->db->query("SELECT title FROM website WHERE id='$id'");
@@ -33,20 +38,23 @@ function pageNamebyId($id) {
 		return "";
 }
 
-function listAlbum() {
+function listAlbum()
+{
 	$dataDriver = &get_instance();
 	$q = $dataDriver->db->select("gallery_album_id,gallery_album_title")->from('gallery_album');
 	$r = $q->get()->result();
 	return $r;
 }
-function getmenus() {
+function getmenus()
+{
 	$dataDriver = &get_instance();
 	$q = $dataDriver->db->query("select * from website where parent='-1'");
 	$final = $q->result();
 	return $final;
 }
 
-function getSubmenu($id) {
+function getSubmenu($id)
+{
 	$dataDriver = &get_instance();
 	$q = $dataDriver->db->query("select * from website where parent='$id'");
 	$final = $q->result();
@@ -77,7 +85,7 @@ function alert_check()
 	$mx = &get_instance();
 
 	if ($success = $mx->session->flashdata('success')) {
-?>
+		?>
 		<div class="alert alert-info alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			<h4> <?= $success; ?></h4>
@@ -86,7 +94,7 @@ function alert_check()
 
 	<?php
 	if ($error = $mx->session->flashdata('error')) {
-	?>
+		?>
 		<div class="alert alert-danger">
 			<strong>Error!</strong> <?= $error; ?>
 		</div>
@@ -108,7 +116,7 @@ function pegination_genarate($links)
 	</div>
 
 
-<?php
+	<?php
 
 }
 
@@ -131,20 +139,21 @@ function shorten_string($string, $wordsreturned)
 }
 function active_nav($nav, $check_nav)
 {
-    if (is_array($nav)) {
-        return in_array($check_nav, $nav) ? "active" : "";
-    }
-    return ($nav == $check_nav) ? "active" : "";
+	if (is_array($nav)) {
+		return in_array($check_nav, $nav, true) ? 'active' : '';
+	}
+
+	return ($nav === $check_nav) ? 'active' : '';
 }
 
 function active_open($nav, $check_nav)
 {
-    if (is_array($nav)) {
-        return in_array($check_nav, $nav) ? "menu-open active" : "";
-    }
-    return ($nav == $check_nav) ? "menu-open active" : "";
-}
+	if (is_array($nav)) {
+		return in_array($check_nav, $nav, true) ? 'menu-open active' : '';
+	}
 
+	return ($nav === $check_nav) ? 'menu-open active' : '';
+}
 function bn_date($str)
 {
 	$en = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
@@ -297,8 +306,9 @@ function count_pending($table, $where)
 	return $data;
 }
 
-function visitor_count() {
-	
+function visitor_count()
+{
+
 	$dataDriver = &get_instance();
 	$data = $dataDriver->Common->get_data('visitors')->result();
 	$total_visitor = count($data);
@@ -308,21 +318,21 @@ function visitor_count() {
 
 function track_visitor()
 {
-    $CI =& get_instance();
-    $CI->load->database();
+	$CI =& get_instance();
+	$CI->load->database();
 
-    $ip = $CI->input->ip_address();
-    $today = date('Y-m-d');
+	$ip = $CI->input->ip_address();
+	$today = date('Y-m-d');
 
-    $exists = $CI->db->where('ip_address', $ip)
-                     ->where('DATE(visit_time)', $today)
-                     ->get('newvisitors')
-                     ->row();
+	$exists = $CI->db->where('ip_address', $ip)
+		->where('DATE(visit_time)', $today)
+		->get('newvisitors')
+		->row();
 
-    if (!$exists) {
-        $CI->db->insert('newvisitors', [
-            'ip_address' => $ip,
-            'visit_time' => date('Y-m-d H:i:s')
-        ]);
-    }
+	if (!$exists) {
+		$CI->db->insert('newvisitors', [
+			'ip_address' => $ip,
+			'visit_time' => date('Y-m-d H:i:s')
+		]);
+	}
 }

@@ -79,7 +79,11 @@ class Admin_Projects extends CI_Controller
     {
 
         $this->check_access('Add new Project');
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+        $data = $this->engine->store_nav(
+            'Projects',
+            'add_project',
+            'Our Projects'
+        );
         $data['category'] = $category ? $category : '';
 
         // echo '<pre>';
@@ -210,7 +214,11 @@ class Admin_Projects extends CI_Controller
     public function project_update_form($id)
     {
         $this->check_access('Add new Project');
-        $data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+        $data = $this->engine->store_nav(
+            'Projects',
+            'project_update_form',
+            'Our Projects'
+        );
         $data['projects'] = $this->db->get_where('projects', ['id' => $id])->row();
 
         // echo '<pre>';
@@ -346,7 +354,11 @@ class Admin_Projects extends CI_Controller
     public function projects_category()
     {
         $this->check_access('Add new Project');
-        $data = $this->engine->store_nav('Category', 'Category', 'Chandra Trading Limited');
+        $data = $this->engine->store_nav(
+            'Projects',
+            'projects_category',
+            'Our Projects'
+        );
 
         // echo '<pre>';
         // print_r($categories);
@@ -465,9 +477,9 @@ class Admin_Projects extends CI_Controller
 
         $this->check_access('Our Projects');
         $data = $this->engine->store_nav(
-            'projects',
-            'projects',
-            'Project List'
+            'Projects',
+            'projects_list',
+            'Our Projects'
         );
 
         // Filter values
@@ -573,9 +585,9 @@ class Admin_Projects extends CI_Controller
         }
 
         $data = $this->engine->store_nav(
-            'projects',
-            'projects',
-            'projects Details: ' . $projects->project_name
+            'Projects',
+            'project_update_form',
+            'projects Details' . $projects->project_name
         );
 
         // $data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
@@ -598,9 +610,9 @@ class Admin_Projects extends CI_Controller
 
 
 
-   
-   
-   
+
+
+
 
     //  public function projects_category()
 //     {

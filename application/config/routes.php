@@ -109,7 +109,7 @@ $route['user_list'] = 'Admin/users_list';
 
 
 // leads
-$route['landowners_query'] = 'Admin_landowner_controller/landowners_query';
+$route['landowner_leads_list'] = 'Admin_landowner_controller/landowners_query';
 $route['landowners_query_details/(:num)'] = 'Admin_landowner_controller/landowners_query_details/$1';
 $route['update_land_query_status/(:num)'] = 'Admin_landowner_controller/update_land_query_status/$1';
 $route['delete_land_query/(:num)'] = 'Admin_landowner_controller/delete_land_query/$1';

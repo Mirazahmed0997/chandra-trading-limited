@@ -225,6 +225,11 @@
                                             <div class="user-info">
 
                                                 <div class="user-avatar">
+                                                    <img src="<?= base_url('assets/uploads/user_img/' . $row->user_img) ?>"
+                                                        alt="User Image" class="img-fluid rounded-circle"
+                                                        style="width: 45px; height: 45px; object-fit: cover;">
+                                                </div>
+                                                <!-- <div class="user-avatar">
 
                                                     <?= strtoupper(
                                                         substr(
@@ -241,7 +246,7 @@
                                                         )
                                                     ); ?>
 
-                                                </div>
+                                                </div> -->
 
 
                                                 <div>

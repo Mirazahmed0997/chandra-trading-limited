@@ -422,41 +422,60 @@ $users = $this->db->get('users')->row();
                 <?php endif; ?> -->
 
 
+
                 <?php if (has_menu_access('Projects')): ?>
-                    <li class="nav-item has-treeview <?= active_open('Properties', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('Properties', $main_nav); ?>">
+
+                    <?php
+                    $project_submenus = [
+                        'projects_category',
+                        'projects_list'
+                    ];
+                    ?>
+
+                    <li class="nav-item has-treeview <?= active_open($project_submenus, $sub_nav); ?>">
+
+                        <a href="#" class="nav-link <?= active_nav('Projects', $main_nav); ?>">
+
                             <i class="nav-icon fas fa-landmark"></i>
+
                             <p>
                                 Projects
                                 <i class="fas fa-angle-left right"></i>
                             </p>
+
                         </a>
 
                         <ul class="nav nav-treeview">
+
                             <?php if (has_menu_access('Our Projects')): ?>
+
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('projects_category') ?>"
+
+                                    <a href="<?= base_url('projects_category') ?>"
                                         class="nav-link <?= active_nav('projects_category', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
+
                                         <p>Our Projects</p>
+
+                                        <?php if ($sub_nav == 'projects_category'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
+
                             <?php endif; ?>
 
-                            <!-- <?php if (has_menu_access('Add new Project')): ?>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url('add_project') ?>"
-                                        class="nav-link <?= active_nav('add_project', $sub_nav); ?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add new Project</p>
-                                    </a>
-                                </li>
-                            <?php endif; ?> -->
+
+
                         </ul>
+
                     </li>
 
-
                 <?php endif; ?>
+
 
                 <?php if (has_menu_access('Client')): ?>
                     <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
@@ -470,8 +489,9 @@ $users = $this->db->get('users')->row();
                 <?php endif; ?>
 
                 <?php if (has_menu_access('Transaction')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('transactions') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                    <li class="nav-item has-treeview <?= active_open('', $sub_nav); ?>">
+                        <a href="<?php echo base_url('transactions') ?>"
+                            class="nav-link <?= active_nav('Transaction', $main_nav); ?>">
                             <i class="nav-icon fas fa-exchange-alt"></i>
                             <p>
                                 Transaction
@@ -481,84 +501,137 @@ $users = $this->db->get('users')->row();
                 <?php endif; ?>
 
                 <?php if (has_menu_access('Account')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="" class="nav-link <?= active_nav('projects_cost', $main_nav); ?>">
+
+                    <?php
+                    $account_submenus = [
+                        'projects_cost/Pending',
+                        'DepositExpenseAccountHeadManagement',
+                        'projects_cost/Deposit',
+                        'projects_cost/Expense',
+                        'office_expenses_list'
+                    ];
+                    ?>
+
+                    <li class="nav-item has-treeview <?= active_open($account_submenus, $sub_nav); ?>">
+
+                        <a href="#" class="nav-link <?= active_nav('Account', $main_nav); ?>">
                             <i class="nav-icon fas fa-user-circle"></i>
 
                             <p>
                                 Account
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge bg-danger"><?php if ($account_count > 0) { ?>
-                                        <span class="badge bg-danger"><?= $account_count ?></span>
-                                    <?php } ?></span>
+
+                                <?php if ($account_count > 0): ?>
+                                    <span class="badge bg-danger"><?= $account_count ?></span>
+                                <?php endif; ?>
                             </p>
                         </a>
+
                         <ul class="nav nav-treeview">
+
                             <?php if (has_menu_access('Pending Vouchars')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('projects_cost/' . 'Pending') ?>"
-                                        class="nav-link <?= active_nav('projects_cost/' . 'Pending', $sub_nav); ?>">
+                                    <a href="<?= base_url('projects_cost/Pending') ?>"
+                                        class="nav-link <?= active_nav('projects_cost/Pending', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pending Vouchars</p>
-                                        <span class="badge bg-danger"><?php if ($account_count > 0) { ?>
-                                                <span class="badge bg-danger"><?= $account_count ?></span>
-                                            <?php } ?></span>
+
+                                        <?php if ($sub_nav == 'projects_cost/Pending'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
+                                        <?php if ($account_count > 0): ?>
+                                            <span class="badge bg-danger"><?= $account_count ?></span>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
-                        </ul>
-                        <ul class="nav nav-treeview">
+
+
                             <?php if (has_menu_access('Account Head Management')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('DepositExpenseAccountHeadManagement') ?>"
+                                    <a href="<?= base_url('DepositExpenseAccountHeadManagement') ?>"
                                         class="nav-link <?= active_nav('DepositExpenseAccountHeadManagement', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Account Head Management</p>
+
+                                        <?php if ($sub_nav == 'DepositExpenseAccountHeadManagement'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
-                        </ul>
-                        <ul class="nav nav-treeview">
+
+
                             <?php if (has_menu_access('Project Deposit Vouchar')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('projects_cost/' . 'Deposit') ?>"
-                                        class="nav-link <?= active_nav('projects_cost', $sub_nav); ?>">
+                                    <a href="<?= base_url('projects_cost/Deposit') ?>"
+                                        class="nav-link <?= active_nav('projects_cost/Deposit', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Project Deposit Vouchar</p>
+
+                                        <?php if ($sub_nav == 'projects_cost/Deposit'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
-                        </ul>
-                        <ul class="nav nav-treeview">
+
+
                             <?php if (has_menu_access('Project Expense Vouchar')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('projects_cost/' . 'Expense') ?>"
-                                        class="nav-link <?= active_nav('projects_cost', $sub_nav); ?>">
+                                    <a href="<?= base_url('projects_cost/Expense') ?>"
+                                        class="nav-link <?= active_nav('projects_cost/Expense', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Project Expense Vouchar</p>
+
+                                        <?php if ($sub_nav == 'projects_cost/Expense'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
-                        </ul>
-                        <ul class="nav nav-treeview">
+
+
                             <?php if (has_menu_access('Office Expense Managment')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('office_expenses_list') ?>"
+                                    <a href="<?= base_url('office_expenses_list') ?>"
                                         class="nav-link <?= active_nav('office_expenses_list', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Office Expense Managment</p>
+
+                                        <?php if ($sub_nav == 'office_expenses_list'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
-                        </ul>
 
+                        </ul>
                     </li>
+
                 <?php endif; ?>
 
                 <?php if (has_menu_access('Settings')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('', $main_nav); ?>">
+
+                    <?php
+                    $settings_submenus = [
+                        'set_attendence_form',
+                        'set_holidays_form',
+                        'admin_profile'
+                    ];
+                    ?>
+
+                    <li class="nav-item has-treeview <?= active_open($settings_submenus, $sub_nav); ?>">
+
+                        <a href="#" class="nav-link <?= active_nav('Settings', $main_nav); ?>">
                             <i class="nav-icon fas fa-cog"></i>
+
                             <p>
                                 Settings
                                 <i class="fas fa-angle-left right"></i>
@@ -569,114 +642,212 @@ $users = $this->db->get('users')->row();
 
                             <?php if (has_menu_access('Set Attendence')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('set_attendence_form') ?>"
+                                    <a href="<?= base_url('set_attendence_form') ?>"
                                         class="nav-link <?= active_nav('set_attendence_form', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Set Attendence</p>
+
+                                        <?php if ($sub_nav == 'set_attendence_form'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
+
+
                             <?php if (has_menu_access('Set Holidays')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('set_holidays_form') ?>"
+                                    <a href="<?= base_url('set_holidays_form') ?>"
                                         class="nav-link <?= active_nav('set_holidays_form', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Set Holidays</p>
+
+                                        <?php if ($sub_nav == 'set_holidays_form'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
+
+
                             <li class="nav-item">
-                                <a href="<?php echo base_url('admin_profile') ?>"
+                                <a href="<?= base_url('admin_profile') ?>"
                                     class="nav-link <?= active_nav('admin_profile', $sub_nav); ?>">
+
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>My Profile</p>
+
+                                    <?php if ($sub_nav == 'admin_profile'): ?>
+                                        <i class="fas fa-check text-white float-right"></i>
+                                    <?php endif; ?>
                                 </a>
                             </li>
 
                         </ul>
-
                     </li>
+
                 <?php endif; ?>
 
                 <?php if (has_menu_access('Leave Applications')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+
+                    <?php
+                    $leave_submenus = [
+                        'admin_leave_application_list'
+                    ];
+                    ?>
+
+                    <li class="nav-item has-treeview <?= active_open($leave_submenus, $sub_nav); ?>">
+
+                        <a href="#" class="nav-link <?= active_nav('Leave Applications', $main_nav); ?>">
+
                             <i class="nav-icon fas fa-file-signature"></i>
+
                             <p>
                                 Leave Applications
+                                <i class="fas fa-angle-left right"></i>
                             </p>
-                            <i class="fas fa-angle-left right"></i>
+
                         </a>
+
                         <ul class="nav nav-treeview">
+
                             <?php if (has_menu_access('Applications List')): ?>
+
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('admin_leave_application_list') ?>"
+
+                                    <a href="<?= base_url('admin_leave_application_list') ?>"
                                         class="nav-link <?= active_nav('admin_leave_application_list', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
+
                                         <p>Applications List</p>
+
+                                        <?php if ($sub_nav == 'admin_leave_application_list'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
+
                             <?php endif; ?>
+
                         </ul>
+
                     </li>
+
                 <?php endif; ?>
 
                 <?php if (has_menu_access('Communication & Messages')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+
+                    <?php
+                    $communication_submenus = [
+                        'landowner_leads_list',
+                        'contact_messages',
+                        'investment_enquiries',
+                        'admin_property_book_data'
+                    ];
+                    ?>
+
+                    <li class="nav-item has-treeview <?= active_open($communication_submenus, $sub_nav); ?>">
+
+                        <a href="#" class="nav-link <?= active_nav('Communication & Messages', $main_nav); ?>">
+
                             <i class="nav-icon fas fa-comments"></i>
+
                             <p>
                                 Communication & Messages
+                                <i class="fas fa-angle-left right"></i>
                             </p>
-                            <i class="fas fa-angle-left right"></i>
+
                         </a>
+
                         <ul class="nav nav-treeview">
+
                             <?php if (has_menu_access('Landowner Enquiries')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('admin_leave_application_list') ?>"
-                                        class="nav-link <?= active_nav('admin_leave_application_list', $sub_nav); ?>">
+
+                                    <a href="<?= base_url('landowner_leads_list') ?>"
+                                        class="nav-link <?= active_nav('landowner_leads_list', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p> Landowner Enquiries</p>
+
+                                        <p>Landowner Enquiries</p>
+
+                                        <?php if ($sub_nav == 'landowner_leads_list'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
                             <?php endif; ?>
+
 
                             <?php if (has_menu_access('General Enquiries')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('contact_messages') ?>"
+
+                                    <a href="<?= base_url('contact_messages') ?>"
                                         class="nav-link <?= active_nav('contact_messages', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
+
                                         <p>General Enquiries</p>
+
+                                        <?php if ($sub_nav == 'contact_messages'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
                             <?php endif; ?>
-
 
 
                             <?php if (has_menu_access('Investment Enquiries')): ?>
-                                <li class="nav-item has-treeview <?= active_open('Investment Enquiries', $main_nav); ?>">
-                                    <a href="#" class="nav-link <?= active_nav('Investment Enquiries', $main_nav); ?>">
+                                <li class="nav-item">
+
+                                    <a href="<?= base_url('investment_enquiries') ?>"
+                                        class="nav-link <?= active_nav('investment_enquiries', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Investment Enquiries
-                                        </p>
+
+                                        <p>Investment Enquiries</p>
+
+                                        <?php if ($sub_nav == 'investment_enquiries'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
                             <?php endif; ?>
 
+
                             <?php if (has_menu_access('Bookings')): ?>
-                                <li class="nav-item has-treeview <?= active_open('admin_property_book_data', $main_nav); ?>">
-                                    <a href="<?php echo base_url('admin_property_book_data') ?>"
-                                        class="nav-link <?= active_nav('admin_property_book_data', $main_nav); ?>">
+                                <li class="nav-item">
+
+                                    <a href="<?= base_url('admin_property_book_data') ?>"
+                                        class="nav-link <?= active_nav('admin_property_book_data', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Bookings
-                                        </p>
+
+                                        <p>Bookings</p>
+
+                                        <?php if ($sub_nav == 'admin_property_book_data'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
                             <?php endif; ?>
+
                         </ul>
                     </li>
+
                 <?php endif; ?>
 
 
@@ -704,85 +875,147 @@ $users = $this->db->get('users')->row();
                     </li>
                 <?php endif; ?>
                 <?php if (has_menu_access('Staff')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+
+                    <?php
+                    $staff_submenus = [
+                        'staff_list',
+                        'admin_joining_letter_list'
+                    ];
+                    ?>
+
+                    <li class="nav-item has-treeview <?= active_open($staff_submenus, $sub_nav); ?>">
+
+                        <a href="#" class="nav-link <?= active_nav('Staff', $main_nav); ?>">
+
                             <i class="nav-icon fas fa-users"></i>
+
                             <p>
                                 Staff
                                 <i class="fas fa-angle-left right"></i>
                             </p>
+
                         </a>
+
                         <ul class="nav nav-treeview">
 
                             <?php if (has_menu_access('Staff list')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('staff_list') ?>"
+
+                                    <a href="<?= base_url('staff_list') ?>"
                                         class="nav-link <?= active_nav('staff_list', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Staff list</p>
+
+                                        <p>Staff List</p>
+
+                                        <?php if ($sub_nav == 'staff_list'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
                             <?php endif; ?>
+
+
                             <?php if (has_menu_access('Joining Letter')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('admin_joining_letter_list') ?>"
+
+                                    <a href="<?= base_url('admin_joining_letter_list') ?>"
                                         class="nav-link <?= active_nav('admin_joining_letter_list', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
+
                                         <p>Joining Letter</p>
+
+                                        <?php if ($sub_nav == 'admin_joining_letter_list'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
                             <?php endif; ?>
+
                         </ul>
 
                     </li>
+
                 <?php endif; ?>
                 <?php if (has_menu_access('Job Portal')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+
+                    <?php
+                    $job_portal_submenus = [
+                        'accepted_applications_list',
+                        'pending_applications_list',
+                        'rejected_applications_list'
+                    ];
+                    ?>
+
+                    <li class="nav-item has-treeview <?= active_open($job_portal_submenus, $sub_nav); ?>">
+
+                        <a href="#" class="nav-link <?= active_nav('Job Portal', $main_nav); ?>">
+
                             <i class="nav-icon fas fa-briefcase"></i>
+
                             <p>
                                 Job Portal
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
-                                        <span class="badge bg-danger"><?= $application_count ?></span>
-                                    <?php } ?></span>
 
+                                <?php if ($application_count > 0): ?>
+                                    <span class="badge bg-danger"><?= $application_count ?></span>
+                                <?php endif; ?>
                             </p>
+
                         </a>
+
                         <ul class="nav nav-treeview">
+
                             <?php if (has_menu_access('Accepted List')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('accepted_applications_list') ?>"
+                                    <a href="<?= base_url('accepted_applications_list') ?>"
                                         class="nav-link <?= active_nav('accepted_applications_list', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Accepted List</p>
+
+                                        <?php if ($sub_nav == 'accepted_applications_list'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
+
                             <?php if (has_menu_access('Pending Applications')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('pending_applications_list') ?>"
+                                    <a href="<?= base_url('pending_applications_list') ?>"
                                         class="nav-link <?= active_nav('pending_applications_list', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pending Applications</p>
-                                        <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
-                                                <span class="badge bg-danger"><?= $application_count ?></span>
-                                            <?php } ?></span>
+
+                                        <?php if ($application_count > 0): ?>
+                                            <span class="badge bg-danger"><?= $application_count ?></span>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
 
                             <?php if (has_menu_access('Rejected Applications')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('rejected_applications_list') ?>"
+                                    <a href="<?= base_url('rejected_applications_list') ?>"
                                         class="nav-link <?= active_nav('rejected_applications_list', $sub_nav); ?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Rejected Applications</p>
+
+                                        <?php if ($sub_nav == 'rejected_applications_list'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
                             <?php endif; ?>
+
                         </ul>
                     </li>
+
                 <?php endif; ?>
 
 
@@ -865,46 +1098,75 @@ $users = $this->db->get('users')->row();
                     </li>
                 <?php endif; ?>
 
-                 <?php if (has_menu_access('Share Holder Managment')): ?>
-                    <li class="nav-item has-treeview <?= active_open('', $main_nav); ?>">
-                        <a href="<?php echo base_url('') ?>" class="nav-link <?= active_nav('', $main_nav); ?>">
+                <?php if (has_menu_access('Share Holder Managment')): ?>
+
+                    <li class="nav-item has-treeview <?= active_open(
+                        ['share_application_form', 'pending_shareholder_applications_list'],
+                        $sub_nav
+                    ); ?>">
+
+                        <a href="javascript:void(0)" class="nav-link <?= active_nav(
+                            'Share Holder Managment',
+                            $main_nav
+                        ); ?>">
+
                             <i class="nav-icon fas fa-briefcase"></i>
+
                             <p>
                                 Share Holder Managment
                                 <i class="fas fa-angle-left right"></i>
-                                <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
-                                        <span class="badge bg-danger"><?= $application_count ?></span>
-                                    <?php } ?></span>
+
+                                <?php if ($application_count > 0): ?>
+                                    <span class="badge bg-danger">
+                                        <?= $application_count ?>
+                                    </span>
+                                <?php endif; ?>
                             </p>
                         </a>
+
                         <ul class="nav nav-treeview">
-                           
+
                             <?php if (has_menu_access('Share Holder Application')): ?>
+
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('share_application_form') ?>"
-                                        class="nav-link <?= active_nav('share_application_form', $sub_nav); ?>">
+
+                                    <a href="<?= base_url('share_application_form') ?>" class="nav-link <?= active_nav(
+                                          'share_application_form',
+                                          $sub_nav
+                                      ); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Share Holder Application</p>
-                                        <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
-                                                <span class="badge bg-danger"><?= $application_count ?></span>
-                                            <?php } ?></span>
+
                                     </a>
+
                                 </li>
+
                             <?php endif; ?>
+
+
                             <?php if (has_menu_access('Pending Share Holder')): ?>
+
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('pending_shareholder_applications_list') ?>"
-                                        class="nav-link <?= active_nav('pending_shareholder_applications_list', $sub_nav); ?>">
+
+                                    <a href="<?= base_url('pending_shareholder_applications_list') ?>" class="nav-link <?= active_nav(
+                                          'pending_shareholder_applications_list',
+                                          $sub_nav
+                                      ); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Pending Share Holder</p>
-                                        <span class="badge bg-danger"><?php if ($application_count > 0) { ?>
-                                                <span class="badge bg-danger"><?= $application_count ?></span>
-                                            <?php } ?></span>
+
                                     </a>
+
                                 </li>
+
                             <?php endif; ?>
+
                         </ul>
+
                     </li>
+
                 <?php endif; ?>
 
                 <br>
@@ -919,35 +1181,68 @@ $users = $this->db->get('users')->row();
 
 
                 <?php if (has_menu_access('User Management')): ?>
-                    <li class="nav-item has-treeview <?= active_open('User Management', $main_nav); ?>">
-                        <a href="#" class="nav-link <?= active_nav('User Management', $main_nav); ?>">
+
+                    <?php
+                    $user_management_submenus = [
+                        'users_list',
+                        'admin_registration_form'
+                    ];
+                    ?>
+
+                    <li class="nav-item has-treeview <?= active_open($user_management_submenus, $sub_nav); ?>">
+
+                        <a href="javascript:void(0)" class="nav-link <?= active_nav('User Management', $main_nav); ?>">
+
                             <i class="nav-icon fas fa-users"></i>
+
                             <p>
                                 User Management
                                 <i class="fas fa-angle-left right"></i>
                             </p>
+
                         </a>
+
                         <ul class="nav nav-treeview">
+
                             <?php if (has_menu_access('User')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('user_list') ?>"
-                                        class="nav-link <?= active_nav('applicant_pending_list', $sub_nav); ?>">
+
+                                    <a href="<?= base_url('user_list') ?>"
+                                        class="nav-link <?= active_nav('users_list', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User</p>
+
+                                        <?php if ($sub_nav == 'users_list'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
                             <?php endif; ?>
+
                             <?php if (has_menu_access('Add new User')): ?>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url('admin_registration_form') ?>"
+
+                                    <a href="<?= base_url('admin_registration_form') ?>"
                                         class="nav-link <?= active_nav('admin_registration_form', $sub_nav); ?>">
+
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Add new User</p>
+                                        <p>Add New User</p>
+
+                                        <?php if ($sub_nav == 'admin_registration_form'): ?>
+                                            <i class="fas fa-check text-white float-right"></i>
+                                        <?php endif; ?>
+
                                     </a>
+
                                 </li>
                             <?php endif; ?>
+
                         </ul>
                     </li>
+
                 <?php endif; ?>
             </ul>
         </nav>

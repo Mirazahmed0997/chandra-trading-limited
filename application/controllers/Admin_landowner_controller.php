@@ -48,9 +48,9 @@ class Admin_landowner_controller extends CI_Controller
     {
         $this->check_access('Landowner Enquiries');
         $data = $this->engine->store_nav(
-            'Landowners',
-            'Landowners',
-            'landowners_query'
+            'Communication & Messages',
+            'landowner_leads_list',
+            'Landowner Enquiries'
         );
 
         // Map inputs to consistent array keys matching table fields
@@ -166,6 +166,11 @@ class Admin_landowner_controller extends CI_Controller
 
     public function landowners_query_details($id = NULL)
     {
+        $data = $this->engine->store_nav(
+            'Communication & Messages',
+            'landowner_leads_list',
+            'Landowner Enquiries'
+        );
         $this->check_access('Landowner Enquiries');
         if (empty($id)) {
             show_404();
@@ -224,9 +229,9 @@ class Admin_landowner_controller extends CI_Controller
     {
         $this->check_access('General Enquiries');
         $data = $this->engine->store_nav(
+            'Communication & Messages',
             'contact_messages',
-            'contact_messages',
-            'contact_messages'
+            'General Enquiries'
         );
 
         $filters = array(
@@ -325,10 +330,11 @@ class Admin_landowner_controller extends CI_Controller
             show_404();
         }
 
+
         $data = $this->engine->store_nav(
-            'contact messages',
-            'contact messages',
-            'contact messages Details:' . $contact_messages->full_name
+            'Communication & Messages',
+            'contact_messages',
+            'Contact messages Details:' . $contact_messages->full_name
         );
 
         $data['contact_messages'] = $contact_messages;
@@ -351,7 +357,7 @@ class Admin_landowner_controller extends CI_Controller
 
 
 
-   
+
 
 
 

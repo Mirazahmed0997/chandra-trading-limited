@@ -123,7 +123,11 @@ class Admin extends CI_Controller
 	public function admin_registration()
 	{
 		$this->check_access('Add new User');
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+		$data = $this->engine->store_nav(
+			'User Management',
+			'admin_registration_form',
+			'Add New User'
+		);
 
 		$path = 'admin/registration/registration';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
@@ -187,7 +191,11 @@ class Admin extends CI_Controller
 
 	public function admin_profile()
 	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+		$data = $this->engine->store_nav(
+			'Settings',
+			'admin_profile',
+			'admin profile'
+		);
 		$loggedUser = $this->session->userdata('login_user_info_all');
 
 		$data['user'] = $this->db
@@ -389,7 +397,11 @@ class Admin extends CI_Controller
 	public function users_list()
 	{
 		$this->check_access('User');
-		$data = $this->engine->store_nav('users_list', 'users_list', 'User List');
+		$data = $this->engine->store_nav(
+			'User Management',
+			'users_list',
+			'User List'
+		);
 
 		$where_data = array();
 
@@ -458,7 +470,11 @@ class Admin extends CI_Controller
 			redirect(base_url('Admin/users_list'));
 		}
 
-		$data = $this->engine->store_nav('users_list', 'users_list', 'User List');
+		$data = $this->engine->store_nav(
+			'User Management',
+			'users_list',
+			'User Details'
+		);
 
 		$data['user'] = $this->Common->get_data_single_conditional('users', 'id', $id)->row();
 
@@ -474,9 +490,9 @@ class Admin extends CI_Controller
 	{
 		$this->check_access('User');
 		$data = $this->engine->store_nav(
+			'User Management',
 			'users_list',
-			'users_list',
-			'user info'
+			'User Profile'
 		);
 
 		$login_user = $this->session->userdata('login_user_info_all');
@@ -659,9 +675,9 @@ class Admin extends CI_Controller
 		 * -------------------------
 		 */
 		$data = $this->engine->store_nav(
-			'property_bookings',
-			'property_bookings',
-			'Property Bookings'
+			'Communication & Messages',
+			'admin_property_book_data',
+			'Site Visits'
 		);
 
 		$data['property_bookings'] = $property_bookings;
@@ -704,10 +720,11 @@ class Admin extends CI_Controller
 		}
 
 		$data = $this->engine->store_nav(
-			'properties',
-			'properties',
+			'Communication & Messages',
+			'admin_property_visit_data',
 			'Property Details: ' . $property->property_name
 		);
+
 
 		// $data = $this->engine->store_nav('site', 'Nothing', 'সদস্য আবেদন ফরম');
 
@@ -845,9 +862,9 @@ class Admin extends CI_Controller
 
 
 		$data = $this->engine->store_nav(
-			'visit_bookings',
-			'visit_bookings',
-			'visit Bookings'
+			'Communication & Messages',
+			'admin_property_visit_data',
+			'General Enquiries'
 		);
 
 		$data['visit_bookings'] = $property_bookings;
@@ -928,7 +945,11 @@ class Admin extends CI_Controller
 	public function set_attendence_form()
 	{
 		$this->check_access('Set Attendence');
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+		$data = $this->engine->store_nav(
+			'Settings',
+			'set_attendence_form',
+			'Set Attendence'
+		);
 
 		$path = 'admin/attendance/set_attendance';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
@@ -995,7 +1016,11 @@ class Admin extends CI_Controller
 	public function set_holidays_form()
 	{
 		$this->check_access('Set Holidays');
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+		$data = $this->engine->store_nav(
+			'Settings',
+			'set_holidays_form',
+			'Set Holidays'
+		);
 
 		$path = 'admin/attendance/set_holidays';
 		$this->engine->render_view($data, $path, $this->side_menu, $this->main_layout);
@@ -1043,7 +1068,11 @@ class Admin extends CI_Controller
 
 	public function admin_leave_application_list()
 	{
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+		$data = $this->engine->store_nav(
+			'Leave Applications',
+			'admin_leave_application_list',
+			'Applications List'
+		);
 
 
 
@@ -1150,7 +1179,11 @@ class Admin extends CI_Controller
 			show_404();
 		}
 
-		$data = $this->engine->store_nav('Nothing', 'Nothing', 'Chandra Trading Limited');
+		$data = $this->engine->store_nav(
+			'Leave Applications',
+			'admin_leave_application_list',
+			'Applications Details'
+		);
 
 
 		$data['staff_leave_applications'] = $staff_leave_applications;
